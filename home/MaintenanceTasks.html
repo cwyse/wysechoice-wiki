@@ -1,0 +1,53 @@
+<!--
+title: Maintenance Tasks
+description: 
+published: true
+date: 2020-10-13T02:30:03.291Z
+tags: 
+editor: undefined
+dateCreated: 2020-10-13T02:29:57.967Z
+-->
+
+<h1>General Backup</h1>
+<p><strong>Current backup location:</strong> chris-Precision-7740:/home/chris/personal/backups</p>
+<h1>Postgres Backup</h1>
+<p><strong>Current backup location:</strong> &lt;postgres_host&gt;:~/docker_vols/postgres</p>
+<h5>Complete Database Backup / Restore</h5>
+<p>The &lt;postgres-username&gt; should be the owner of the <i>postgres</i> database.&nbsp; Usually <i>postgres</i> is the owner of the <i>postgres</i> database.</p>
+<pre><code class="language-plaintext">$ # Dump database to &lt;backup-clean-file&gt;
+$ pg_dumpall --verbose --clean --host=&lt;postgres-server&gt; --port 5432 --username=&lt;postgres-username&gt; --file=&lt;backup-clean-file&gt;
+$
+$ # Restore database from &lt;backup-clean-file&gt;, dropping existing tables
+$ psql --host=&lt;postgres-server&gt; --port 5432 --file=&lt;backup-clean-file&gt; --dbname=postgres --echo-all --log-file=&lt;backup-clean-log-file&gt; --output=&lt;backup-clean-output-file&gt; --username=&lt;postgres-username&gt;
+$
+$ # Dump database to &lt;backup-file&gt;
+$ pg_dumpall --verbose --host=&lt;postgres-server&gt; --port 5432 --username=&lt;postgres-username&gt; --file=&lt;backup-file&gt;
+$
+$ # Restore all databases from &lt;backup-file&gt;
+$ psql --host=&lt;postgres-server&gt; --port 5432 --file=&lt;backup-file&gt; --dbname=postgres --echo-all --log-file=&lt;backup-log-file&gt; --output=&lt;backup-output-file&gt; --username=&lt;postgres-username&gt;</code></pre>
+<p>Example backup:</p>
+<ul>
+  <li>postgres-server:&nbsp; 192.168.40.30</li>
+  <li>postgres-username: postgres</li>
+  <li>backup-clean-file: backup.clean.file</li>
+  <li>~/.pgpass:<ul>
+      <li>192.168.40.30:5432:*:wikijs:wikijsrocks</li>
+    </ul>
+  </li>
+</ul>
+<p>&nbsp;</p>
+<pre><code class="language-plaintext">$ pg_dumpall --verbose --clean --host 192.168.40.30 --port 5432 --username postgres --file backup.clean.file</code></pre>
+<p>Example restore:</p>
+<ul>
+  <li>postgres-server:&nbsp; 192.168.40.30</li>
+  <li>postgres-username: xwiki</li>
+  <li>backup-clean-file: backup.clean.file</li>
+  <li>~/.pgpass:<ul>
+      <li>192.168.40.30:5432:*:wikijs:wikijsrocks</li>
+    </ul>
+  </li>
+</ul>
+<p>&nbsp;</p>
+<pre><code class="language-plaintext">$ psql --host=172.21.0.4 --port 5432 --file=backup.clean.file --dbname=postgres --echo-all --log-file=backup.clean.file.log --output=backup.clean.file.out -U xwiki</code></pre>
+<p>$ psql --host=192.168.40.30 --port 5432 --file=backup.clean.file --dbname=postgres --echo-all --log-file=backup.clean.file.log --output=backup.clean.file.out -U xwiki</p>
+<p>You need to restart the postgres server to update the ownership of the databases.</p>

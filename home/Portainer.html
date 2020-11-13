@@ -1,0 +1,86 @@
+<!--
+title: Portainer
+description: 
+published: true
+date: 2020-10-13T02:11:39.159Z
+tags: 
+editor: undefined
+dateCreated: 2020-10-13T02:11:33.587Z
+-->
+
+<h1>Overview</h1>
+<p>Container maintenance is handled using the Portainer Docker image.&nbsp; The image has is locally named according to the version.&nbsp; In this instance, version 1.24.1 is named portainer1241.&nbsp; The image mounts a volume, portainer_data, that is maintained across version upgrades.</p>
+<p>&nbsp;</p>
+<figure class="table" style="width:796px;">
+  <table style="background-color:rgb(255, 255, 255);">
+    <tbody>
+      <tr>
+        <th style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">Image</th>
+        <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">portainer/portainer-ce:latest</td>
+      </tr>
+      <tr>
+        <th style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">Web Site</th>
+        <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;"><a href="https://www.portainer.io/">https://www.portainer.io/</a></td>
+      </tr>
+      <tr>
+        <th style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">Ports</th>
+        <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">0.0.0.0:8000 -&gt; 8000/tcp&nbsp; &nbsp;(Edge Agent Endpoint) (Currently not used)<br>0.0.0.0:9000 -&gt; 9000/tcp&nbsp; &nbsp;(Portainer Endpoint)</td>
+      </tr>
+      <tr>
+        <th style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">Data Volume</th>
+        <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">portainer_data</td>
+      </tr>
+      <tr>
+        <th style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">Network</th>
+        <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">bridge</td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+<h2>&nbsp;</h2>
+<h2>Initial Installation</h2>
+<p><code>$ docker volume create portainer_data</code><br><code>$ docker run -d -p 8000:8000 -p 9000:9000 --name=portainer-ce_2.0 --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest</code></p>
+<h2>Initial Configuration</h2>
+<p><i><strong>TBD</strong></i></p>
+<h2>&nbsp;</h2>
+<h2>Version Upgrade</h2>
+<p>From the Portainer website, select <i><strong>Images</strong></i>.&nbsp; Pull the latest portainer image. &nbsp;Since the <i>portainer/portainer:latest</i> tag is already in use, the latest version will be <i>portainer/portainer:&lt;none&gt;</i>.</p>
+<p><code>$ docker stop portainer&lt;current_version&gt;</code><br><code>$ docker rm portainer&lt;current_version&gt;</code><br><code>$ # &nbsp;DON'T RECREATE VOLUME &nbsp;# docker volume create portainer_data</code><br><code>$ docker run -d -p 8000:8000 -p 9000:9000 --name=portainer-ce_&lt;new_version&gt; --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce</code></p>
+<h2>Client Endpoints</h2>
+<p>The localhost endpoint is automatically enabled.&nbsp; Remote hosts need to have their Docker API enabled.&nbsp; An excerpt from "<a href="https://success.mirantis.com/article/how-do-i-enable-the-remote-api-for-dockerd">How do I enable the remote API for dockerd</a>" is given below:</p>
+<figure class="table" style="width:796px;">
+  <table style="background-color:rgb(255, 255, 255);">
+    <tbody>
+      <tr>
+        <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;width:55px;">&nbsp;</td>
+        <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;width:1107px;">
+          <p>&nbsp;</p>
+          <h2>How do I enable the remote API for dockerd</h2>
+          <p>After completing these steps, you will have enabled the remote API for dockerd, without editing the systemd unit file in place:</p>
+          <p>Create a file at <code>/etc/systemd/system/docker.service.d/startup_options.conf</code> with the below contents:</p>
+          <pre><code class="language-plaintext"># /etc/systemd/system/docker.service.d/override.conf
+[Service]
+ExecStart=
+ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2376
+</code></pre>
+          <blockquote>
+            <p><strong>Note:</strong> The -H flag binds dockerd to a listening socket, either a Unix socket or a TCP port. You can specify multiple -H flags to bind to multiple sockets/ports. The default -H fd:// uses systemd's socket activation feature to refer to /lib/systemd/system/docker.socket.</p>
+          </blockquote>
+          <p>Reload the unit files:</p>
+          <pre><code class="language-plaintext">$ sudo systemctl daemon-reload
+</code></pre>
+          <p>Restart the docker daemon with new startup options:</p>
+          <pre><code class="language-plaintext">$ sudo systemctl restart docker.service
+</code></pre>
+          <p>Ensure that anyone that has access to the TCP listening socket is a trusted user since access to the docker daemon is root-equivalent.</p>
+          <h1>Additional Documentation</h1>
+          <ul>
+            <li><a href="https://docs.docker.com/engine/security/">https://docs.docker.com/engine/security/</a></li>
+          </ul>
+          <p>&nbsp;</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+<p>&nbsp;</p>

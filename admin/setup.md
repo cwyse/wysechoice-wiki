@@ -2,7 +2,7 @@
 title: Setup
 description: Network and Application Setup
 published: true
-date: 2020-11-15T15:43:00.152Z
+date: 2020-11-15T15:44:12.179Z
 tags: 
 editor: markdown
 dateCreated: 2020-11-15T09:50:55.982Z
@@ -80,7 +80,7 @@ The localhost endpoint is automatically enabled.  Remote hosts need to have thei
         <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;width:55px;">&nbsp;</td>
         <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;width:1107px;">
           <p>&nbsp;</p>
-          <h2 class="toc-header" id="how-do-i-enable-the-remote-api-for-dockerd"> How do I enable the remote API for dockerd</h2>
+          <h2  id="how-do-i-enable-the-remote-api-for-dockerd"> How do I enable the remote API for dockerd</h2>
           <p>After completing these steps, you will have enabled the remote API for dockerd, without editing the systemd unit file in place:</p>
           <p>Create a file at <code>/etc/systemd/system/docker.service.d/startup_options.conf</code> with the below contents:</p>
           <pre class="prismjs line-numbers"><code class="language-plaintext"># /etc/systemd/system/docker.service.d/override.conf
@@ -98,7 +98,7 @@ ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2376
           <pre class="prismjs line-numbers"><code class="language-plaintext">$ sudo systemctl restart docker.service
 </code></pre>
           <p>Ensure that anyone that has access to the TCP listening socket is a trusted user since access to the docker daemon is root-equivalent.</p>
-          <h1 class="toc-header" id="additional-documentation"> Additional Documentation</h1>
+          <h1  id="additional-documentation"> Additional Documentation</h1>
           <ul>
             <li><a class="is-external-link" href="https://docs.docker.com/engine/security/">https://docs.docker.com/engine/security/</a></li>
           </ul>

@@ -2,7 +2,7 @@
 title: Setup
 description: Network and Application Setup
 published: true
-date: 2020-11-15T15:08:05.820Z
+date: 2020-11-15T15:10:39.297Z
 tags: 
 editor: markdown
 dateCreated: 2020-11-15T09:50:55.982Z
@@ -106,6 +106,8 @@ ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2376
     </tbody>
   </table>
 </figure>
+
+</ul>
 
 ### Upgrade
 From the Portainer website, select Images.  Pull the latest portainer image.  Since the _portainer/portainer:latest_ tag is already in use, the latest version will be _portainer/portainer:\<none\>_.

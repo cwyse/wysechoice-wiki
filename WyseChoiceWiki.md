@@ -2,9 +2,9 @@
 title: WyseChoice Wiki
 description: Wyse Household Notes & Information
 published: true
-date: 2020-11-13T02:59:19.727Z
-tags: 
-editor: undefined
+date: 2020-11-15T09:25:54.102Z
+tags: level0
+editor: markdown
 dateCreated: 2020-11-04T00:59:28.760Z
 ---
 
@@ -13,6 +13,26 @@ dateCreated: 2020-11-04T00:59:28.760Z
 This website is intended as a tool to document the information relevant to the Wyse household. It will contain information on the network infrastructure, hobbies, calendars, links to user manuals for household products, pictures, backup support, and any other relevant information.
 
 # Tabs {.tabset}
+
+## :wrench:&nbsp;&nbsp;Administration
+
+
+- [:wrench:  &nbsp;&nbsp;Setup *Describes how to initially create the network and applications.*](/network_setup)
+- [:hammer:  &nbsp;&nbsp;Tools *Administratvie tools.*](/network_tools)
+- [:system: &nbsp;&nbsp;Configuration *Reviews the existing services, their use, setup and configuration*](/network_services)
+- [:archive: &nbsp;&nbsp;Backup / Restore *Backup and restore procedures.*](network_backup)
+{.links-list}
+
+## :wrench:&nbsp;&nbsp;Network Information
+
+
+- [:signal_strength: &nbsp;&nbsp;Network Layout *Network diagram, uses, and interconnections*](/network_layout)
+- [:iphone: &nbsp;&nbsp;Network Devices *Network device information*](/network_devices)
+- [:wrench:  &nbsp;&nbsp;Network Setup *Describes how to initially create the network.*](/network_setup)
+- [:hammer:  &nbsp;&nbsp;Network Tools *Tools for maintaining and monitoring the network.*](/network_tools)
+- [:computer: &nbsp;&nbsp;Network Services *Reviews the existing services, their use, setup and configuration*](/network_services)
+- [:floppy_disk: &nbsp;&nbsp;Network Backup *Backup and restore procedures.*](network_backup)
+{.links-list}
 
 ## :wrench:&nbsp;&nbsp;Network Information
 

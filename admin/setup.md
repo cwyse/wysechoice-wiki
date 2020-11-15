@@ -2,7 +2,7 @@
 title: Setup
 description: Network and Application Setup
 published: true
-date: 2020-11-15T15:24:44.175Z
+date: 2020-11-15T15:25:30.423Z
 tags: 
 editor: markdown
 dateCreated: 2020-11-15T09:50:55.982Z
@@ -73,6 +73,8 @@ $ docker run -d -p 8000:8000 -p 9000:9000 --name=portainer-ce_2.0 --restart=alwa
 The localhost endpoint is automatically enabled.  Remote hosts need to have their Docker API enabled.  An excerpt from "[How do I enable the remote API for dockerd](https://success.mirantis.com/article/how-do-i-enable-the-remote-api-for-dockerd)" is given below:
 
 <figure style="width:796px;" class="table">
+  <table style="background-color:rgb(255, 255, 255);">
+  </table>
 </figure>
 
 

@@ -2,7 +2,7 @@
 title: Setup
 description: Network and Application Setup
 published: true
-date: 2020-11-15T15:02:44.389Z
+date: 2020-11-15T15:04:19.308Z
 tags: 
 editor: markdown
 dateCreated: 2020-11-15T09:50:55.982Z
@@ -104,6 +104,7 @@ ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2376
     </tbody>
   </table>
 </figure>
+
 ### Upgrade
 From the Portainer website, select Images.  Pull the latest portainer image.  Since the _portainer/portainer:latest_ tag is already in use, the latest version will be _portainer/portainer:\<none\>_.
 
@@ -118,8 +119,8 @@ $ docker run -d -p 8000:8000 -p 9000:9000 --name=portainer-ce_<new_version> --re
 {.is-info}
 
 ### Reference
-
-- [Configure Client Endpoints for Portainer](https://docs.docker.com/engine/security)
+> TBD
+{.is-info}
 
 ### Support Files
 > TBD

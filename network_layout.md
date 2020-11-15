@@ -2,7 +2,7 @@
 title: Network Layout
 description: Network diagram, information, and interconnections
 published: true
-date: 2020-11-15T00:05:17.348Z
+date: 2020-11-15T00:13:05.811Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T01:31:26.503Z
@@ -14,10 +14,14 @@ These subpages document the WyseChoice network.  It is a complicated network inf
 
 ## Network Diagrams
 ### Tabs {.tabset}
-#### Miscellaneous
 #### VLANs
 ![wysechoicevlans.png](/wysechoicevlans.png)
+#### Email
+![wysechoiceemail.png](/wysechoiceemail.png)
+#### PiHole (Old)
+![piholediagram.png](/piholediagram.png)
 {.links-list}
+
 ## WiFi Access
 
 The network has three separate SSIDs for specific purposes:

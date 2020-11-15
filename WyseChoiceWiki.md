@@ -2,7 +2,7 @@
 title: WyseChoice Wiki
 description: Wyse Household Notes & Information
 published: true
-date: 2020-11-15T09:25:54.102Z
+date: 2020-11-15T09:55:56.032Z
 tags: level0
 editor: markdown
 dateCreated: 2020-11-04T00:59:28.760Z
@@ -18,7 +18,7 @@ This website is intended as a tool to document the information relevant to the W
 
 
 - [:wrench:  &nbsp;&nbsp;Setup *Describes how to initially create the network and applications.*](/network_setup)
-- [:hammer:  &nbsp;&nbsp;Tools *Administratvie tools.*](/network_tools)
+- [:hammer:  &nbsp;&nbsp;Admin Tools *Administratvie tools.*](/network_tools)
 - [:system: &nbsp;&nbsp;Configuration *Reviews the existing services, their use, setup and configuration*](/network_services)
 - [:archive: &nbsp;&nbsp;Backup / Restore *Backup and restore procedures.*](network_backup)
 {.links-list}

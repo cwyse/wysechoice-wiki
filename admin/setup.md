@@ -2,7 +2,7 @@
 title: Setup
 description: Network and Application Setup
 published: true
-date: 2020-11-15T14:50:24.388Z
+date: 2020-11-15T14:51:52.371Z
 tags: 
 editor: markdown
 dateCreated: 2020-11-15T09:50:55.982Z
@@ -84,7 +84,8 @@ $ docker run -d -p 8000:8000 -p 9000:9000 --name=portainer-ce_<new_version> --re
 {.is-info}
 
 ### Reference
-[Lorem ipsum](https://wiki.js.org/about)
+- [Lorem ipsum](https://wiki.js.org/about)
+- [https://docs.docker.com/engine/security](Configure Client Endpoints for Portainer)
 
 Consectetur [adipiscing](/install/requirements) elit
 

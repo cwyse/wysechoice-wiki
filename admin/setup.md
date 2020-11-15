@@ -2,7 +2,7 @@
 title: Setup
 description: Network and Application Setup
 published: true
-date: 2020-11-15T15:25:30.423Z
+date: 2020-11-15T15:26:24.525Z
 tags: 
 editor: markdown
 dateCreated: 2020-11-15T09:50:55.982Z
@@ -74,6 +74,8 @@ The localhost endpoint is automatically enabled.  Remote hosts need to have thei
 
 <figure style="width:796px;" class="table">
   <table style="background-color:rgb(255, 255, 255);">
+    <tbody>
+    </tbody>
   </table>
 </figure>
 

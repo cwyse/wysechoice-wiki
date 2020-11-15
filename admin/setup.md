@@ -2,7 +2,7 @@
 title: Setup
 description: Network and Application Setup
 published: true
-date: 2020-11-15T15:33:48.717Z
+date: 2020-11-15T15:39:13.542Z
 tags: 
 editor: markdown
 dateCreated: 2020-11-15T09:50:55.982Z
@@ -72,6 +72,7 @@ $ docker run -d -p 8000:8000 -p 9000:9000 --name=portainer-ce_2.0 --restart=alwa
 ### Client Endpoints
 The localhost endpoint is automatically enabled.  Remote hosts need to have their Docker API enabled.  An excerpt from "[How do I enable the remote API for dockerd](https://success.mirantis.com/article/how-do-i-enable-the-remote-api-for-dockerd)" is given below:
 
+<div>
 <figure style="width:796px;" class="table">
   <table style="background-color:rgb(255, 255, 255);">
     <tbody>
@@ -79,12 +80,35 @@ The localhost endpoint is automatically enabled.  Remote hosts need to have thei
         <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;width:55px;">&nbsp;</td>
         <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;width:1107px;">
           <p>&nbsp;</p>
+          <h2 class="toc-header" id="how-do-i-enable-the-remote-api-for-dockerd"><a href="#how-do-i-enable-the-remote-api-for-dockerd" class="toc-anchor">¶</a> How do I enable the remote API for dockerd</h2>
           <p>After completing these steps, you will have enabled the remote API for dockerd, without editing the systemd unit file in place:</p>
+          <p>Create a file at <code>/etc/systemd/system/docker.service.d/startup_options.conf</code> with the below contents:</p>
+          <pre class="prismjs line-numbers"><code class="language-plaintext"># /etc/systemd/system/docker.service.d/override.conf
+[Service]
+ExecStart=
+ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2376
+</code></pre>
+          <blockquote>
+            <p><strong>Note:</strong> The -H flag binds dockerd to a listening socket, either a Unix socket or a TCP port. You can specify multiple -H flags to bind to multiple sockets/ports. The default -H fd:// uses systemd's socket activation feature to refer to /lib/systemd/system/docker.socket.</p>
+          </blockquote>
+          <p>Reload the unit files:</p>
+          <pre class="prismjs line-numbers"><code class="language-plaintext">$ sudo systemctl daemon-reload
+</code></pre>
+          <p>Restart the docker daemon with new startup options:</p>
+          <pre class="prismjs line-numbers"><code class="language-plaintext">$ sudo systemctl restart docker.service
+</code></pre>
+          <p>Ensure that anyone that has access to the TCP listening socket is a trusted user since access to the docker daemon is root-equivalent.</p>
+          <h1 class="toc-header" id="additional-documentation"><a href="#additional-documentation" class="toc-anchor">¶</a> Additional Documentation</h1>
+          <ul>
+            <li><a class="is-external-link" href="https://docs.docker.com/engine/security/">https://docs.docker.com/engine/security/</a></li>
+          </ul>
+          <p>&nbsp;</p>
         </td>
       </tr>
     </tbody>
   </table>
 </figure>
+</div>
 
 
 ## Upgrade

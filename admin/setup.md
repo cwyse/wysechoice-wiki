@@ -2,7 +2,7 @@
 title: Setup
 description: Network and Application Setup
 published: true
-date: 2020-11-15T15:04:19.308Z
+date: 2020-11-15T15:05:39.787Z
 tags: 
 editor: markdown
 dateCreated: 2020-11-15T09:50:55.982Z
@@ -114,6 +114,7 @@ $ docker rm portainer<current_version>
 $ #  DON'T RECREATE VOLUME  # docker volume create portainer_data
 $ docker run -d -p 8000:8000 -p 9000:9000 --name=portainer-ce_<new_version> --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce
 ```
+
 ### Backup
 > TBD
 {.is-info}

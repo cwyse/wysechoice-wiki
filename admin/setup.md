@@ -2,7 +2,7 @@
 title: Setup
 description: Network and Application Setup
 published: true
-date: 2020-11-15T15:12:31.919Z
+date: 2020-11-15T15:16:19.831Z
 tags: 
 editor: markdown
 dateCreated: 2020-11-15T09:50:55.982Z
@@ -27,11 +27,11 @@ dateCreated: 2020-11-15T09:50:55.982Z
     - Portainer
     - PgAdmin4
 
-## Portainer
+# Portainer
 
-## Tabs {.tabset}
+# Tabs {.tabset}
 
-### Overview
+## Overview
 Container maintenance is handled using the Portainer Docker image.  The image has is locally named according to the version.  In this instance, version 1.24.1 is named portainer1241.  The image mounts a volume, portainer_data, that is maintained across version upgrades.
 <br>
 <figure style="width:796px;" class="table">
@@ -61,15 +61,15 @@ Container maintenance is handled using the Portainer Docker image.  The image ha
   </table>
 </figure>
 
-### Initial Setup
+## Initial Setup
 ```
 $ docker volume create portainer_data
 $ docker run -d -p 8000:8000 -p 9000:9000 --name=portainer-ce_2.0 --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
 ```
 
-### Configuration
+## Configuration
 
-#### Client Endpoints
+###  Client Endpoints
 The localhost endpoint is automatically enabled.  Remote hosts need to have their Docker API enabled.  An excerpt from "[How do I enable the remote API for dockerd](https://success.mirantis.com/article/how-do-i-enable-the-remote-api-for-dockerd)" is given below:
 <figure style="width:796px;" class="table">
   <table style="background-color:rgb(255, 255, 255);">
@@ -109,7 +109,7 @@ ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2376
 
 
 
-### Upgrade
+## Upgrade
 From the Portainer website, select Images.  Pull the latest portainer image.  Since the _portainer/portainer:latest_ tag is already in use, the latest version will be _portainer/portainer:\<none\>_.
 
 ```
@@ -119,21 +119,21 @@ $ #  DON'T RECREATE VOLUME  # docker volume create portainer_data
 $ docker run -d -p 8000:8000 -p 9000:9000 --name=portainer-ce_<new_version> --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce
 ```
 
-### Backup
+## Backup
 > TBD
 {.is-info}
 
-### Reference
+## Reference
 > TBD
 {.is-info}
 
-### Support Files
+## Support Files
 > TBD
 {.is-info}
 
 
     
-## Dream Machine
+# Dream Machine
 
 ## Tabs {.tabset}
 

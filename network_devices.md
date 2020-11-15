@@ -2,7 +2,7 @@
 title: Network Devices
 description: Network device information
 published: true
-date: 2020-11-15T08:56:30.114Z
+date: 2020-11-15T09:01:03.766Z
 tags: 
 editor: markdown
 dateCreated: 2020-11-13T03:04:49.791Z
@@ -12,12 +12,13 @@ dateCreated: 2020-11-13T03:04:49.791Z
 
 The following tables list information on the primary devices on the network that other devices are dependent on.
 
-The routers provide both wired and wireless internet access.  Each access point provides the same set of SSIDs - WYSECHOICE, WYSECHOICE_IOT, and WYSECHOICE_STREAMING.  Only the WYSECHOICE access point is permitted to access the others access point VLANs.  WYSECHOICE is intended for devices used by people that will be aware of security breaches.  Unmonitored devices are purposely separated to prevent unauthorized access.# Device List by VLAN
+<br>
 
-The devices on the network are subdivided into VLANs.  A snapshot of the devices present on 11/12/20 are shown below, grouped by VLAN.
 ### Tabs {.tabset}
 
 #### Routers & APs
+The routers provide both wired and wireless internet access.  Each access point provides the same set of SSIDs - WYSECHOICE, WYSECHOICE_IOT, andWYSECHOICE_STREAMING.  Only the WYSECHOICE access point is permitted to access the others access point VLANs.  WYSECHOICE is intended for devices used by people that will be aware of security breaches.  Unmonitored devices are purposely separated to prevent unauthorized access.
+<br>
 <figure class="table">
   <table style="background-color:rgb(255, 255, 255);">
     <thead>
@@ -63,7 +64,10 @@ The devices on the network are subdivided into VLANs.  A snapshot of the devices
   </table>
 </figure>
 
-#### Routers & AP
+#### Servers
+The servers on the network will be monitored using the network administration tools.  These are intended to be online all the time.
+<br>
+
 <figure class="table">
   <table style="background-color:rgb(255, 255, 255);">
     <thead>
@@ -190,6 +194,8 @@ The devices on the network are subdivided into VLANs.  A snapshot of the devices
 {.links-list}
 
 #  Devices as of 11/11/20
+The devices on the network are subdivided into VLANs. A snapshot of the devices present on 11/12/20 are shown below, grouped by VLAN.
+<br>
 ### Tabs {.tabset}
 
 #### WYSECHOICE_WIRED<br>VLAN 1

@@ -2,9 +2,9 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2020-11-13T02:18:22.238Z
-tags: 
-editor: undefined
+date: 2020-11-15T09:44:18.614Z
+tags: level1
+editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
 ---
 

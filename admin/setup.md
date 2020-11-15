@@ -2,7 +2,7 @@
 title: Setup
 description: Network and Application Setup
 published: true
-date: 2020-11-15T15:27:55.677Z
+date: 2020-11-15T15:29:41.250Z
 tags: 
 editor: markdown
 dateCreated: 2020-11-15T09:50:55.982Z
@@ -77,6 +77,12 @@ The localhost endpoint is automatically enabled.  Remote hosts need to have thei
     <tbody>
       <tr>
         <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;width:55px;">&nbsp;</td>
+
+        <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;width:1107px;">
+          <p>&nbsp;</p>
+          <h2 class="toc-header" id="how-do-i-enable-the-remote-api-for-dockerd"><a href="#how-do-i-enable-the-remote-api-for-dockerd" class="toc-anchor">¶</a> How do I enable the remote API for dockerd</h2>
+          <p>After completing these steps, you will have enabled the remote API for dockerd, without editing the systemd unit file in place:</p>
+        </td>
       </tr>
     </tbody>
   </table>

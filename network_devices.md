@@ -2,18 +2,194 @@
 title: Network Devices
 description: Network device information
 published: true
-date: 2020-11-13T12:25:54.918Z
+date: 2020-11-15T08:56:30.114Z
 tags: 
-editor: undefined
+editor: markdown
 dateCreated: 2020-11-13T03:04:49.791Z
 ---
 
-# Device List by VLAN
+# Primary Device Information
+
+The following tables list information on the primary devices on the network that other devices are dependent on.
+
+The routers provide both wired and wireless internet access.  Each access point provides the same set of SSIDs - WYSECHOICE, WYSECHOICE_IOT, and WYSECHOICE_STREAMING.  Only the WYSECHOICE access point is permitted to access the others access point VLANs.  WYSECHOICE is intended for devices used by people that will be aware of security breaches.  Unmonitored devices are purposely separated to prevent unauthorized access.# Device List by VLAN
 
 The devices on the network are subdivided into VLANs.  A snapshot of the devices present on 11/12/20 are shown below, grouped by VLAN.
+### Tabs {.tabset}
 
+#### Routers & APs
+<figure class="table">
+  <table style="background-color:rgb(255, 255, 255);">
+    <thead>
+      <tr>
+        <th style="border-bottom:2px solid rgb(158, 158, 158);padding:0.75rem;">Name</th>
+        <th>Hostname</th>
+        <th>Device Type</th>
+        <th style="border-bottom:2px solid rgb(158, 158, 158);padding:0.75rem;">Address</th>
+        <th style="border-bottom:2px solid rgb(158, 158, 158);padding:0.75rem;">MAC Address</th>
+        <th style="border-bottom:2px solid rgb(158, 158, 158);padding:0.75rem;">Ports</th>
+        <th style="border-bottom:2px solid rgb(158, 158, 158);padding:0.75rem;">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">Dream Machine</td>
+        <td>udm</td>
+        <td>UniFi Dream Machine</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">192.168.1.1</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">74:83:c2:d6:c9:1b</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">443, 22</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">Unifi Dream Machine</td>
+      </tr>
+      <tr>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">Family Room AP</td>
+        <td>&nbsp;</td>
+        <td>UniFi AP-AC-Lite</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">192.168.1.29</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">80:2A:A8:86:FC:98</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">22</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">Unifi AP-AC-Lite</td>
+      </tr>
+      <tr>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">Living Room AP</td>
+        <td>&nbsp;</td>
+        <td>UniFi AP-AC-Lite</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">192.168.1.69</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">80:2A:A8:86:FB:37</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">22</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">Unifi AP-AC-Lite</td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
 
-## Devices as of 11/11/20
+#### Routers & AP
+<figure class="table">
+  <table style="background-color:rgb(255, 255, 255);">
+    <thead>
+      <tr>
+        <th style="border-bottom:2px solid rgb(158, 158, 158);padding:0.75rem;">&nbsp;</th>
+        <th>Hostname</th>
+        <th>Device Type</th>
+        <th style="border-bottom:2px solid rgb(158, 158, 158);padding:0.75rem;">Address</th>
+        <th style="border-bottom:2px solid rgb(158, 158, 158);padding:0.75rem;">Host Machine</th>
+        <th style="border-bottom:2px solid rgb(158, 158, 158);padding:0.75rem;">MAC Address</th>
+        <th style="border-bottom:2px solid rgb(158, 158, 158);padding:0.75rem;">Ports</th>
+        <th style="border-bottom:2px solid rgb(158, 158, 158);padding:0.75rem;">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">rpi4</td>
+        <td>&nbsp;</td>
+        <td>Raspberry Pi 4 Model B Rev 1.1</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">192.168.1.2</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">-</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">DC:A6:32:24:E4:C3</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">22</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">Raspberry PI 4, DockerNet, Postgres &amp; Caddy Server</td>
+      </tr>
+      <tr>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">qnap</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">192.168.1.8/9</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">-</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">24:5E:BE:13:00:FD/FE</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">8084</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">NAS File Server</td>
+      </tr>
+      <tr>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">pi-hole</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">192.168.5.3</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">DreamMachine</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">6A:EB:06:85:A5:B5</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">53,80</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">Pi-Hole DNS Server, running in MACVLAN podman container on Dream Machine</td>
+      </tr>
+      <tr>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">wiki</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">192.168.40.128</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">rpi4</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">02:42:c0:a8:28:80</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">3000</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">Wiki.js server</td>
+      </tr>
+      <tr>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">postgres</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">192.168.40.30</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">rpi4</td>
+        <td colspan="2" style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">02:42:C0:A8:28:1E</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">Postgres database server (wiki, ghini)</td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+#### Container Based Servers
+<figure class="table">
+  <table style="background-color:rgb(255, 255, 255);">
+    <thead>
+      <tr>
+        <th style="border-bottom:2px solid rgb(158, 158, 158);padding:0.75rem;">Name</th>
+        <th style="border-bottom:2px solid rgb(158, 158, 158);padding:0.75rem;">VM Type</th>
+        <th style="border-bottom:2px solid rgb(158, 158, 158);padding:0.75rem;">Host Machine</th>
+        <th style="border-bottom:2px solid rgb(158, 158, 158);padding:0.75rem;">Image</th>
+        <th style="border-bottom:2px solid rgb(158, 158, 158);padding:0.75rem;">Container</th>
+        <th style="border-bottom:2px solid rgb(158, 158, 158);padding:0.75rem;">Volumes</th>
+        <th style="border-bottom:2px solid rgb(158, 158, 158);padding:0.75rem;">Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">pi-hole</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">podman</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">DreamMachine</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;"><a class="is-external-link" href="http://docker.io/pihole/pihole:latest">docker.io/pihole/pihole:latest</a></td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">pihole</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">/mnt/data/etc-pihole:/etc/pihole</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">&nbsp;</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">&nbsp;</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">&nbsp;</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">&nbsp;</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">&nbsp;</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">/mnt/data/pihole/etc-dnsmasq.d:/etc/dnsmasq.d</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">wiki</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">docker</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">rpi4</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">requarks/wiki:2</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">wiki</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">/home/pi/docker_vols/wiki_data:/wiki/data/content</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">postgres</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">docker</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">rpi4</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">postgres:9.5</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">postgres-9.5</td>
+        <td style="border-bottom:1px solid rgb(238, 238, 238);padding:0.75rem;">/home/pi/docker_vols/postgres:/var/lib/postgresql/data</td>
+        <td>&nbsp;</td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+{.links-list}
+
+#  Devices as of 11/11/20
 ### Tabs {.tabset}
 
 #### WYSECHOICE_WIRED<br>VLAN 1

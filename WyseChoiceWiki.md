@@ -2,7 +2,7 @@
 title: WyseChoice Wiki
 description: Wyse Household Notes & Information
 published: true
-date: 2020-11-15T10:06:55.369Z
+date: 2020-11-15T10:20:20.891Z
 tags: level0
 editor: markdown
 dateCreated: 2020-11-04T00:59:28.760Z
@@ -14,7 +14,7 @@ This website is intended as a tool to document the information relevant to the W
 
 # Tabs {.tabset}
 
-## :wrench:&nbsp;&nbsp;Administration
+## :pencil:&nbsp;&nbsp;Administration
 
 
 - [:wrench:  &nbsp;&nbsp;Setup *Describes how to initially create the network and applications.*](/admin/setup)

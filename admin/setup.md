@@ -2,7 +2,7 @@
 title: Setup
 description: Network and Application Setup
 published: true
-date: 2020-11-16T10:59:02.891Z
+date: 2020-11-16T11:01:48.474Z
 tags: 
 editor: markdown
 dateCreated: 2020-11-15T09:50:55.982Z
@@ -80,7 +80,7 @@ The localhost endpoint is automatically enabled.  Remote hosts need to have thei
         <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;width:55px;">&nbsp;</td>
         <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;width:1107px;">
           <p>&nbsp;</p>
-          <h2  id="how-do-i-enable-the-remote-api-for-dockerd"> How do I enable the remote API for dockerd</h2>
+<!--          <h2  id="how-do-i-enable-the-remote-api-for-dockerd"> How do I enable the remote API for dockerd</h2>-->
           <p>After completing these steps, you will have enabled the remote API for dockerd, without editing the systemd unit file in place:</p>
           <p>Create a file at <code>/etc/systemd/system/docker.service.d/startup_options.conf</code> with the below contents:</p>
           <pre class="prismjs line-numbers"><code class="language-plaintext"># /etc/systemd/system/docker.service.d/override.conf
@@ -109,7 +109,7 @@ ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2376
   </table>
 </figure>
 </div>
-dfa
+### dfa
 
 ## Upgrade
 From the Portainer website, select Images.  Pull the latest portainer image.  Since the _portainer/portainer:latest_ tag is already in use, the latest version will be _portainer/portainer:\<none\>_.

@@ -2,7 +2,7 @@
 title: Setup
 description: Network and Application Setup
 published: true
-date: 2020-11-16T11:23:25.397Z
+date: 2020-11-16T11:28:48.241Z
 tags: 
 editor: markdown
 dateCreated: 2020-11-15T09:50:55.982Z
@@ -181,6 +181,38 @@ $ docker update --cpus 2 -m 4g
 
 ### Configuration
 https://docs.requarks.io
+
+### Upgrade
+> TBD
+{.is-info}
+
+### Backup
+> TBD
+{.is-info}
+
+### Reference
+> TBD
+{.is-info}
+
+### Support Files
+> TBD
+{.is-info}
+
+# Ghini
+
+## Tabs {.tabset}
+
+### Overview
+
+
+### Initial Setup
+
+
+### Configuration
+- Ghini database is served on the Postgres server, postgres.wysechoice.net*
+- Ghini database will be backed up nightly to postgres2.wysechoice.net (planned), which will be the failsafe database server
+- User: chris  Password: <store securely outside the repository>
+- Pictures:  [fileserver.wysechoice.net://srv/ghini/pictures](fileserver.wysechoice.net://srv/ghini/pictures) (planned)
 
 ### Upgrade
 > TBD

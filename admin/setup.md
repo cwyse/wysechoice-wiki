@@ -2,7 +2,7 @@
 title: Setup
 description: Network and Application Setup
 published: true
-date: 2020-11-16T11:16:11.274Z
+date: 2020-11-16T11:23:25.397Z
 tags: 
 editor: markdown
 dateCreated: 2020-11-15T09:50:55.982Z
@@ -134,6 +134,70 @@ $ docker run -d -p 8000:8000 -p 9000:9000 --name=portainer-ce_<new_version> --re
 
 
     
+# Wiki.js
+
+## Tabs {.tabset}
+
+### Overview
+This Wiki is served from a Docker container.  It uses both Wiki.js and a Postgres database image to store the content.
+<figure style="width:796px;" class="table">
+  <table style="background-color:rgb(255, 255, 255);">
+    <tbody>
+      <tr>
+        <th style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">Image</th>
+        <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">requarks/wiki:2 (latest version 2)</td>
+      </tr>
+      <tr>
+        <th style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">Database Image</th>
+        <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">postgres:9.5</td>
+      </tr>
+      <tr>
+        <th style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">Web Sites</th>
+        <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;"><a class="is-external-link" href="https://hub.docker.com/_/postgres">https://hub.docker.com/_/postgres</a>,<a class="is-external-link" href="https://hub.docker.com/r/requarks/wiki">https://hub.docker.com/r/requarks/wiki</a></td>
+      </tr>
+      <tr>
+        <th style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">Ports</th>
+        <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">0.0.0.0:3000 -&gt; 8080/tcp</td>
+      </tr>
+      <tr>
+        <th style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">Data Volumes</th>
+        <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">${HOME}/docker_vols/wiki, ${HOME}/docker_vols/postgres</td>
+      </tr>
+      <tr>
+        <th style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">Network</th>
+        <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">dockernet</td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+### Initial Setup
+```
+$ mkdir ~/docker_vols/wiki_data
+$ docker run --net=dockernet --name postgres-9.5 --ip 192.168.40.30 -p 5432:5432 -m 4g -v ~/docker_vols/postgres:/var/lib/postgresql/data -e POSTGRES_ROOT_PASSWORD=xwiki -e POSTGRES_USER=xwiki -e POSTGRES_PASSWORD=xwiki -e POSTGRES_DB=xwiki -e POSTGRES_INITDB_ARGS="--encoding=UTF8" -d postgres:9.5
+$ docker run -d -p 8080:3000 --net=dockernet --name wiki --restart unless-stopped -e "DB_TYPE=postgres" -e "DB_HOST=postgres-9.5" -e "DB_PORT=5432" -e "DB_USER=wikijs" -e "DB_PASS=wikijsrocks" -e "DB_NAME=wiki" -v /home/pi/docker_vols/wiki_data requarks/wiki:2
+$ docker update --cpus 2 -m 4g
+```
+
+### Configuration
+https://docs.requarks.io
+
+### Upgrade
+> TBD
+{.is-info}
+
+### Backup
+> TBD
+{.is-info}
+
+### Reference
+> TBD
+{.is-info}
+
+### Support Files
+> TBD
+{.is-info}
+
 # Dream Machine
 
 ## Tabs {.tabset}

@@ -2,7 +2,7 @@
 title: Setup
 description: Network and Application Setup
 published: true
-date: 2020-11-16T11:01:48.474Z
+date: 2020-11-16T11:02:52.548Z
 tags: 
 editor: markdown
 dateCreated: 2020-11-15T09:50:55.982Z
@@ -98,7 +98,7 @@ ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2376
           <pre class="prismjs line-numbers"><code class="language-plaintext">$ sudo systemctl restart docker.service
 </code></pre>
           <p>Ensure that anyone that has access to the TCP listening socket is a trusted user since access to the docker daemon is root-equivalent.</p>
-          <h1  id="additional-documentation"> Additional Documentation</h1>
+<!--          <h1  id="additional-documentation"> Additional Documentation</h1>-->
           <ul>
             <li><a class="is-external-link" href="https://docs.docker.com/engine/security/">https://docs.docker.com/engine/security/</a></li>
           </ul>

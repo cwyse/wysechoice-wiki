@@ -2,7 +2,7 @@
 title: Network Layout
 description: Network diagram, information, and interconnections
 published: true
-date: 2020-12-11T13:16:51.557Z
+date: 2020-12-11T15:27:52.719Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T01:31:26.503Z
@@ -18,6 +18,88 @@ These subpages document the WyseChoice network.  It is a complicated network inf
 ![wysechoicevlans.png](/wysechoicevlans.png)
 #### Email
 ![wysechoiceemail.png](/wysechoiceemail.png)
+#### Server Addresses
+##### UniFi Dream Machine
+
+```Model:       UniFi Dream Machine
+Version:     1.5.6.2150
+MAC Address: 74:83:c2:d6:c9:1b
+IP Address:  68.9.160.37
+Hostname:    DreamMachine
+Name: dreammachine.wysechoice.net (Planned)
+Firmware: v1.5.6
+MAC Address:
+Local IP Address: 192.168.1.1
+```
+
+##### Networks:
+
+###### WYSECHOICE_WIRED (VLAN 1 - Default)
+
+```192.168.1.1/24
+DHCP: 192.168.1.6 - 192.168.1.254
+DNS: 8.8.4.4, 8.8.8.8, 10.0.0.1
+```
+
+###### PI-HOLE (VLAN 5)
+
+```192.168.5.1/24
+DHCP: 192.168.5.6 - 192.168.1.254
+DNS: 8.8.4.4, 8.8.8.8, 10.0.0.1
+```
+
+###### DockerNet (VLAN 40)
+
+```192.168.40.1/24
+DHCP: N/A
+DNS: N/A
+```
+
+##### Wireless Networks:
+
+Wireless Channels: 1 Low (2G), 48 medium VHT40 (5G)
+###### WYSECHOICE (VLAN 10)
+
+```192.168.10.1/24
+DHCP: 192.168.10.6 - 192.168.10.254
+DNS: 192.168.5.3
+```
+
+###### WYSECHOICE_IOT (VLAN 20)
+
+```192.168.20.1/24
+DHCP: 192.168.20.6 - 192.168.20.254
+DNS: 192.168.5.3
+```
+
+###### WYSECHOICE_STREAMING (VLAN 30)
+
+```192.168.30.1/24
+DHCP: 192.168.30.6-192.168.30.254
+DNS: 192.168.5.3
+```
+
+
+##### UniFi AP-AC-Lite (9/12/20)
+
+```Model:       UAP-AC-Lite
+Version:     5.35.0.12205
+MAC Address: 80:2a:a8:86:fc:98
+IP Address:  192.168.1.29
+Hostname:    FamilyRoomAP
+Wireless Channels: 11 Low (2G), 36 Medium VHT80 (5G)
+```
+
+##### Unifi AP-AC-Lite (9/12/20)
+
+```Model:       UAP-AC-Lite
+Version:     5.35.0.12205
+MAC Address: 80:2a:a8:86:fb:37
+IP Address:  192.168.1.69
+Hostname:    LivingRoomAP
+Wireless Channels: 6 Low (2G), 40 Medium VHT40 (5G)
+```
+
 #### PiHole (Old)
 ![piholediagram.png](/piholediagram.png)
 {.links-list}

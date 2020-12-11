@@ -2,7 +2,7 @@
 title: Network Applications
 description: Network and Application Setup
 published: true
-date: 2020-12-11T12:42:24.974Z
+date: 2020-12-11T13:00:36.324Z
 tags: 
 editor: markdown
 dateCreated: 2020-11-15T09:50:55.982Z
@@ -241,6 +241,108 @@ https://docs.requarks.io
 - Ghini database will be backed up nightly to postgres2.wysechoice.net (planned), which will be the failsafe database server
 - User: chris  Password: <store securely outside the repository>
 - Pictures:  [fileserver.wysechoice.net://srv/ghini/pictures](fileserver.wysechoice.net://srv/ghini/pictures) (planned)
+
+### Upgrade
+> TBD
+{.is-info}
+
+### Backup
+> TBD
+{.is-info}
+
+### Reference
+> TBD
+{.is-info}
+
+### Support Files
+> TBD
+{.is-info}
+
+# Grafana
+
+## Tabs {.tabset}
+
+### Overview
+> TBD
+{.is-info}
+
+
+### Initial Setup
+> TBD
+{.is-info}
+
+
+### Configuration
+> TBD
+{.is-info}
+
+### Upgrade
+> TBD
+{.is-info}
+
+### Backup
+> TBD
+{.is-info}
+
+### Reference
+> TBD
+{.is-info}
+
+### Support Files
+> TBD
+{.is-info}
+
+# Syslog
+
+## Tabs {.tabset}
+
+### Overview
+> TBD
+{.is-info}
+
+
+### Initial Setup
+> TBD
+{.is-info}
+
+
+### Configuration
+> TBD
+{.is-info}
+
+### Upgrade
+> TBD
+{.is-info}
+
+### Backup
+> TBD
+{.is-info}
+
+### Reference
+> TBD
+{.is-info}
+
+### Support Files
+> TBD
+{.is-info}
+
+# CheckMK
+
+## Tabs {.tabset}
+
+### Overview
+> TBD
+{.is-info}
+
+
+### Initial Setup
+> TBD
+{.is-info}
+
+
+### Configuration
+> TBD
+{.is-info}
 
 ### Upgrade
 > TBD

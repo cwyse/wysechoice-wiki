@@ -2,7 +2,7 @@
 title: Network Layout
 description: Network diagram, information, and interconnections
 published: true
-date: 2020-11-15T09:42:19.911Z
+date: 2020-12-11T13:16:51.557Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T01:31:26.503Z
@@ -29,6 +29,8 @@ The network has three separate SSIDs for specific purposes:
 1. **WYSECHOICE** - Trusted access for human users
 1. **WYSECHOICE_STREAMING** - Untrusted access for streaming devices
 1. **WYSECHOICE_IOT** - Untrusted access for IOT devices
+
+Each of the SSIDs is on their own VLAN to allow customization of the group's support.  The primary customization is to only allow the **WYSECHOICE** VLAN to have access to the full network.  The other VLANs may be running proprietary software, that could be compromised, so they are prevented from reaching the **WYSECHOICE** VLAN.  The **WYSECHOICE_STREAMING**  VLAN was separated to potentially prioritize traffic for a better streaming experience.   Currently, it is differentiated by only supporting 5G access, and  **WYSECHOICE_IOT**  is limited to 2G.
 
 ### Tabs {.tabset}
 

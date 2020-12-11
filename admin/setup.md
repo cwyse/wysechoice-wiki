@@ -2,7 +2,7 @@
 title: Setup
 description: Network and Application Setup
 published: true
-date: 2020-11-16T11:28:48.241Z
+date: 2020-12-11T12:23:31.578Z
 tags: 
 editor: markdown
 dateCreated: 2020-11-15T09:50:55.982Z
@@ -140,6 +140,55 @@ $ docker run -d -p 8000:8000 -p 9000:9000 --name=portainer-ce_<new_version> --re
 
 ### Overview
 This Wiki is served from a Docker container.  It uses both Wiki.js and a Postgres database image to store the content.
+
+#### Wiki Conventions & Plans
+The intent of this Wiki is to provide an easily accessible set of documents that assist in the maintenance of an increasingly complex network configuration.  A secondary goal is establish a forum for information and content relevant to the Wyse household.
+
+Ease of use is accomplished by using a standard way to provide information.  Inconsistencies in format should be reduced, allowing a user to quickly find the needed information for a specific server or service.  The following list are guidelines to support this goal.
+
+##### General Guidance
+- **Completeness:** All network and application services provided on/by this network should be listed on this Wiki
+- **Dedicated Content:**  Content for each service should be available on it's own section or page
+- **Common Content:** Documentation that is common across services and/or servers should be found in every associated service section.  In-lined content is preferred, but a link to common content may be required.
+{.grid-list}
+##### Server sections
+Descriptions of servers should be displayed in a standard way.  The content below lists the base information that should be the minimum information provided for each server.  It should be displayed the same way for each server.
+- **Machine name:** &nbsp;&nbsp;&nbsp;Hostname and IP address of server
+- **Architecture:** &nbsp;&nbsp;&nbsp;Server CPU model and any specific hardware
+- **Operating System:**&nbsp;&nbsp;&nbsp;Operating System and version
+- **Firmware:**&nbsp;&nbsp;&nbsp;Any relevant firmware and version(s)
+- **Address(es):** &nbsp;&nbsp;&nbsp;Static IP address(es) and interfaces
+- **Location:** &nbsp;&nbsp;&nbsp;Physical location of server
+- **Primary software list:** &nbsp;&nbsp;&nbsp;List of major software components with links to support references
+- **Configuration:** &nbsp;&nbsp;&nbsp;Current configuration settings and/or link to configuration procedure
+- **Backup:** &nbsp;&nbsp;&nbsp;Quick description and link to backup procedure
+- **Services:** &nbsp;&nbsp;&nbsp;List of service links
+- **Date:**&nbsp;&nbsp;&nbsp;Date information was last updated
+{.grid-list}
+3. Service section content
+- **Service type:** &nbsp;&nbsp;&nbsp;Type of service being provided (file server, DHCP, etc).
+- **Service name:** &nbsp;&nbsp;&nbsp;Name of service application
+- **Service host:** &nbsp;&nbsp;&nbsp;DNS name of service host
+- **Interface link:** &nbsp;&nbsp;&nbsp;Link to any web based administrative interface
+- **Virtualization Software:** &nbsp;&nbsp;&nbsp;Type of virtualization software (Docker, podman, Virtual Box, etc) if used
+- **Configuration:** &nbsp;&nbsp;&nbsp;Current configuration settings and/or link to configuration procedure
+- **Backup:** &nbsp;&nbsp;&nbsp;Quick description and link to backup procedure
+- **Date:**&nbsp;&nbsp;&nbsp;Date information was last updated
+
+{.grid-list}
+
+#### Non-Wiki Specific Guidelines
+> This information does not belong here.  Once it is provided in other sections of the Wiki, it should be removed.
+{.is-warning}
+
+- Backups to another machine will be scheduled for all configuration and data
+- Monthly restore operations will be scheduled to test backup
+- Docker will be used for all services if possible
+    
+---
+
+---
+
 <figure style="width:796px;" class="table">
   <table style="background-color:rgb(255, 255, 255);">
     <tbody>

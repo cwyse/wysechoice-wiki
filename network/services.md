@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2020-12-11T12:50:35.735Z
+date: 2020-12-11T14:55:05.094Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -18,6 +18,33 @@ The network uses a Pi-hole domain name server.  The Pi-hole server provides both
 
 This server runs as podman container on the UDM router.  Although it is hosted on the UDM router (192.168.1.1), it appears on the network with its own MAC address.  The container resides on VLAN 5, which is a MACVLan network using the UDM router as it's network interface.
 
+#### Boot sequence
+
+> <font color=green>UDM Linux steps in green</font>
+{.is-info}
+
+> <font color=blue>Unifi-os podman container steps in blue</font>
+{.is-info}
+
+1.  <font color=green>UDM boots Linux</font>
+1.  <font color=green>UDM starts **unifi-os** podman container</font>
+1.  <font color=blue>Unifi-os container starts re-installing cached deb packages from /data/dpkg-cache (<font color=green>/mnt/data/unifi-os/dpkg-cache</font>)</font>
+1.  <font color=blue>Unifi-os container finds udm-boot package and re-installs it</font>
+1.  <font color=blue>udm-boot installs on_boot.sh to /usr/share/udm-boot </font>
+1.  <font color=blue>udm-boot installs udm-boot.service to /lib/systemd/system</font>
+1.  <font color=blue>udm-boot post-install remote copies on_boot.sh to the host at <font color=green>/mnt/data/on_boot.sh</font> and creates <font color=green>/mnt/data/on_boot.d</font> directory if not present</font>
+1.  <font color=blue>udm-boot post-install enables and starts udm-boot service</font>
+1.  <font color=blue>udm-boot service uses ssh-proxy to execute <font color=green>/mnt/data/on_boot.sh</font></font>
+1.  <font color=green>on_boot.sh searches and executes startup scripts found in /mnt/data/on_boot.d</font> 
+1.  <font color=green>/mnt/data/on_boot.d/10-dns.sh is executed, creating 192.168.5.x MACVLan (using configuration from /mnt/data/podman/cni/20-dns.conflist), and starts p-hole podman container</font>
+1.  <font color=blue>udm-boot service completes</font>
+1.  <font color=red>pihole podman container starts DNS & administrative web server</font>
+1.  <font color=red>pihole podman container starts DNS & administrative web server</font>
+
+
+
+
+
 ### Initial Setup
 ### Configuration
 ### Backup
@@ -32,11 +59,10 @@ https://github.com/boostchicken/udm-utilities/blob/master/cni-plugins/20-dns.con
 
 https://github.com/boostchicken/udm-utilities/blob/master/dns-common/on_boot.d/10-dns.sh
 ### Support Files
-10-dns.sh
-
-20-dns.conflist
-
-pihole.sh
+#### Located on UDM filesystem (not unifi-os container)
+[10-dns.sh](/mnt/data/on_boot.d/10-dns.sh) - Pi-Hole configuration and startup script
+[20-dns.conflist](/mnt/data/podman/cni/20-dns.conflist) - Configuration of 192.168.5.x MACVLAN for Pi-Hole
+[pihole.sh](/pihole.sh) - Create and run container
 
 ## Domain Name Service (DNS)
 

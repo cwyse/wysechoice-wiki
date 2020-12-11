@@ -2,7 +2,7 @@
 title: Setup
 description: Network and Application Setup
 published: true
-date: 2020-12-11T12:27:57.178Z
+date: 2020-12-11T12:28:51.127Z
 tags: 
 editor: markdown
 dateCreated: 2020-11-15T09:50:55.982Z
@@ -172,6 +172,7 @@ This Wiki is served from a Docker container.  It uses both Wiki.js and a Postgre
     </tbody>
   </table>
 </figure>
+
 ### Notes
 #### Wiki Conventions & Plans
 The intent of this Wiki is to provide an easily accessible set of documents that assist in the maintenance of an increasingly complex network configuration.  A secondary goal is establish a forum for information and content relevant to the Wyse household.

@@ -2,7 +2,7 @@
 title: Setup
 description: Network and Application Setup
 published: true
-date: 2020-12-11T12:23:31.578Z
+date: 2020-12-11T12:27:57.178Z
 tags: 
 editor: markdown
 dateCreated: 2020-11-15T09:50:55.982Z
@@ -140,7 +140,39 @@ $ docker run -d -p 8000:8000 -p 9000:9000 --name=portainer-ce_<new_version> --re
 
 ### Overview
 This Wiki is served from a Docker container.  It uses both Wiki.js and a Postgres database image to store the content.
-
+<br>
+    
+<figure style="width:796px;" class="table">
+  <table style="background-color:rgb(255, 255, 255);">
+    <tbody>
+      <tr>
+        <th style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">Image</th>
+        <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">requarks/wiki:2 (latest version 2)</td>
+      </tr>
+      <tr>
+        <th style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">Database Image</th>
+        <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">postgres:9.5</td>
+      </tr>
+      <tr>
+        <th style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">Web Sites</th>
+        <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;"><a class="is-external-link" href="https://hub.docker.com/_/postgres">https://hub.docker.com/_/postgres</a>,<a class="is-external-link" href="https://hub.docker.com/r/requarks/wiki">https://hub.docker.com/r/requarks/wiki</a></td>
+      </tr>
+      <tr>
+        <th style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">Ports</th>
+        <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">0.0.0.0:3000 -&gt; 8080/tcp</td>
+      </tr>
+      <tr>
+        <th style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">Data Volumes</th>
+        <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">${HOME}/docker_vols/wiki, ${HOME}/docker_vols/postgres</td>
+      </tr>
+      <tr>
+        <th style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">Network</th>
+        <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">dockernet</td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+### Notes
 #### Wiki Conventions & Plans
 The intent of this Wiki is to provide an easily accessible set of documents that assist in the maintenance of an increasingly complex network configuration.  A secondary goal is establish a forum for information and content relevant to the Wyse household.
 
@@ -184,41 +216,6 @@ Descriptions of servers should be displayed in a standard way.  The content belo
 - Backups to another machine will be scheduled for all configuration and data
 - Monthly restore operations will be scheduled to test backup
 - Docker will be used for all services if possible
-    
----
-
----
-
-<figure style="width:796px;" class="table">
-  <table style="background-color:rgb(255, 255, 255);">
-    <tbody>
-      <tr>
-        <th style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">Image</th>
-        <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">requarks/wiki:2 (latest version 2)</td>
-      </tr>
-      <tr>
-        <th style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">Database Image</th>
-        <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">postgres:9.5</td>
-      </tr>
-      <tr>
-        <th style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">Web Sites</th>
-        <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;"><a class="is-external-link" href="https://hub.docker.com/_/postgres">https://hub.docker.com/_/postgres</a>,<a class="is-external-link" href="https://hub.docker.com/r/requarks/wiki">https://hub.docker.com/r/requarks/wiki</a></td>
-      </tr>
-      <tr>
-        <th style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">Ports</th>
-        <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">0.0.0.0:3000 -&gt; 8080/tcp</td>
-      </tr>
-      <tr>
-        <th style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">Data Volumes</th>
-        <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">${HOME}/docker_vols/wiki, ${HOME}/docker_vols/postgres</td>
-      </tr>
-      <tr>
-        <th style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">Network</th>
-        <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">dockernet</td>
-      </tr>
-    </tbody>
-  </table>
-</figure>
 
 ### Initial Setup
 ```

@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2020-11-15T09:44:18.614Z
+date: 2020-12-11T12:50:35.735Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -38,7 +38,10 @@ https://github.com/boostchicken/udm-utilities/blob/master/dns-common/on_boot.d/1
 
 pihole.sh
 
-## DHCP
+## Domain Name Service (DNS)
+
+## Tabs {.tabset}
+
 ### Overview
 The network uses a Pi-hole domain name server.  The Pi-hole server provides both DNS lookup and filtering.  It utilizes various lists of known ad web sites to prevent them from being accessed.  
 
@@ -63,6 +66,26 @@ https://github.com/boostchicken/udm-utilities/blob/master/dns-common/on_boot.d/1
 20-dns.conflist
 
 pihole.sh
+
+## E-Mail
+## Tabs {.tabset}
+
+### Overview
+Email addresses: chris.wyse@wysechoice.net, doris.wyse@wysechoice.net
+
+
+### Initial Setup
+### Configuration
+The following flow diagram describes the Email configuration.  It uses three separate services - Cloudflare, ImproveMX, and Cox.  When an Email is sent from anywhere on the internet, the DNS service on Cloudflare for the wysechoice.net domain recognizes the Email address and forwards it to ImproveMX.  Cloudflare supports forwarding to a single Email address.  ImproveMX provides Email forwarding for multiple Email addresses in a domain.  The Email is forwarded to one of two servers on ImproveMX, which determine the final destination address and server at cox.net.  Changing Email service providers only requires modification of the ImproveMX records to point to the new servers.  The wysechoice.net Email addresses remain unchanged, regardless of provider.
+
+![wysechoiceemail.png](/wysechoiceemail.png)
+
+### Backup
+TBD
+### Reference
+TBD
+### Support Files
+TBD
 
 ## Firewall
 ### Overview

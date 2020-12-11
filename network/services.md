@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2020-12-11T15:09:29.913Z
+date: 2020-12-11T15:13:56.682Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -45,6 +45,22 @@ This server runs as podman container on the UDM router.  Although it is hosted o
 
 ### Initial Setup
 ### Configuration
+#### Provide data to Grafana (needs more clarification)
+Get the WEBPASSWORD from /etc/pihole/setupVars.conf in the podman container:
+
+WEBPASSWORD=c3c6db3026a6ddb15d603ddd2fe20521ea5656d3608e387a7637185b2867bb26
+
+curl -ks "http://192.168.5.3/admin/api.php?overTimeData10mins&auth=c3c6db3026a6ddb15d603ddd2fe20521ea5656d3608e387a7637185b2867bb26"
+
+#### Download and install whitelisted DNS names
+
+https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/whitelist.txt  => /etc/pihole/whitelist.txt on container.
+
+root@pi:~# wget https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/whitelist.txt
+
+root@pi:~# while read -r line; do pihole -w $line; done <whitelist.txt
+
+/pi-hole-pi_hole-teleporter_2020-10-24_14-15-20.tar.gz
 ### Backup
 Backup and restore is currently manual through the pihole administration:
 ![piholebackup.png](/piholebackup.png)
@@ -125,19 +141,7 @@ This server runs as podman container on the UDM router.  Although it is hosted o
 ### Configuration
 ### Backup
 ### Reference
-https://github.com/boostchicken/udm-utilities/tree/master/on-boot-script
 
-https://github.com/boostchicken/udm-utilities/tree/master/run-pihole
-
-http://192.168.5.3/admin/queries.php
-
-https://github.com/boostchicken/udm-utilities/blob/master/cni-plugins/20-dns.conflist
-
-https://github.com/boostchicken/udm-utilities/blob/master/dns-common/on_boot.d/10-dns.sh
 ### Support Files
-10-dns.sh
 
-20-dns.conflist
-
-pihole.sh
 

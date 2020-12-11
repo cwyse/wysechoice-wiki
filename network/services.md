@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2020-12-11T14:55:05.094Z
+date: 2020-12-11T15:05:27.873Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -26,6 +26,9 @@ This server runs as podman container on the UDM router.  Although it is hosted o
 > <font color=blue>Unifi-os podman container steps in blue</font>
 {.is-info}
 
+> <font color=red>pihole podman container steps in red</font>
+{.is-info}
+
 1.  <font color=green>UDM boots Linux</font>
 1.  <font color=green>UDM starts **unifi-os** podman container</font>
 1.  <font color=blue>Unifi-os container starts re-installing cached deb packages from /data/dpkg-cache (<font color=green>/mnt/data/unifi-os/dpkg-cache</font>)</font>
@@ -39,11 +42,6 @@ This server runs as podman container on the UDM router.  Although it is hosted o
 1.  <font color=green>/mnt/data/on_boot.d/10-dns.sh is executed, creating 192.168.5.x MACVLan (using configuration from /mnt/data/podman/cni/20-dns.conflist), and starts p-hole podman container</font>
 1.  <font color=blue>udm-boot service completes</font>
 1.  <font color=red>pihole podman container starts DNS & administrative web server</font>
-1.  <font color=red>pihole podman container starts DNS & administrative web server</font>
-
-
-
-
 
 ### Initial Setup
 ### Configuration

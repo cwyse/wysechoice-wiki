@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2020-12-11T15:05:27.873Z
+date: 2020-12-11T15:09:29.913Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -46,6 +46,10 @@ This server runs as podman container on the UDM router.  Although it is hosted o
 ### Initial Setup
 ### Configuration
 ### Backup
+Backup and restore is currently manual through the pihole administration:
+![piholebackup.png](/piholebackup.png)
+[pi-hole-pi_hole-teleporter_2020-10-24_14-15-20.tar.gz](/pi-hole-pi_hole-teleporter_2020-10-24_14-15-20.tar.gz)
+
 ### Reference
 https://github.com/boostchicken/udm-utilities/tree/master/on-boot-script
 

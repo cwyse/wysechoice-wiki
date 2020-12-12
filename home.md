@@ -2,7 +2,7 @@
 title: WyseChoice Wiki
 description: Wyse Household Notes & Information
 published: true
-date: 2020-12-11T04:20:46.437Z
+date: 2020-12-12T03:32:00.633Z
 tags: level0
 editor: markdown
 dateCreated: 2020-11-04T00:59:28.760Z
@@ -25,6 +25,7 @@ This website is intended as a tool to document the information relevant to the W
 
 ## :wrench:&nbsp;&nbsp;Network Information
 
+<a id="network"></a>
 
 - [:signal_strength: &nbsp;&nbsp;Network Layout *Network diagram, uses, and interconnections*](/network/layout)
 - [:iphone: &nbsp;&nbsp;Network Devices *Network device information*](/network/devices)

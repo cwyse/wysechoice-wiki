@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2020-12-12T10:07:16.938Z
+date: 2020-12-12T10:32:01.855Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -102,17 +102,49 @@ TBD
 ### Support Files
 TBD
 
-## Firewall
-### Overview
-The network uses a Pi-hole domain name server.  The Pi-hole server provides both DNS lookup and filtering.  It utilizes various lists of known ad web sites to prevent them from being accessed.  
+## DockerNet
+## Tabs {.tabset}
 
-This server runs as podman container on the UDM router.  Although it is hosted on the UDM router (192.168.1.1), it appears on the network with its own MAC address.  The container resides on VLAN 5, which is a MACVLan network using the UDM router as it's network interface.
+### Overview
+DockerNet is a MACVLAN network for docker containers.  It requires configuration on the Docker host machine to create the network, and additional configuration on the router to access the network remotely.  The configuration allows new docker images to appear on the network as individual devices with their own MAC addresses. 
+
+Currently the support is provided by the Raspberry Pi 4B, at 192.168.1.2.  It is created and configured there, and all containers are provided by that server.  This service could be expanded to bridge to other servers in the future.
+
+
+### Initial Setup
+The primary reference used for creating this configuration is [Using Docker MACVLAN Networks](https://blog.oddbit.com/post/2018-03-12-using-docker-macvlan-networks/).  The configuration had some issues with the checksum value in the packets being received.  Unfortunately, I didn't document it well, but the solution is to disable the checksum offloading in eth0-shim.
+
+Creation of the DockerNet MACVLAN requires configuration on the UDM server to support routing to the DockerNet server (192.168.1.2) and additional configuration on machinethe eth0-shim interface.
+
+#### Checksum Offloading
+
+
+### Configuration
+
+
+### Backup
+TBD
+### Reference
+TBD
+### Support Files
+TBD
+
+## Firewall
+## Tabs {.tabset}
+
+### Overview
+
 
 ### Initial Setup
 ### Configuration
-### Backup
-### Reference
 
+
+### Backup
+TBD
+### Reference
+TBD
 ### Support Files
+TBD
+
 
 

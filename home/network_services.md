@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2020-12-13T03:17:51.345Z
+date: 2020-12-13T03:23:44.238Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -144,10 +144,10 @@ https://github.com/boostchicken/udm-utilities/blob/master/cni-plugins/20-dns.con
 https://github.com/boostchicken/udm-utilities/blob/master/dns-common/on_boot.d/10-dns.sh
 ### Support Files
 #### Located on UDM filesystem (not unifi-os container)
-[10-dns.sh](/mnt/data/on_boot.d/10-dns.sh) - Pi-Hole configuration and startup script
-[20-dns.conflist](/mnt/data/podman/cni/20-dns.conflist) - Configuration of 192.168.5.x MACVLAN for Pi-Hole
+[/mnt/data/on_boot.d/10-dns.sh](/10-dns.sh) - Pi-Hole configuration and startup script
+[/mnt/data/podman/cni/20-dns.conflist](/20-dns.conflist) - Configuration of 192.168.5.x MACVLAN for Pi-Hole
 [pihole.sh](/pihole.sh) - Create and run container
-[dns_restart.sh](/dns_restart.sh) - Script to monitor and restart pihole container if necessary
+[/usr/local/bin/dns_restart.sh](/dns_restart.sh) - Script to monitor and restart pihole container if necessary
 
 ## E-Mail
 ## Tabs {.tabset}

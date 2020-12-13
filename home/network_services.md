@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2020-12-12T12:10:40.493Z
+date: 2020-12-13T01:46:31.166Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -44,6 +44,46 @@ This server runs as podman container on the UDM router.  Although it is hosted o
 1.  <font color=red>pihole podman container starts DNS & administrative web server</font>
 
 ### Initial Setup
+
+The Pi-Hole DNS server currently runs on the Ubiquiti Dream Machine router, in a podman container.  The following steps are required for the initial configuration and setup.
+
+1.  Install the UDM-Boot package
+     - The UDM-Boot package is available on GitHub:
+     https://raw.githubusercontent.com/boostchicken/udm-utilities/master/on-boot-script/packages/udm-boot_1.0.2_all.deb
+     - The source code is available in the on-boot-script dictory of the repository
+1.   On your controller, make a Corporate network with no DHCP server and give it a VLAN. For this example we are using VLAN 5.
+1.  Install the pi-hole podman container on the UDM
+     - Copy 20-dns.conflist to /mnt/data/podman/cni. This will create your podman macvlan network
+     - Copy 10-dns.sh to /mnt/data/on_boot.d and update its values to reflect your environment
+     - Execute /mnt/data/on_boot.d/10-dns.sh     
+1.  Run the pihole docker container, be sure to make the directories for your persistent pihole configuration. They are mounted as volumes in the command below.
+
+    ```
+    podman run -d --network dns --restart always \
+    --name pihole \
+    -e TZ="America/Los Angeles" \
+    -v "/mnt/data/etc-pihole/:/etc/pihole/" \
+    -v "/mnt/data/pihole/etc-dnsmasq.d/:/etc/dnsmasq.d/" \
+    --dns=127.0.0.1 --dns=1.1.1.1 \
+    --hostname pi.hole \
+    -e VIRTUAL_HOST="pi.hole" \
+    -e PROXY_LOCATION="pi.hole" \
+    -e ServerIP="10.0.5.3" \
+    -e IPv6="False" \
+    pihole/pihole:latest
+    ```
+    The below errors are expected and acceptable:
+
+    ```
+    ERRO[0022] unable to get systemd connection to add healthchecks: dial unix /run/systemd/private: connect: no such file or directory
+    ERRO[0022] unable to get systemd connection to start healthchecks: dial unix /run/systemd/private: connect: no such file or directory
+    ```
+
+1.  Set pihole password
+    `podman exec -it pihole pihole -a -p YOURNEWPASSHERE`
+    
+1.  Update your DNS Servers to 192.168.5.3 (or your custom ip) in all your DHCP configs.    
+
 ### Configuration
 #### Provide data to Grafana (needs more clarification)
 Get the WEBPASSWORD from /etc/pihole/setupVars.conf in the podman container:

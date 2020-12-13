@@ -2,7 +2,7 @@
 title: Network Servers
 description: Physical network servers
 published: true
-date: 2020-12-12T03:36:17.902Z
+date: 2020-12-13T03:12:36.411Z
 tags: 
 editor: markdown
 dateCreated: 2020-12-11T12:40:15.387Z
@@ -41,6 +41,11 @@ The network uses a Pi-hole domain name server.  The Pi-hole server provides both
 This server runs as podman container on the UDM router.  Although it is hosted on the UDM router (192.168.1.1), it appears on the network with its own MAC address.  The container resides on VLAN 5, which is a MACVLan network using the UDM router as it's network interface.
 
 ### Initial Setup
+### Maintenance
+
+#### UDM Password Change
+The /usr/local/bin/dns_restarts.sh script on the DNS monitoring host whenever the UDM root password changes.
+
 ### Configuration
 ### Backup
 ### Reference

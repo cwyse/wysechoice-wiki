@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2020-12-13T02:17:11.855Z
+date: 2020-12-13T02:17:58.072Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -95,7 +95,7 @@ The Pi-Hole DNS server currently runs on the Ubiquiti Dream Machine router, in a
     if ping -c 1 ${UDM_ROUTER}; then
         # If the DNS server is not working
         if ! nslookup ${UDM_ROUTER} ${DNS_SERVER}; then
-            echo pass | ssh -t root@${UDM_ROUTER} "podman start pihole"  
+            echo "&847&XLXXbxY" | ssh -t root@${UDM_ROUTER} "podman start pihole"  
         fi
     fi
     ```

@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2020-12-13T01:46:31.166Z
+date: 2020-12-13T02:17:11.855Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -83,6 +83,22 @@ The Pi-Hole DNS server currently runs on the Ubiquiti Dream Machine router, in a
     `podman exec -it pihole pihole -a -p YOURNEWPASSHERE`
     
 1.  Update your DNS Servers to 192.168.5.3 (or your custom ip) in all your DHCP configs.    
+1.  Configure a cron job to monitor the container
+    - On a host on the network, create a cronjob that executes the following script every minute:
+    ```
+    #!/usr/bin/env bash
+
+    DNS_SERVER=192.168.5.3
+    UDM_ROUTER=192.168.1.1
+
+    # If the router is running
+    if ping -c 1 ${UDM_ROUTER}; then
+        # If the DNS server is not working
+        if ! nslookup ${UDM_ROUTER} ${DNS_SERVER}; then
+            echo pass | ssh -t root@${UDM_ROUTER} "podman start pihole"  
+        fi
+    fi
+    ```
 
 ### Configuration
 #### Provide data to Grafana (needs more clarification)

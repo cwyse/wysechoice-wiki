@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2020-12-13T03:07:48.885Z
+date: 2020-12-13T03:10:06.783Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -104,6 +104,11 @@ The Pi-Hole DNS server currently runs on the Ubiquiti Dream Machine router, in a
     ```
     - `chmod 755 /usr/local/bin/dns_restart.sh`
     - `crontab -e` -> `* * * * * /usr/local/bin/dns_restart.sh`
+
+### Maintenance
+
+#### UDM Password Change
+The dns_restarts.sh script needs to be updated whenever the UDM root password changes
 
 ### Configuration
 #### Provide data to Grafana (needs more clarification)

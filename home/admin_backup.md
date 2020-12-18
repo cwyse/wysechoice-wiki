@@ -2,11 +2,114 @@
 title: Backup and Restore
 description: 
 published: true
-date: 2020-12-18T03:10:24.783Z
+date: 2020-12-18T03:55:02.828Z
 tags: 
 editor: markdown
 dateCreated: 2020-12-18T03:10:24.783Z
 ---
+
+
+# User Data Backups
+
+User backups are handled in three separate ways.
+1. Frequent backups to the QNAP NAS server
+2. Long term backups to Google Drive
+3. Long term backups to Amazon Glacier
+
+## QNAP NAS Backups
+
+TBD
+
+# Google Drive Backups
+These backups are intended to be for relatively long term storage.  It's meant to be used if the NAS backup fails.  The backup is initiated from the QNAP NAS.  It runs a scheduled backup to Google Drive once per week.  Backups are stored in a subdirectory of "My Drive/QNAP_Backup".  The backups use the chris.wyse.1965@gmail.com Google account.
+
+Backup Host: qnap.wysechoice.net
+Backup Server: drive.google.com
+Backup Server Account: chris.wyse.1965@gmail.com
+Backup Utility (on host): HBS 3 Hybrid Backup Sync
+Data Compression: None
+Client Side Encryption Cipher: aes-256-cbc
+Message digest: md5
+Encryption Password: <store securely outside the repository>
+
+The files are sent to Google Drive after encryption.  The directory structure is maintained, but the specific files will not be available until they are decrypted.  The command to decrypt is:
+```
+openssl enc -md md5 -aes-256-cbc -d -in <encrypted file> -out <decrypted file>
+```
+# Amazon Glacier Backup
+
+These backups are intended for very long term storage.  Retrieval is extremely slow (although storage is very cheap).  This is a last resort to recover data.
+
+Like the Google Drive backup, it is initiated from the QNAP NAS.  It runs a scheduled backup to Amazon Glacier once per month.  Backups are stored in a an Amazon vault, 'QNAP_Vault'.  The backups use the chris.wyse@wysechoice.net Amazon account.
+
+Backup Host: qnap.wysechoice.net
+Backup Server: aws.amazon.com
+Backup Server Account: chris.wyse@wysechoice.net
+AWS Access Key ID: <store securely outside the repository>
+AWS Secret Access Key: <store securely outside the repository>
+AWS Region: us-east-1
+Backup Utility (on host): HBS 3 Hybrid Backup Sync
+Data Compression: None
+Client Side Encryption Cipher: aes-256-cbc
+Message digest: md5
+Encryption Password: <store securely outside the repository>
+
+Retrieval and deletion requires scripting.  The AWS CLI must be installed, and credentials stored in ~/.aws/credentials, with the config file in ~/.aws/config.
+
+## Retrieval
+
+The files are retrieved via the Amazon CLI using *aws glacier* commands.  The retrieval process is still TBD.
+
+The files are sent to Amazon after encryption.  The directory structure is maintained, but the specific files will not be available until they are decrypted.  The command to decrypt is:
+```
+openssl enc -md md5 -aes-256-cbc -d -in <encrypted file> -out <decrypted file>
+```
+
+## Deletion
+
+Deletion of all archives in the vault may take hours or days.  The easiest was to accomplish the is to run a docker image.  The image requests a list of archives to delete.  It polls for the list every 10 minutes until it is received.  Once received, it issues a delete command for each of the archives found, then deletes the vault.
+
+```
+#!/bin/bash
+
+AWS_ACCOUNT_ID=741335856197
+AWS_REGION=us-east-1
+AWS_VAULT_NAME=QNAP_Vault
+AWS_OUTPUT='./output.json'
+
+AWS_CREDENTIALS_JSON='/home/chris/.aws/credentials.json'
+
+# https://github.com/leeroybrun/glacier-vault-remove
+#docker run -v ${AWS_CREDENTIALS_JSON}:/app/credentials.json -d leeroyb/glacier-vault-remove ${AWS_REGION} [${AWS_VAULT_NAME}|LIST] [DEBUG] [NUM_PROCESSES] [<job_id>|LIST|NEW|LATEST]
+docker run -v ${AWS_CREDENTIALS_JSON}:/app/credentials.json -d leeroyb/glacier-vault-remove ${AWS_REGION} ${AWS_VAULT_NAME} DEBUG 10
+```
+
+The credentials for the deletion script should be in JSON format:
+```
+{
+	"AWSAccessKeyId": "<store securely outside the repository>",
+	"AWSSecretKey":   "<store securely outside the repository>"
+}
+```
+The credentials for the CLI:
+```
+[default]
+aws_access_key_id=<store securely outside the repository>
+aws_secret_access_key=<store securely outside the repository>
+```
+The config for the CLI:
+```
+[default]
+region=us-east-1
+output=json
+```
+
+# Network Configuration Backup
+
+Network configuration backup is handled separately from user data backup.  The LibreNMS application is used to consolidate various configurations.  
+
+LibreNMS will probably back up to GitLab.  It will run as a stack of docker containers, which will be used for additional network support, like reverse proxy, syslog server, and other network tools.
+
 
 # General Backup
 **Current backup location**: chris-Precision-7740:/home/chris/personal/backups

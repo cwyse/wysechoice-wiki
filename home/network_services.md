@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2020-12-29T03:53:24.788Z
+date: 2020-12-29T03:56:29.192Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -37,6 +37,9 @@ The configuration can be tested by running:
 from both the UDM and an external host.
 
 SNMP Tutorial: http://www.net-snmp.org/tutorial/tutorial-5/demon/snmpd.html
+### QNAP NAS SNMP Configuration
+Login to the QNAP NAS, open the ControlPanel, and select 'Network & File Services' on the left hand side.  Next to that, select 'SNMP'.  SNMP should be enabled, v3, user 'admin', use Authentication protocol HMAC-MD5, and password <store securely outside the repository>.
+
 ## Domain Name Service (DNS)
 
 ## Tabs {.tabset}

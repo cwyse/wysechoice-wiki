@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2020-12-29T03:46:32.303Z
+date: 2020-12-29T03:53:24.788Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -36,6 +36,7 @@ The configuration can be tested by running:
 `snmpwalk -v3 -l authPriv -u snmpv3 -a SHA -A <store securely outside the repository> -x AES -X <store securely outside the repository> udp:192.168.1.1:161 .`
 from both the UDM and an external host.
 
+SNMP Tutorial: http://www.net-snmp.org/tutorial/tutorial-5/demon/snmpd.html
 ## Domain Name Service (DNS)
 
 ## Tabs {.tabset}

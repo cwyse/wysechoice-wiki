@@ -2,13 +2,40 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2020-12-13T03:24:35.094Z
+date: 2020-12-29T03:46:32.303Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
 ---
 
 # Standard Network Services
+## Simple Network Management Protocol (SNMP)
+
+## Tabs {.tabset}
+
+### Overview
+SNMP allows monitoring of network devices.  The LibreNMS application is configured with the SNMP enabled devices.
+
+### UDM SNMP Configuration
+The UDM configuration is not fully integrated with the firmware yet, and requires some manual configuration.  The following commands were found on the Ubiquiti forums:
+
+1. SSH to UDM-Pro
+2. Escalate to the Linux shell with :
+`unifi-os shell`
+3. sudo apt-get -y install snmp snmpd libsnmp-dev vim
+4. sudo net-snmp-config --create-snmpv3-user -ro -A password -x password -X AES -A SHA snmpv3
+Edit the SNMP configuration :
+5. vi /etc/snmp/snmpd.conf
+Add the following line:
+`agentAddress udp:192.168.1.1:161`
+6. systemctl start snmpd
+
+Note that this configuration will probably not survive a firmware update.  In addition to this configuration I enabled SNMP v1, v2c, & v3 in the GUI, and set the user and password to match this configuration (snmpv3/<store securely outside the repository>).
+
+The configuration can be tested by running:
+`snmpwalk -v3 -l authPriv -u snmpv3 -a SHA -A <store securely outside the repository> -x AES -X <store securely outside the repository> udp:192.168.1.1:161 .`
+from both the UDM and an external host.
+
 ## Domain Name Service (DNS)
 
 ## Tabs {.tabset}

@@ -2,7 +2,7 @@
 title: Miscellaneous Notes
 description: Various bits of information without a home
 published: true
-date: 2021-01-01T17:15:16.488Z
+date: 2021-01-01T17:26:55.123Z
 tags: 
 editor: markdown
 dateCreated: 2021-01-01T17:15:16.488Z
@@ -81,6 +81,60 @@ OpenFortiGUI is a simple user interface to configure and use the OpenFortiVPN so
 
 When the VPN connects, it creates a *ppp* network interface.  We have two potential VPN interfaces, one to connect to California, and one for Connecticut.  To avoid confusion, the interfaces will be renamed to ca_vpn0 and ct_vpn0.
 
+OpenFortiGUI supports VPN profiles to create a PPP connection with a VPN server.  Location of the profiles can be set in the GUI.  The configuration should be set as shown below.  In particular, the *set_dns* option needs to be *false*, and the *pppd_no_peerdns* option needs to be *true*, otherwise the *resolv.conf* file will be overwritten, preventing *dnsmasq* from splitting the DNS accesses.  Also note that the *pppd_ifname* has been updated to *vpn_ca0*.
+
+- ~/.openfortigui/vpnprofiles/CA_VPN.conf
+```
+[cert]
+ca_file=
+trusted_cert=5ab07e8fa6d17fd1e204fa3c1d740c841c167c9576d92d649a848751ec337853
+user_cert=
+user_key=
+verify_cert=false
+
+[options]
+set_routes=true
+set_dns=false
+pppd_no_peerdns=true                                                                                                                    
+insecure_ssl=false
+debug=false
+realm=
+autostart=false
+always_ask_otp=false
+otp_prompt=
+otp_delay=0
+half_internet_routers=false
+pppd_log_file=
+pppd_plugin_file=
+pppd_ifname=vpn_ca0
+pppd_ipparam="'device=$DEVICE'"
+pppd_call=
+
+[vpn]
+gateway_host=sslvpn.canoga.com
+gateway_port=18443
+name=CA VPN
+password="Vf8MS0VmssZByf/O2ZArug=="
+username=cwyse
+```
+The options section of the Connecticut VPN profile is identical.  The other two sections should be updated to use the Connecticut server as shown below:
+```
+[cert]
+ca_file=
+trusted_cert=3ef1ed49853e3512ec0c7f4f56d9e235e86d79bb31060f103a8523beefdee4a2
+user_cert=
+user_key=
+verify_cert=false
+
+# Options section ommitted
+
+[vpn]
+gateway_host=ct.canoga.com
+gateway_port=18443
+name=CT VPN
+password="Vf8MS0VmssZByf/O2ZArug=="
+username=cwyse
+```
 ### Point to Point Daemon (pppd)
 This might not be necessary after dnsmasq changes, but the pppd configuration was modified to add routes to the DNS servers via the appropriate interface.  The *fortivpn* script uses *dig* to obtain the IP address of the DNS servers, then adds a route to make them go through the correct interface.  If interface names change, this file would need to be updated.
 - /etc/ppp/ip-up.d

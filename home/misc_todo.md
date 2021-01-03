@@ -2,7 +2,7 @@
 title: Miscellaneous To Do Items
 description: Categorized To Do list
 published: true
-date: 2021-01-03T16:31:30.117Z
+date: 2021-01-03T17:27:12.100Z
 tags: 
 editor: markdown
 dateCreated: 2020-12-13T01:03:08.246Z
@@ -29,6 +29,9 @@ As promised, a picture of my laminar flow hood. The opening in the front is ~29"
 ![laminarflowhood2.jpg](/laminarflowhood2.jpg)
 ![laminarflowhood3.png](/laminarflowhood3.png)
 ![hoods_dimensions1.jpg](/hoods_dimensions1.jpg)
+https://www.shroomery.org/8491/I-want-to-construct-a-HEPA-hood-How-do-I-match-a-blower-to-a-HEPA-filter
+https://www.orchideenvermehrung.at/english/lfh/index.htm
+
 # Network
 
 

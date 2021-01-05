@@ -2,7 +2,7 @@
 title: Network Applications
 description: Network and Application Setup
 published: true
-date: 2020-12-12T03:37:57.058Z
+date: 2021-01-05T14:44:42.810Z
 tags: 
 editor: markdown
 dateCreated: 2020-11-15T09:50:55.982Z
@@ -208,6 +208,8 @@ $ docker update --cpus 2 -m 4g
 ```
 
 ### Configuration
+To provide search capability for the web site content, the search engine usage needs to be configured.  From the administration page, select the search engine configuration page.  Choose the PostGresql search engine.  This engine also requires an extension to be enabled in the Wiki database.  Execute `CREATE EXTENSION pg_trgm;` against the Wiki database to enable the required extension (e.g. - via pgadmin4).
+
 https://docs.requarks.io
 
 ### Upgrade

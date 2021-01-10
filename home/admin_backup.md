@@ -2,7 +2,7 @@
 title: Backup and Restore
 description: 
 published: true
-date: 2020-12-21T02:09:25.476Z
+date: 2021-01-10T13:15:05.961Z
 tags: 
 editor: markdown
 dateCreated: 2020-12-18T03:10:24.783Z
@@ -121,6 +121,7 @@ Network configuration backup is handled separately from user data backup.  The L
 
 LibreNMS will probably back up to GitLab.  It will run as a stack of docker containers, which will be used for additional network support, like reverse proxy, syslog server, and other network tools.
 
+https://codingpackets.com/blog/oxidized-gitlab-storage-backend/
 
 # General Backup
 **Current backup location**: chris-Precision-7740:/home/chris/personal/backups

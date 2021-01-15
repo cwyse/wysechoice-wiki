@@ -2,7 +2,7 @@
 title: Network Layout
 description: Network diagram, information, and interconnections
 published: true
-date: 2021-01-15T14:12:31.693Z
+date: 2021-01-15T14:23:17.748Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T01:31:26.503Z
@@ -23,6 +23,7 @@ Link Aggregation configurated on ports 7 & 8, connected to QNAP NAS.
 SNMP v2c Enabled
 Defaults for other settings
 Located in office
+[DGS-1100 Series EasySmart Switch user Manual B1 v1.0](/dgs-1100-05_05pd_08_08p_revb_manual_v2.21_ww_en.pdf)
 
 #### Ubiquiti USW-Flex-Mini-FamilyRoom
 Ubiquiti USW-Flex-Mini switch assigned to 192.168.1.6

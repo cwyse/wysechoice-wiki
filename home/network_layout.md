@@ -2,7 +2,7 @@
 title: Network Layout
 description: Network diagram, information, and interconnections
 published: true
-date: 2020-12-12T03:35:28.062Z
+date: 2021-01-15T14:11:25.694Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T01:31:26.503Z
@@ -16,6 +16,26 @@ These subpages document the WyseChoice network.  It is a complicated network inf
 ### Tabs {.tabset}
 #### VLANs
 ![wysechoicevlans.png](/wysechoicevlans.png)
+
+#### D-Link DGS-1100-08
+D-Link managed switch assigned to 192.168.1.15.
+Link Aggregation configurated on ports 7 & 8, connected to QNAP NAS.
+SNMP v2c Enabled
+Defaults for other settings
+Located in office
+
+### Ubiquiti USW-Flex-Mini-FamilyRoom
+Ubiquiti USW-Flex-Mini switch assigned to 192.168.1.6
+Uplink to UDM
+Downlinks to Family Room AP & Toshiba TV
+Located in Family Room
+
+### Ubiquiti USW-Flex-Mini-LivingRoom
+Ubiquiti USW-Flex-Mini switch assigned to 192.168.1.7
+Uplink to UDM
+Downlinks to Living Room AP & Fire TV
+Located in Living Room
+
 #### Email
 ![wysechoiceemail.png](/wysechoiceemail.png)
 #### Server Addresses

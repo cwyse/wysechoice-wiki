@@ -2,7 +2,7 @@
 title: Backup and Restore
 description: 
 published: true
-date: 2021-01-16T03:45:38.438Z
+date: 2021-01-16T03:56:43.758Z
 tags: 
 editor: markdown
 dateCreated: 2020-12-18T03:10:24.783Z
@@ -99,7 +99,8 @@ sudo apt install rsync -y
 ssh-proxy /mnt/data/on_boot.sh
 ```
 
-#### Open up port 837??
+#### NAS Storage Spaces
+![rsync.png](/rsync.png)
 
 # Google Drive Backups
 These backups are intended to be for relatively long term storage.  It's meant to be used if the NAS backup fails.  The backup is initiated from the QNAP NAS.  It runs a scheduled backup to Google Drive once per week.  Backups are stored in a subdirectory of "My Drive/QNAP_Backup".  The backups use the chris.wyse.1965@gmail.com Google account.

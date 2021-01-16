@@ -2,7 +2,7 @@
 title: WyseChoice Wiki
 description: Wyse Household Notes & Information
 published: true
-date: 2020-12-12T12:15:25.379Z
+date: 2021-01-16T22:40:46.711Z
 tags: level0
 editor: markdown
 dateCreated: 2020-11-04T00:59:28.760Z
@@ -59,6 +59,7 @@ This website is intended as a tool to document the information relevant to the W
 
 - [:memo: &nbsp;&nbsp;Notes *Locations and information on pictures.*](/home/misc_notes)
 - [:soon: &nbsp;&nbsp;To Do *Plans for the future.*](/home/misc_todo)
+- [:memo: &nbsp;&nbsp;Borrowed Items *Items loaned out.*](/home/loaned_items)
 {.links-list}
 
 ![Wiki.js](https://static.requarks.io/logo/wikijs-butterfly.svg){.align-abstopright}

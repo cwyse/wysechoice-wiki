@@ -2,7 +2,7 @@
 title: Backup and Restore
 description: 
 published: true
-date: 2021-01-10T13:15:05.961Z
+date: 2021-01-16T03:01:22.526Z
 tags: 
 editor: markdown
 dateCreated: 2020-12-18T03:10:24.783Z
@@ -19,6 +19,40 @@ User backups are handled in three separate ways.
 ## QNAP NAS Backups
 
 TBD
+
+### Standard Rsyncd configuration
+`/etc/rsyncd.conf`
+```
+motd file = /etc/rsyncd.motd
+log file = /var/log/rsyncd.log
+pid file = /var/run/rsyncd.pid
+lock file = /var/run/rsync.lock
+
+[chris]
+   path = /home/chris
+   comment = Home directory
+   uid = nobody
+   gid = nobody
+   read only = yes                                                                                                                                          
+   list = yes
+   auth users = rsync
+   secrets file = /etc/rsyncd.secrets
+```
+`/etc/rsync.secrets`
+```
+root:rsync
+rsync:rsync
+```
+```
+-rw-r----- 1 root root 23 Jan 15 21:51 /etc/rsyncd.secrets
+```
+```
+chris@chris-Precision-7740:/etc$ sudo systemctl start rsync
+chris@chris-Precision-7740:/etc$ sudo systemctl enable rsync
+Synchronizing state of rsync.service with SysV service script with /lib/systemd/systemd-sysv-install.
+Executing: /lib/systemd/systemd-sysv-install enable rsync
+chris@chris-Precision-7740:/etc$ 
+```
 
 # Google Drive Backups
 These backups are intended to be for relatively long term storage.  It's meant to be used if the NAS backup fails.  The backup is initiated from the QNAP NAS.  It runs a scheduled backup to Google Drive once per week.  Backups are stored in a subdirectory of "My Drive/QNAP_Backup".  The backups use the chris.wyse.1965@gmail.com Google account.

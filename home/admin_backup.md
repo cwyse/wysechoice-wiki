@@ -2,7 +2,7 @@
 title: Backup and Restore
 description: 
 published: true
-date: 2021-01-16T03:01:22.526Z
+date: 2021-01-16T03:45:03.927Z
 tags: 
 editor: markdown
 dateCreated: 2020-12-18T03:10:24.783Z
@@ -52,6 +52,51 @@ chris@chris-Precision-7740:/etc$ sudo systemctl enable rsync
 Synchronizing state of rsync.service with SysV service script with /lib/systemd/systemd-sysv-install.
 Executing: /lib/systemd/systemd-sysv-install enable rsync
 chris@chris-Precision-7740:/etc$ 
+```
+### On the Dream Machine
+`/mnt/data/on_boot.d/20-rsync.sh`
+```
+#!/usr/bin/env bash                                                             
+                                                                                
+systemctl stop rsync                                                            
+                                                                                
+##                                                                              
+## These are the master copies of                                               
+## /etc/rsyncd.conf & /etc/rsyncd.secrets.                                      
+## They are overwritten with this contant                                       
+## every time the container boots.                                              
+##                                                                              
+cat << RSYNCD.CONF >/etc/rsyncd.conf                                            
+motd file = /etc/rsyncd.motd                                                    
+log file = /var/log/rsyncd.log                                                  
+pid file = /var/run/rsyncd.pid                                                  
+lock file = /var/run/rsync.lock                                                 
+                                                                                
+[unifi]                                                                         
+   path = /                                                                     
+   comment = Root directory                                                     
+   uid = nobody                                                                 
+   gid = nobody                                                                 
+   read only = yes                                                              
+   list = yes                                                                   
+   auth users = rsync                                                           
+   secrets file = /etc/rsyncd.secrets                                           
+RSYNCD.CONF                                                                     
+                                                                                
+cat << RSYNCD.SECRETS >/etc/rsyncd.secrets                                      
+root:rsync                                                                      
+rsync:rsync                                                                     
+RSYNCD.SECRETS                                                                  
+                                                                                
+chmod 0640 /etc/resyncd.secrets                                                 
+systemctl start rsync                                                           
+systemctl enable rsync                                                          
+```
+Create the file, the type execute the following commands:
+```
+unifi-os shell
+sudo apt install rsync -y
+ssh-proxy /mnt/data/on_boot.sh
 ```
 
 # Google Drive Backups

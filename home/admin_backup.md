@@ -2,7 +2,7 @@
 title: Backup and Restore
 description: 
 published: true
-date: 2021-01-16T03:56:43.758Z
+date: 2021-01-17T04:25:59.528Z
 tags: 
 editor: markdown
 dateCreated: 2020-12-18T03:10:24.783Z
@@ -23,7 +23,6 @@ TBD
 ### Standard Rsyncd configuration
 `/etc/rsyncd.conf`
 ```
-motd file = /etc/rsyncd.motd
 log file = /var/log/rsyncd.log
 pid file = /var/run/rsyncd.pid
 lock file = /var/run/rsync.lock
@@ -31,21 +30,9 @@ lock file = /var/run/rsync.lock
 [chris]
    path = /home/chris
    comment = Home directory
-   uid = nobody
-   gid = nobody
-   read only = yes                                                                                                                                          
-   list = yes
-   auth users = rsync
-   secrets file = /etc/rsyncd.secrets
+   read only = true                                                                                                                                
 ```
-`/etc/rsync.secrets`
-```
-root:rsync
-rsync:rsync
-```
-```
--rw-r----- 1 root root 23 Jan 15 21:51 /etc/rsyncd.secrets
-```
+
 ```
 chris@chris-Precision-7740:/etc$ sudo systemctl start rsync
 chris@chris-Precision-7740:/etc$ sudo systemctl enable rsync
@@ -53,6 +40,8 @@ Synchronizing state of rsync.service with SysV service script with /lib/systemd/
 Executing: /lib/systemd/systemd-sysv-install enable rsync
 chris@chris-Precision-7740:/etc$ 
 ```
+
+
 ### On the Dream Machine
 `/mnt/data/on_boot.d/20-rsync.sh`
 ```
@@ -66,8 +55,7 @@ systemctl stop rsync
 ## They are overwritten with this contant                                       
 ## every time the container boots.                                              
 ##                                                                              
-cat << RSYNCD.CONF >/etc/rsyncd.conf                                            
-motd file = /etc/rsyncd.motd                                                    
+cat << RSYNCD.CONF >/etc/rsyncd.conf                                                                                           
 log file = /var/log/rsyncd.log                                                  
 pid file = /var/run/rsyncd.pid                                                  
 lock file = /var/run/rsync.lock                                                 
@@ -75,20 +63,11 @@ lock file = /var/run/rsync.lock
 [unifi]                                                                         
    path = /                                                                     
    comment = Root directory                                                     
-   uid = nobody                                                                 
-   gid = nobody                                                                 
-   read only = yes                                                              
-   list = yes                                                                   
-   auth users = rsync                                                           
-   secrets file = /etc/rsyncd.secrets                                           
+   uid = 902                                                              
+   gid = 902                                                            
+   read only = true                                                                                                         
 RSYNCD.CONF                                                                     
-                                                                                
-cat << RSYNCD.SECRETS >/etc/rsyncd.secrets                                      
-root:rsync                                                                      
-rsync:rsync                                                                     
-RSYNCD.SECRETS                                                                  
-                                                                                
-chmod 0640 /etc/resyncd.secrets                                                 
+                                                                                                                                                                                                                                                              
 systemctl start rsync                                                           
 systemctl enable rsync                                                          
 ```

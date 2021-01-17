@@ -2,7 +2,7 @@
 title: Backup and Restore
 description: 
 published: true
-date: 2021-01-17T04:40:53.342Z
+date: 2021-01-17T06:10:41.862Z
 tags: 
 editor: markdown
 dateCreated: 2020-12-18T03:10:24.783Z
@@ -79,9 +79,9 @@ ssh-proxy /mnt/data/on_boot.sh
 ```
 
 #### NAS Storage Spaces
-The backups run every night betwen 2AM and 3AM.  The backups are all in subdirectories of /mnt/CACHEDEV/backups/RSync.  That directory contains two scripts: AllBackups.sh and RSyncBackup.sh.  The RSyncBackup.sh script handles individual backups.  Backups are incremental, with a total of seven separate backups saved.  Subdirectories are: <remote>/<model>/<path>/data.  In addition to the data directory, backup.N directories are used for prior backups.
+The backups run every night at 2:15AM.  The backups are all in subdirectories of /share/CACHEDEV1_DATA/backup/RSync, which maps to DATAVOL1/backup/RSync in FileManager on the NAS.  That directory contains two scripts: BackupAll.sh and RSyncBackup.sh.  The RSyncBackup.sh script handles individual backups.  Backups are incremental, with a total of seven separate backups saved.  Subdirectories are: `<remote>/<model>/<path>/data`.  In addition to the data directory, backup.N directories are used for prior backups.
   
-The AllBackups.sh script is executed nightly by a cron job.  
+The BackupAll.sh script is executed nightly by a cron job.  
 
 # Google Drive Backups
 These backups are intended to be for relatively long term storage.  It's meant to be used if the NAS backup fails.  The backup is initiated from the QNAP NAS.  It runs a scheduled backup to Google Drive once per week.  Backups are stored in a subdirectory of "My Drive/QNAP_Backup".  The backups use the chris.wyse.1965@gmail.com Google account.

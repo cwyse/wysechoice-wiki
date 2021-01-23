@@ -2,7 +2,7 @@
 title: WyseChoice Wiki
 description: Wyse Household Notes & Information
 published: true
-date: 2021-01-23T14:21:09.212Z
+date: 2021-01-23T14:21:53.142Z
 tags: level0
 editor: markdown
 dateCreated: 2020-11-04T00:59:28.760Z
@@ -44,7 +44,7 @@ This website is intended as a tool to document the information relevant to the W
 
 ## :bust_in_silhouette:&nbsp;&nbsp;Personal
 
-- [:herb:&nbsp;&nbsp;Hobbies *User Account Information.*](/home/account_information)
+- [:bank:&nbsp;&nbsp;Account Information *User Account Information.*](/home/account_information)
 - [:camera: &nbsp;&nbsp;Photos *Locations and information on pictures.*](/home/personal_photos)
 - [:heart: &nbsp;&nbsp;Health Records *Personal health records and information.*](/home/personal_health)
 - [:herb:&nbsp;&nbsp;Hobbies *Miscellaneous resources for hobbies.*](/home/personal_hobbies)

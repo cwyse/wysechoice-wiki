@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2021-01-31T22:38:40.254Z
+date: 2021-01-31T23:19:41.766Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -395,6 +395,7 @@ iface eth0 inet static
 
 ### Configuration
 In addition to the host configuration, the router must also be configured to allow traffic to get to DockerNet.  The configuration and routing is shown in the following images used to configure the Ubiquiti Dream Machine:
+![dockernet.png](/dockernet.png)![rsync.png](/rsync.png)[2019-09-26-raspbian-buster.info](/2019-09-26-raspbian-buster.info)[fwrules.txt](/data/fwrules.txt)
 ![dockernet.png](/dockernet.png)
 ![dockernetrouting.png](/dockernetrouting.png)
 ![dockernetfirewall.png](/dockernetfirewall.png)

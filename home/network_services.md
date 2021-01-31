@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2020-12-29T03:56:29.192Z
+date: 2021-01-31T22:38:40.254Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -202,26 +202,32 @@ TBD
 ### Support Files
 TBD
 
-## DockerNet
+## DockerNet.\<subnet>
 ## Tabs {.tabset}
 
 ### Overview
 DockerNet is a MACVLAN network for docker containers.  It requires configuration on the Docker host machine to create the network, and additional configuration on the router to access the network remotely.  The configuration allows new docker images to appear on the network as individual devices with their own MAC addresses. 
 
-Currently the support is provided by the Raspberry Pi 4B, at 192.168.1.2.  It is created and configured there, and all containers are provided by that server.  This service could be expanded to bridge to other servers in the future.
-
+The intent of is to have an easy way to create a network of Docker containers running on a device.  These containers would have their own MAC addresses and look new devices added to the network.  The current implementation uses a VLAN for each new docker network.
 
 ### Initial Setup
-The primary reference used for creating this configuration is [Using Docker MACVLAN Networks](https://blog.oddbit.com/post/2018-03-12-using-docker-macvlan-networks/).  The configuration had some issues with the checksum value in the packets being received.  Unfortunately, I didn't document it well, but the solution is to disable the checksum offloading in eth0-shim.
+The primary reference used for creating this configuration is [Using Docker MACVLAN Networks](https://blog.oddbit.com/post/2018-03-12-using-docker-macvlan-networks/).  The configuration had some issues with the checksum value in the packets being received.  Unfortunately, I didn't document it well, but the solution is to disable the checksum offloading in eth0-shim.  The other unusual required setting is that the host interface needs to be in promiscuous mode.
 
 Creation of the DockerNet MACVLAN requires configuration on the UDM server to support routing to the DockerNet server (192.168.1.2) and additional configuration on the host machine.
 
-Assumptions:
-- Docker host is 192.168.1.2
-- IP address 192.168.1.3 is reserved for Dockernet
-- Docker host's physical interface is eth0
+#### Required Input parameters:
+- Host IP:  This is the address of the host interface, and must be statically assigned.
+- Host_GW:  This is the gateway used by the host interface
+- HOST_SHIM: Address of the secondary shim interface, and must be statically assigned.
+- MAC_ADDR: To prevent address overlap, assign the HOST_SHIM an address using the Docker prefix followed by the assigned IP address.  For example, the Docker prefix is '02:00', and the HOST_SHIM address is 192.168.1.120 (corresponding to 0xC0.0xA8.0x01.0x78).  The MAC_ADDR to use would be '02:00:C0:A8:01:78'.
+- HOST_IF:  Name of the host interface (usually eth0)
+- IS_WIFI:  Unsupported - set to 0
 
-Creation Steps:
+> NOTE: The script contains some support to bridge across Wifi, but bridging technique is different and more complicated.  It involves additional software as well as configuration changes.  The WiFi support is included in the script for potential future use, but is not used.
+{.is-info}
+
+
+#### Creation Steps:
 
 1. Remove the DockerNet MACVLAN network if it exists
 1. Create a virtual interface (eth0-shim) to act as a bridge between the MACVLAN and the host

@@ -2,7 +2,7 @@
 title: Backup and Restore
 description: 
 published: true
-date: 2021-01-17T06:13:59.061Z
+date: 2021-02-01T03:05:41.750Z
 tags: 
 editor: markdown
 dateCreated: 2020-12-18T03:10:24.783Z
@@ -45,32 +45,42 @@ chris@chris-Precision-7740:/etc$
 ### On the Dream Machine
 `/mnt/data/on_boot.d/20-rsync.sh`
 ```
-#!/usr/bin/env bash                                                             
-                                                                                
-systemctl stop rsync                                                            
-                                                                                
-##                                                                              
-## These are the master copies of                                               
-## /etc/rsyncd.conf & /etc/rsyncd.secrets.                                      
-## They are overwritten with this contant                                       
-## every time the container boots.                                              
-##                                                                              
-cat << RSYNCD.CONF >/etc/rsyncd.conf                                                                                           
-log file = /var/log/rsyncd.log                                                  
-pid file = /var/run/rsyncd.pid                                                  
-lock file = /var/run/rsync.lock                                                 
-                                                                                
-[unifi]                                                                         
-   path = /                                                                     
-   comment = Root directory                                                     
-   uid = 902                                                              
-   gid = 902                                                            
-   read only = true                                                                                                         
-RSYNCD.CONF                                                                     
-                                                                                                                                                                                                                                                              
-systemctl start rsync                                                           
-systemctl enable rsync                                                          
+#!/usr/bin/env bash                                                       
+                                                                                      
+systemctl stop rsync                                                                           
+
+## 
+## These are the master copies of                 
+## /etc/rsyncd.conf & /etc/rsyncd.secrets.         
+## They are overwritten with this content
+## every time the container boots.              
+##
+cat << RSYNCD.CONF >/etc/rsyncd.conf                                                           log file = /var/log/rsyncd.log                                                                 pid file = /var/run/rsyncd.pid                                                                 lock file = /var/run/rsync.lock 
+
+[unifi]
+   path = /          
+   comment = Root directory                
+   read only = true
+   uid = 902
+   gid = 902
+RSYNCD.CONF                                                                                     
+
+#
+# If the rsync daemon is stopped (possibly be a firmware update) without a reboot,
+# it won't be restarted by systemd.  The default service doesn't have the Restart=on-failure
+# set.                                        
+#
+# To get around this problem before the backup at around 2 AM, we enable a cron job that
+# hopefully persists through an update.  If not, the alternative would be to restart it
+# either remotely or from the pi-hole container.
+#
+SYSD_CMD="systemctl restart rsync"
+CRON_TIME='10 1    * * *   root   '
+grep "${SYSD_CMD}" /etc/crontab || echo "${CRON_TIME} ${SYSD_CMD}" >>/etc/crontab
+
+systemctl start rsync                                                                           systemctl enable rsync                                                                         
 ```
+
 Create the file, the type execute the following commands:
 ```
 unifi-os shell

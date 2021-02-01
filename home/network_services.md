@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2021-02-01T14:00:02.135Z
+date: 2021-02-01T14:02:12.926Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -243,7 +243,7 @@ Currently, DockerNet is hosted on the Raspberry PI 4 (pi-hole).  It can be crea
 
 The following script function creates the DockerNet on the PI:
 
-```
+```bash
 #!/bin/bash
 set -e
 set -xv

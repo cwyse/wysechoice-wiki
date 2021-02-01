@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2021-02-01T13:55:13.064Z
+date: 2021-02-01T14:00:02.135Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -229,6 +229,9 @@ Creation of the DockerNet MACVLAN requires configuration on the UDM server to su
 
 #### Creation Steps:
 
+> Steps need to be updated & scripts should be cleaned up - script below is current (2/1/21) 
+{.is-info}
+
 1. Remove the DockerNet MACVLAN network if it exists
 1. Create a virtual interface (eth0-shim) to act as a bridge between the MACVLAN and the host
 1. Create /etc/network/interfaced.d/eth0-shim to persist the configuration across boots
@@ -241,156 +244,309 @@ Currently, DockerNet is hosted on the Raspberry PI 4 (pi-hole).  It can be crea
 The following script function creates the DockerNet on the PI:
 
 ```
-# 
-# create_dockernet:
-# 
-#   This function creates the 'dockernet' MACVLAN network, using subnet 192.168.40.0/24.
-#   This allows each docker container to appear to be connected to the physical network, 
-#   with it's own MAC address.
-#                                                                                                                       
+#!/bin/bash
+set -e
+set -xv
+
+
 function create_dockernet()
 {
-  # Reference:
-  # https://blog.oddbit.com/post/2018-03-12-using-docker-macvlan-networks/
+  HOST_IP=192.168.1.119
+  HOST_GW=192.168.1.1
+  HOST_SHIM_IP=192.168.1.120
+  MAC_ADDR="02:00:C0:A8:01:78"
+  NEW_SUBNET=50
+  HOST_IF=eth0
+  IS_WIFI=0
 
-  # Routing requirements:
-  #    1. Docker assigned addresses should not be used by the router
-  #    2. Routes need to be created to access the subnet residing on the docker host
-  #    3. Secondary MACVLAN (eth0-shim) used to connect containers to host
-  #
-  #############################################
-  #
-  #  The following routes must be configured
-  #  on the router to connect to the containers 
-  #  in the 192.168.40.0/24 subnet . 
-  #
-  #############################################
-  #  192.168.40.0/24 dev br40 scope link  src 192.168.40.1 
-  #  192.168.40.0/31 dev br0  metric 1 
-  #  192.168.40.2 via 192.168.1.3 dev br0  metric 1 
-  #  192.168.40.4/30 dev br0  metric 1 
-  #  192.168.40.8/29 dev br0  metric 1 
-  #  192.168.40.16/28 dev br0  metric 1 
-  #  192.168.40.32/27 dev br0  metric 1 
-  #  192.168.40.64/26 dev br0  metric 1 
-  #  192.168.40.128/25 dev br0  metric 1 
-  ############################################
+  # Reference:
+  # https://blog.oddbit.com/post/2018-03-12-using-docker-macvlan-networks/
 
-  printf "Creating dockernet. "
+  # Routing requirements:
+  #    1. Docker assigned addresses should not be used by the router
+  #    2. Routes need to be created to access the subnet residing on the docker host
+  #    3. Secondary MACVLAN (${HOST_IF}-shim) used to connect containers to host
+  #
+  #############################################
+  #
+  #  The following routes must be configured
+  #  on the router to connect to the containers
+  #  in the 192.168.${NEW_SUBNET}.0/24 subnet .
+  #
+  #############################################
+  #  192.168.${NEW_SUBNET}.0/24 dev br40 scope link  src 192.168.${NEW_SUBNET}.1
+  #  192.168.${NEW_SUBNET}.0/31 dev br0  metric 1
+  #  192.168.${NEW_SUBNET}.2 via ${HOST_SHIM_IP} dev br0  metric 1
+  #  192.168.${NEW_SUBNET}.4/30 dev br0  metric 1
+  #  192.168.${NEW_SUBNET}.8/29 dev br0  metric 1
+  #  192.168.${NEW_SUBNET}.16/28 dev br0  metric 1
+  #  192.168.${NEW_SUBNET}.32/27 dev br0  metric 1
+  #  192.168.${NEW_SUBNET}.64/26 dev br0  metric 1
+  #  192.168.${NEW_SUBNET}.128/25 dev br0  metric 1
+  ############################################
 
-  # Start from scratch
-  if docker network ls | grep  dockernet >/dev/null 2>&1; then
-    docker network remove dockernet
-  fi
+  printf "Creating dockernet. "
 
-  #
-  # Create dockernet corresponding to same definition in router
-  #   Uses router DHCP settings which are currently allocating 192.168.40.128 - 192.168.40.255 (192.168.40.128/25)
-  #
-
-  # Create eth0-shim MACVLan interface for communication between the host
-  #  and the MACVlan network
-  sudo rm -f /etc/network/interfaces.d/eth0-shim || true
-  SHIM_CFG=$(mktemp)
-
-  # Public MAC addresses use these ranges:
-  #   x2-xx-xx-xx-xx-xx
-  #   x6-xx-xx-xx-xx-xx
-  #   xA-xx-xx-xx-xx-xx
-  #   xE-xx-xx-xx-xx-xx
-  #
-  # The range selected was arbitrary, x2-xx-xx-xx-xx-xx.  The
-  # last four segments are mapped to the IP address to prevent
-  # internal network conflicts.
-  #                                                                                                                     
-  MAC_ADDR="02:00:C0:A8:01:03"
-
-  #
-  # Make ethtool is installed to provide support to disable
-  # checksum offloading.
-  #
-  echo sudo apt install -y ethtool
-  sudo apt install -y ethtool || true
-
-  #
-  # Create the MACVlan bridge configuration file for the host,
-  # to make the interface persistent across boots.  Also, if the
-  # interface is not defined, issue the network commands to create
-  # the interface immediately.
-  #
-  sudo cat <<***REMOVED*** >${SHIM_CFG}
-auto eth0-shim
-iface eth0-shim inet static
- address 192.168.1.3
- pre-up ip link add eth0-shim link eth0 type macvlan mode bridge
- up ip addr add 192.168.40.2/32 dev eth0-shim                                  
- up ip link set eth0-shim address ${MAC_ADDR} up
- up ip route add 192.168.40.0/31 dev eth0-shim
- up ip route add 192.168.40.3/32 dev eth0-shim
- up ip route add 192.168.40.4/30 dev eth0-shim
- up ip route add 192.168.40.8/29 dev eth0-shim
- up ip route add 192.168.40.16/28 dev eth0-shim
- up ip route add 192.168.40.32/27 dev eth0-shim
- up ip route add 192.168.40.64/26 dev eth0-shim
- up ip route add 192.168.40.128/25 dev eth0-shim
- offload-tso  off
-***REMOVED***
- sudo mv ${SHIM_CFG} /etc/network/interfaces.d/eth0-shim
-
- if ! ip addr show eth0-shim >/dev/null 2>&1; then                                                                     
-    # Add a shim ethernet to act as a bridge to the host machine
-    sudo ip link add eth0-shim link eth0 type macvlan mode bridge
-    sudo ip addr add 192.168.40.2/32 dev eth0-shim
-    sudo ip link set eth0-shim address ${MAC_ADDR} up
-
-    # Route all the addresses through the shim
-    sudo ip route add 192.168.40.0/31 dev eth0-shim
-    sudo ip route add 192.168.40.3/32 dev eth0-shim
-    sudo ip route add 192.168.40.4/30 dev eth0-shim
-    sudo ip route add 192.168.40.8/29 dev eth0-shim
-    sudo ip route add 192.168.40.16/28 dev eth0-shim
-    sudo ip route add 192.168.40.32/27 dev eth0-shim
-    sudo ip route add 192.168.40.64/26 dev eth0-shim
-    sudo ip route add 192.168.40.128/25 dev eth0-shim
-  fi
-  sudo ethtool -K eth0-shim tso off || true
+  # Start from scratch
+  if docker network ls | grep  dockernet >/dev/null 2>&1; then
+    docker network remove dockernet.${NEW_SUBNET}
+  fi
 
   #
-  # Enable promiscuous mode for eth0                                                                                                                                           
-  #   The parent interface (eth0) for the MACVLAN must be
+  # Create dockernet corresponding to same definition in router
+  #   Uses router DHCP settings which are currently allocating 192.168.${NEW_SUBNET}.128 - 192.168.${NEW_SUBNET}.255 (192.168.${NEW_SUBNET}.128/25)
+  #
+
+  # Create ${HOST_IF}-shim MACVLan interface for communication between the host
+  #  and the MACVlan network
+  sudo rm -f /etc/network/interfaces.d/${HOST_IF}-shim || true
+  SHIM_CFG=$(mktemp)
+
+  # Public MAC addresses use these ranges:
+  #   x2-xx-xx-xx-xx-xx
+  #   x6-xx-xx-xx-xx-xx
+  #   xA-xx-xx-xx-xx-xx
+  #   xE-xx-xx-xx-xx-xx
+  #
+  # The range selected was arbitrary, x2-xx-xx-xx-xx-xx.  The
+  # last four segments are mapped to the IP address to prevent
+  # internal network conflicts.
+  #
+  #MAC_ADDR="02:00:C0:A8:01:78"
+
+  #
+  # Make ethtool is installed to provide support to disable
+  # checksum offloading.
+  #
+  echo sudo apt install -y ethtool
+  sudo apt install -y ethtool || true
+
+#  if ! grep 'kernel.dmesg_restrict' /etc/sysctl.conf; then
+#    sudo echo 'kernel.dmesg_restrict = 0' >>/etc/sysctl.conf
+#  fi
+
+#  sudo service procps restart
+
+  #
+  # Create the MACVlan bridge configuration file for the host,
+  # to make the interface persistent across boots.  Also, if the
+  # interface is not defined, issue the network commands to create
+  # the interface immediately.
+  #
+  sudo cat <<***REMOVED*** >${SHIM_CFG}
+auto ${HOST_IF}-shim
+iface ${HOST_IF}-shim inet static
+ address ${HOST_SHIM_IP}
+ pre-up ip link set ${HOST_IF}-shim link ${HOST_IF} type macvlan mode bridge
+ up /bin/bash -c "echo ${HOST_IF}-shim up >/dev/kmsg"
+ up ip addr replace 192.168.${NEW_SUBNET}.2/32 dev ${HOST_IF}-shim noprefixroute
+ up ip link set ${HOST_IF}-shim address ${MAC_ADDR} up
+ up ip route add 192.168.${NEW_SUBNET}.0/31 dev ${HOST_IF}-shim
+ up ip route add 192.168.${NEW_SUBNET}.3/32 dev ${HOST_IF}-shim
+ up ip route add 192.168.${NEW_SUBNET}.4/30 dev ${HOST_IF}-shim
+ up ip route add 192.168.${NEW_SUBNET}.8/29 dev ${HOST_IF}-shim
+ up ip route add 192.168.${NEW_SUBNET}.16/28 dev ${HOST_IF}-shim
+ up ip route add 192.168.${NEW_SUBNET}.32/27 dev ${HOST_IF}-shim
+ up ip route add 192.168.${NEW_SUBNET}.64/26 dev ${HOST_IF}-shim
+ up ip route add 192.168.${NEW_SUBNET}.128/25 dev ${HOST_IF}-shim
+ offload-gso  off
+***REMOVED***
+ sudo mkdir -p /etc/network/interfaces.d/
+ sudo mv ${SHIM_CFG} /etc/network/interfaces.d/${HOST_IF}-shim
+
+ sudo ip link delete ${HOST_IF}-shim || true
+ if ! ip addr show ${HOST_IF}-shim >/dev/null 2>&1; then
+    # Add a shim ethernet to act as a bridge to the host machine
+    sudo ip link add ${HOST_IF}-shim link ${HOST_IF} type macvlan mode bridge
+    sudo bash -c "echo ${HOST_IF}-shim up >/dev/kmsg"
+    sudo ip addr replace 192.168.${NEW_SUBNET}.2/32 dev ${HOST_IF}-shim noprefixroute
+    sudo ip link set ${HOST_IF}-shim address ${MAC_ADDR} up
+
+    # Route all the addresses through the shim
+    sudo ip route add 192.168.${NEW_SUBNET}.0/31 dev ${HOST_IF}-shim
+    sudo ip route add 192.168.${NEW_SUBNET}.3/32 dev ${HOST_IF}-shim
+    sudo ip route add 192.168.${NEW_SUBNET}.4/30 dev ${HOST_IF}-shim
+    sudo ip route add 192.168.${NEW_SUBNET}.8/29 dev ${HOST_IF}-shim
+    sudo ip route add 192.168.${NEW_SUBNET}.16/28 dev ${HOST_IF}-shim
+    sudo ip route add 192.168.${NEW_SUBNET}.32/27 dev ${HOST_IF}-shim
+    sudo ip route add 192.168.${NEW_SUBNET}.64/26 dev ${HOST_IF}-shim
+    sudo ip route add 192.168.${NEW_SUBNET}.128/25 dev ${HOST_IF}-shim
+  fi
+  sudo ethtool -K ${HOST_IF}-shim gso off 
+
+  #
+  # Enable promiscuous mode for ${HOST_IF}
+  #   The parent interface (${HOST_IF}) for the MACVLAN must be
   #   in promiscuous mode to allow multiple VLANs on the interface
   #
-  sudo rm -f /etc/network/interfaces.d/eth0 || true
+  sudo rm -f /etc/network/interfaces.d/${HOST_IF} || true
   ETH0_CFG=$(mktemp)
   sudo cat <<***REMOVED*** >${ETH0_CFG}
-auto eth0
-iface eth0 inet static 
-  address 192.168.1.2/24
-  gateway 192.168.1.1
-  up /sbin/ip -4 link set eth0 promisc on
-  down /sbin/ip link set eth0 promisc off
-  down /sbin/ip link set eth0 down
+auto ${HOST_IF}
+iface ${HOST_IF} inet static
+  address ${HOST_IP}/24
+  gateway ${HOST_GW}
+  up /sbin/ip -4 link set ${HOST_IF} promisc on
+  down /sbin/ip link set ${HOST_IF} promisc off
+  down /sbin/ip link set ${HOST_IF} down
 ***REMOVED***
-  sudo mv ${ETH_CFG} /etc/network/interfaces.d/eth0
+  sudo mv ${ETH0_CFG} /etc/network/interfaces.d/${HOST_IF}
+  sudo ip link set ${HOST_IF} promisc on
 
-  sudo ip link set eth0 promisc on
+  systemd_setup
+  if [ ${IS_WIFI} -eq 1 ]; then
+    wifi_support
+  fi
 
-  # Use the MACVLan driver - allowing docker containers to appear as if physically connected to network
-  DOCKER_OPTIONS="  -d macvlan"
-  # Specify the physical interface to use
-  DOCKER_OPTIONS+=" -o parent=eth0"
-  # Set the subnet to use for the network.  The router will also define this subnet as a VLAN.
-  DOCKER_OPTIONS+=" --subnet 192.168.40.0/24"           
-  # Define the external gateway machine.  Ubiquiti provides this virtual gateway in the router.
-  DOCKER_OPTIONS+=" --gateway 192.168.40.1"             
-  # Define the IP range for containers that don't specify an IP address
-  DOCKER_OPTIONS+=" --ip-range 192.168.40.128/25"       
-  # Reserve an address to use for the MACVLAN bridge (eth0-shim) communication with host
-  DOCKER_OPTIONS+=" --aux-address "'host=192.168.40.2'
-  docker network create ${DOCKER_OPTIONS} dockernet
- 
-  printf "Done.\n"
+  if grep 'CONFIGURE_INTERFACES=' /etc/default/networking; then
+    sudo sed -i '/CONFIGURE_INTERFACES=/d' /etc/default/networking
+  fi
+  sudo bash -c "echo 'CONFIGURE_INTERFACES=yes' >>/etc/default/networking"
+
+  if grep 'VERBOSE=' /etc/default/networking; then
+    sudo sed -i '/VERBOSE=/d' /etc/default/networking
+  fi
+  sudo bash -c "echo 'VERBOSE=no' >>/etc/default/networking"
+
+  if grep 'source-directory' /etc/network/interfaces; then
+    sudo sed -i -e 's/source-directory/source/g' /etc/network/interfaces
+  fi
+
+  if grep 'DOCKER_OPTS=' /etc/default/docker; then
+    sudo sed -i '/DOCKER_OPTS=/d' /etc/default/docker
+  fi
+  sudo bash -c "echo 'DOCKER_OPTS=\" --dns 192.168.5.3 -dns 1.1.1.1 --dns 8.8.8.8 --dns 8.8.4.4\"' >>/etc/default/docker"
+
+  # Use the MACVLan driver - allowing docker containers to appear as if physically connected to network
+  DOCKER_OPTIONS="  -d macvlan"
+  # Specify the physical interface to use
+  DOCKER_OPTIONS+=" -o parent=${HOST_IF}"
+  # Set the subnet to use for the network.  The router will also define this subnet as a VLAN.
+  DOCKER_OPTIONS+=" --subnet 192.168.${NEW_SUBNET}.0/24"
+  # Define the external gateway machine.  Ubiquiti provides this virtual gateway in the router.
+  DOCKER_OPTIONS+=" --gateway 192.168.${NEW_SUBNET}.1"
+  # Define the IP range for containers that don't specify an IP address
+  DOCKER_OPTIONS+=" --ip-range 192.168.${NEW_SUBNET}.128/25"
+  # Reserve an address to use for the MACVLAN bridge (${HOST_IF}-shim) communication with host
+  DOCKER_OPTIONS+=" --aux-address host=192.168.${NEW_SUBNET}.2"
+  docker network create ${DOCKER_OPTIONS} dockernet.${NEW_SUBNET}
+
+  printf "Done.\n"
 }
+
+systemd_setup() {
+  sysd_cfg=$(mktemp)
+  sudo cat <<***REMOVED*** >${sysd_cfg}
+[NetDev]
+Name=${HOST_IF}-shim
+Kind=macvlan
+
+[MACVLAN]
+Mode=bridge
+***REMOVED***
+  sudo mv -f ${sysd_cfg} /etc/systemd/network/${HOST_IF}-shim.netdev
+  sudo chmod 644 /etc/systemd/network/${HOST_IF}-shim.netdev
+
+  sudo cat <<***REMOVED*** >${sysd_cfg}
+[Match]
+Name=${HOST_IF}-shim
+
+[Network]
+IPForward=yes
+Address=192.168.${NEW_SUBNET}.2/24
+Gateway=192.168.${NEW_SUBNET}.1
+***REMOVED***
+  sudo mv -f ${sysd_cfg} /etc/systemd/network/${HOST_IF}-shim.network
+  sudo chmod 644 /etc/systemd/network/${HOST_IF}-shim.network
+
+  sudo cat <<***REMOVED*** >${sysd_cfg}
+[Match]
+Name=${HOST_IF}
+
+[Network]
+MACVLAN=${HOST_IF}-shim
+***REMOVED***
+  sudo mv ${sysd_cfg} /etc/systemd/network/${HOST_IF}.network
+  sudo chmod 644 /etc/systemd/network/${HOST_IF}.network
+
+  sudo cat <<***REMOVED*** >${sysd_cfg}
+[Unit]
+After=network.target
+Before=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/sbin/ip link set ${HOST_IF} promisc on
+RemainAfterExit=yes
+
+[Install]
+WantedBy=network-online.target
+***REMOVED***
+  sudo mv -f ${sysd_cfg} /etc/systemd/system/macvlan.service
+
+sudo systemctl daemon-reload
+sudo systemctl enable systemd-networkd
+sudo systemctl enable macvlan
+
+}
+
+wifi_support()
+{
+  # https://www.linux-tips-and-tricks.de/en/raspberry/312-how-to-create-a-wlan-ethernet-bridge-on-debian-raspberry/#arp
+
+  if grep -v 'net.ifnames' /boot/cmdline.txt; then
+    sudo bash -c "sed -i -e 's/$/ net.ifnames=0/' /boot/cmdline.txt"
+  fi
+
+  if grep 'net.ipv4.ip_forward' /etc/sysctl.conf; then
+    sudo sed -i '/net.ipv4.ip_forward/d' /etc/sysctl.conf
+  fi
+  sudo bash -c "echo 'net.ipv4.ip_forward=1' >>/etc/sysctl.conf"
+
+  sudo apt install -y parprouted dhcp-helper avahi-daemon
+
+  if grep 'DHCPHELPER_OPTS' /etc/default/dhcp-helper; then
+    sudo sed -i '/DHCPHELPER_OPTS/d' /etc/default/dhcp-helper
+  fi
+  sudo bash -c "echo 'DHCPHELPER_OPTS=\"-b wlan0\"' >>/etc/default/dhcp-helper"
+
+  if grep 'enable-reflector' /etc/avahi/avahi-daemon.conf; then
+    sudo sed -i '/enable-reflector/d' /etc/avahi/avahi-daemon.conf
+  fi
+  sudo bash -c "echo 'enable-reflector=yes' >>/etc/avahi/avahi-daemon.conf"
+
+
+  sudo cat <<***REMOVED*** > /etc/network/interfaces.d/${HOST_IF}-shim
+auto ${HOST_IF}-shim
+allow-hotplug ${HOST_IF}-shim
+iface ${HOST_IF}-shim inet dhcp
+  post-down /usr/bin/killall /usr/sbin/parprouted
+  # Assign eth0 same IP address as wlan0 so dhcp-proxy will proxy for the same subnet
+  post-up /sbin/ip addr add $(ip addr show ${HOST_IF}-shim | grep -Eo "^\s+inet [^ ]+ " | sed -E 's/^\s+//' | cut -f 2 -d ' ' | cut -f 1 -d/ | head -1)/32 dev eth0
+  post-up /usr/sbin/service dhcp-helper restart && /usr/sbin/parprouted eth0 ${HOST_IF}-shim
+  post-down /sbin/ifdown eth0 
+  pre-up ip link set ${HOST_IF}-shim link ${HOST_IF} type macvlan mode bridge
+  up /bin/bash -c "echo ${HOST_IF}-shim up >/dev/kmsg"
+  up ip addr add 192.168.50.2/32 dev ${HOST_IF}-shim
+  up ip link set ${HOST_IF}-shim address 02:00:C0:A8:0A:4D up
+ up ip route add 192.168.50.0/31 dev ${HOST_IF}-shim
+ up ip route add 192.168.50.3/32 dev ${HOST_IF}-shim
+ up ip route add 192.168.50.4/30 dev ${HOST_IF}-shim
+ up ip route add 192.168.50.8/29 dev ${HOST_IF}-shim
+ up ip route add 192.168.50.16/28 dev ${HOST_IF}-shim
+ up ip route add 192.168.50.32/27 dev ${HOST_IF}-shim
+ up ip route add 192.168.50.64/26 dev ${HOST_IF}-shim
+ up ip route add 192.168.50.128/25 dev ${HOST_IF}-shim
+ offload-gso  off
+ offload-tx   off
+ offload-rx   off
+ offload-tso  off
+***REMOVED***
+
+
+}
+
+
 ```
 
 ### Configuration

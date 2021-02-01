@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2021-02-01T05:33:51.951Z
+date: 2021-02-01T13:50:42.207Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -411,10 +411,26 @@ The postgres server runs in a docker image on the same host machine.  The databa
 - DB User: wikijs
 - DB Password: wikijsrocks
 
-The postgres data is dumped out every 3 days and stored on the NAS (192.168.1.8).  The backup is performed on from the NAS.  It requires the rsyncd daemon to be running.  It executes the following command on the docker host:
+The postgres data is dumped out every 3 days (TBD!!) and stored on the NAS (192.168.1.8).  The backup is performed on from the NAS.  It requires the rsyncd daemon to be running.  It executes the following command on the docker host:
 ```
 docker exec postgres-9.5 pg_dump wiki -U wikijs -F c > ~/wikibackup.dump
 ```
+
+To restore the database backup, stop the wiki docker container:
+```
+docker stop wiki
+```
+Then restore the wikibackup.dump file into a new database, first dropping the existing empty DB:
+```
+docker exec -it postgres-9.5 dropdb -U wikijs wiki
+docker exec -it postgres-9.5 createdb -U wikijs wiki
+cat ~/wikibackup.dump | docker exec -i postgres-9.5 pg_restore -U wikijs -d wiki
+```
+We can now restart the wiki container:
+```
+docker start wiki
+```
+
 ### Reference
 TBD
 ### Support Files

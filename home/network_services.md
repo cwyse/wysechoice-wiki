@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2021-01-31T23:19:41.766Z
+date: 2021-02-01T01:51:27.436Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -401,7 +401,20 @@ In addition to the host configuration, the router must also be configured to all
 ![dockernetfirewall.png](/dockernetfirewall.png)
 
 ### Backup
-TBD
+The website data is continually stored in two places, the postgres database and a git repository.  Both are updated whenever a change is made.
+
+The postgres server runs in a docker image on the same host machine.  The database parameters used for the connection are given below:
+- DB Type: postgres
+- DB Host: postgres-9.5 (Name of docker container)
+- DB Port: 5432
+- DB Name: wiki
+- DB User: wikijs
+- DB Password: wikijsrocks
+
+The postgres data is dumped out every 3 days and stored on the NAS (192.168.1.8).  The backup is performed on from the NAS.  It requires the rsyncd daemon to be running.  It executes the following command on the docker host:
+```
+docker exec postgres-9.5 pg_dump wiki -U wikijs -F c > ~/wikibackup.dump
+```
 ### Reference
 TBD
 ### Support Files

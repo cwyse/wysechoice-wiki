@@ -2,7 +2,7 @@
 title: Network Applications
 description: Network and Application Setup
 published: true
-date: 2021-01-05T14:44:42.810Z
+date: 2021-02-01T01:13:53.433Z
 tags: 
 editor: markdown
 dateCreated: 2020-11-15T09:50:55.982Z
@@ -217,8 +217,9 @@ https://docs.requarks.io
 {.is-info}
 
 ### Backup
-> TBD
-{.is-info}
+``` 
+docker exec postgres-9.5 pg_dump wiki -U wikijs -F c > ~/wikibackup.dump
+```
 
 ### Reference
 > TBD

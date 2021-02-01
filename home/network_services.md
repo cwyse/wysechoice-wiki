@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2021-02-01T13:50:42.207Z
+date: 2021-02-01T13:55:13.064Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -431,8 +431,22 @@ We can now restart the wiki container:
 docker start wiki
 ```
 
-### Reference
-TBD
+### Upgrade
+Before upgrading the wiki, perform a backup, and make sure the git repository is also backup up the site.  Then stop the wiki:
+
+```
+docker stop wiki
+```
+Pull the latest docker image:
+```
+docker pull requarks/wiki:2
+```
+Create and run a new container that includes the date in the name:
+```
+docker run -d -p 8080:3000 --net=dockernet --name wiki_01_31_21 --restart unless-stopped -e "DB_TYPE=postgres" -e "DB_HOST=postgres-9.5" -e "DB_PORT=5432" -e "DB_USER=wikijs" -e "DB_PASS=wikijsrocks" -e "DB_NAME=wiki" -v /home/pi/docker_vols/wiki_data requarks/wiki:2
+```
+Test the updated wiki.  If everything is OK, the old container and image can be deleted.
+
 ### Support Files
 TBD
 

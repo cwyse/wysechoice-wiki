@@ -2,7 +2,7 @@
 title: Backup and Restore
 description: 
 published: true
-date: 2021-02-07T21:26:37.556Z
+date: 2021-02-07T21:52:30.353Z
 tags: 
 editor: markdown
 dateCreated: 2020-12-18T03:10:24.783Z
@@ -25,18 +25,19 @@ This script contains stanzas for each client machine being backed up.  It relies
 The backups run every night at 2:15AM by the WebCrontab application.  
 
 The backups are all in subdirectories of /share/CACHEDEV1_DATA/backup/RSync, which maps to DATAVOL1/backup/RSync in FileManager on the NAS.  That directory contains two scripts: 
-- BackupAll.sh 
-- RSyncBackup.sh
+- [BackupAll.sh](/backupall.sh) 
+- [RSyncBackup.sh](/rsyncbackup.sh)
 
 The RSyncBackup.sh script handles individual backups.  The starting directory for each backup on the client is based on the source path defined in the client's rsyncd.conf file.  The third parameter of the script is the subdirectory to backup.
 
 Backups are incremental, with a total of seven separate backups saved.  Subdirectories are: `<remote>/<model>/<path>/data`.  In addition to the data directory, backup.N directories are used for prior backups.
   
-The BackupAll.sh script is executed nightly by a cron job.  
-
 https://github.com/pedroetb/rsync-incremental-backup
 
-### Standard Rsyncd configuration
+### Standard Rsyncd Client Configuration
+
+The following is a typical rsyncd.conf file for a client.  It specified 'chris' as the source model, and allows read access to everything below the /home/chris directory.  The RSync backup could backup any directory in the 'chris' home directory.
+
 `/etc/rsyncd.conf`
 ```
 log file = /var/log/rsyncd.log
@@ -48,6 +49,7 @@ lock file = /var/run/rsync.lock
    comment = Home directory
    read only = true                                                                                                                                
 ```
+Once the rsync configuration is set up, the service should be started and enabled:
 
 ```
 chris@chris-Precision-7740:/etc$ sudo systemctl start rsync
@@ -59,7 +61,34 @@ chris@chris-Precision-7740:/etc$
 
 
 ### On the Dream Machine
-`/mnt/data/on_boot.d/20-rsync.sh`
+
+The Dream Machine is a special configuration case, since when the NAS backup connects with the RSync daemon, it is running inside of the podman container.  The configuration of rsyncd.conf needs to be inside the container as well, yet it would typically be lost once the container is recreated (e.g. on a firmware update).
+
+This situation is circumvented through a somewhat complex path to update the appropriate files.  Specifically, the rsyncd.conf file gets created when the container boots.  Additionally, it requires support to ensure the the rsync daemon stays running.
+
+The solution relies on the udm-boot package.  This package provides an on_boot.d directory that perists through firmware updates.  Any scripts in the directory will be executed when the container boots.  However, these scripts run on the _host_ operating system, not the container.
+
+The commands for the rsync support need to be executed in the container.  The solution was to create a script in the on_boot.d directory that supports executing scripts in the container using the `podman exec` command.  The 99-on-boot-podman.sh script provides that support by executing any scripts found in ../podman/on_boot.d using the `podman exec` command.
+
+`/mnt/data/on_boot.d/99-on-boot-podman.sh`
+```
+#!/bin/sh
+
+echo "Executing /mnt/data/on_boot.d/99_on_boot_podman.sh"
+if [ -d /mnt/data/podman/on_boot.d ]; then
+	cp -rfp /mnt/data/podman/on_boot.d /mnt/persistent
+	for i in /mnt/persistent/on_boot.d/*.sh; do
+		if [ -r $i ]; then
+			podman exec unifi-os $i
+		fi
+	done
+fi
+echo "Finished /mnt/data/on_boot.d/99_on_boot_podman.sh"
+```
+
+The script below update the rsyncd.conf file in the podman container to make the directory available to the NAS.  It also updates a crontab on the UDM to restart the rsync daemon each night at 1:10 AM.  If the daemon had trapped during the day or had been stopped, the cronjob will restart it prior to the backup later that night.
+
+`/mnt/data/podman/on_boot.d/20-rsync.sh`
 ```
 #!/usr/bin/env bash                                                       
                                                                                       
@@ -97,13 +126,13 @@ grep "${SYSD_CMD}" /etc/crontab || echo "${CRON_TIME} ${SYSD_CMD}" >>/etc/cronta
 systemctl start rsync                                                                           systemctl enable rsync                                                                         
 ```
 
-Create the file, the type execute the following commands:
+For the initial installation, create the files, then execute the following commands:
 ```
-unifi-os shell
-sudo apt install rsync -y
-ssh-proxy /mnt/data/on_boot.sh
+# unifi-os shell
+root@ubnt:/# apt install rsync -y
+root@ubnt:/# ssh-proxy /mnt/data/on_boot.sh
 ```
-
+On subsequent boots, the server will be started automatically.
 #### NAS Storage Spaces
 The backups run every night at 2:15AM.  The backups are all in subdirectories of /share/CACHEDEV1_DATA/backup/RSync, which maps to DATAVOL1/backup/RSync in FileManager on the NAS.  That directory contains two scripts: BackupAll.sh and RSyncBackup.sh.  The RSyncBackup.sh script handles individual backups.  Backups are incremental, with a total of seven separate backups saved.  Subdirectories are: `<remote>/<model>/<path>/data`.  In addition to the data directory, backup.N directories are used for prior backups.
   

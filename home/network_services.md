@@ -2,13 +2,25 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2021-02-01T14:02:12.926Z
+date: 2021-02-07T23:51:24.259Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
 ---
 
 # Standard Network Services
+## Reverse Proxy
+
+## Tabs {.tabset}
+
+### Overview
+Reverse-proxy support is available via a Caddy server running on the QNAP NAS.  The Caddyfile is located at /share/CACHEDEV1_DATA/.qpkg/Caddy2.  It needs an entry for each new port mapping required.  
+
+It is currently not running.  It can be tested by executing 'Caddy run' from the NAS command line.  It needs to be configured to start automatically.
+
+The DNS server also needs to be updated to map each desired name to the Caddy server.
+
+
 ## Simple Network Management Protocol (SNMP)
 
 ## Tabs {.tabset}

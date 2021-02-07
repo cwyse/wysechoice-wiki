@@ -2,7 +2,7 @@
 title: Backup and Restore
 description: 
 published: true
-date: 2021-02-07T21:55:33.800Z
+date: 2021-02-07T22:09:42.539Z
 tags: 
 editor: markdown
 dateCreated: 2020-12-18T03:10:24.783Z
@@ -30,9 +30,13 @@ The backups are all in subdirectories of /share/CACHEDEV1_DATA/backup/RSync, whi
 
 The RSyncBackup.sh script handles individual backups.  The starting directory for each backup on the client is based on the source path defined in the client's rsyncd.conf file.  The third parameter of the script is the subdirectory to backup.
 
-Backups are incremental, with a total of seven separate backups saved.  Subdirectories are: `<remote>/<model>/<path>/data`.  In addition to the data directory, backup.N directories are used for prior backups.
-  
-https://github.com/pedroetb/rsync-incremental-backup
+Backups are incremental, with a total of seven separate backups saved.  
+
+The backup creates subdirectories beneath the RSync directory with a very specific layout.  The top subdirectory is the remote client name or IP address.  Subdirectories below that are for the specific model (defined in client's rsyncd.conf) being backed up.  The next level _was intended_ to be the path, but currently there is a bug.  Instead, there is a _data_ directory and a _backup.N_ directory for each prior backup.  
+
+Additionally, there is an _.rsync-incremental-backup_ directory that contains the log files.
+
+Reference: https://github.com/pedroetb/rsync-incremental-backup
 
 ### Standard Rsyncd Client Configuration
 

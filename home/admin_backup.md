@@ -2,7 +2,7 @@
 title: Backup and Restore
 description: 
 published: true
-date: 2021-02-07T19:51:30.452Z
+date: 2021-02-07T21:26:37.556Z
 tags: 
 editor: markdown
 dateCreated: 2020-12-18T03:10:24.783Z
@@ -20,14 +20,20 @@ User backups are handled in three separate ways.
 
 The QNAP NAS initiates RSyncD backups using the BackupAll.sh script in the /share/CACHEDEV1_DATA/backup/RSync directory, which maps to DATAVOL1/backup/RSync in FileManager on the NAS.
 
-This script contains stanzas for each client machine being backed up.  It relies on each client system being configured in advance to allow the NAS to access the system via rsync.  The clients have the option of enabling passwordless SSH access from the NAS, or adding a username and password to the BackupAll.sh script.  For example:
-	`sshpass -p ${PASSWORD} ssh -t root@${REMOTE_PW} "podman stop pihole"`
-where PASSWORD and REMOTE_PW are set ???
+This script contains stanzas for each client machine being backed up.  It relies on each client system being configured in advance to allow the NAS to access the system via rsync.  The clients must enable passwordless SSH access from the NAS.
 
+The backups run every night at 2:15AM by the WebCrontab application.  
 
-The backups run every night at 2:15AM.  The backups are all in subdirectories of /share/CACHEDEV1_DATA/backup/RSync, which maps to DATAVOL1/backup/RSync in FileManager on the NAS.  That directory contains two scripts: BackupAll.sh and RSyncBackup.sh.  The RSyncBackup.sh script handles individual backups.  Backups are incremental, with a total of seven separate backups saved.  Subdirectories are: `<remote>/<model>/<path>/data`.  In addition to the data directory, backup.N directories are used for prior backups.
+The backups are all in subdirectories of /share/CACHEDEV1_DATA/backup/RSync, which maps to DATAVOL1/backup/RSync in FileManager on the NAS.  That directory contains two scripts: 
+- BackupAll.sh 
+- RSyncBackup.sh
+
+The RSyncBackup.sh script handles individual backups.  The starting directory for each backup on the client is based on the source path defined in the client's rsyncd.conf file.  The third parameter of the script is the subdirectory to backup.
+
+Backups are incremental, with a total of seven separate backups saved.  Subdirectories are: `<remote>/<model>/<path>/data`.  In addition to the data directory, backup.N directories are used for prior backups.
   
 The BackupAll.sh script is executed nightly by a cron job.  
+
 https://github.com/pedroetb/rsync-incremental-backup
 
 ### Standard Rsyncd configuration

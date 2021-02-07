@@ -2,7 +2,7 @@
 title: Backup and Restore
 description: 
 published: true
-date: 2021-02-07T21:52:30.353Z
+date: 2021-02-07T21:54:39.938Z
 tags: 
 editor: markdown
 dateCreated: 2020-12-18T03:10:24.783Z
@@ -100,7 +100,10 @@ systemctl stop rsync
 ## They are overwritten with this content
 ## every time the container boots.              
 ##
-cat << RSYNCD.CONF >/etc/rsyncd.conf                                                           log file = /var/log/rsyncd.log                                                                 pid file = /var/run/rsyncd.pid                                                                 lock file = /var/run/rsync.lock 
+cat << RSYNCD.CONF >/etc/rsyncd.conf 
+log file = /var/log/rsyncd.log                                                                 
+pid file = /var/run/rsyncd.pid                                                                 
+lock file = /var/run/rsync.lock 
 
 [unifi]
    path = /          

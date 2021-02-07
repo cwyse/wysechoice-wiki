@@ -2,7 +2,7 @@
 title: Backup and Restore
 description: 
 published: true
-date: 2021-02-07T21:54:58.884Z
+date: 2021-02-07T21:55:33.800Z
 tags: 
 editor: markdown
 dateCreated: 2020-12-18T03:10:24.783Z
@@ -126,7 +126,8 @@ SYSD_CMD="systemctl restart rsync"
 CRON_TIME='10 1    * * *   root   '
 grep "${SYSD_CMD}" /etc/crontab || echo "${CRON_TIME} ${SYSD_CMD}" >>/etc/crontab
 
-systemctl start rsync                                                                           systemctl enable rsync                                                                         
+systemctl start rsync                                                                           
+systemctl enable rsync                                                                         
 ```
 
 For the initial installation, create the files, then execute the following commands:

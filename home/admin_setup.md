@@ -2,7 +2,7 @@
 title: Initial Setup
 description: Initial configuration for various components
 published: true
-date: 2021-02-01T03:28:39.504Z
+date: 2021-02-09T04:27:41.733Z
 tags: 
 editor: markdown
 dateCreated: 2021-02-01T03:28:39.504Z
@@ -28,3 +28,5 @@ Restart=on-failure
 RestartSec=20s
 ```
 in the [Service] stanza.
+
+# Cloudflare Certificates

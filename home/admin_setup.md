@@ -2,7 +2,7 @@
 title: Initial Setup
 description: Initial configuration for various components
 published: true
-date: 2021-02-09T04:27:41.733Z
+date: 2021-02-09T04:43:47.909Z
 tags: 
 editor: markdown
 dateCreated: 2021-02-01T03:28:39.504Z
@@ -30,3 +30,22 @@ RestartSec=20s
 in the [Service] stanza.
 
 # Cloudflare Certificates
+
+Cloudflare certificates have been created and installed on the QNAP NAS under *Control Panel->Security->Certificate & Private Key*.  Copies of these keys and certificates are also attached to this web page.
+
+The origin certificate was created in Cloudflare, for hosts `*.wysechoice.net,wysechoice.net`.
+The origin certificate is named *wysechoice.net.cert.pem*, and expires
+in 2035.  The associated key was stored in the same directory, in *wysechoice.net.key.pem*.  
+
+Cloudflare requires an intermediate certificate thate can be downloaded from their site:
+  https://support.cloudflare.com/hc/article_attachments/360037885371/origin_ca_rsa_root.pem
+It needs to be installed into /etc/ssl/certs of any image using these certificates either through the command line or throught the QNAP GUI.
+
+Some applications require a certificate bundle containing the primary certificate (wysechoice.net.cert.pem) and
+the intermediate certificate (origin_ca_rsa_root.pem) concatenated into a single file:
+    `cat wysechoice.net.cert.pem origin_ca_rsa_root.pem >> bundle.crt`
+The bundle needs to be installed in /etc/ssl/certs with the others if needed.
+
+[wysechoice.net.cert.pem](/wysechoice.net.cert.pem) 
+[wysechoice.net.key.pem](/wysechoice.net.key.pem)
+[origin_ca_rsa_root.pem](/origin_ca_rsa_root.pem)

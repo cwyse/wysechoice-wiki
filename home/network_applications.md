@@ -2,7 +2,7 @@
 title: Network Applications
 description: Network and Application Setup
 published: true
-date: 2021-02-12T04:18:19.143Z
+date: 2021-02-12T04:19:57.968Z
 tags: 
 editor: markdown
 dateCreated: 2020-11-15T09:50:55.982Z
@@ -81,17 +81,10 @@ ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2376
 </div>
 
 ## Upgrade
-From the Portainer website, select Images.  Pull the latest portainer image.  Since the _portainer/portainer:latest_ tag is already in use, the latest version will be _portainer/portainer:\<none\>_.
-
-```
-$ docker stop portainer<current_version>
-$ docker rm portainer<current_version>
-$ #  DON'T RECREATE VOLUME  # docker volume create portainer_data
-$ docker run -d -p 8000:8000 -p 9000:9000 --name=portainer-ce_<new_version> --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce
-```
-
+TBD
 ## Backup
 > TBD
+The /opt/Portainer/data directory should be backed to retain the configuration.
 {.is-info}
 
 ## Reference

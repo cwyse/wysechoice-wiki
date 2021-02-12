@@ -2,7 +2,7 @@
 title: Network Applications
 description: Network and Application Setup
 published: true
-date: 2021-02-12T03:57:58.231Z
+date: 2021-02-12T04:18:19.143Z
 tags: 
 editor: markdown
 dateCreated: 2020-11-15T09:50:55.982Z
@@ -13,40 +13,29 @@ dateCreated: 2020-11-15T09:50:55.982Z
 # Tabs {.tabset}
 
 ## Overview
-Container maintenance is handled using the Portainer Docker image.  The image has is locally named according to the version.  In this instance, version 1.24.1 is named portainer1241.  The image mounts a volume, portainer_data, that is maintained across version upgrades.
+Container maintenance is handled using Portainer running on QNAP.  The QPKG is available on the Qnap.Club at https://www.qnapclub.eu/en/qpkg/466.  Portainer is run as an application on the QNAP machine - not insde a docker container.  The image mounts a volume, /opt/Portainer/data, which stores the portainer database and other customizable data.
 <br>
 <figure style="width:796px;" class="table">
   <table style="background-color:rgb(255, 255, 255);">
     <tbody>
-      <tr>
-        <th style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">Image</th>
-        <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">portainer/portainer-ce:latest</td>
-      </tr>
-      <tr>
+            <tr>
         <th style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">Web Site</th>
         <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;"><a class="is-external-link" href="https://www.portainer.io/">https://www.portainer.io/</a></td>
       </tr>
       <tr>
         <th style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">Ports</th>
-        <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">0.0.0.0:8000 -&gt; 8000/tcp&nbsp; &nbsp;(Edge Agent Endpoint) (Currently not used)<br>0.0.0.0:9000 -&gt; 9000/tcp&nbsp; &nbsp;(Portainer Endpoint)</td>
+        <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">127.0.0.1:2375 -&gt; 2375/tcp&nbsp; &nbsp;(Local endpoint URL)<br>0.0.0.0:9123 -&gt; 9123/tcp&nbsp; &nbsp;(Portainer Web Interface)</td>
       </tr>
       <tr>
         <th style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">Data Volume</th>
-        <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">portainer_data</td>
-      </tr>
-      <tr>
-        <th style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">Network</th>
-        <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">bridge</td>
+        <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">/opt/Portainer/data</td>
       </tr>
     </tbody>
   </table>
 </figure>
 
 ## Initial Setup
-```
-$ docker volume create portainer_data
-$ docker run -d -p 8000:8000 -p 9000:9000 --name=portainer-ce_2.0 --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
-```
+Download the QPKG from https://www.qnapclub.eu/en/qpkg/466.  Log in as an administrator to the QNAP machine.  Open the *App Center* and click the *+* next to the :gear: icon in the upper right.  This will open an *Install Manually* dialog box.  Browse to the QPKG file that you downloaded and click the Install button.
 
 ## Configuration
 
@@ -113,7 +102,7 @@ $ docker run -d -p 8000:8000 -p 9000:9000 --name=portainer-ce_<new_version> --re
 > TBD
 {.is-info}
 
-# Portainer
+# Portainer (old)
 
 # Tabs {.tabset}
 

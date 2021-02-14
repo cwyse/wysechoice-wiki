@@ -2,7 +2,7 @@
 title: Initial Setup
 description: Initial configuration for various components
 published: true
-date: 2021-02-09T04:43:47.909Z
+date: 2021-02-14T09:40:22.588Z
 tags: 
 editor: markdown
 dateCreated: 2021-02-01T03:28:39.504Z
@@ -20,6 +20,9 @@ rsync
 ...
 
 A docker network should be created at installation time even if it is not configured in the router.
+
+## Timezone
+Docker images (or at least containers) should run `dpkg-reconfigure tzdata` to set the timezone to New York.
 
 ## Rsyncd
 This is required for backup purposes.  It should be set to restart on-failure by updating the /etc/systemd/system/mult-user.target.wants/rsync.service to include

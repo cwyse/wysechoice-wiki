@@ -2,7 +2,7 @@
 title: Network Applications
 description: Network and Application Setup
 published: true
-date: 2021-02-16T03:40:55.322Z
+date: 2021-02-16T12:49:47.623Z
 tags: 
 editor: markdown
 dateCreated: 2020-11-15T09:50:55.982Z
@@ -44,7 +44,7 @@ For the _Layout_ tab:
 Create the label, then print it to a PDF.
 
 #### Mail Merge
-Create a mail merge in gLabel.  Query the data in the needed format from the Ghini database.
+Create a mail merge in gLabel.  The ghini database contains a view called *plant_labels* that provides the necessary record information.
 
 #### GIMP
 Start GIMP and open the PDF from the last step.  Use the default import settings.

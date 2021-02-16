@@ -2,11 +2,132 @@
 title: Network Applications
 description: Network and Application Setup
 published: true
-date: 2021-02-14T15:21:15.238Z
+date: 2021-02-16T03:19:52.051Z
 tags: 
 editor: markdown
 dateCreated: 2020-11-15T09:50:55.982Z
 ---
+
+# Label Printing
+
+# Tabs {.tabset}
+
+## Overview
+CUPS printing isn't working for the Brother PT-P700 label printer.  However, a combination of programs can be used to generate labels.
+
+#### gLabels
+This package supports the creation of labels and mail merge.  The following settings should be used to create a template for the labels.  On the _Page Size_ tab of the template creation:
+1. Page Size: Other
+2. Width: 520 points
+3. Height 128 points
+
+On the _Label or Card Size_ tab:
+1. Width: 520
+2. Height 128
+3. Round: 0
+4. Horiz. waste: 0
+5. Vert. waste: 0
+6. Margin: 14
+
+For the _Layout_ tab: 
+1. Number accross: 1
+2. Number down: 1
+3. Distance from left: 0
+4. Distance from top: 0
+5. Horizontal pitch: 520
+6. Vertical pitch: 128
+
+Create the label, then print it to a PDF.
+
+#### GIMP
+Start GIMP and open the PDF from the last step.  Use the default import settings.
+
+Under Image->Mode, select 'Use black and white palette', and _Convert_.  Under _Scale Image_, select:
+1. Width: 500 px (unlink)
+2. Height 127 px
+
+Set the Print Size to:
+1. Width: 1.875 in
+2. Height: 0.498 in
+3. X res: 360 px/in
+4. Y res: 255 px/in
+
+Export the file as a PNG file.
+
+References:
+##### Docker Image
+- https://hub.docker.com/r/ydkn/cups
+- https://gitlab.com/ydkn/docker-cups
+##### Ptouch Print
+- Build dependencies
+-- git
+-- autogen
+-- autoreconf
+-- gettext
+-- autopoint
+- https://github.com/clarkewd/ptouch-print
+
+
+## Initial Setup
+Download the QPKG from https://www.qnapclub.eu/en/qpkg/466.  Log in as an administrator to the QNAP machine.  Open the *App Center* and click the *+* next to the :gear: icon in the upper right.  This will open an *Install Manually* dialog box.  Browse to the QPKG file that you downloaded and click the Install button.
+
+## Configuration
+
+### Client Endpoints
+The localhost endpoint is automatically enabled.  Remote hosts need to have their Docker API enabled.  An excerpt from "[How do I enable the remote API for dockerd](https://success.mirantis.com/article/how-do-i-enable-the-remote-api-for-dockerd)" is given below:
+
+<div>
+<figure style="width:796px;" class="table">
+  <table style="background-color:rgb(255, 255, 255);">
+    <tbody>
+      <tr>
+        <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;width:55px;">&nbsp;</td>
+        <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;width:1107px;">
+          <p>&nbsp;</p><div style="font-size:22px">
+<!--          <h2  id="how-do-i-enable-the-remote-api-for-dockerd"> --> <strong>How do I enable the remote API for dockerd</strong><hr></div><!--</h2>-->
+          <p>After completing these steps, you will have enabled the remote API for dockerd, without editing the systemd unit file in place:</p>
+          <p>Create a file at <code>/etc/systemd/system/docker.service.d/startup_options.conf</code> with the below contents:</p>
+          <pre class="prismjs line-numbers"><code class="language-plaintext"># /etc/systemd/system/docker.service.d/override.conf
+[Service]
+ExecStart=
+ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2376
+</code></pre>
+          <blockquote>
+            <p><strong>Note:</strong> The -H flag binds dockerd to a listening socket, either a Unix socket or a TCP port. You can specify multiple -H flags to bind to multiple sockets/ports. The default -H fd:// uses systemd's socket activation feature to refer to /lib/systemd/system/docker.socket.</p>
+          </blockquote>
+          <p>Reload the unit files:</p>
+          <pre class="prismjs line-numbers"><code class="language-plaintext">$ sudo systemctl daemon-reload
+</code></pre>
+          <p>Restart the docker daemon with new startup options:</p>
+          <pre class="prismjs line-numbers"><code class="language-plaintext">$ sudo systemctl restart docker.service
+</code></pre>
+          <p>Ensure that anyone that has access to the TCP listening socket is a trusted user since access to the docker daemon is root-equivalent.</p><br>
+<div class="toc-header" style="font-size:25px;color:blue"><!--          <h1  id="additional-documentation">--><strong>Additional Documentation</strong><hr><!--</h1>--></div>
+          <ul>
+            <li><a class="is-external-link" href="https://docs.docker.com/engine/security/">https://docs.docker.com/engine/security/</a></li>
+          </ul>
+          <p>&nbsp;</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+</div>
+
+## Upgrade
+TBD
+## Backup
+> TBD
+The /opt/Portainer/data directory should be backed to retain the configuration.
+{.is-info}
+
+## Reference
+> TBD
+{.is-info}
+
+## Support Files
+> TBD
+{.is-info}
 
 # CUPS
 
@@ -89,6 +210,7 @@ The /opt/Portainer/data directory should be backed to retain the configuration.
 ## Support Files
 > TBD
 {.is-info}
+
 # Portainer
 
 # Tabs {.tabset}

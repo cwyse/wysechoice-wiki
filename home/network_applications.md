@@ -2,7 +2,7 @@
 title: Network Applications
 description: Network and Application Setup
 published: true
-date: 2021-02-16T03:19:52.051Z
+date: 2021-02-16T03:39:14.515Z
 tags: 
 editor: markdown
 dateCreated: 2020-11-15T09:50:55.982Z
@@ -15,7 +15,11 @@ dateCreated: 2020-11-15T09:50:55.982Z
 ## Overview
 CUPS printing isn't working for the Brother PT-P700 label printer.  However, a combination of programs can be used to generate labels.
 
+https://sites.google.com/site/tingox/brother_pt-p700
+
 #### gLabels
+https://blog.worldlabel.com/2008/glabels-ez-label-creator-for-linux.html
+
 This package supports the creation of labels and mail merge.  The following settings should be used to create a template for the labels.  On the _Page Size_ tab of the template creation:
 1. Page Size: Other
 2. Width: 520 points
@@ -53,6 +57,19 @@ Set the Print Size to:
 4. Y res: 255 px/in
 
 Export the file as a PNG file.
+
+#### PTouch-Print
+https://github.com/clarkewd/ptouch-print
+https://mockmoon-cybernetics.ch/computer/p-touch2430pc/
+
+Download the ptouch-print git repository and compile it.
+```
+sudo apt install -y autogen autoconf gettext autopoint gcc libgd-dev libusb-dev libusb-1.0-0-dev make autofs udev dialog 
+./configure 
+make
+```
+ptouct-print --image <filename.png>
+
 
 References:
 ##### Docker Image

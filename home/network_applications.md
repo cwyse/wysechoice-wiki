@@ -2,7 +2,7 @@
 title: Network Applications
 description: Network and Application Setup
 published: true
-date: 2021-02-16T13:10:55.927Z
+date: 2021-02-17T05:06:43.986Z
 tags: 
 editor: markdown
 dateCreated: 2020-11-15T09:50:55.982Z
@@ -45,6 +45,10 @@ Create the label, then print it to a PDF.
 
 #### Mail Merge
 Create a mail merge in gLabel.  The ghini database contains two views with plant label information: *plant_labels* and *plant_labels_living*.  Either of these views can be used to provide data to the mail merge.
+
+Use pgadmin4, load a view with the desired plants, and export the data as a CSV file.  In gLabels, select Objects->Mail Merge, and import the CSV file.
+
+Load the PlantLabels template, which was merge fields included.  Merge fields are in the format "${merge-field}", where the merge field value is the column header of the CSV file.  Select File->Print, and Print To File, to output the labels to a PDF file.
 
 #### GIMP
 Start GIMP and open the PDF from the last step.  Use the default import settings.

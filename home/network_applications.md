@@ -2,7 +2,7 @@
 title: Network Applications
 description: Network and Application Setup
 published: true
-date: 2021-02-17T05:30:17.744Z
+date: 2021-02-17T14:37:06.229Z
 tags: 
 editor: markdown
 dateCreated: 2020-11-15T09:50:55.982Z
@@ -77,6 +77,8 @@ https://mockmoon-cybernetics.ch/computer/p-touch2430pc/
 Download the ptouch-print git repository and compile it.
 ```
 sudo apt install -y autogen autoconf gettext autopoint gcc libgd-dev libusb-dev libusb-1.0-0-dev make autofs udev dialog 
+cd ptouch-print
+./autogen.sh
 ./configure 
 make
 ```

@@ -2,13 +2,13 @@
 title: Network Applications
 description: Network and Application Setup
 published: true
-date: 2021-02-17T14:37:06.229Z
+date: 2021-02-21T02:59:25.619Z
 tags: 
 editor: markdown
 dateCreated: 2020-11-15T09:50:55.982Z
 ---
 
-# Label Printing
+[plantlabels.glabels](/plantlabels.glabels)# Label Printing
 
 # Tabs {.tabset}
 
@@ -48,12 +48,18 @@ Create a mail merge in gLabel.  The ghini database contains two views with plant
 
 Use pgadmin4, load a view with the desired plants, and export the data as a CSV file.  In gLabels, select Objects->Mail Merge, and import the CSV file.
 
-Load the PlantLabels template, which was merge fields included.  Merge fields are in the format "${merge-field}", where the merge field value is the column header of the CSV file.  Select File->Print, and Print To File, to output the labels to a PDF file.
+Load the [PlantLabels template](/plantlabels.glabels), which has merge fields included.  Merge fields are in the format "${merge-field}", where the merge field value is the column header of the CSV file.  Select File->Print, and Print To File, to output the labels to a PDF file.
 
 Convert the PDF file into multiple PNG images:
 ```
 convert output.pdf -crop 520x128 -negate -threshold 0 -negate labels_%d.png
 ```
+
+> **Update:**
+Use the [labelgen.py](/labelgen.py) command to read the database, run the mailmerge, and create the label images.  Parameters must be configured within
+the file.
+{.is-info}
+
 
 #### GIMP
 Start GIMP and open the PDF from the last step.  Use the default import settings.

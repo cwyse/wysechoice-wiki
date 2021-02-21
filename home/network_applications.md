@@ -2,7 +2,7 @@
 title: Network Applications
 description: Network and Application Setup
 published: true
-date: 2021-02-21T02:59:25.619Z
+date: 2021-02-21T03:44:47.834Z
 tags: 
 editor: markdown
 dateCreated: 2020-11-15T09:50:55.982Z
@@ -60,6 +60,8 @@ Use the [labelgen.py](/labelgen.py) command to read the database, run the mailme
 the file.
 {.is-info}
 
+This file will scp the label file and issue the print command.
+[print.py](/print.py)
 
 #### GIMP
 Start GIMP and open the PDF from the last step.  Use the default import settings.

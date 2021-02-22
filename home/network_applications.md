@@ -2,7 +2,7 @@
 title: Network Applications
 description: Network and Application Setup
 published: true
-date: 2021-02-21T03:44:47.834Z
+date: 2021-02-22T11:39:54.964Z
 tags: 
 editor: markdown
 dateCreated: 2020-11-15T09:50:55.982Z
@@ -17,6 +17,21 @@ CUPS printing isn't working for the Brother PT-P700 label printer.  However, a c
 
 https://sites.google.com/site/tingox/brother_pt-p700
 
+#### print-driver-ptouch
+```
+apt install libcup2-dev libxml2 libxml2-dev libxml-libxml-perl
+git clone https://github.com/philpem/printer-driver-ptouch.git
+cd print-driver-ptouch
+rm missing
+autoreconf -i
+./autogen.sh
+./configure
+make
+make install
+cd /etc/init.d
+./dbus start
+./avahi-daemon start
+```
 #### gLabels
 https://blog.worldlabel.com/2008/glabels-ez-label-creator-for-linux.html
 

@@ -2,7 +2,7 @@
 title: Network Applications
 description: Network and Application Setup
 published: true
-date: 2021-02-22T11:39:54.964Z
+date: 2021-02-22T13:59:11.501Z
 tags: 
 editor: markdown
 dateCreated: 2020-11-15T09:50:55.982Z
@@ -32,6 +32,19 @@ cd /etc/init.d
 ./dbus start
 ./avahi-daemon start
 ```
+/dev/bus not present:
+```
+/dev/bus or /dev/serial do not show up under /dev in the container
+Try this:
+
+docker run -v /dev/bus:/dev/bus:ro -v /dev/serial:/dev/serial:ro -i -t --entrypoint /bin/bash --cap-add SYS_PTRACE debian:amd64
+
+This will make /dev/bus and /dev/serial show up as bind mounts in your container. Yet you will find that _fastboot devices or adb_ will not work. Strace will show you permission denied. What you want instead is this:
+
+
+docker run --device=/dev/bus -v /dev/serial:/dev/serial:ro -i -t --entrypoint /bin/bash --cap-add SYS_PTRACE debian:amd64
+```
+
 #### gLabels
 https://blog.worldlabel.com/2008/glabels-ez-label-creator-for-linux.html
 

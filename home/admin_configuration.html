@@ -2,7 +2,7 @@
 title: Hardware Configuration_wsyiwyg
 description: 
 published: true
-date: 2020-12-12T12:18:46.193Z
+date: 2021-02-26T13:11:12.667Z
 tags: 
 editor: ckeditor
 dateCreated: 2020-10-13T01:27:19.214Z
@@ -16,3 +16,9 @@ dateCreated: 2020-10-13T01:27:19.214Z
 <p>Provisioned&nbsp;</p>
 <p><a href="https://www.raspberrypi.org/downloads/raspberry-pi-os/">https://www.raspberrypi.org/downloads/raspberry-pi-os/</a></p>
 <p><a href="https://downloads.raspberrypi.org/raspbian/images/">https://downloads.raspberrypi.org/raspbian/images/</a></p>
+<h1>Linux Administration</h1>
+<pre><code class="language-plaintext">sudo apt-get install perl libnet-ssleay-perl openssl libauthen-pam-perl libpam-runtime libio-pty-perl apt-show-versions python
+# Latest version can be found at: https://www.webmin.com/deb.html
+wget http://prdownloads.sourceforge.net/webadmin/webmin_1.970_all.deb
+sudo dpkg --install webmin_1.970_all.deb</code></pre>
+<p>Access Webmin: https://&lt;ip-address&gt;:10000/</p>

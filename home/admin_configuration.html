@@ -2,7 +2,7 @@
 title: Hardware Configuration_wsyiwyg
 description: 
 published: true
-date: 2021-02-26T13:11:12.667Z
+date: 2021-02-26T15:19:34.563Z
 tags: 
 editor: ckeditor
 dateCreated: 2020-10-13T01:27:19.214Z
@@ -17,7 +17,17 @@ dateCreated: 2020-10-13T01:27:19.214Z
 <p><a href="https://www.raspberrypi.org/downloads/raspberry-pi-os/">https://www.raspberrypi.org/downloads/raspberry-pi-os/</a></p>
 <p><a href="https://downloads.raspberrypi.org/raspbian/images/">https://downloads.raspberrypi.org/raspbian/images/</a></p>
 <h1>Linux Administration</h1>
-<pre><code class="language-plaintext">sudo apt-get install perl libnet-ssleay-perl openssl libauthen-pam-perl libpam-runtime libio-pty-perl apt-show-versions python
+<pre><code class="language-plaintext">#  On RPI
+if cat /proc/1/cgroup |grep docker &gt;/dev/null; then
+  apt-get purge -y apt-show-versions
+  rm /var/lib/apt/lists/*gz /var/lib/apt/lists/*lz4
+  apt-get -o Acquire::GzipIndexes=false update
+  apt-get install -y apt-show-versions
+else
+  apt-get update
+fi
+sudo apt-get install -y perl libnet-ssleay-perl openssl libauthen-pam-perl libpam-runtime libio-pty-perl apt-show-versions python
+#  On RPI
 # Latest version can be found at: https://www.webmin.com/deb.html
 wget http://prdownloads.sourceforge.net/webadmin/webmin_1.970_all.deb
 sudo dpkg --install webmin_1.970_all.deb</code></pre>

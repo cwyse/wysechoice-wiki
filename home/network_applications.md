@@ -2,7 +2,7 @@
 title: Network Applications
 description: Network and Application Setup
 published: true
-date: 2021-02-22T13:59:11.501Z
+date: 2021-02-27T15:18:55.459Z
 tags: 
 editor: markdown
 dateCreated: 2020-11-15T09:50:55.982Z
@@ -554,9 +554,27 @@ docker exec postgres-9.5 pg_dump wiki -U wikijs -F c > ~/wikibackup.dump
 
 
 ### Initial Setup
-> TBD
-{.is-info}
 
+#### API Keys
+Create API Keys for various Grafana roles:
+##### Viewer
+```
+Key
+<store securely outside the repository>
+curl -H "Authorization: Bearer <store securely outside the repository>" http://192.168.1.8:3000/api/dashboards/home
+```
+##### Editor
+```
+Key
+eyJrIjoia29xa0liWDROcHMxRGhYR0xNTmV5V0hqVkl6aWFDcEkiLCJuIjoiRWRpdG9yS2V5IiwiaWQiOjF9
+curl -H "Authorization: Bearer eyJrIjoia29xa0liWDROcHMxRGhYR0xNTmV5V0hqVkl6aWFDcEkiLCJuIjoiRWRpdG9yS2V5IiwiaWQiOjF9" http://192.168.1.8:3000/api/dashboards/home
+```
+##### Admin
+```
+Key
+<store securely outside the repository>
+curl -H "Authorization: Bearer <store securely outside the repository>" http://192.168.1.8:3000/api/dashboards/home
+```
 
 ### Configuration
 > TBD

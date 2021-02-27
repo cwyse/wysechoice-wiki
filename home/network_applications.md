@@ -2,7 +2,7 @@
 title: Network Applications
 description: Network and Application Setup
 published: true
-date: 2021-02-27T15:18:55.459Z
+date: 2021-02-27T15:44:21.044Z
 tags: 
 editor: markdown
 dateCreated: 2020-11-15T09:50:55.982Z
@@ -549,8 +549,13 @@ docker exec postgres-9.5 pg_dump wiki -U wikijs -F c > ~/wikibackup.dump
 ## Tabs {.tabset}
 
 ### Overview
-> TBD
-{.is-info}
+
+Grafana is install on the QNAP server (192.168.1.8), listening on port 3000.  
+
+The installation was done via a QPKG file downloaded from the QNAPClub Store at https://www.qnapclub.eu/en/qpkg/812.  It is installed into /opt/Grafana.  The default configuration (/opt/Grafana/conf/defaults.ini) uses relative paths from the installation directory.  Manually installed plugins need to specify the plugin directory, e.g.:
+```
+grafana-cli --pluginsDir /opt/Grafana/data/plugins --debug --homepath /opt/Grafana --config /opt/Grafana/conf/defaults.ini plugins install simpod-json-datasource
+```
 
 
 ### Initial Setup
@@ -577,8 +582,11 @@ curl -H "Authorization: Bearer <store securely outside the repository>" http://1
 ```
 
 ### Configuration
-> TBD
-{.is-info}
+
+#### Plugins:
+
+- [JSON Datasource – a generic backend datasource](https://grafana.com/grafana/plugins/simpod-json-datasource?pg=plugins&plcmt=featured-undefined)
+  
 
 ### Upgrade
 > TBD

@@ -2,13 +2,16 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2021-02-07T23:51:24.259Z
+date: 2021-03-13T14:24:00.731Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
 ---
 
 # Standard Network Services
+
+## [Network Services List](/home/network_services/service_list)
+
 ## Reverse Proxy
 
 ## Tabs {.tabset}

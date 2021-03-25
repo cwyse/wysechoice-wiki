@@ -2,7 +2,7 @@
 title: Loaned Items
 description: Table of what I've borrowed and loaned out
 published: true
-date: 2021-01-16T22:51:14.137Z
+date: 2021-03-25T01:12:13.203Z
 tags: 
 editor: markdown
 dateCreated: 2021-01-16T22:44:24.961Z
@@ -16,4 +16,4 @@ dateCreated: 2021-01-16T22:44:24.961Z
 | 1/16/21 | Jake      | Medium pair of microspikes    |          |
 | 1/16/21 | Jake      | Pair of binoculars            |          |
 | 1/16/21 | Mark      | Tin snips                     |          |
-| 1/16/21 | Matt      | Table saw digital protractor  |          |
+| 1/16/21 | Matt      | Table saw digital protractor  | 3/1/21   |

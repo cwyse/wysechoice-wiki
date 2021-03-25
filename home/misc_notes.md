@@ -2,7 +2,7 @@
 title: Miscellaneous Notes
 description: Various bits of information without a home
 published: true
-date: 2021-01-01T17:26:55.123Z
+date: 2021-03-25T04:08:24.783Z
 tags: 
 editor: markdown
 dateCreated: 2021-01-01T17:15:16.488Z
@@ -172,3 +172,4 @@ for ip in $canoga_ips; do
   route add $ip dev vpn_ca0
 done
 ```
+Haircut 3/25/21

@@ -2,7 +2,7 @@
 title: WyseChoice Wiki
 description: Wyse Household Notes & Information
 published: true
-date: 2021-03-25T01:19:34.375Z
+date: 2021-03-25T01:23:39.656Z
 tags: level0
 editor: markdown
 dateCreated: 2020-11-04T00:59:28.760Z
@@ -42,6 +42,7 @@ This website is intended as a tool to document the information relevant to the W
 - [:moneybag: &nbsp;&nbsp;Finance *Financial information.*](/home/household_finance)
 - [:car: &nbsp;&nbsp;Vehicles *Registrations, service information, links to loans.*](/home/vehicles)
 - [:paintbrush: &nbsp;&nbsp;Paint Colors Used *List of paint colors/types used throughout the house*](/home/paints_used) 
+- [:art: &nbsp;&nbsp;Family Artist Prints *Image files of various paintings done by relatives*](/home/artist_prints) 
 {.links-list}
 
 ## :bust_in_silhouette:&nbsp;&nbsp;Personal

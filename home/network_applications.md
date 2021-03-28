@@ -2,9 +2,9 @@
 title: Network Applications
 description: Network and Application Setup
 published: true
-date: 2021-02-27T15:44:21.044Z
+date: 2021-02-27T15:44:28.863Z
 tags: 
-editor: markdown
+editor: undefined
 dateCreated: 2020-11-15T09:50:55.982Z
 ---
 

@@ -2,9 +2,9 @@
 title: Initial Setup
 description: Initial configuration for various components
 published: true
-date: 2021-02-14T09:40:22.588Z
+date: 2021-02-14T09:40:28.393Z
 tags: 
-editor: markdown
+editor: undefined
 dateCreated: 2021-02-01T03:28:39.504Z
 ---
 

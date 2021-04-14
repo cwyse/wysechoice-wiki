@@ -2,9 +2,9 @@
 title: Network Applications
 description: Network and Application Setup
 published: true
-date: 2021-02-27T15:44:28.863Z
+date: 2021-04-14T02:53:19.649Z
 tags: 
-editor: undefined
+editor: markdown
 dateCreated: 2020-11-15T09:50:55.982Z
 ---
 
@@ -410,28 +410,48 @@ This Wiki is served from a Docker container.  It uses both Wiki.js and a Postgre
   <table style="background-color:rgb(255, 255, 255);">
     <tbody>
       <tr>
-        <th style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">Image</th>
+        <th style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;text-align:left;">Docker Host</th>
+        <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">qnap.wysechoice.net (192.168.1.8)</td>
+      </tr>
+      <tr>
+        <th style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;text-align:left;">Docker Base Image</th>
         <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">requarks/wiki:2 (latest version 2)</td>
       </tr>
       <tr>
-        <th style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">Database Image</th>
-        <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">postgres:9.5</td>
+        <th style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;text-align:left;">Docker Image</th>
+        <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">wiki_01_31_21</td>
       </tr>
       <tr>
-        <th style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">Web Sites</th>
-        <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;"><a class="is-external-link" href="https://hub.docker.com/_/postgres">https://hub.docker.com/_/postgres</a>,<a class="is-external-link" href="https://hub.docker.com/r/requarks/wiki">https://hub.docker.com/r/requarks/wiki</a></td>
-      </tr>
-      <tr>
-        <th style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">Ports</th>
-        <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">0.0.0.0:3000 -&gt; 8080/tcp</td>
-      </tr>
-      <tr>
-        <th style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">Data Volumes</th>
+        <th style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;text-align:left;">Data Volumes</th>
         <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">${HOME}/docker_vols/wiki, ${HOME}/docker_vols/postgres</td>
       </tr>
       <tr>
-        <th style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">Network</th>
-        <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">dockernet</td>
+        <th style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;text-align:left;">Network</th>
+        <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">dockernet (192.168.40.0/24)</td>
+      </tr>
+      <tr>
+        <th style="border-top:5px solid rgb(221, 221, 221);padding:8px;vertical-align:top;text-align:left;">Host</th>
+        <td style="border-top:5px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">wiki.wysechoice.net (192.168.40.128)</td>
+      </tr>
+      <tr>
+        <th style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;text-align:left;">Port</th>
+        <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">3000 -> 8080</td>
+      </tr>
+      <tr>
+        <th style="border-top:5px solid rgb(221, 221, 221);padding:8px;vertical-align:top;text-align:left;">Docker Database Host</th>
+        <td style="border-top:5px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">qnap.wysechoice.net (192.168.1.8)</td>
+      </tr>
+      <tr>
+        <th style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;text-align:left;">Database Host</th>
+        <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">postgres.wysechoice.net (192.168.40.30)</td>
+      </tr>
+      <tr>
+        <th style="border-top:px solid rgb(221, 221, 221);padding:8px;vertical-align:top;text-align:left;">Docker Database Image</th>
+        <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;">postgres:9.5</td>
+      </tr>
+      <tr>
+        <th style="border-top:5px solid rgb(221, 221, 221);padding:8px;vertical-align:top;text-align:left;">Reference</th>
+        <td style="border-top:5px solid rgb(221, 221, 221);padding:8px;vertical-align:top;"><a class="is-external-link" href="https://hub.docker.com/_/postgres">https://hub.docker.com/_/postgres</a>,<a class="is-external-link" href="https://hub.docker.com/r/requarks/wiki">https://hub.docker.com/r/requarks/wiki</a></td>
       </tr>
     </tbody>
   </table>
@@ -496,8 +516,20 @@ To provide search capability for the web site content, the search engine usage n
 https://docs.requarks.io
 
 ### Upgrade
-> TBD
-{.is-info}
+```
+# Stop and remove container named "wiki-2.5.201"
+docker stop wiki-<old_version>
+docker rm wiki-<old_version>
+
+# Pull latest image of Wiki.js
+docker pull requarks/wiki:2
+
+# Create new container of Wiki.js based on latest image
+docker run -d -p 8080:3000 --net=dockernet --name wiki-<new_version> --restart unless-stopped -e "DB_TYPE=postgres" -e "DB_HOST=postgres-9.5" -e "DB_PORT=5432" -e "DB_USER=wikijs" -e "DB_PASS=wikijsrocks" -e "DB_NAME=wiki" -v /home/pi/docker_vols/wiki_data requarks/wiki:2
+
+# Use a second CPU for the container
+docker update --cpus 2 wiki-<new_version>
+```
 
 ### Backup
 ``` 

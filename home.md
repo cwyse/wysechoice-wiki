@@ -2,7 +2,7 @@
 title: WyseChoice Wiki
 description: Wyse Household Notes & Information
 published: true
-date: 2021-04-14T03:23:46.833Z
+date: 2021-04-14T03:34:26.084Z
 tags: level0
 editor: markdown
 dateCreated: 2020-11-04T00:59:28.760Z
@@ -64,6 +64,7 @@ This website is intended as a tool to document the information relevant to the W
 ## :link:&nbsp;&nbsp;Reference
 
 - [:smile: &nbsp;&nbsp; Emojis *Emoji Cheat Sheet*](https://www.webfx.com/tools/emoji-cheat-sheet/)
+- [:information_source: &nbsp;&nbsp; Markdown Tables *MultiMarkdown Tables Reference*](https://fletcher.github.io/MultiMarkdown-5/tables.html)
 - [:nut_and_bolt: &nbsp;&nbsp;Hardware *Hardware specific reference material.*](/home/reference_hardware)
 - [:briefcase: &nbsp;&nbsp;Software *Software reference material.*](/home/reference_software)
 

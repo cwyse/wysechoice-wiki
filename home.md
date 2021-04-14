@@ -2,9 +2,9 @@
 title: WyseChoice Wiki
 description: Wyse Household Notes & Information
 published: true
-date: 2021-03-25T04:07:17.624Z
-tags: 
-editor: undefined
+date: 2021-04-14T03:23:46.833Z
+tags: level0
+editor: markdown
 dateCreated: 2020-11-04T00:59:28.760Z
 ---
 
@@ -12,9 +12,8 @@ dateCreated: 2020-11-04T00:59:28.760Z
 
 This website is intended as a tool to document the information relevant to the Wyse household. It will contain information on the network infrastructure, hobbies, calendars, links to user manuals for household products, pictures, backup support, and any other relevant information.
 
-# Tabs {.tabset}
 
-## :pencil:&nbsp;&nbsp;Administration
+## :pencil:&nbsp;&nbsp;Network Administration
 
 
 - [:wrench:  &nbsp;&nbsp;Setup *Describes how to initially create the network and applications.*](/home/admin_setup)
@@ -45,6 +44,15 @@ This website is intended as a tool to document the information relevant to the W
 - [:art: &nbsp;&nbsp;Family Artist Prints *Image files of various paintings done by relatives*](/home/artist_prints) 
 {.links-list}
 
+## :herb:&nbsp;&nbsp;Gardening
+
+- [:bulb:&nbsp;&nbsp;Wish List *Plants for the future.*](/home/garden_wishlist)
+- [:package: &nbsp;&nbsp;Supplies *Links and information for gardening supplies.*](/home/garden_supplies)
+- [:ledger: &nbsp;&nbsp;Garden Notes *Notes and pictures of the gardens.*](/home/garden_notes)
+- [:space_invader:&nbsp;&nbsp;Invasives *Plants that were weedy or hard to control.*](/home/garden_invasives)
+- [:house_with_garden:&nbsp;&nbsp; Greenhouse *Greenhouse ideas and links.*](/home/garden_greenhouse)
+{.links-list}
+
 ## :bust_in_silhouette:&nbsp;&nbsp;Personal
 
 - [:bank:&nbsp;&nbsp;Account Information *User Account Information.*](/home/account_information)
@@ -55,7 +63,8 @@ This website is intended as a tool to document the information relevant to the W
 
 ## :link:&nbsp;&nbsp;Reference
 
-- [::nut_and_bolt:: &nbsp;&nbsp;Hardware *Hardware specific reference material.*](/home/reference_hardware)
+- [:smile: &nbsp;&nbsp; Emojis *Emoji Cheat Sheet*](https://www.webfx.com/tools/emoji-cheat-sheet/)
+- [:nut_and_bolt: &nbsp;&nbsp;Hardware *Hardware specific reference material.*](/home/reference_hardware)
 - [:briefcase: &nbsp;&nbsp;Software *Software reference material.*](/home/reference_software)
 
 {.links-list}

@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2021-10-29T12:53:46.324Z
+date: 2021-10-29T13:03:45.599Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -226,7 +226,7 @@ https://github.com/boostchicken/udm-utilities/blob/master/dns-common/on_boot.d/1
 #### Located on UDM filesystem (not unifi-os container)
 [/mnt/data/on_boot.d/10-dns.sh](/10-dns.sh) - Pi-Hole configuration and startup script
 [/mnt/data/podman/cni/20-dns.conflist](/20-dns.conflist) - Configuration of 192.168.5.x MACVLAN for Pi-Hole
-[pihole.sh](/pihole.sh) - Create and run container
+[pihole.sh](/pihole.sh) - Create and run container ---  NOTE:  This doesn't match the run command shown above.  Specifically, it has an additional backup DNS (1.0.0.1), and is missing the --cap-add and --group-add parameters.  Not sure why - but needs to be reviewed.
 
 #### Located on DNS monitoring host
 [/usr/local/bin/dns_restart.sh](/dns_restart.sh) - Script to monitor and restart pihole container if necessary

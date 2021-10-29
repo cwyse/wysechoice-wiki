@@ -2,11 +2,13 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2021-03-13T14:24:07.741Z
-tags: 
-editor: undefined
+date: 2021-10-29T12:53:46.324Z
+tags: level1
+editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
 ---
+
+- Reverse 
 
 # Standard Network Services
 
@@ -99,6 +101,7 @@ The Pi-Hole DNS server currently runs on the Ubiquiti Dream Machine router, in a
      - The source code is available in the on-boot-script dictory of the repository
 1.   On your controller, make a Corporate network with no DHCP server and give it a VLAN. For this example we are using VLAN 5.
 1.  Install the pi-hole podman container on the UDM
+     - `podman pull pihole/pihole:latest`
      - Copy 20-dns.conflist to /mnt/data/podman/cni. This will create your podman macvlan network
      - Copy 10-dns.sh to /mnt/data/on_boot.d and update its values to reflect your environment
      - Execute /mnt/data/on_boot.d/10-dns.sh     
@@ -107,15 +110,18 @@ The Pi-Hole DNS server currently runs on the Ubiquiti Dream Machine router, in a
     ```
     podman run -d --network dns --restart always \
     --name pihole \
-    -e TZ="America/Los Angeles" \
+    -e TZ="America/New_York" \
     -v "/mnt/data/etc-pihole/:/etc/pihole/" \
     -v "/mnt/data/pihole/etc-dnsmasq.d/:/etc/dnsmasq.d/" \
     --dns=127.0.0.1 --dns=1.1.1.1 \
     --hostname pi.hole \
     -e VIRTUAL_HOST="pi.hole" \
     -e PROXY_LOCATION="pi.hole" \
-    -e ServerIP="10.0.5.3" \
+    -e ServerIP="192.168.5.3" \
     -e IPv6="False" \
+    --cap-add NET_ADMIN \
+    --cap-add SYS_NICE \
+    --group-add=www-data \
     pihole/pihole:latest
     ```
     The below errors are expected and acceptable:
@@ -129,25 +135,27 @@ The Pi-Hole DNS server currently runs on the Ubiquiti Dream Machine router, in a
     `podman exec -it pihole pihole -a -p YOURNEWPASSHERE`
     
 1.  Update your DNS Servers to 192.168.5.3 (or your custom ip) in all your DHCP configs.    
-1.  Configure a cron job to monitor the container and restart if necessary
+1.  Configure a cron job to monitor the container from a separate hose and restart it if necessary
     - Copy the following script to /usr/local/bin/dns_restart.sh on a host computer
     ```
     #!/usr/bin/env bash
 
     DNS_SERVER=192.168.5.3
     UDM_ROUTER=192.168.1.1
+    WYSECHOICE=wysechoice.net
     PASSWORD="&847&XLXXbxY"
 
     # If the router is running
     if ping -c 1 ${UDM_ROUTER} > /dev/null 2>&1; then
         # If the DNS server is not working
-        if ! nslookup ${UDM_ROUTER} ${DNS_SERVER} > /dev/null 2>&1; then
+        if ! nslookup ${WYSECHOICE} ${DNS_SERVER} > /dev/null 2>&1; then
             sshpass -p ${PASSWORD} ssh -t root@${UDM_ROUTER} "podman stop pihole"
-            sshpass -p ${PASSWORD} ssh -t root@${UDM_ROUTER} "podman start pihole"
-            # May want to re-load whitelists and blacklists?
+            sshpass -p ${PASSWORD} ssh -t root@${UDM_ROUTER} "/mnt/data/on_boot.d/10-dns.sh"
+            # May want to re-load whitelists and blacklists? 
         fi
     fi
     ```
+    
     - `chmod 755 /usr/local/bin/dns_restart.sh`
     - `crontab -e` -> `* * * * * /usr/local/bin/dns_restart.sh`
 
@@ -156,6 +164,30 @@ The Pi-Hole DNS server currently runs on the Ubiquiti Dream Machine router, in a
 #### UDM Password Change
 The dns_restarts.sh script needs to be updated whenever the UDM root password changes
 
+#### Update Pi-Hole Image
+
+From host machine (UDM/192.168.1.1):
+```
+    podman pull pihole/pihole:latest
+    podman stop pihole; podman container rm pihole
+    podman run -d --network dns --restart always \
+    --name pihole \
+    -e TZ="America/New_York" \
+    -v "/mnt/data/etc-pihole/:/etc/pihole/" \
+    -v "/mnt/data/pihole/etc-dnsmasq.d/:/etc/dnsmasq.d/" \
+    --dns=127.0.0.1 --dns=1.1.1.1 \
+    --hostname pi.hole \
+    -e VIRTUAL_HOST="pi.hole" \
+    -e PROXY_LOCATION="pi.hole" \
+    -e ServerIP="192.168.5.3" \
+    -e IPv6="False" \
+    --cap-add NET_ADMIN \
+    --cap-add SYS_NICE \
+    --group-add=www-data \
+    pihole/pihole:latest
+    podman exec -it pihole pihole -a -p YOURNEWPASSHERE
+```
+As an added check to make sure the restart script is working properly, you can stop the container (`podman stop pihole`), then wait a maximum of 1 minute, and the container should restart.  You can check it using `podman container ls`.
 ### Configuration
 #### Provide data to Grafana (needs more clarification)
 Get the WEBPASSWORD from /etc/pihole/setupVars.conf in the podman container:
@@ -177,6 +209,8 @@ root@pi:~# while read -r line; do pihole -w $line; done <whitelist.txt
 Backup and restore is currently manual through the pihole administration:
 ![piholebackup.png](/piholebackup.png)
 [pi-hole-pi_hole-teleporter_2020-10-24_14-15-20.tar.gz](/pi-hole-pi_hole-teleporter_2020-10-24_14-15-20.tar.gz)
+[pi-hole-pi_hole-teleporter_2021-06-13_13-02-07.tar.gz](/home/network_services/pihole/pi-hole-pi_hole-teleporter_2021-06-13_13-02-07.tar.gz)
+[pi-hole-pi_hole-teleporter_2021-06-16_01-20-07.tar.gz](/home/network_services/pihole/pi-hole-pi_hole-teleporter_2021-06-16_01-20-07.tar.gz)
 
 ### Reference
 https://github.com/boostchicken/udm-utilities/tree/master/on-boot-script

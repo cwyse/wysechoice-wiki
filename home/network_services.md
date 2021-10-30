@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2021-10-30T02:47:51.707Z
+date: 2021-10-30T03:28:27.061Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -151,13 +151,36 @@ The Pi-Hole DNS server currently runs on the Ubiquiti Dream Machine router, in a
         if ! nslookup ${WYSECHOICE} ${DNS_SERVER} > /dev/null 2>&1; then
             sshpass -p ${PASSWORD} ssh -t root@${UDM_ROUTER} "podman stop pihole"
             sshpass -p ${PASSWORD} ssh -t root@${UDM_ROUTER} "/mnt/data/on_boot.d/10-dns.sh"
-            # May want to re-load whitelists and blacklists? 
         fi
     fi
     ```
     
     - `chmod 755 /usr/local/bin/dns_restart.sh`
     - `crontab -e` -> `* * * * * /usr/local/bin/dns_restart.sh`
+    
+    - Copy the following script to /usr/local/bin/pihole_whitelist.sh on a host computer.  This will update the whitelist nightly.
+    ```
+    #!/usr/bin/env bash
+
+    DNS_SERVER=192.168.5.3
+    UDM_ROUTER=192.168.1.1
+    WYSECHOICE=wysechoice.net
+    PASSWORD="&847&XLXXbxY"
+
+    # If the router is running
+    if ping -c 1 ${UDM_ROUTER} > /dev/null 2>&1; then
+        # If the DNS server is not working
+        if ! nslookup ${WYSECHOICE} ${DNS_SERVER} > /dev/null 2>&1; then
+            curl -ks https://raw.githubusercontent.com/anudeepND/whitelist/master/domains/whitelist.txt >/tmp/whitelist.txt
+            sshpass -p ${PASSWORD} scp /tmp/whitelist.txt root@${UDM_ROUTER}:/mnt/data/etc-pihole                                       
+	        sshpass -p ${PASSWORD} ssh -t root@${UDM_ROUTER} podman exec -it pihole pihole -g
+        fi
+    fi
+    ```
+    
+    - `chmod 755 /usr/local/bin/pihole_whitelist.sh`
+    - `crontab -e` -> `0 2 * * * /usr/local/bin/pihole_whitelist.sh`
+
 
 ### Maintenance
 

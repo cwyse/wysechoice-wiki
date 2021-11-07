@@ -2,7 +2,7 @@
 title: Backup and Restore
 description: 
 published: true
-date: 2021-11-07T15:52:16.975Z
+date: 2021-11-07T16:00:56.104Z
 tags: 
 editor: markdown
 dateCreated: 2020-12-18T03:10:24.783Z
@@ -77,31 +77,31 @@ The commands for the rsync support need to be executed in the container.  The so
 `/mnt/data/on_boot.d/99-on-boot-podman.sh`
 ```
 #!/bin/sh
-
+      
 # Persistent bootup scripts
 ON_BOOT_DIR=/mnt/data/on_boot.d
-
+                               
 # Persistent bootup scripts executed in podman container
-POD_BOOT_DIR=/mnt/data/podman/on_boot.d
-
-# Shared directory used by podman container        
-SHARED_DIR=/mnt/persistent/on_boot.d 
-
-echo "Executing $ON_BOOT_DIR/99_on_boot_podman.sh"                   
-if [ -d $POD_BOOT_DIR ]; then                          
+POD_BOOT_DIR=/mnt/data/podman/on_boot.d                 
+                                       
+# Shared directory used by podman container
+SHARED_DIR=/mnt/persistent                 
+                          
+echo "Executing $ON_BOOT_DIR/99_on_boot_podman.sh"
+if [ -d $POD_BOOT_DIR ]; then                     
     # Copy to location accessible to podman container
-    cp -rfp $POD_BOOT_DIR $SHARED_DIR                              
-    for i in $SHARED_DIR/on_boot.d/*.sh; do               
-        if [ -r $i ]; then
+    cp -rfp $POD_BOOT_DIR $SHARED_DIR                
+    for i in $SHARED_DIR/on_boot.d/*.sh; do
+        if [ -r $i ]; then                 
             podman exec unifi-os $i
-        fi
-    done
-fi
-
+        fi                         
+    done  
+fi      
+  
 # Make sure rsync is installed in unifi-os container
-podman exec unifi-os apt install rsync -y
-
-echo "Finished $ON_BOOT_DIR/99_on_boot_podman.sh"                   
+podman exec unifi-os apt install rsync -y           
+                                         
+echo "Finished $ON_BOOT_DIR/99_on_boot_podman.sh"
 
 ```
 

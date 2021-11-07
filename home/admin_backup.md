@@ -2,9 +2,9 @@
 title: Backup and Restore
 description: 
 published: true
-date: 2021-03-12T03:42:44.508Z
+date: 2021-11-07T15:12:35.209Z
 tags: 
-editor: undefined
+editor: markdown
 dateCreated: 2020-12-18T03:10:24.783Z
 ---
 
@@ -79,6 +79,7 @@ The commands for the rsync support need to be executed in the container.  The so
 #!/bin/sh
 
 echo "Executing /mnt/data/on_boot.d/99_on_boot_podman.sh"
+
 if [ -d /mnt/data/podman/on_boot.d ]; then
 	cp -rfp /mnt/data/podman/on_boot.d /mnt/persistent
 	for i in /mnt/persistent/on_boot.d/*.sh; do
@@ -87,6 +88,10 @@ if [ -d /mnt/data/podman/on_boot.d ]; then
 		fi
 	done
 fi
+
+# Make sure rsync is installed in unifi-os container
+podman exec unifi-os apt install rsync -y
+
 echo "Finished /mnt/data/on_boot.d/99_on_boot_podman.sh"
 ```
 

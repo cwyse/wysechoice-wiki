@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2021-10-30T03:28:27.061Z
+date: 2021-12-08T03:26:50.472Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -253,6 +253,51 @@ https://github.com/boostchicken/udm-utilities/blob/master/dns-common/on_boot.d/1
 
 #### Located on DNS monitoring host
 [/usr/local/bin/dns_restart.sh](/dns_restart.sh) - Script to monitor and restart pihole container if necessary
+## Multicast Domain Name Service (MDNS)
+
+## Tabs {.tabset}
+### Overview
+The MDNS support provided by the router does not work as expected.  Therefore, it needs to be disabled in the UDM, and replaced with a custom MDNS repeater.
+
+This page provides instructions: 
+https://www.brandonmartinez.com/2020/09/02/unifi-and-mdns-with-apple-homekit/
+
+In the UDM, all MDNS and IGMP snooping needs to be disabled.  Then a custom MDNS repeater 
+image is downloaded.  This image is used to create three containers to allow MDNS forwarding
+from the networks to the internet, while still keeping the VLANs separater from each other.
+
+The commands used to create the containers:
+```
+# podman run -it -d --restart=always --name="multicast-relay-IOT" --network=host -e OPTS=" --verbose" -e INTERFACES="br0 br20 br30" docker.io/scyto/multicast-relay
+# podman run -it -d --restart=always --name="multicast-relay-10" --network=host -e OPTS=" --verbose" -e INTERFACES="br0 br10" docker.io/scyto/multicast-relay
+# podman run -it -d --restart=always --name="multicast-relay-Docker" --network=host -e OPTS=" --verbose" -e INTERFACES="br0 br40 br50" docker.io/scyto/multicast-relay
+```
+
+Finally, a script needs to be created to start the containers at boot.  Create 
+/mnt/data/on_boot.d/01-mulicast-relay.sh, with the following content:
+```
+#!/bin/sh
+#
+# https://www.brandonmartinez.com/2020/09/02/unifi-and-mdns-with-apple-homekit/
+#
+# podman run -it -d --restart=always --name="multicast-relay-IOT" --network=host -e OPTS=" --verbose" -e INTERFACES="br0 br20 br30" docker.io/scyto/multicast-relay
+# podman run -it -d --restart=always --name="multicast-relay-10" --network=host -e OPTS=" --verbose" -e INTERFACES="br0 br10" docker.io/scyto/multicast-relay
+# podman run -it -d --restart=always --name="multicast-relay-Docker" --network=host -e OPTS=" --verbose" -e INTERFACES="br0 br40 br50" docker.io/scyto/multicast-relay
+#
+
+# kill all instances of avahi-daemon (UDM spins an instance up even with mDNS services disabled)
+killall avahi-daemon
+
+# start the multicast-relay container image
+podman start multicast-relay-IOT
+podman start multicast-relay-10
+podman start multicast-relay-Docker
+```
+
+Make sure to make the file executable:
+`chmod 755 01-mulicast-relay.sh`
+
+Then reboot the system and make sure the containers start and the avahi-daemon(s) is not running.
 
 ## E-Mail
 ## Tabs {.tabset}

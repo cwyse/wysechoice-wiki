@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2021-12-08T03:26:50.472Z
+date: 2021-12-08T19:13:59.639Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -727,6 +727,100 @@ TBD
 ## Tabs {.tabset}
 
 ### Overview
+To support better firewall logging, the UDM has been provisioned with some scripts from https://github.com/boostchicken/udm-utilities/blob/master/ipt-enable-logs/scripts/ipt-enable-logs.sh.  The version of the scripts on the UDM do not include the Go scripts.  The scripts are not intended for a UDM, so they will not work without modification.
+
+The changes are to use an enable script (scripts/ipt-enable-logs.sh) written for a Bourne shell, shown in this thread.
+https://github.com/opustecnica/public/issues/2
+The original notes and instructions on the setup are found here:
+https://github.com/opustecnica/public/wiki/UDM-&-UDM-PRO-NOTES
+The ipt-enables-logs-launch.sh script is taken from the last web site.
+Note that the /data directory on the UDM must be a symbolic link to /mnt/data/unifi-os.
+A script for remotely viewing the log files is included at the bottom of the ipt-enable-logs.sh script.
+
+**/mnt/data/scripts/ipt-enable-logs.sh**
+```
+#!/bin/sh
+
+# [NOTE] Need to find a hook to run this script not only at startup but every time time the firewall is modified.
+
+# Clear existing ipt-save if it exists.
+
+# [NOTE] /data must be a symbolic link to /mnt/data/unifi-os
+#   lrwxrwxrwx    1 root     root            18 Dec  7 22:29 /data -> /mnt/data/unifi-os
+
+FILE=/data/ipt-save
+if test -f "${FILE}"; then
+  rm -f "${FILE}"
+fi
+
+# Collect existing iptables configuration into an array.
+prev_line=''
+iptables-save |
+while IFS= read -r line; do
+  if [ -n "${prev_line}" ]; then
+    ACTION="$(echo "${line}" | sed -E "s/.*-j\s(.*)$/\1/")"
+    if echo "${ACTION}" | grep ^RETURN$ >/dev/null; then ACTION='ACCEPT'; fi
+    echo -e "${prev_line}" | sed -E "s/^-A\sUBIOS_(\S+)\s.*-j LOG$/& --log-prefix \"[${ACTION}_\1] \"/" >> "${FILE}"
+    prev_line=''
+  fi
+
+  if echo "${line}" | grep LOG$ >/dev/null
+    then
+      prev_line="${line}"
+    else
+      echo -e "${line}" >> "${FILE}"
+      prev_line=''
+  fi
+done
+
+exit
+
+#
+# Copy this script to view the follow the UDM firewall log from a remote machine
+#
+
+#!/bin/bash
+
+# Set this to the name of the router, and define passwordless login
+UDM=udm
+
+logunifijson () 
+{ 
+    ssh_alias ${UDM} "tail -f /var/log/messages" | rg "kernel:" | sed "s/]IN/] IN/" | jq --unbuffered -R '. | rtrimstr(" ") | split(": ") | {date: (.[0] | split(" ") | .[0:3] | join(" "))} + (.[1] | capture("\\[.+\\] \\[(?<rule>.*)\\].*")) + ((.[1] | capture("\\[.+\\] (?<rest>.*)") | .rest | split(" ") | map(select(startswith("[") == false) | split("=") | {(.[0]): .[1]})) | (reduce .[] as $item ({}; . + $item)))'
+}
+
+logunifi () 
+{ 
+    logunifijson | jq --unbuffered -r '"\(.date) - \(.rule)\tIN=\(.IN)  \t\(.PROTO)\tSRC=\(.SRC)@\(.SPT)\tDST=\(.DST)@\(.DPT)\tLEN=\(.LEN)\t"'
+}
+```
+**/mnt/data/on_boot.d/30-ipt-enable-logs-launch.sh**
+```
+#!/bin/sh
+set -e
+
+/mnt/data/scripts/ipt-enable-logs.sh
+iptables-restore -c < /data/ipt-save
+```
+**/mnt/data/scripts/refresh-iptables.sh**
+```
+#!/bin/sh
+
+set -e
+
+if [ -f /mnt/data/on_boot.d/10-dns.sh ]; then
+  if ! iptables-save | grep -e '\-A PREROUTING.* \--log-prefix "\[' > /dev/null; then
+    /mnt/data/on_boot.d/10-dns.sh
+  else
+    echo "iptables already contains DNAT log prefixes, ignoring."
+  fi
+fi
+
+/mnt/data/on_boot.d/30-ipt-enable-logs-launch.sh
+```
+If 30-ipt-enable-logs-launch.sh is present (could be a symbolic link to the scripts directory), the logging will be started at boot up.  If changes are made to the firewall rules, either the UDM must be rebooted, or the refresh-iptables.sh script must be executed.
+
+
 
 
 ### Initial Setup

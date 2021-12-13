@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2021-12-13T03:54:19.628Z
+date: 2021-12-13T04:13:08.002Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -38,14 +38,20 @@ root@db084cee31fe:/# exit
 1. Select 'Add your first data source', choose InfluxDB
 1. Change the URL to http://influxdb_1.8.4:8086/
 1. Enter Database: unifi, User: unifipoller, Password: <influxdb password>, then press Save & Test
+1. Import the dashboards be clicking the '+' on the left hand side, and choosing import.  Add the following IDs:
+  - 10419
+  - 10414
+  - 10417
+  - 10416
+  - 10415
+  - 10418
+1. Select the InfluxDB data source for each of the dashboards, and create a new ID for each.
+1. `docker pull golift/unifi-poller`
+1. Copy an example config to ~/docker/unpoller - https://github.com/unpoller/unpoller/blob/master/examples/up.conf.example
+1. Rename example config to unpoller.conf
+1. Update influxdb url to 'http://influxdb_1.8.4:8086/', user to unifipoller, pass to <password>.
+1. `docker run -v /your-local-location/unpoller.conf:/config/unpoller.conf --network influxdb_1.8.4 golift/unifi-poller`
 
-
-
-
-
-It is currently not running.  It can be tested by executing 'Caddy run' from the NAS command line.  It needs to be configured to start automatically.
-
-The DNS server also needs to be updated to map each desired name to the Caddy server.
 
 ## Reverse Proxy
 

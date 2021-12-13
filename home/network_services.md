@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2021-12-13T04:13:08.002Z
+date: 2021-12-13T04:14:23.647Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -50,7 +50,7 @@ root@db084cee31fe:/# exit
 1. Copy an example config to ~/docker/unpoller - https://github.com/unpoller/unpoller/blob/master/examples/up.conf.example
 1. Rename example config to unpoller.conf
 1. Update influxdb url to 'http://influxdb_1.8.4:8086/', user to unifipoller, pass to <password>.
-1. `docker run -v /your-local-location/unpoller.conf:/config/unpoller.conf --network influxdb_1.8.4 golift/unifi-poller`
+1. `docker run -v /home/chris/docker/unpoller/unpoller.conf:/config/unpoller.conf --network grafana_net --name unifi-poller golift/unifi-poller`
 
 
 ## Reverse Proxy

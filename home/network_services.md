@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2021-12-13T03:18:25.002Z
+date: 2021-12-13T03:51:18.627Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -19,9 +19,10 @@ dateCreated: 2020-11-09T02:33:13.649Z
 ## Tabs {.tabset}
 
 ### Overview
+1. docker network create grafana_net
 1. Create a local Limited Admin account on the UDM, username unifipoller.  Note the password and use it in the docker run command.
 1. docker pull influxdb:1.8.4
-1. `docker run -p 8086:8086 -e INFLUXDB_DB=unifi -e INFLUXDB_ADMIN_USER=unifipoller -e INFLUXDB_ADMIN_PASSWORD=9Yuzebes -v /home/chris/docker/influxdb:/var/lib/influxdb --name influxdb_1.8.4 influxdb:1.8.4`
+1. `docker run -p 8086:8086 --network grafana_net -e INFLUXDB_DB=unifi -e INFLUXDB_ADMIN_USER=unifipoller -e INFLUXDB_ADMIN_PASSWORD=9Yuzebes -v /home/chris/docker/influxdb:/var/lib/influxdb --name influxdb_1.8.4 influxdb:1.8.4`
 1. Update the retention policy to prevent disk overruns.
 ```
 root@db084cee31fe:/# influx
@@ -32,7 +33,12 @@ InfluxDB shell version: 1.8.4
 root@db084cee31fe:/# exit
 ```
 5. docker pull grafana/grafana:8.2.6
-1. `docker run -p 3000:3000 --privileged -v /home/chris/docker/grafana:/var/lib/grafana -e GF_INSTALL_PLUGINS=grafana-clock-panel,natel-discrete-panel,grafana-piechart-panel --name grafana_8.2.6 grafana/grafana:8.2.6`
+1. `docker run -p 3000:3000 --network grafana_net  --privileged -v /home/chris/docker/grafana:/var/lib/grafana -e GF_INSTALL_PLUGINS=grafana-clock-panel,natel-discrete-panel,grafana-piechart-panel --name grafana_8.2.6 grafana/grafana:8.2.6`
+1. In browser, navigate to 127.0.0.1:3000 (Grafana)
+1. Select 'Add your first data source', choose InfluxDB
+1. Change the URL to influxdb_1.8.4:8086
+1. Enter Database: unifi, User: unifipoller, Password: <influxdb password>, then press Save & Test
+
 
 
 

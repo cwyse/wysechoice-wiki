@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2021-12-13T03:51:18.627Z
+date: 2021-12-13T03:54:19.628Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -36,7 +36,7 @@ root@db084cee31fe:/# exit
 1. `docker run -p 3000:3000 --network grafana_net  --privileged -v /home/chris/docker/grafana:/var/lib/grafana -e GF_INSTALL_PLUGINS=grafana-clock-panel,natel-discrete-panel,grafana-piechart-panel --name grafana_8.2.6 grafana/grafana:8.2.6`
 1. In browser, navigate to 127.0.0.1:3000 (Grafana)
 1. Select 'Add your first data source', choose InfluxDB
-1. Change the URL to influxdb_1.8.4:8086
+1. Change the URL to http://influxdb_1.8.4:8086/
 1. Enter Database: unifi, User: unifipoller, Password: <influxdb password>, then press Save & Test
 
 

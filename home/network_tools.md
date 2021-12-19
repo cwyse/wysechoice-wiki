@@ -2,7 +2,7 @@
 title: Network Tools
 description: Network administration tools and utilities
 published: true
-date: 2021-12-19T19:49:14.841Z
+date: 2021-12-19T19:53:59.018Z
 tags: 
 editor: markdown
 dateCreated: 2020-11-13T04:39:58.551Z
@@ -36,7 +36,20 @@ It requires the portainer volume to be created initially (not for an update) usi
 ```
 docker volume create portainer
 ```
+https://medium.com/digitalfrontiers/easily-set-up-portainer-ce-on-a-qnap-nas-5d82b2390854
 
+**podman**  Runs on UDM 
+Podman version has been updated to support the docker API used by portainer using the following information:
+https://github.com/boostchicken/udm-utilities/tree/master/podman-update
+
+It can be updated by executing these two scripts:
+```
+/mnt/data/on_boot.d/01-podman-update.sh
+/mnt/data/on_boot.d/05-install-cni-plugins.sh
+```
+
+
+Update is 
 wiki - Documentation web server running Wiki.js.
 The table below provides additional information on these servers.
 

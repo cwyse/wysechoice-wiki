@@ -2,7 +2,7 @@
 title: Network Tools
 description: Network administration tools and utilities
 published: true
-date: 2021-12-19T19:47:49.892Z
+date: 2021-12-19T19:49:14.841Z
 tags: 
 editor: markdown
 dateCreated: 2020-11-13T04:39:58.551Z
@@ -32,7 +32,10 @@ docker stop portainer
 docker rm portainer
 docker run -d --restart=unless-stopped -p 8000:8000 -p 9123:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer:/data --name portainer portainer/portainer-ce:latest
 ```
-
+It requires the portainer volume to be created initially (not for an update) using the following command:
+```
+docker volume create portainer
+```
 
 wiki - Documentation web server running Wiki.js.
 The table below provides additional information on these servers.

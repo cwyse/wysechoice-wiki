@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2021-12-20T13:18:55.441Z
+date: 2021-12-20T13:22:41.014Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -374,27 +374,38 @@ The dns_restarts.sh script needs to be updated whenever the UDM root password ch
 
 #### Update Pi-Hole Image
 
-From host machine (UDM/192.168.1.1):
+From host machine (UDM/192.168.1.1), in the /mnt/data/scripts directory, run the upd_pihole.sh script:
 ```
-    podman pull pihole/pihole:latest
-    podman stop pihole; podman container rm pihole
-    podman run -d --network dns --restart always \
-    --name pihole \
-    -e TZ="America/New_York" \
-    -v "/mnt/data/etc-pihole/:/etc/pihole/" \
-    -v "/mnt/data/pihole/etc-dnsmasq.d/:/etc/dnsmasq.d/" \
-    --dns=127.0.0.1 --dns=1.1.1.1 \
-    --hostname pi.hole \
-    -e VIRTUAL_HOST="pi.hole" \
-    -e PROXY_LOCATION="pi.hole" \
-    -e ServerIP="192.168.5.3" \
-    -e IPv6="False" \
-    --cap-add NET_ADMIN \
-    --cap-add SYS_NICE \
-    --group-add=www-data \
-    pihole/pihole:latest
-    podman exec -it pihole pihole -a -p YOURNEWPASSHERE
+  #!/bin/sh
+
+  # Change to boostchicken/pihole:latest for DoH
+  # Change to boostchicken/pihole-dote:latest for DoTE
+  IMAGE=pihole/pihole:latest                          
+
+  podman pull $IMAGE
+  podman stop pihole
+  podman rm pihole  
+  podman run -d --network dns --restart always \
+  --name pihole \                               
+  -e TZ="America/New_York" \
+  -v "/mnt/data/etc-pihole/:/etc/pihole/" \
+  -v "/mnt/data/pihole/etc-dnsmasq.d/:/etc/dnsmasq.d/" \
+  --dns=127.0.0.1 --dns=1.1.1.1 \                       
+  --dns=1.0.0.1 \                
+  --hostname pi.hole \
+  -e VIRTUAL_HOST="pi.hole" \
+  -e PROXY_LOCATION="pi.hole" \
+  -e ServerIP="192.168.5.3" \  
+  -e IPv6="False" \          
+  --cap-add NET_ADMIN \
+  --cap-add SYS_NICE \ 
+  --group-add=www-data \
+  --ip=192.168.5.3 \    
+  $IMAGE            
 ```
+  
+    
+  
 As an added check to make sure the restart script is working properly, you can stop the container (`podman stop pihole`), then wait a maximum of 1 minute, and the container should restart.  You can check it using `podman container ls`.
 ### Configuration
 #### Provide data to Grafana (needs more clarification)

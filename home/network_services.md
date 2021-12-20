@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2021-12-20T13:28:31.916Z
+date: 2021-12-20T13:31:27.624Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -321,7 +321,40 @@ The Pi-Hole DNS server currently runs on the Ubiquiti Dream Machine router, in a
 
 1.  Set pihole password
     `podman exec -it pihole pihole -a -p YOURNEWPASSHERE`
+1.  Copy the following script into /mnt/data/scripts/upd_unbound.sh and execute it to create the `unbound` container.
     
+```
+  #!/bin/sh
+
+  cat /mnt/data/scripts/docker.io_password.txt | docker login --username cwyse --password-stdin
+
+  IMAGE="serhiymakarenko/nlnetlabs-unbound-resolver:latest"
+  IMAGE_NAME=unbound
+
+  podman pull $IMAGE
+  podman stop $IMAGE_NAME
+  podman rm $IMAGE_NAME
+
+  curl  https://www.internic.net/domain/named.root > /mnt/data/unbound/root.hints
+
+  cat /mnt/data/scripts/docker.io_password.txt | docker login --username cwyse --password-stdin
+
+  # Podman cgroup is v1 not v2
+
+  podman run -d --name $IMAGE_NAME --network dns \
+      -e TZ="America/New_York" \
+      --hostname unbound \
+      -p 5335:5335/tcp -p 5335:5335/udp \
+      --ip=192.168.5.4 \
+      --restart=always \
+      --cap-add NET_ADMIN \
+      --cap-add SYS_NICE \
+      -v "/mnt/data/unbound/root.hints:/var/lib/unbound/root.hints" \
+      -v "/mnt/data/unbound/pi-hole.conf:/usr/local/etc/unbound/unbound.conf" \
+      --group-add=www-data \
+      $IMAGE
+```  
+1. TODO: Configure PiHole/Unbound to use each other
 1.  Update your DNS Servers to 192.168.5.3 (or your custom ip) in all your DHCP configs.    
 1.  Configure a cron job to monitor the container from a separate host and restart it if necessary
     - Copy the following script to /usr/local/bin/dns_restart.sh on a host computer

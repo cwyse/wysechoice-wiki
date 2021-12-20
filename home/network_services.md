@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2021-12-20T13:22:41.014Z
+date: 2021-12-20T13:28:31.916Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -140,8 +140,9 @@ The Pi-Hole DNS server currently runs on the Ubiquiti Dream Machine router, in a
      - The source code is available in the on-boot-script dictory of the repository
 1.   On your controller, make a Corporate network with no DHCP server and give it a VLAN. For this example we are using VLAN 5.
 1.  Install the pi-hole podman container on the UDM
-     - `podman pull pihole/pihole:latest`
-     - Copy a modified 20-dns.conflist to /mnt/data/podman/cni. This will create your podman macvlan network.  The original file was modified to create a subnet so that the unbound container can be added to it.
+- `podman pull pihole/pihole:latest`
+- Copy a modified 20-dns.conflist to /mnt/data/podman/cni. This will create your podman macvlan network.  The original file was modified to create a subnet so that the unbound container can be added to it.
+  
 ```
   {
      "args": {
@@ -177,8 +178,10 @@ The Pi-Hole DNS server currently runs on the Ubiquiti Dream Machine router, in a
      ]
   }
 ```  
-     - Copy a modified 10-dns.sh to /mnt/data/on_boot.d and update its values to reflect your environment.
-  ```
+  
+- Copy a modified _10-dns.sh_ to /mnt/data/on_boot.d and update its values to reflect your environment.
+  
+```
   #!/bin/sh
 
   ## configuration variables:
@@ -287,8 +290,8 @@ The Pi-Hole DNS server currently runs on the Ubiquiti Dream Machine router, in a
     fi
   done
 ```  
-     - Execute /mnt/data/on_boot.d/10-dns.sh     
-1.  Run the pihole docker container, be sure to make the directories for your persistent pihole configuration. They are mounted as volumes in the command below.
+- Execute /mnt/data/on_boot.d/10-dns.sh     
+4.  Run the pihole docker container, be sure to make the directories for your persistent pihole configuration. They are mounted as volumes in the command below.
 
     ```
     podman run -d --network dns --restart always \

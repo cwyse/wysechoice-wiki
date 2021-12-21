@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2021-12-20T13:31:27.624Z
+date: 2021-12-21T03:56:31.000Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -328,7 +328,7 @@ The Pi-Hole DNS server currently runs on the Ubiquiti Dream Machine router, in a
 
   cat /mnt/data/scripts/docker.io_password.txt | docker login --username cwyse --password-stdin
 
-  IMAGE="serhiymakarenko/nlnetlabs-unbound-resolver:latest"
+  IMAGE="pedantic/unbound:latest"
   IMAGE_NAME=unbound
 
   podman pull $IMAGE
@@ -344,15 +344,12 @@ The Pi-Hole DNS server currently runs on the Ubiquiti Dream Machine router, in a
   podman run -d --name $IMAGE_NAME --network dns \
       -e TZ="America/New_York" \
       --hostname unbound \
-      -p 5335:5335/tcp -p 5335:5335/udp \
       --ip=192.168.5.4 \
       --restart=always \
-      --cap-add NET_ADMIN \
-      --cap-add SYS_NICE \
       -v "/mnt/data/unbound/root.hints:/var/lib/unbound/root.hints" \
-      -v "/mnt/data/unbound/pi-hole.conf:/usr/local/etc/unbound/unbound.conf" \
-      --group-add=www-data \
+      -v "/mnt/data/unbound:/opt/unbound/etc/unbound/" \
       $IMAGE
+
 ```  
 1. TODO: Configure PiHole/Unbound to use each other
 1.  Update your DNS Servers to 192.168.5.3 (or your custom ip) in all your DHCP configs.    

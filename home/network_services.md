@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2021-12-21T04:07:40.437Z
+date: 2021-12-21T04:15:30.716Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -312,14 +312,15 @@ The Pi-Hole DNS server currently runs on the Ubiquiti Dream Machine router, in a
     --ip=192.168.5.3 \
     pihole/pihole:latest
 ```
-    The below errors are expected and acceptable:
+  
+The below errors are expected and acceptable:
 
 ```
     ERRO[0022] unable to get systemd connection to add healthchecks: dial unix /run/systemd/private: connect: no such file or directory
     ERRO[0022] unable to get systemd connection to start healthchecks: dial unix /run/systemd/private: connect: no such file or directory
 ```
 
-1.  Set pihole password
+5.  Set pihole password
     `podman exec -it pihole pihole -a -p YOURNEWPASSHERE`
 1.  Create docker.io_password.txt in the /mnt/data/scripts directory.  It should contain a single line with the password for the user account used in
 the docker login command in upd_unbound.sh
@@ -353,7 +354,7 @@ the docker login command in upd_unbound.sh
       $IMAGE
 
 ```  
-1. The unbound configuraiton includes support for adding custom A records.  An a-records.conf file can be placed in the unbound directory to allow DNS mapping of local addresses.  For example:
+8. The unbound configuraiton includes support for adding custom A records.  An a-records.conf file can be placed in the unbound directory to allow DNS mapping of local addresses.  For example:
 ```
   # A Record
 	#local-data: "somecomputer.local. A 192.168.1.1"
@@ -361,8 +362,16 @@ the docker login command in upd_unbound.sh
 # PTR Record
 	#local-data-ptr: "192.168.1.1 somecomputer.local."
 ```
+SRV records and forward records are also supported.  See the github page for the unbound container:  
+  https://github.com/MatthewVance/unbound-docker/tree/master/1.10.0
   
-1. Logon to the pihole admin page, and under settings, TODO: Configure PiHole/Unbound to use each other select the DNS tab.  Unselect all Upstream DNS servers, and then add a custom IPv4 server - 192.168.5.4#53.
+If this support is not needed or implemented yet, the files must still be created:
+```
+  touch /mnt/data/unbound/a-records.conf
+  touch /mnt/data/unbound/forward-records.conf
+  touch /mnt/data/unbound/srv-records.conf
+```
+9. Logon to the pihole admin page, and under settings, TODO: Configure PiHole/Unbound to use each other select the DNS tab.  Unselect all Upstream DNS servers, and then add a custom IPv4 server - 192.168.5.4#53.
 1.  Update your DNS Servers to 192.168.5.3 (or your custom ip) in all your DHCP configs.    
 1.  Configure a cron job to monitor the container from a separate host and restart it if necessary
     - Copy the following script to /usr/local/bin/dns_restart.sh on a host computer

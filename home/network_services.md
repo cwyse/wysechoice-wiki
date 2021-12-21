@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2021-12-21T03:59:29.862Z
+date: 2021-12-21T04:07:40.437Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -293,7 +293,7 @@ The Pi-Hole DNS server currently runs on the Ubiquiti Dream Machine router, in a
 - Execute /mnt/data/on_boot.d/10-dns.sh     
 4.  Run the pihole docker container, be sure to make the directories for your persistent pihole configuration. They are mounted as volumes in the command below.
 
-    ```
+```
     podman run -d --network dns --restart always \
     --name pihole \
     -e TZ="America/New_York" \
@@ -311,13 +311,13 @@ The Pi-Hole DNS server currently runs on the Ubiquiti Dream Machine router, in a
     --group-add=www-data \
     --ip=192.168.5.3 \
     pihole/pihole:latest
-    ```
+```
     The below errors are expected and acceptable:
 
-    ```
+```
     ERRO[0022] unable to get systemd connection to add healthchecks: dial unix /run/systemd/private: connect: no such file or directory
     ERRO[0022] unable to get systemd connection to start healthchecks: dial unix /run/systemd/private: connect: no such file or directory
-    ```
+```
 
 1.  Set pihole password
     `podman exec -it pihole pihole -a -p YOURNEWPASSHERE`
@@ -353,7 +353,16 @@ the docker login command in upd_unbound.sh
       $IMAGE
 
 ```  
-1. TODO: Configure PiHole/Unbound to use each other
+1. The unbound configuraiton includes support for adding custom A records.  An a-records.conf file can be placed in the unbound directory to allow DNS mapping of local addresses.  For example:
+```
+  # A Record
+	#local-data: "somecomputer.local. A 192.168.1.1"
+
+# PTR Record
+	#local-data-ptr: "192.168.1.1 somecomputer.local."
+```
+  
+1. Logon to the pihole admin page, and under settings, TODO: Configure PiHole/Unbound to use each other select the DNS tab.  Unselect all Upstream DNS servers, and then add a custom IPv4 server - 192.168.5.4#53.
 1.  Update your DNS Servers to 192.168.5.3 (or your custom ip) in all your DHCP configs.    
 1.  Configure a cron job to monitor the container from a separate host and restart it if necessary
     - Copy the following script to /usr/local/bin/dns_restart.sh on a host computer

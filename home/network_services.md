@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2021-12-21T04:15:30.716Z
+date: 2021-12-21T04:32:52.547Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -371,7 +371,8 @@ If this support is not needed or implemented yet, the files must still be create
   touch /mnt/data/unbound/forward-records.conf
   touch /mnt/data/unbound/srv-records.conf
 ```
-9. Logon to the pihole admin page, and under settings, TODO: Configure PiHole/Unbound to use each other select the DNS tab.  Unselect all Upstream DNS servers, and then add a custom IPv4 server - 192.168.5.4#53.
+9. Logon to the pihole admin page, and under settings, TODO: Configure PiHole/Unbound to use each other select the DNS tab.  Unselect all Upstream DNS servers, and then add a custom IPv4 server - 192.168.5.4#53.  Also make sure DNSSEC is turned off. (https://github.com/pi-hole/docs/issues/207)
+1.  Update /mnt/data/pihole/etc-dnsmasq.d/01-pihole.conf and set the cache-size to 0.
 1.  Update your DNS Servers to 192.168.5.3 (or your custom ip) in all your DHCP configs.    
 1.  Configure a cron job to monitor the container from a separate host and restart it if necessary
     - Copy the following script to /usr/local/bin/dns_restart.sh on a host computer

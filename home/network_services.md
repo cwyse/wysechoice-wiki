@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2021-12-21T04:32:52.547Z
+date: 2021-12-21T04:38:25.974Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -420,7 +420,7 @@ If this support is not needed or implemented yet, the files must still be create
     - `chmod 755 /usr/local/bin/pihole_whitelist.sh`
     - `crontab -e` -> `0 2 * * * /usr/local/bin/pihole_whitelist.sh`
 
-
+More unbound info: https://www.nlnetlabs.nl/documentation/unbound/howto-setup/
 ### Maintenance
 
 #### UDM Password Change

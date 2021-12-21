@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2021-12-21T03:56:31.000Z
+date: 2021-12-21T03:59:29.862Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -321,6 +321,8 @@ The Pi-Hole DNS server currently runs on the Ubiquiti Dream Machine router, in a
 
 1.  Set pihole password
     `podman exec -it pihole pihole -a -p YOURNEWPASSHERE`
+1.  Create docker.io_password.txt in the /mnt/data/scripts directory.  It should contain a single line with the password for the user account used in
+the docker login command in upd_unbound.sh
 1.  Copy the following script into /mnt/data/scripts/upd_unbound.sh and execute it to create the `unbound` container.
     
 ```

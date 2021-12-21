@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2021-12-21T04:44:21.027Z
+date: 2021-12-21T04:47:00.569Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -693,6 +693,8 @@ If this support is not needed or implemented yet, the files must still be create
   remote-control:
       control-enable: yes
 ```
+1.  This command will display stats with remote control enabled:
+  `podman exec -it unbound unbound-control stats`
 1.  Update /mnt/data/pihole/etc-dnsmasq.d/01-pihole.conf and set the cache-size to 0.
 1.  Update your DNS Servers to 192.168.5.3 (or your custom ip) in all your DHCP configs.    
 1.  Configure a cron job to monitor the container from a separate host and restart it if necessary
@@ -820,7 +822,7 @@ https://github.com/boostchicken/udm-utilities/blob/master/dns-common/on_boot.d/1
 #### Located on UDM filesystem (not unifi-os container)
 [/mnt/data/on_boot.d/10-dns.sh](/10-dns.sh) - Pi-Hole configuration and startup script
 [/mnt/data/podman/cni/20-dns.conflist](/20-dns.conflist) - Configuration of 192.168.5.x MACVLAN for Pi-Hole
-[pihole.sh](/pihole.sh) - Create and run container ---  NOTE:  This doesn't match the run command shown above.  Specifically, it has an additional backup DNS (1.0.0.1), and is missing the --cap-add and --group-add parameters.  Not sure why - but needs to be reviewed.
+[pihole.sh](/pihole.sh) - Create and run container ---  NOTE:  This doesn''t match the run command shown above.  Specifically, it has an additional backup DNS (1.0.0.1), and is missing the --cap-add and --group-add parameters.  Not sure why - but needs to be reviewed.
 
 #### Located on DNS monitoring host
 [/usr/local/bin/dns_restart.sh](/dns_restart.sh) - Script to monitor and restart pihole container if necessary

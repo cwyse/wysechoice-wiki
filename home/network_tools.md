@@ -2,7 +2,7 @@
 title: Network Tools
 description: Network administration tools and utilities
 published: true
-date: 2021-12-22T01:53:53.460Z
+date: 2021-12-22T01:54:31.636Z
 tags: 
 editor: markdown
 dateCreated: 2020-11-13T04:39:58.551Z
@@ -21,7 +21,7 @@ syslog - TBD -  Service needed to manage server logs
 1. Start ContainerStation on the QNAP NAS
 1. Enter portainer in the search bar
 1. Click Install
-![portainer_xreatecontainer.png](/portainer_createcontainer.png)
+![portainer_createcontainer.png](/portainer_createcontainer.png)
 
 **portainer** - 
 Runs on QNAP (192.168.1.8:9123).  Endpoints used are:

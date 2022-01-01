@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2021-12-31T06:49:22.029Z
+date: 2022-01-01T04:16:01.179Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -22,7 +22,7 @@ dateCreated: 2020-11-09T02:33:13.649Z
 1. docker network create grafana_net
 1. Create a local Limited Admin account on the UDM, username unifipoller.  Note the password and use it in the docker run command.
 1. docker pull influxdb:1.8.4
-1. `docker run --restart=always --ip 192.168.50.4 -p 8086:8086 --network dockernet.50 -e INFLUXDB_DB=unifi -e INFLUXDB_ADMIN_USER=unifipoller -e INFLUXDB_ADMIN_PASSWORD=9Yuzebes -v /home/pi/docker/influxdb:/var/lib/influxdb --name influxdb_1.8.4 influxdb:1.8.4`
+1. `docker run --restart=always --ip 192.168.50.4 -p 8086:8086 --network dockernet.50 -e INFLUXDB_DB=unifi -e INFLUXDB_ADMIN_USER=unifipoller -e INFLUXDB_ADMIN_PASSWORD=9Yuzebes -v /home/pi/docker_vols/influxdb:/var/lib/influxdb --name influxdb_1.8.4 influxdb:1.8.4`
 1. Update the retention policy to prevent disk overruns.
 ```
 root@db084cee31fe:/# influx

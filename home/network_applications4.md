@@ -2,7 +2,7 @@
 title: Net Applications
 description: 
 published: true
-date: 2022-01-09T15:53:01.492Z
+date: 2022-01-09T15:54:09.065Z
 tags: 
 editor: markdown
 dateCreated: 2022-01-09T15:29:28.378Z
@@ -135,4 +135,60 @@ References:
 ##### Docker Image
 - https://hub.docker.com/r/ydkn/cups
 - https://gitlab.com/ydkn/docker-cups
+
+##### Ptouch Print
+- Build dependencies
+-- git
+-- autogen
+-- autoreconf
+-- gettext
+-- autopoint
+- https://github.com/clarkewd/ptouch-print
+
+
+### Initial Setup
+Download the QPKG from https://www.qnapclub.eu/en/qpkg/466.  Log in as an administrator to the QNAP machine.  Open the *App Center* and click the *+* next to the :gear: icon in the upper right.  This will open an *Install Manually* dialog box.  Browse to the QPKG file that you downloaded and click the Install button.
+
+### Configuration
+
+#### Client Endpoints
+The localhost endpoint is automatically enabled.  Remote hosts need to have their Docker API enabled.  An excerpt from "[How do I enable the remote API for dockerd](https://success.mirantis.com/article/how-do-i-enable-the-remote-api-for-dockerd)" is given below:
+
+<div>
+<figure style="width:796px;" class="table">
+  <table style="background-color:rgb(255, 255, 255);">
+    <tbody>
+      <tr>
+        <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;width:55px;">&nbsp;</td>
+        <td style="border-top:1px solid rgb(221, 221, 221);padding:8px;vertical-align:top;width:1107px;">
+          <p>&nbsp;</p><div style="font-size:22px">
+<!--          <h2  id="how-do-i-enable-the-remote-api-for-dockerd"> --> <strong>How do I enable the remote API for dockerd</strong><hr></div><!--</h2>-->
+          <p>After completing these steps, you will have enabled the remote API for dockerd, without editing the systemd unit file in place:</p>
+          <p>Create a file at <code>/etc/systemd/system/docker.service.d/startup_options.conf</code> with the below contents:</p>
+          <pre class="prismjs line-numbers"><code class="language-plaintext"># /etc/systemd/system/docker.service.d/override.conf
+[Service]
+ExecStart=
+ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2376
+</code></pre>
+          <blockquote>
+            <p><strong>Note:</strong> The -H flag binds dockerd to a listening socket, either a Unix socket or a TCP port. You can specify multiple -H flags to bind to multiple sockets/ports. The default -H fd:// uses systemd's socket activation feature to refer to /lib/systemd/system/docker.socket.</p>
+          </blockquote>
+          <p>Reload the unit files:</p>
+          <pre class="prismjs line-numbers"><code class="language-plaintext">$ sudo systemctl daemon-reload
+</code></pre>
+          <p>Restart the docker daemon with new startup options:</p>
+          <pre class="prismjs line-numbers"><code class="language-plaintext">$ sudo systemctl restart docker.service
+</code></pre>
+          <p>Ensure that anyone that has access to the TCP listening socket is a trusted user since access to the docker daemon is root-equivalent.</p><br>
+<div class="toc-header" style="font-size:25px;color:blue"><!--          <h1  id="additional-documentation">--><strong>Additional Documentation</strong><hr><!--</h1>--></div>
+          <ul>
+            <li><a class="is-external-link" href="https://docs.docker.com/engine/security/">https://docs.docker.com/engine/security/</a></li>
+          </ul>
+          <p>&nbsp;</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+</div>
 

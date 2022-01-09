@@ -2,7 +2,7 @@
 title: WyseChoice Wiki
 description: Wyse Household Notes & Information
 published: true
-date: 2021-04-14T03:34:26.084Z
+date: 2022-01-09T15:27:22.901Z
 tags: level0
 editor: markdown
 dateCreated: 2020-11-04T00:59:28.760Z
@@ -29,7 +29,7 @@ This website is intended as a tool to document the information relevant to the W
 - [:iphone: &nbsp;&nbsp;Network Devices *Network device information*](/home/network_devices)
 - [:hammer:  &nbsp;&nbsp;Network Tools *Tools for maintaining and monitoring the network.*](/home/network_tools)
 - [:computer: &nbsp;&nbsp;Network Services *Reviews the existing services, their use, setup and configuration*](/home/network_services)
-- [:computer: &nbsp;&nbsp;Network Applications  *Applications running and available on the network*](/home/network_applications)
+- [:computer: &nbsp;&nbsp;Network Applications  *Applications running and available on the network*](/home/network_applications3)
 - [:computer: &nbsp;&nbsp;Network Servers  *Physical network server information*](/home/network_servers)
 
 {.links-list}

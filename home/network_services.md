@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2022-01-09T13:33:21.390Z
+date: 2022-01-09T13:41:55.849Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -1012,6 +1012,11 @@ Creation of the DockerNet MACVLAN requires configuration on the UDM server to su
 Currently, DockerNet is hosted on the Raspberry PI 4 (pi-hole).  It can be created by using the following script function after configuring the routing.  DockerNet is created once, then the network is used by the containers on the Raspberry PI 4. 
 
 The following script function creates the DockerNet on the PI:
+  
+> The original script used SysV instead of SystemD.  It included settings to turn off gso, tx, rx, and tso offloading on the shim interface.  These settings are not currently done for systemd.  If there are issues, systemd may need to be modified to include these settings.
+> {.is-warning}
+
+
 
 ```bash
 #!/bin/bash

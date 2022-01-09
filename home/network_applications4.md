@@ -2,7 +2,7 @@
 title: Net Applications
 description: 
 published: true
-date: 2022-01-09T16:15:03.569Z
+date: 2022-01-09T16:15:59.079Z
 tags: 
 editor: markdown
 dateCreated: 2022-01-09T15:29:28.378Z
@@ -148,4 +148,6 @@ References:
 
 ### Initial Setup
 Download the QPKG from https://www.qnapclub.eu/en/qpkg/466.  Log in as an administrator to the QNAP machine.  Open the *App Center* and click the *+* next to the :gear: icon in the upper right.  This will open an *Install Manually* dialog box.  Browse to the QPKG file that you downloaded and click the Install button.
+
+### Configuration
 

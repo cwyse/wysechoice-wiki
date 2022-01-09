@@ -2,15 +2,15 @@
 title: Net Applications
 description: 
 published: true
-date: 2022-01-09T15:39:49.006Z
+date: 2022-01-09T15:41:59.139Z
 tags: 
 editor: markdown
 dateCreated: 2022-01-09T15:29:28.378Z
 ---
 
-# Network Applications
+# Label Printing
 
-[plantlabels.glabels](/plantlabels.glabels)# Label Printing
+## [plantlabels.glabels](/plantlabels.glabels)
 
 
 # Tabs {.tabset}

@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2022-01-09T13:29:48.956Z
+date: 2022-01-09T13:30:12.779Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -1274,6 +1274,7 @@ WantedBy=network-online.target
 
 sudo systemctl daemon-reload
 sudo systemctl enable systemd-networkd
+sudo systemctl restart systemd-networkd
 sudo systemctl enable macvlan
 
 }

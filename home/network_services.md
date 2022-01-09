@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2022-01-09T13:30:12.779Z
+date: 2022-01-09T13:30:50.459Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -1204,6 +1204,7 @@ iface ${HOST_IF} inet static
   printf "Done.\n"
 }
 
+# https://major.io/2015/10/26/systemd-networkd-and-macvlan-interfaces/
 systemd_setup() {
   sysd_cfg=$(mktemp)
   sudo cat <<***REMOVED*** >${sysd_cfg}

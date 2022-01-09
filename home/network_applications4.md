@@ -2,7 +2,7 @@
 title: Net Applications
 description: 
 published: true
-date: 2022-01-09T15:54:09.065Z
+date: 2022-01-09T15:55:33.700Z
 tags: 
 editor: markdown
 dateCreated: 2022-01-09T15:29:28.378Z
@@ -191,4 +191,20 @@ ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2376
   </table>
 </figure>
 </div>
+
+### Upgrade
+TBD
+
+### Backup
+> TBD
+The /opt/Portainer/data directory should be backed to retain the configuration.
+{.is-info}
+
+### Reference
+> TBD
+{.is-info}
+
+### Support Files
+> TBD
+{.is-info}
 

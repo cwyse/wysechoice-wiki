@@ -1,11 +1,11 @@
 ---
 title: Network Applications
-description: Network and Application Setup
+description: 
 published: true
-date: 2021-04-14T02:53:19.649Z
+date: 2022-01-09T15:21:28.448Z
 tags: 
 editor: markdown
-dateCreated: 2020-11-15T09:50:55.982Z
+dateCreated: 2022-01-09T15:21:28.448Z
 ---
 
 [plantlabels.glabels](/plantlabels.glabels)# Label Printing

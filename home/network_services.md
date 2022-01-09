@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2022-01-09T13:11:40.019Z
+date: 2022-01-09T13:19:14.436Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -47,41 +47,9 @@ Connection Name:  WyseChoice
 1. `./runme.sh`
 
 ```
-#
-# Install psql
-#
-sudo apt install postgresql-client-common
-sudo apt install postgresql-client
-
-
-#
-# Setup the repository
-#
-
-# Install the public key for the repository (if not done previously):
-sudo curl https://www.pgadmin.org/static/packages_pgadmin_org.pub | sudo apt-key add
-
-# Create the repository configuration file:
-sudo sh -c 'echo "deb https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/$(lsb_release -cs) pgadmin4 main" > /etc/apt/sources.list.d/pgadmin4.list && apt update'
-
-#
-# Install pgAdmin
-#
-
-# Install for both desktop and web modes:
-sudo apt install pgadmin4
-
-# Install for desktop mode only:
-sudo apt install pgadmin4-desktop
-
-# Install for web mode only: 
-sudo apt install pgadmin4-web 
-
-# Configure the webserver, if you installed pgadmin4-web:
-sudo /usr/pgadmin4/bin/setup-web.sh
+After executing these commands, the container should be running, and the Ghini application will be available at http://192.168.50.5:8080/vnc.html.  Note that it is NOT an https connection.
 ```
 
-The DNS server also needs to be updated to map each desired name to the Caddy server.
 
 ## PGAdmin4 &  Psql
 
@@ -125,8 +93,6 @@ sudo apt install pgadmin4-web
 # Configure the webserver, if you installed pgadmin4-web:
 sudo /usr/pgadmin4/bin/setup-web.sh
 ```
-
-The DNS server also needs to be updated to map each desired name to the Caddy server.
 
 ## Grafana / InfluxDB / UnifiPoller
 

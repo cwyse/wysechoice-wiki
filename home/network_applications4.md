@@ -2,20 +2,21 @@
 title: Net Applications
 description: 
 published: true
-date: 2022-01-09T15:41:59.139Z
+date: 2022-01-09T15:44:12.578Z
 tags: 
 editor: markdown
 dateCreated: 2022-01-09T15:29:28.378Z
 ---
 
-# Label Printing
+# Network Applications
 
-## [plantlabels.glabels](/plantlabels.glabels)
+## Label Printing
 
+[plantlabels.glabels](/plantlabels.glabels)
 
-# Tabs {.tabset}
+## Tabs {.tabset}
 
-## Overview
+### Overview
 CUPS printing isn't working for the Brother PT-P700 label printer.  However, a combination of programs can be used to generate labels.
 
 https://sites.google.com/site/tingox/brother_pt-p700

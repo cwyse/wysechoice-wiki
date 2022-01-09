@@ -2,7 +2,7 @@
 title: Net Applications
 description: 
 published: true
-date: 2022-01-09T16:20:23.777Z
+date: 2022-01-09T16:22:39.393Z
 tags: 
 editor: markdown
 dateCreated: 2022-01-09T15:29:28.378Z
@@ -215,6 +215,7 @@ The /opt/Portainer/data directory should be backed to retain the configuration.
 
 ### Overview
 Container maintenance is handled using Portainer running on QNAP.  The QPKG is available on the Qnap.Club at https://www.qnapclub.eu/en/qpkg/466.  Portainer is run as an application on the QNAP machine - not insde a docker container.  The image mounts a volume, /opt/Portainer/data, which stores the portainer database and other customizable data.
+```
 <br>
 <figure style="width:796px;">
   <table style="background-color:rgb(255, 255, 255);">
@@ -234,7 +235,7 @@ Container maintenance is handled using Portainer running on QNAP.  The QPKG is a
     </tbody>
   </table>
 </figure>
-
+```
 ### Initial Setup
 Download the QPKG from https://www.qnapclub.eu/en/qpkg/466.  Log in as an administrator to the QNAP machine.  Open the *App Center* and click the *+* next to the :gear: icon in the upper right.  This will open an *Install Manually* dialog box.  Browse to the QPKG file that you downloaded and click the Install button.
 
@@ -242,7 +243,7 @@ Download the QPKG from https://www.qnapclub.eu/en/qpkg/466.  Log in as an admini
 
 #### Client Endpoints
 The localhost endpoint is automatically enabled.  Remote hosts need to have their Docker API enabled.  An excerpt from "[How do I enable the remote API for dockerd](https://success.mirantis.com/article/how-do-i-enable-the-remote-api-for-dockerd)" is given below:
-
+```
 <div>
 <figure style="width:796px;">
   <table style="background-color:rgb(255, 255, 255);">
@@ -280,7 +281,7 @@ ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2376
   </table>
 </figure>
 </div>
-
+```
 ### Upgrade
 TBD
 ### Backup
@@ -302,6 +303,7 @@ The /opt/Portainer/data directory should be backed to retain the configuration.
 
 ### Overview
 Container maintenance is handled using the Portainer Docker image.  The image has is locally named according to the version.  In this instance, version 1.24.1 is named portainer1241.  The image mounts a volume, portainer_data, that is maintained across version upgrades.
+```
 <br>
 <figure style="width:796px;">
   <table style="background-color:rgb(255, 255, 255);">
@@ -329,6 +331,7 @@ Container maintenance is handled using the Portainer Docker image.  The image ha
     </tbody>
   </table>
 </figure>
+```
 
 ### Initial Setup
 ```
@@ -340,7 +343,7 @@ $ docker run -d -p 8000:8000 -p 9000:9000 --name=portainer-ce_2.0 --restart=alwa
 
 #### Client Endpoints
 The localhost endpoint is automatically enabled.  Remote hosts need to have their Docker API enabled.  An excerpt from "[How do I enable the remote API for dockerd](https://success.mirantis.com/article/how-do-i-enable-the-remote-api-for-dockerd)" is given below:
-
+```
 <div>
 <figure style="width:796px;">
   <table style="background-color:rgb(255, 255, 255);">
@@ -378,7 +381,7 @@ ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2376
   </table>
 </figure>
 </div>
-
+```
 ### Upgrade
 From the Portainer website, select Images.  Pull the latest portainer image.  Since the _portainer/portainer:latest_ tag is already in use, the latest version will be _portainer/portainer:\<none\>_.
 
@@ -409,6 +412,7 @@ $ docker run -d -p 8000:8000 -p 9000:9000 --name=portainer-ce_<new_version> --re
 
 ### Overview
 This Wiki is served from a Docker container.  It uses both Wiki.js and a Postgres database image to store the content.
+```
 <br>
     
 <figure style="width:796px;">
@@ -461,7 +465,7 @@ This Wiki is served from a Docker container.  It uses both Wiki.js and a Postgre
     </tbody>
   </table>
 </figure>
-
+```
 ### Notes
 #### Wiki Conventions & Plans
 The intent of this Wiki is to provide an easily accessible set of documents that assist in the maintenance of an increasingly complex network configuration.  A secondary goal is establish a forum for information and content relevant to the Wyse household.

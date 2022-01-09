@@ -1,8 +1,8 @@
 ---
-title: Network Applications
+title: Network Applications2
 description: 
 published: true
-date: 2022-01-09T15:25:13.974Z
+date: 2022-01-09T15:25:39.739Z
 tags: 
 editor: markdown
 dateCreated: 2022-01-09T15:21:28.448Z

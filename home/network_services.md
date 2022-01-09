@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2022-01-09T13:30:50.459Z
+date: 2022-01-09T13:33:21.390Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -1273,6 +1273,9 @@ WantedBy=network-online.target
 ***REMOVED***
   sudo mv -f ${sysd_cfg} /etc/systemd/system/macvlan.service
 
+sudo rm -f /etc/network/interfaces.d/${HOST_IF} || true
+sudo rm -f /etc/network/interfaces.d/${HOST_IF}-shim || true
+  
 sudo systemctl daemon-reload
 sudo systemctl enable systemd-networkd
 sudo systemctl restart systemd-networkd

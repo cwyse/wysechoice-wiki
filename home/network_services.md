@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2022-01-09T13:19:36.873Z
+date: 2022-01-09T13:29:48.956Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -1210,7 +1210,8 @@ systemd_setup() {
 [NetDev]
 Name=${HOST_IF}-shim
 Kind=macvlan
-
+MACAddress=${HOST_SHIM_MAC_ADDR}
+  
 [MACVLAN]
 Mode=bridge
 ***REMOVED***
@@ -1221,10 +1222,17 @@ Mode=bridge
 [Match]
 Name=${HOST_IF}-shim
 
+[Link]
+MACAddress=${HOST_SHIM_MAC_ADDR}
+
 [Network]
 IPForward=yes
+DNS=192.168.5.3
+DHCP=no
+Address=${HOST_SHIM_IP}/24
+Gateway=${HOST_SHIM_IP}
 Address=192.168.${NEW_SUBNET}.2/24
-Gateway=192.168.${NEW_SUBNET}.1
+
 ***REMOVED***
   sudo mv -f ${sysd_cfg} /etc/systemd/network/${HOST_IF}-shim.network
   sudo chmod 644 /etc/systemd/network/${HOST_IF}-shim.network
@@ -1235,6 +1243,12 @@ Name=${HOST_IF}
 
 [Network]
 MACVLAN=${HOST_IF}-shim
+IPv6AcceptRouterAdvertisements=no
+DNS=192.168.5.3
+DHCP=no
+Address=${HOST_IP}/24
+Gateway=192.168.1.1
+  
 ***REMOVED***
   sudo mv ${sysd_cfg} /etc/systemd/network/${HOST_IF}.network
   sudo chmod 644 /etc/systemd/network/${HOST_IF}.network
@@ -1247,10 +1261,14 @@ Before=network-online.target
 [Service]
 Type=oneshot
 ExecStart=/sbin/ip link set ${HOST_IF} promisc on
+ExecStart=/sbin/ip link set ${HOST_IF}-shim promisc on
+ExecStop=/sbin/ip link set ${HOST_IF} promisc off
+ExecStop=/sbin/ip link set ${HOST_IF}-shim promisc off
 RemainAfterExit=yes
 
 [Install]
 WantedBy=network-online.target
+
 ***REMOVED***
   sudo mv -f ${sysd_cfg} /etc/systemd/system/macvlan.service
 

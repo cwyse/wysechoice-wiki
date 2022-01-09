@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2022-01-09T13:19:14.436Z
+date: 2022-01-09T13:19:36.873Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -46,9 +46,9 @@ Connection Name:  WyseChoice
 1. `cd ghini\rpi-novnc`
 1. `./runme.sh`
 
-```
+
 After executing these commands, the container should be running, and the Ghini application will be available at http://192.168.50.5:8080/vnc.html.  Note that it is NOT an https connection.
-```
+
 
 
 ## PGAdmin4 &  Psql

@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2022-01-09T12:53:36.635Z
+date: 2022-01-09T13:11:40.019Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -13,6 +13,75 @@ dateCreated: 2020-11-09T02:33:13.649Z
 # Standard Network Services
 
 ## [Network Services List](/home/network_services/service_list)
+
+## Ghini via NoVNC
+
+## Tabs {.tabset}
+
+### Overview
+Install Ghini on a Raspberry PI, and access via NoVNC container.
+
+### Installation
+
+The following steps will build and run a docker image that includes both Ghini and NoVNC.  The image name is set in the runme.sh script (IMAGE_NAME="cwyse/ghini:3.1.7").  Similarly, the container name (ghini), network (dockernet.50), and the IP address (192.168.50.5) are configured there via environment variables.
+
+TODO: The script also contains volume definitions that are commented out.  These need to be added back in at some point for access to the container configuration.
+
+The Dockerfile includes a pre-configured connection to the current PostgreSQL server, at 192.168.40.30:5432.  This should be changed to something configurable.
+
+The connection to the Ghini database pre-configuration is shown below:
+```
+Connection Name:  WyseChoice
+        Type: PostgreSQL
+    Database: ghini
+        Host: 192.168.40.30
+        Port: 5432
+        User: chris
+    Password: <store securely outside the repository> (must be entered by user)
+```
+
+
+1. Create a work directory on a Raspberry PI.
+1. `git clone git@gitlab.com:cwyse/docker.git -b ghini ghini`
+1. `cd ghini\rpi-novnc`
+1. `./runme.sh`
+
+```
+#
+# Install psql
+#
+sudo apt install postgresql-client-common
+sudo apt install postgresql-client
+
+
+#
+# Setup the repository
+#
+
+# Install the public key for the repository (if not done previously):
+sudo curl https://www.pgadmin.org/static/packages_pgadmin_org.pub | sudo apt-key add
+
+# Create the repository configuration file:
+sudo sh -c 'echo "deb https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/$(lsb_release -cs) pgadmin4 main" > /etc/apt/sources.list.d/pgadmin4.list && apt update'
+
+#
+# Install pgAdmin
+#
+
+# Install for both desktop and web modes:
+sudo apt install pgadmin4
+
+# Install for desktop mode only:
+sudo apt install pgadmin4-desktop
+
+# Install for web mode only: 
+sudo apt install pgadmin4-web 
+
+# Configure the webserver, if you installed pgadmin4-web:
+sudo /usr/pgadmin4/bin/setup-web.sh
+```
+
+The DNS server also needs to be updated to map each desired name to the Caddy server.
 
 ## PGAdmin4 &  Psql
 

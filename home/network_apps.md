@@ -2,7 +2,7 @@
 title: Network Apps
 description: 
 published: true
-date: 2022-01-10T02:56:42.079Z
+date: 2022-01-10T03:06:27.974Z
 tags: 
 editor: markdown
 dateCreated: 2022-01-10T02:56:42.079Z
@@ -514,8 +514,8 @@ Descriptions of servers should be displayed in a standard way.  The content belo
 ### Initial Setup
 ```
 $ mkdir ~/docker_vols/wiki_data
-$ docker run --net=dockernet --name postgres-9.5 --ip 192.168.40.30 -p 5432:5432 -m 4g -v ~/docker_vols/postgres:/var/lib/postgresql/data -e POSTGRES_ROOT_PASSWORD=xwiki -e POSTGRES_USER=xwiki -e POSTGRES_PASSWORD=xwiki -e POSTGRES_DB=xwiki -e POSTGRES_INITDB_ARGS="--encoding=UTF8" -d postgres:9.5
-$ docker run -d -p 8080:3000 --net=dockernet --name wiki --restart unless-stopped -e "DB_TYPE=postgres" -e "DB_HOST=postgres-9.5" -e "DB_PORT=5432" -e "DB_USER=wikijs" -e "DB_PASS=wikijsrocks" -e "DB_NAME=wiki" -v /home/pi/docker_vols/wiki_data requarks/wiki:2
+$ # Make sure postgres-14.1 is running
+$ docker run -d --ip="192.168.40.33" --mac-address="02:42:c0:a8:28:21" -p 3000:3000 --net=dockernet.40 --name wiki-2 --restart unless-stopped -e "DB_TYPE=postgres" -e "DB_HOST=postgres-14.1" -e "DB_PORT=5432" -e "DB_USER=wikijs" -e "DB_PASS=wikijsrocks" -e "DB_NAME=wiki" -v wiki_data:/home/pi/docker_vols/wiki_data -v wiki_content:/wiki/data/content requarks/wiki:2
 $ docker update --cpus 2 -m 4g
 ```
 
@@ -534,8 +534,7 @@ docker rm wiki-<old_version>
 docker pull requarks/wiki:2
 
 # Create new container of Wiki.js based on latest image
-docker run -d -p 8080:3000 --net=dockernet --name wiki-<new_version> --restart unless-stopped -e "DB_TYPE=postgres" -e "DB_HOST=postgres-9.5" -e "DB_PORT=5432" -e "DB_USER=wikijs" -e "DB_PASS=wikijsrocks" -e "DB_NAME=wiki" -v /home/pi/docker_vols/wiki_data requarks/wiki:2
-
+docker run -d --ip="192.168.40.33" --mac-address="02:42:c0:a8:28:21" -p 3000:3000 --net=dockernet.40 --name wiki-<new-version> --restart unless-stopped -e "DB_TYPE=postgres" -e "DB_HOST=postgres-14.1" -e "DB_PORT=5432" -e "DB_USER=wikijs" -e "DB_PASS=wikijsrocks" -e "DB_NAME=wiki" -v wiki_data:/home/pi/docker_vols/wiki_data -v wiki_content:/wiki/data/content requarks/wiki:<new-version>
 # Use a second CPU for the container
 docker update --cpus 2 wiki-<new_version>
 ```

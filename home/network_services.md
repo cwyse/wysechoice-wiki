@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2022-01-09T13:41:55.849Z
+date: 2022-01-11T02:27:13.150Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -13,6 +13,126 @@ dateCreated: 2020-11-09T02:33:13.649Z
 # Standard Network Services
 
 ## [Network Services List](/home/network_services/service_list)
+
+## OpenNMS
+
+Note: OpenNMS requires postgres 10.0+.  If the postgres container resides on an older system (e.g. Raspbian Buster), the docker application will dynamically link an older libseccomp2 library.  Use of the old library causes the container dates to be incorrect.  If using an older system, make sure the library is updated on the system hosting the docker application:
+```
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 04EE7237B7D453EC 648ACFD622F3D138
+echo "deb http://deb.debian.org/debian buster-backports main" | sudo tee -a /etc/apt/sources.list.d/buster-backports.list
+sudo apt update
+sudo apt install -t buster-backports libseccomp2
+```
+
+Login in to postgres server and create user and database:
+```
+ssh pi@192.168.1.2
+# docker exec -it --privileged --user postgres postgres-14.1 bash
+postgres# createuser -P opennms
+postgres# createdb -O opennms opennms
+```
+Create a project directory for Horizon Core and create a docker-compose.yml file.
+```
+mkdir horizon
+cd horizon
+vi docker-compose.yml
+```
+```
+---
+version: '3'
+
+volumes:
+  data-opennms: {}
+
+services:
+  horizon:
+    image: opennms/horizon:29.0.4
+    container_name: horizon
+    environment:
+      TZ: 'America/New_York'
+      POSTGRES_HOST: '192.168.40.32'
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'F9yb7UYN*6ZE9'
+      OPENNMS_DBNAME: 'opennms-core-db'
+      OPENNMS_DBUSER: 'opennms'
+      OPENNMS_DBPASS: '<store securely outside the repository>'
+    volumes:
+      - data-opennms:/opennms-data
+      - /home/chris/docker_vols/horizon/etc:/opt/opennms/etc
+    command: ["-s"]
+    ports:
+      - '8980:8980/tcp'
+      - '8101:8101/tcp'
+    healthcheck:
+      test: [ 'CMD', 'curl', '-f', '-I', 'http://localhost:8980/opennms/login.jsp' ]
+      interval: 1m
+      timeout: 5s
+      retries: 3   
+```
+Prepare a local configuration directory to run as an unprivileged user
+```
+mkdir etc
+chown 10001:10001 -R etc
+```
+Initialize the database and schema and a configuration directory
+```
+docker-compose run horizon -i
+```
+Start service in background
+```
+docker-compose up -d
+```
+> You can also use this command when you run upgrades. You must delete the file etc/configured file first. It works as a guard to prevent unnecessary database migration runs on startup.
+{.is-info}
+
+Show configuration changes from a pristine system with:
+```
+docker-compose exec -w /opt/opennms/bin horizon ./config-diff.sh -d.
+```
+If you changed your configuration files manually you can run the configuration tester with:
+```
+docker-compose exec horizon bin/config-tester -a
+```
+
+## Datagerry & OpenNMS
+
+
+## Tabs {.tabset}
+
+### Overview
+https://docs.opennms.com/horizon/28.0.0/deployment/core/getting-started.html
+https://docs.datagerry.com/latest/admin_guide/setup.html#docker-image
+
+### Installation
+
+The following steps will build and run a docker image that includes both Ghini and NoVNC.  The image name is set in the runme.sh script (IMAGE_NAME="cwyse/ghini:3.1.7").  Similarly, the container name (ghini), network (dockernet.50), and the IP address (192.168.50.5) are configured there via environment variables.
+
+TODO: The script also contains volume definitions that are commented out.  These need to be added back in at some point for access to the container configuration.
+
+The Dockerfile includes a pre-configured connection to the current PostgreSQL server, at 192.168.40.30:5432.  This should be changed to something configurable.
+
+The connection to the Ghini database pre-configuration is shown below:
+```
+Connection Name:  WyseChoice
+        Type: PostgreSQL
+    Database: ghini
+        Host: 192.168.40.30
+        Port: 5432
+        User: chris
+    Password: <store securely outside the repository> (must be entered by user)
+```
+
+
+1. Create a work directory on a Raspberry PI.
+1. `git clone git@gitlab.com:cwyse/docker.git -b ghini ghini`
+1. `cd ghini\rpi-novnc`
+1. `./runme.sh`
+
+
+After executing these commands, the container should be running, and the Ghini application will be available at http://192.168.50.5:8080/vnc.html.  Note that it is NOT an https connection.
+
+
 
 ## Ghini via NoVNC
 

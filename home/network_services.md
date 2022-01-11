@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2022-01-11T02:30:17.929Z
+date: 2022-01-11T02:36:36.570Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -15,6 +15,7 @@ dateCreated: 2020-11-09T02:33:13.649Z
 ## [Network Services List](/home/network_services/service_list)
 
 ## OpenNMS
+https://docs.opennms.com/horizon/28.0.0/deployment/core/getting-started.html
 
 Note: OpenNMS requires postgres 10.0+.  If the postgres container resides on an older system (e.g. Raspbian Buster), the docker application will dynamically link an older libseccomp2 library.  Use of the old library causes the container dates to be incorrect.  If using an older system, make sure the library is updated on the system hosting the docker application:
 ```
@@ -106,42 +107,71 @@ Immediately change the password to a secure one.
 1. Click **[Submit]**.
 1. Log out, then log in with your new password.
 
-## Datagerry & OpenNMS
+## Datagerry 
 
 
 ## Tabs {.tabset}
 
 ### Overview
-https://docs.opennms.com/horizon/28.0.0/deployment/core/getting-started.html
+
 https://docs.datagerry.com/latest/admin_guide/setup.html#docker-image
 
 ### Installation
 
-The following steps will build and run a docker image that includes both Ghini and NoVNC.  The image name is set in the runme.sh script (IMAGE_NAME="cwyse/ghini:3.1.7").  Similarly, the container name (ghini), network (dockernet.50), and the IP address (192.168.50.5) are configured there via environment variables.
-
-TODO: The script also contains volume definitions that are commented out.  These need to be added back in at some point for access to the container configuration.
-
-The Dockerfile includes a pre-configured connection to the current PostgreSQL server, at 192.168.40.30:5432.  This should be changed to something configurable.
-
-The connection to the Ghini database pre-configuration is shown below:
+Create a docker-compose.yml file:
 ```
-Connection Name:  WyseChoice
-        Type: PostgreSQL
-    Database: ghini
-        Host: 192.168.40.30
-        Port: 5432
-        User: chris
-    Password: <store securely outside the repository> (must be entered by user)
+version: "3.0"
+services:
+  nginx:
+    image: nethinks/nginx:latest
+    hostname: nginx
+    ports:
+    - "8087:80"
+    depends_on:
+    - datagerry
+    environment:
+      NGINX_LOCATION_DEFAULT: "/;/;http://datagerry:4000"
+    restart: unless-stopped
+
+  datagerry:
+    image: nethinks/datagerry:latest
+    hostname: datagerry
+    depends_on:
+    - db
+    - broker
+    environment:
+      DATAGERRY_Database_host: "db"
+      DATAGERRY_MessageQueueing_host: "broker"
+    restart: unless-stopped
+
+  db:
+    image: mongo:4.2-bionic
+    hostname: db
+    restart: unless-stopped
+    volumes:
+      - mongodb-data:/data/db
+      - mongodb-config:/data/configdb
+    
+  broker:
+    image: rabbitmq:3.8
+    hostname: broker
+    restart: unless-stopped
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+
+volumes:
+  rabbitmq-data:
+  mongodb-data:
+  mongodb-config:
 ```
-
-
-1. Create a work directory on a Raspberry PI.
-1. `git clone git@gitlab.com:cwyse/docker.git -b ghini ghini`
-1. `cd ghini\rpi-novnc`
-1. `./runme.sh`
-
-
-After executing these commands, the container should be running, and the Ghini application will be available at http://192.168.50.5:8080/vnc.html.  Note that it is NOT an https connection.
+```
+docker-compose up -d
+```
+```
+http://<<host>:8780
+user: admin
+password: admin
+```
 
 
 

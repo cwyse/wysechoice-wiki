@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2022-01-11T02:27:13.150Z
+date: 2022-01-11T02:30:17.929Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -94,6 +94,17 @@ If you changed your configuration files manually you can run the configuration t
 ```
 docker-compose exec horizon bin/config-tester -a
 ```
+### First login
+After you start the Horizon Core services, access the web application at:
+http://core-instance-ip:8980/opennms. The default login and password is **admin**.
+
+Immediately change the password to a secure one.
+1. Open http://core-instance-ip:8980/opennms in your web browser.
+1. Log in with with admin/admin.
+1. Click **[admin] → [Change Password]** in the navigation bar.
+1. Use **admin** as the current password then type and confirm a new password in the appropriate boxes.
+1. Click **[Submit]**.
+1. Log out, then log in with your new password.
 
 ## Datagerry & OpenNMS
 

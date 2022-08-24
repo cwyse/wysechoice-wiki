@@ -2,7 +2,7 @@
 title: Network Apps
 description: 
 published: true
-date: 2022-08-24T02:54:27.217Z
+date: 2022-08-24T02:54:54.964Z
 tags: 
 editor: markdown
 dateCreated: 2022-01-10T02:56:42.079Z
@@ -527,7 +527,7 @@ https://docs.requarks.io
 ### Upgrade
 ```
 NEW_VERSION=2.5.286
-# Stop and remove container named "wiki-2.5.201"
+# Stop and remove container named "wiki-<old_version>"
 docker stop wiki-<old_version>
 docker rm wiki-<old_version>
 

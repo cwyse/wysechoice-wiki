@@ -2,7 +2,7 @@
 title: Network Apps
 description: 
 published: true
-date: 2023-02-06T14:05:37.541Z
+date: 2023-02-06T14:09:32.587Z
 tags: 
 editor: markdown
 dateCreated: 2022-01-10T02:56:42.079Z
@@ -612,10 +612,12 @@ docker update --cpus 3 wiki-${NEW_VERSION}
 ```
 
 ### Backup
+Database backup:
 ``` 
 docker exec postgres-9.5 pg_dump wiki -U wikijs -F c > ~/wikibackup.dump
 ```
-
+Content history stored on gitlab:
+[Gitlab Content History](https://gitlab.com/rpi4-docker/wysechoice-wiki)
 ### Reference
 > TBD
 {.is-info}

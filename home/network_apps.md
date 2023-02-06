@@ -2,7 +2,7 @@
 title: Network Apps
 description: 
 published: true
-date: 2022-08-24T02:54:54.964Z
+date: 2023-02-06T14:05:37.541Z
 tags: 
 editor: markdown
 dateCreated: 2022-01-10T02:56:42.079Z
@@ -52,24 +52,24 @@ https://blog.worldlabel.com/2008/glabels-ez-label-creator-for-linux.html
 
 This package supports the creation of labels and mail merge.  The following settings should be used to create a template for the labels.  On the _Page Size_ tab of the template creation:
 1. Page Size: Other
-2. Width: 520 points
-3. Height 128 points
+2. Width: 520 points = 2.889 inches @ 180 DPI (PT-P700 prints at 180x180 DPI)
+3. Height 128 points = 0.711 inches @ 180 DPI
 
 On the _Label or Card Size_ tab:
-1. Width: 520
-2. Height 128
+1. Width: 520 = 2.889 inches @ 180 DPI 
+2. Height 128 = 0.711 inches @ 180 DPI
 3. Round: 0
 4. Horiz. waste: 0
 5. Vert. waste: 0
-6. Margin: 14
+6. Margin: 14 = 0.078 inches @ 180 DPI
 
 For the _Layout_ tab: 
 1. Number accross: 1
 2. Number down: 1
 3. Distance from left: 0
 4. Distance from top: 0
-5. Horizontal pitch: 520
-6. Vertical pitch: 128
+5. Horizontal pitch: 520 = 2.889 inches @ 180 DPI 
+6. Vertical pitch: 128 = 0.711 inches @ 180 DPI
 
 Create the label, then print it to a PDF.
 
@@ -85,7 +85,7 @@ Convert the PDF file into multiple PNG images:
 convert output.pdf -crop 520x128 -negate -threshold 0 -negate labels_%d.png
 ```
 
-> **Update:**
+> **Update: 2/5/2023**
 Use the [labelgen.py](/labelgen.py) command to read the database, run the mailmerge, and create the label images.  Parameters must be configured within
 the file.
 {.is-info}
@@ -514,9 +514,10 @@ Descriptions of servers should be displayed in a standard way.  The content belo
 ### Initial Setup
 ```
 $ mkdir ~/docker_vols/wiki_data
+$ WIKI_VERSION=wiki-2.5.296
 $ # Make sure postgres-14.1 is running
-$ docker run -d --ip="192.168.40.33" --mac-address="02:42:c0:a8:28:21" -p 3000:3000 --net=dockernet.40 --name wiki-2 --restart unless-stopped -e "DB_TYPE=postgres" -e "DB_HOST=postgres-14.1" -e "DB_PORT=5432" -e "DB_USER=wikijs" -e "DB_PASS=wikijsrocks" -e "DB_NAME=wiki" -v wiki_data:/home/pi/docker_vols/wiki_data -v wiki_content:/wiki/data/content requarks/wiki:2
-$ docker update --cpus 2 -m 4g
+$ docker run -d --ip="192.168.40.33" --mac-address="02:42:c0:a8:28:21" -p 3000:3000 --net=dockernet.40 --name ${WIKI_VERSION} --restart unless-stopped -e "DB_TYPE=postgres" -e "DB_HOST=postgres-14.1" -e "DB_PORT=5432" -e "DB_USER=wikijs" -e "DB_PASS=wikijsrocks" -e "DB_NAME=wiki" -v wiki_data:/home/pi/docker_vols/wiki_data -v wiki_content:/wiki/data/content requarks/wiki:2
+$ docker update --cpus 3 ${WIKI_VERSION}
 ```
 
 ### Configuration
@@ -525,19 +526,89 @@ To provide search capability for the web site content, the search engine usage n
 https://docs.requarks.io
 
 ### Upgrade
+The following script will upgrade the wiki container to a new version.  The NEW_VERSION and OLD_VERSION variables should be set prior to execution.  It should be executed on the system that is hosting the docker container, currently braavos.wysechoice.net.  
+
+It will stop the currently running docker container and delete it (wiki data resides in the database, not the container).  Then the latest docker image is retrieved from Docker Hub, and that image is started with the appropriate parameters.  Specifically:
+- DB Container Name: postgres-14.1
+- DB Port: 5432
+- DB Name: wiki
+- DB User: wikijs
+- DB Password: wikijsrocks
+- DB Type: postgres
+- Wiki Content: /wiki/data/content in container is mapped to the wiki_content volume
+- Network: dockernet.40
+- IP: wiki.wysechoice.net
+- DNS: pihole.wysechoice.net
+
+[upgrade_wiki.sh](/upgrade_wiki.sh)
+
 ```
-NEW_VERSION=2.5.286
+#!/bin/bash
+NEW_VERSION=2.5.296
+OLD_VERSION=2.5.296 
+
+# function to get IP address
+function get_ipaddr {
+  local hostname=${1}
+  local dnsserver=${2}
+  local query_type=${3} # A or AAAA (IPv6)
+  local ip_address=""
+
+  # A and AAA record for IPv4 and IPv6, respectively
+  # $1 stands for first argument
+  if [ -n "${hostname}" ]; then
+    if [ -z "${query_type}" ]; then
+      query_type="A"
+    fi
+    # use host command for DNS lookup operations
+    host -t ${query_type}  ${hostname} ${dnsserver} &>/dev/null 
+    if [ "$?" -eq "0" ]; then
+      # get ip address
+      ip_address="$(host -t ${query_type} ${hostname} ${dnsserver}| awk '/has.*address/{print $NF; exit}')"
+    else
+      return 1
+    fi
+  else
+    return 2
+  fi
+# display ip
+ echo $ip_address
+}
+
+hostname="wiki.wysechoice.net"
+dnsname="pihole.wysechoice.net"
+STATIC_IP=$(get_ipaddr $hostname $dnsname)
+DNS_SERVER_IP=$(get_ipaddr $dnsname $dnsname)
+
 # Stop and remove container named "wiki-<old_version>"
-docker stop wiki-<old_version>
-docker rm wiki-<old_version>
+docker stop wiki-${OLD_VERSION}
+docker rm wiki-${OLD_VERSION}
 
 # Pull latest image of Wiki.js
 docker pull requarks/wiki:2
 
 # Create new container of Wiki.js based on latest image
-docker run -d --ip="192.168.40.33" --dns="192.168.5.3" --mac-address="02:42:c0:a8:28:21" -p 3000:3000 --net=dockernet.40 --name wiki-${NEW_VERSION} --hostname="wiki" --restart unless-stopped -e "DB_TYPE=postgres" -e "DB_HOST=postgres-14.1" -e "DB_PORT=5432" -e "DB_USER=wikijs" -e "DB_PASS=wikijsrocks" -e "DB_NAME=wiki" -v wiki_data:/home/pi/docker_vols/wiki_data -v wiki_content:/wiki/data/content requarks/wiki:2
+docker run -d                                                  \
+           --ip="${STATIC_IP}"                                 \
+           --dns="${DNS_SERVER_IP}"                            \
+           --mac-address="02:42:c0:a8:28:21"                   \
+           -p 3000:3000                                        \
+           --net=dockernet.40                                  \
+           --name wiki-${NEW_VERSION}                          \
+           --hostname="wiki"                                   \
+           --restart unless-stopped                            \
+           -e "DB_TYPE=postgres"                               \
+           -e "DB_HOST=postgres-14.1"                          \
+           -e "DB_PORT=5432"                                   \
+           -e "DB_USER=wikijs"                                 \
+           -e "DB_PASS=wikijsrocks"                            \
+           -e "DB_NAME=wiki"                                   \
+           -v wiki_content:/wiki/data/content                  \
+           requarks/wiki:2
+
 # Use a second CPU for the container
-docker update --cpus 2 wiki-${NEW_VERSION}
+docker update --cpus 3 wiki-${NEW_VERSION}
+
 ```
 
 ### Backup

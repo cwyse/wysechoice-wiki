@@ -1,0 +1,65 @@
+<!--
+title: Plant_Labels_Living
+description: SQL code to provide plant label information from database
+published: true
+date: 2023-02-26T02:22:38.632Z
+tags: 
+editor: ckeditor
+dateCreated: 2023-02-26T02:22:38.632Z
+-->
+
+<pre><code class="language-plaintext"> SELECT accession.code,
+        CASE
+            WHEN species.hybrid IS TRUE THEN
+            CASE
+                WHEN species.infrasp1_rank::text = 'cv.'::text THEN concat(genus.epithet, ' x ', species.epithet, ' ', '''', species.infrasp1::text, '''')
+                ELSE concat(genus.epithet, ' x ', species.epithet, ' ', species.infrasp1_rank, ' ', species.infrasp1)
+            END
+            ELSE
+            CASE
+                WHEN species.infrasp1_rank::text = 'cv.'::text THEN concat(genus.epithet, ' ', species.epithet, ' ', '''', species.infrasp1::text, '''')
+                ELSE concat(genus.epithet, ' ', species.epithet, ' ', species.infrasp1_rank, ' ', species.infrasp1)
+            END
+        END AS title,
+        CASE
+            WHEN species.hybrid IS TRUE THEN
+            CASE
+                WHEN species.infrasp1_rank::text = 'cv.'::text THEN concat(genus.epithet, ' x ', species.epithet)
+                ELSE concat(genus.epithet, ' x ', species.epithet)
+            END
+            ELSE
+            CASE
+                WHEN species.infrasp1_rank::text = 'cv.'::text THEN concat(genus.epithet, ' ', species.epithet)
+                ELSE concat(genus.epithet, ' ', species.epithet)
+            END
+        END AS title_line1,
+        CASE
+            WHEN species.hybrid IS TRUE THEN
+            CASE
+                WHEN species.infrasp1_rank::text = 'cv.'::text THEN concat('''', species.infrasp1::text, '''')
+                ELSE concat(species.infrasp1_rank, ' ', species.infrasp1)
+            END
+            ELSE
+            CASE
+                WHEN species.infrasp1_rank::text = 'cv.'::text THEN concat('''', species.infrasp1::text, '''')
+                ELSE concat(species.infrasp1_rank, ' ', species.infrasp1)
+            END
+        END AS title_line2,
+    vernacular_name.name,
+    family.epithet AS family,
+    genus.epithet AS genus,
+    species.hybrid,
+    species.epithet AS species,
+    species.infrasp1_rank,
+    species.infrasp1,
+    collection.locale
+   FROM family,
+    genus,
+    plant,
+    species,
+    vernacular_name,
+    accession
+     LEFT JOIN source ON source.accession_id = accession.id
+     LEFT JOIN collection ON collection.source_id = source.id
+  WHERE accession.species_id = species.id AND species.genus_id = genus.id AND genus.family_id = family.id AND vernacular_name.species_id = accession.species_id AND plant.quantity &gt; 0 AND plant.accession_id = accession.id
+  ORDER BY accession.code, family.epithet, genus.epithet, species.epithet;</code></pre>

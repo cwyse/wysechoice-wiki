@@ -2,7 +2,7 @@
 title: Garden Label Generation (WYSIWIG)
 description: 
 published: true
-date: 2023-02-26T02:20:31.985Z
+date: 2023-02-26T02:27:42.882Z
 tags: 
 editor: ckeditor
 dateCreated: 2023-02-26T00:03:40.834Z
@@ -15,71 +15,17 @@ dateCreated: 2023-02-26T00:03:40.834Z
 <h1>Service</h1>
 <h2>Prerequisites</h2>
 <ol>
-  <li>Postgres server&nbsp;<ol>
+  <li>Postgres server<ol>
       <li>Ghini database already created</li>
-      <li>View defined to facilitate label query&nbsp;<ol>
-          <li>Default: <i>plant_labels_living</i></li>
-          <li><i>SQL: &nbsp;</i>&nbsp;</li>
-        </ol>
-      </li>
+      <li>View defined to facilitate label query (default:&nbsp;<i> </i><a href="http://wiki.wysechoice.net:3000/en/upd_02_23/code/plant_labels_living"><i>Plant_Labels_Living</i></a>)</li>
+    </ol>
+  </li>
+  <li>Print server<ol>
+      <li>PT-P700 attached&nbsp;</li>
+      <li>Ptouch-print software installed and on path</li>
     </ol>
   </li>
 </ol>
-<pre><code class="language-plaintext">SELECT accession.code,
-       CASE
-           WHEN species.hybrid IS TRUE THEN
-           CASE
-               WHEN species.infrasp1_rank::text = 'cv.'::text THEN concat(genus.epithet, ' x ', species.epithet, ' ', '''', species.infrasp1::text, '''')
-               ELSE concat(genus.epithet, ' x ', species.epithet, ' ', species.infrasp1_rank, ' ', species.infrasp1)
-           END
-           ELSE
-           CASE
-               WHEN species.infrasp1_rank::text = 'cv.'::text THEN concat(genus.epithet, ' ', species.epithet, ' ', '''', species.infrasp1::text, '''')
-               ELSE concat(genus.epithet, ' ', species.epithet, ' ', species.infrasp1_rank, ' ', species.infrasp1)
-           END
-       END AS title,
-       CASE
-           WHEN species.hybrid IS TRUE THEN
-           CASE
-               WHEN species.infrasp1_rank::text = 'cv.'::text THEN concat(genus.epithet, ' x ', species.epithet)
-               ELSE concat(genus.epithet, ' x ', species.epithet)
-           END
-           ELSE
-           CASE
-               WHEN species.infrasp1_rank::text = 'cv.'::text THEN concat(genus.epithet, ' ', species.epithet)
-               ELSE concat(genus.epithet, ' ', species.epithet)
-           END
-       END AS title_line1,
-       CASE
-           WHEN species.hybrid IS TRUE THEN
-           CASE
-               WHEN species.infrasp1_rank::text = 'cv.'::text THEN concat('''', species.infrasp1::text, '''')
-               ELSE concat(species.infrasp1_rank, ' ', species.infrasp1)
-           END
-           ELSE
-           CASE
-               WHEN species.infrasp1_rank::text = 'cv.'::text THEN concat('''', species.infrasp1::text, '''')
-               ELSE concat(species.infrasp1_rank, ' ', species.infrasp1)
-           END
-       END AS title_line2,
-   vernacular_name.name,
-   family.epithet AS family,
-   genus.epithet AS genus,
-   species.hybrid,
-   species.epithet AS species,
-   species.infrasp1_rank,
-   species.infrasp1,
-   collection.locale
-  FROM family,
-   genus,
-   plant,
-   species,
-   vernacular_name,
-   accession
-    LEFT JOIN source ON source.accession_id = accession.id
-    LEFT JOIN collection ON collection.source_id = source.id
- WHERE accession.species_id = species.id AND species.genus_id = genus.id AND genus.family_id = family.id AND vernacular_name.species_id = accession.species_id AND plant.quantity &gt; 0 AND plant.accession_id = accession.id
- ORDER BY accession.code, family.epithet, genus.epithet, species.epithet;</code></pre>
 <h2>Host Setup</h2>
 <p>&nbsp;</p>
 <h2>Update</h2>

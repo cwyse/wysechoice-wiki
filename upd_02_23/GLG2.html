@@ -2,13 +2,89 @@
 title: Garden Label Generation (WYSIWIG)
 description: 
 published: true
-date: 2023-02-26T00:04:49.834Z
+date: 2023-02-26T02:20:31.985Z
 tags: 
 editor: ckeditor
 dateCreated: 2023-02-26T00:03:40.834Z
 -->
 
-<h1>Plant labels</h1>
+<h1>Overview</h1>
+<figure class="image image_resized" style="width:47.56%;"><img src="/label_printing_configuration.drawio.png">
+  <figcaption>Label Printing Configuration</figcaption>
+</figure>
+<h1>Service</h1>
+<h2>Prerequisites</h2>
+<ol>
+  <li>Postgres server&nbsp;<ol>
+      <li>Ghini database already created</li>
+      <li>View defined to facilitate label query&nbsp;<ol>
+          <li>Default: <i>plant_labels_living</i></li>
+          <li><i>SQL: &nbsp;</i>&nbsp;</li>
+        </ol>
+      </li>
+    </ol>
+  </li>
+</ol>
+<pre><code class="language-plaintext">SELECT accession.code,
+       CASE
+           WHEN species.hybrid IS TRUE THEN
+           CASE
+               WHEN species.infrasp1_rank::text = 'cv.'::text THEN concat(genus.epithet, ' x ', species.epithet, ' ', '''', species.infrasp1::text, '''')
+               ELSE concat(genus.epithet, ' x ', species.epithet, ' ', species.infrasp1_rank, ' ', species.infrasp1)
+           END
+           ELSE
+           CASE
+               WHEN species.infrasp1_rank::text = 'cv.'::text THEN concat(genus.epithet, ' ', species.epithet, ' ', '''', species.infrasp1::text, '''')
+               ELSE concat(genus.epithet, ' ', species.epithet, ' ', species.infrasp1_rank, ' ', species.infrasp1)
+           END
+       END AS title,
+       CASE
+           WHEN species.hybrid IS TRUE THEN
+           CASE
+               WHEN species.infrasp1_rank::text = 'cv.'::text THEN concat(genus.epithet, ' x ', species.epithet)
+               ELSE concat(genus.epithet, ' x ', species.epithet)
+           END
+           ELSE
+           CASE
+               WHEN species.infrasp1_rank::text = 'cv.'::text THEN concat(genus.epithet, ' ', species.epithet)
+               ELSE concat(genus.epithet, ' ', species.epithet)
+           END
+       END AS title_line1,
+       CASE
+           WHEN species.hybrid IS TRUE THEN
+           CASE
+               WHEN species.infrasp1_rank::text = 'cv.'::text THEN concat('''', species.infrasp1::text, '''')
+               ELSE concat(species.infrasp1_rank, ' ', species.infrasp1)
+           END
+           ELSE
+           CASE
+               WHEN species.infrasp1_rank::text = 'cv.'::text THEN concat('''', species.infrasp1::text, '''')
+               ELSE concat(species.infrasp1_rank, ' ', species.infrasp1)
+           END
+       END AS title_line2,
+   vernacular_name.name,
+   family.epithet AS family,
+   genus.epithet AS genus,
+   species.hybrid,
+   species.epithet AS species,
+   species.infrasp1_rank,
+   species.infrasp1,
+   collection.locale
+  FROM family,
+   genus,
+   plant,
+   species,
+   vernacular_name,
+   accession
+    LEFT JOIN source ON source.accession_id = accession.id
+    LEFT JOIN collection ON collection.source_id = source.id
+ WHERE accession.species_id = species.id AND species.genus_id = genus.id AND genus.family_id = family.id AND vernacular_name.species_id = accession.species_id AND plant.quantity &gt; 0 AND plant.accession_id = accession.id
+ ORDER BY accession.code, family.epithet, genus.epithet, species.epithet;</code></pre>
+<h2>Host Setup</h2>
+<p>&nbsp;</p>
+<h2>Update</h2>
+<h2>Backup</h2>
+<h1>Garden Label Supplies</h1>
 <h2>PTouch Printer Tape:</h2>
 <pre><code class="language-plaintext">Brother Genuine P-Touch TSX-S251 Tape
 1" (0.94") Wide Extra-Strength Adhesive Laminated Tape
@@ -31,6 +107,99 @@ Item #: 2A-10-25</code></pre>
   <li><a href="https://larklabel.com/">Lark Label</a></li>
   <li><a href="https://myplantlabel.com/">MyPlantLabel</a></li>
 </ul>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<ol>
+  <li>Width: 500 px (unlink)</li>
+  <li>Height 127 px</li>
+</ol>
+<p>Set the Print Size to:</p>
+<ol>
+  <li>Width: 1.875 in</li>
+  <li>Height: 0.498 in</li>
+  <li>X res: 360 px/in</li>
+  <li>Y res: 255 px/in</li>
+</ol>
+<p>Export the file as a PNG file.</p>
+<h4>PTouch-Print</h4>
+<p><a href="https://github.com/clarkewd/ptouch-print">https://github.com/clarkewd/ptouch-print</a><br><a href="https://mockmoon-cybernetics.ch/computer/p-touch2430pc/">https://mockmoon-cybernetics.ch/computer/p-touch2430pc/</a></p>
+<p>Download the ptouch-print git repository and compile it.</p>
+<pre><code class="language-plaintext">sudo apt install -y autogen autoconf gettext autopoint gcc libgd-dev libusb-dev libusb-1.0-0-dev make autofs udev dialog
+cd ptouch-print
+./autogen.sh
+./configure
+make</code></pre>
+<p>Copy</p>
+<p>ptouch-print --image &lt;filename.png&gt;</p>
+<p>&nbsp;</p>
+<p>CUPS printing isn't working for the Brother PT-P700 label printer. However, a combination of programs can be used to generate labels.<br><a href="http://wiki.wysechoice.net:3000/plantlabels.glabels">plantlabels.glabels</a><br><a href="https://sites.google.com/site/tingox/brother_pt-p700">https://sites.google.com/site/tingox/brother_pt-p700</a></p>
+<h4>print-driver-ptouch</h4>
+<pre><code class="language-plaintext">apt install libcup2-dev libxml2 libxml2-dev libxml-libxml-perl
+git clone https://github.com/philpem/printer-driver-ptouch.git
+cd print-driver-ptouch
+rm missing
+autoreconf -i
+./autogen.sh
+./configure
+make
+make install
+cd /etc/init.d
+./dbus start
+./avahi-daemon start</code></pre>
+<p>Copy</p>
+<p>/dev/bus not present:</p>
+<pre><code class="language-plaintext">/dev/bus or /dev/serial do not show up under /dev in the container
+Try this:
+
+docker run -v /dev/bus:/dev/bus:ro -v /dev/serial:/dev/serial:ro -i -t --entrypoint /bin/bash --cap-add SYS_PTRACE debian:amd64
+
+This will make /dev/bus and /dev/serial show up as bind mounts in your container. Yet you will find that _fastboot devices or adb_ will not work. Strace will show you permission denied. What you want instead is this:
+
+
+docker run --device=/dev/bus -v /dev/serial:/dev/serial:ro -i -t --entrypoint /bin/bash --cap-add SYS_PTRACE debian:amd64</code></pre>
+<p>Copy</p>
+<h4>gLabels</h4>
+<p><a href="https://blog.worldlabel.com/2008/glabels-ez-label-creator-for-linux.html">https://blog.worldlabel.com/2008/glabels-ez-label-creator-for-linux.html</a></p>
+<p>This package supports the creation of labels and mail merge. The following settings should be used to create a template for the labels. On the <u>Page Size</u> tab of the template creation:</p>
+<ol>
+  <li>Page Size: Other</li>
+  <li>Width: 520 points = 2.889 inches @ 180 DPI (PT-P700 prints at 180x180 DPI)</li>
+  <li>Height 128 points = 0.711 inches @ 180 DPI</li>
+</ol>
+<p>On the <u>Label or Card Size</u> tab:</p>
+<ol>
+  <li>Width: 520 = 2.889 inches @ 180 DPI</li>
+  <li>Height 128 = 0.711 inches @ 180 DPI</li>
+  <li>Round: 0</li>
+  <li>Horiz. waste: 0</li>
+  <li>Vert. waste: 0</li>
+  <li>Margin: 14 = 0.078 inches @ 180 DPI</li>
+</ol>
+<p>For the <u>Layout</u> tab:</p>
+<ol>
+  <li>Number accross: 1</li>
+  <li>Number down: 1</li>
+  <li>Distance from left: 0</li>
+  <li>Distance from top: 0</li>
+  <li>Horizontal pitch: 520 = 2.889 inches @ 180 DPI</li>
+  <li>Vertical pitch: 128 = 0.711 inches @ 180 DPI</li>
+</ol>
+<p>Create the label, then print it to a PDF.</p>
+<h4>Mail Merge</h4>
+<p>Create a mail merge in gLabel. The ghini database contains two views with plant label information: <i>plant_labels</i> and <i>plant_labels_living</i>. Either of these views can be used to provide data to the mail merge.</p>
+<p>Use pgadmin4, load a view with the desired plants, and export the data as a CSV file. In gLabels, select Objects-&gt;Mail Merge, and import the CSV file.</p>
+<p>Load the <a href="http://wiki.wysechoice.net:3000/plantlabels.glabels">PlantLabels template</a>, which has merge fields included. Merge fields are in the format "${merge-field}", where the merge field value is the column header of the CSV file. Select File-&gt;Print, and Print To File, to output the labels to a PDF file.</p>
+<p>Convert the PDF file into multiple PNG images:</p>
+<pre><code class="language-plaintext">convert output.pdf -crop 520x128 -negate -threshold 0 -negate labels_%d.png</code></pre>
+<p>Copy</p>
+<blockquote>
+  <p><strong>Update: 2/5/2023</strong><br>Use the <a href="http://wiki.wysechoice.net:3000/labelgen.py">labelgen.py</a> command to read the database, run the mailmerge, and create the label images. Parameters must be configured within<br>the file.</p>
+</blockquote>
+<p>This file will scp the label file and issue the print command.<br><a href="http://wiki.wysechoice.net:3000/print.py">print.py</a></p>
+<h4>GIMP</h4>
+<p>Start GIMP and open the PDF from the last step. Use the default import settings.</p>
+<p>Under Image-&gt;Mode, select 'Use black and white palette', and <u>Convert</u>. Under <u>Scale Image</u>, select:</p>
 <ol>
   <li>Width: 500 px (unlink)</li>
   <li>Height 127 px</li>

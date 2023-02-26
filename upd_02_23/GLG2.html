@@ -1,0 +1,55 @@
+<!--
+title: GLG2
+description: 
+published: true
+date: 2023-02-26T00:03:40.834Z
+tags: 
+editor: ckeditor
+dateCreated: 2023-02-26T00:03:40.834Z
+-->
+
+<h1>Plant labels</h1>
+<h2>PTouch Printer Tape:</h2>
+<pre><code class="language-plaintext">Brother Genuine P-Touch TSX-S251 Tape
+1" (0.94") Wide Extra-Strength Adhesive Laminated Tape
+Black on White
+Laminated for Indoor or Outdoor Use
+Water-Resistant
+0.94" x 26.2' (24mm x 8M)
+TZES251</code></pre>
+<p>Copy</p>
+<h2>Plant Markers</h2>
+<pre><code class="language-plaintext">Kincaid Stainless Steel Plant Marker
+10" A Style, 25 Piece Bundle
+Standard Duty #13 Gauge Posts
+Item #: 2A-10-25</code></pre>
+<p>Copy</p>
+<h2>Plant Marker Sources</h2>
+<ul>
+  <li><a href="https://www.kincaidplantmarkers.com/">Kincaid Plant Markers</a></li>
+  <li><a href="https://www.idealgardenmarkers.com/">IDeal Garden Markers</a></li>
+  <li><a href="https://larklabel.com/">Lark Label</a></li>
+  <li><a href="https://myplantlabel.com/">MyPlantLabel</a></li>
+</ul>
+<ol>
+  <li>Width: 500 px (unlink)</li>
+  <li>Height 127 px</li>
+</ol>
+<p>Set the Print Size to:</p>
+<ol>
+  <li>Width: 1.875 in</li>
+  <li>Height: 0.498 in</li>
+  <li>X res: 360 px/in</li>
+  <li>Y res: 255 px/in</li>
+</ol>
+<p>Export the file as a PNG file.</p>
+<h4>PTouch-Print</h4>
+<p><a href="https://github.com/clarkewd/ptouch-print">https://github.com/clarkewd/ptouch-print</a><br><a href="https://mockmoon-cybernetics.ch/computer/p-touch2430pc/">https://mockmoon-cybernetics.ch/computer/p-touch2430pc/</a></p>
+<p>Download the ptouch-print git repository and compile it.</p>
+<pre><code class="language-plaintext">sudo apt install -y autogen autoconf gettext autopoint gcc libgd-dev libusb-dev libusb-1.0-0-dev make autofs udev dialog
+cd ptouch-print
+./autogen.sh
+./configure
+make</code></pre>
+<p>Copy</p>
+<p>ptouch-print --image &lt;filename.png&gt;</p>

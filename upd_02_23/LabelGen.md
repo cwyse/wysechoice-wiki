@@ -2,7 +2,7 @@
 title: Garden Label Generation
 description: Information on the configuration, tools, and generation of garden plant labels.
 published: true
-date: 2023-03-02T04:04:33.447Z
+date: 2023-03-02T04:05:01.290Z
 tags: garden, service
 editor: markdown
 dateCreated: 2023-02-25T23:59:47.252Z
@@ -129,29 +129,3 @@ Item #: 2A-10-25
 - [IDeal Garden Markers](https://www.idealgardenmarkers.com/)
 - [Lark Label](https://larklabel.com/)
 - [MyPlantLabel](https://myplantlabel.com/)
-
-
-#### PTouch-Print
-https://github.com/clarkewd/ptouch-print
-https://mockmoon-cybernetics.ch/computer/p-touch2430pc/
-
-Download the ptouch-print git repository and compile it.
-```
-sudo apt install -y autogen autoconf gettext autopoint gcc libgd-dev libusb-dev libusb-1.0-0-dev make autofs udev dialog 
-cd ptouch-print
-./autogen.sh
-./configure 
-make
-```
-
-
-
-##### Ptouch Print
-- Build dependencies
--- git
--- autogen
--- autoreconf
--- gettext
--- autopoint
-- https://github.com/clarkewd/ptouch-print
-

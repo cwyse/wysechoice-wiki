@@ -2,7 +2,7 @@
 title: Garden Label Generation
 description: Information on the configuration, tools, and generation of garden plant labels.
 published: true
-date: 2023-03-02T01:48:13.388Z
+date: 2023-03-02T01:48:28.451Z
 tags: garden, service
 editor: markdown
 dateCreated: 2023-02-25T23:59:47.252Z
@@ -10,7 +10,7 @@ dateCreated: 2023-02-25T23:59:47.252Z
 
 # Plant labels
 ## Overview
-![label_printing_configuration.drawio.png](/label_printing_configuration.drawio.png){.align-center :height="400px" width="400px"}
+![label_printing_configuration.drawio.png](/label_printing_configuration.drawio.png){.align-center height="400px" width="400px"}
 
 
 ## Tools and Equipment

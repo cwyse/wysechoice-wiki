@@ -2,7 +2,7 @@
 title: Garden Label Generation
 description: Information on the configuration, tools, and generation of garden plant labels.
 published: true
-date: 2023-03-02T03:28:42.150Z
+date: 2023-03-02T03:42:21.834Z
 tags: garden, service
 editor: markdown
 dateCreated: 2023-02-25T23:59:47.252Z
@@ -80,6 +80,31 @@ If new labels are created, they should use the Glabels-Qt properties as shown be
   </center>
 </figure>
 
+## PTouch-Print
+https://github.com/clarkewd/ptouch-print
+https://mockmoon-cybernetics.ch/computer/p-touch2430pc/
+
+Download the ptouch-print git repository and compile it.
+```
+sudo apt install -y autogen autoconf gettext autopoint gcc libgd-dev libusb-dev libusb-1.0-0-dev make autofs udev dialog 
+cd ptouch-print
+./autogen.sh
+./configure 
+make
+```
+ptouch-print --image <filename.png>
+
+
+
+##### Ptouch Print
+- Build dependencies
+-- git
+-- autogen
+-- autoreconf
+-- gettext
+-- autopoint
+- https://github.com/clarkewd/ptouch-print
+
 ## Tools and Equipment
 ### PTouch Printer Tape: 
 ```
@@ -104,18 +129,6 @@ Item #: 2A-10-25
 - [Lark Label](https://larklabel.com/)
 - [MyPlantLabel](https://myplantlabel.com/)
 
-
-
-1. Width: 500 px (unlink)
-2. Height 127 px
-
-Set the Print Size to:
-1. Width: 1.875 in
-2. Height: 0.498 in
-3. X res: 360 px/in
-4. Y res: 255 px/in
-
-Export the file as a PNG file.
 
 #### PTouch-Print
 https://github.com/clarkewd/ptouch-print

@@ -2,7 +2,7 @@
 title: Garden Label Generation
 description: Information on the configuration, tools, and generation of garden plant labels.
 published: true
-date: 2023-03-02T04:05:01.290Z
+date: 2023-03-02T04:22:07.374Z
 tags: garden, service
 editor: markdown
 dateCreated: 2023-02-25T23:59:47.252Z
@@ -80,6 +80,34 @@ If new labels are created, they should use the Glabels-Qt properties as shown be
   </center>
 </figure>
 
+
+### Glabel template settings
+#### Page Size: Other
+```
+Width: 520 points = 2.889 inches @ 180 DPI (PT-P700 prints at 180x180 DPI)
+Height 128 points = 0.711 inches @ 180 DPI
+```
+
+#### On the Label or Card Size tab:
+```
+Width: 520 = 2.889 inches @ 180 DPI
+Height 128 = 0.711 inches @ 180 DPI
+Round: 0
+Horiz. waste: 0
+Vert. waste: 0
+Margin: 14 = 0.078 inches @ 180 DPI
+```
+
+#### For the Layout tab:
+```
+Number accross: 1
+Number down: 1
+Distance from left: 0
+Distance from top: 0
+Horizontal pitch: 520 = 2.889 inches @ 180 DPI
+Vertical pitch: 128 = 0.711 inches @ 180 DPI
+```
+
 ## PTouch-Print
 
 The PTouch-Print utility uses the libusb library to print, so it doesn't require a special driver.  The project is currently unsupported, but a copy of the repo is available on my Gitlab account:
@@ -129,3 +157,24 @@ Item #: 2A-10-25
 - [IDeal Garden Markers](https://www.idealgardenmarkers.com/)
 - [Lark Label](https://larklabel.com/)
 - [MyPlantLabel](https://myplantlabel.com/)
+
+## Miscellaneous Reference Information
+
+### Glabels-Qt
+This package supports the creation of labels and mail merge. 
+
+https://blog.worldlabel.com/2008/glabels-ez-label-creator-for-linux.html
+
+### Mail Merge - reference only (functionality provided by labelgen)
+
+Create a mail merge in gLabel. The ghini database contains two views with plant label information: plant_labels and plant_labels_living. Either of these views can be used to provide data to the mail merge.
+
+Use pgadmin4, load a view with the desired plants, and export the data as a CSV file. In gLabels, select Objects->Mail Merge, and import the CSV file.
+
+Load the PlantLabels template, which has merge fields included. Merge fields are in the format "${merge-field}", where the merge field value is the column header of the CSV file. Select File->Print, and Print To File, to output the labels to a PDF file.
+
+Convert the PDF file into multiple PNG images using `convert` from ImageMagick:
+```
+convert output.pdf -crop 520x128 -negate -threshold 0 -negate labels_%d.png
+```
+

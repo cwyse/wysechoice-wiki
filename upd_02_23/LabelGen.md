@@ -2,7 +2,7 @@
 title: Garden Label Generation
 description: Information on the configuration, tools, and generation of garden plant labels.
 published: true
-date: 2023-03-02T03:42:21.834Z
+date: 2023-03-02T04:04:33.447Z
 tags: garden, service
 editor: markdown
 dateCreated: 2023-02-25T23:59:47.252Z
@@ -81,8 +81,18 @@ If new labels are created, they should use the Glabels-Qt properties as shown be
 </figure>
 
 ## PTouch-Print
-https://github.com/clarkewd/ptouch-print
-https://mockmoon-cybernetics.ch/computer/p-touch2430pc/
+
+The PTouch-Print utility uses the libusb library to print, so it doesn't require a special driver.  The project is currently unsupported, but a copy of the repo is available on my Gitlab account:
+
+https://gitlab.com/cwyse/ptouch-print.git
+
+The original sources were:
+1. https://github.com/clarkewd/ptouch-print
+1. https://mockmoon-cybernetics.ch/computer/p-touch2430pc/
+
+Another developer may have adopted the repository but a quick search did not find anything.
+
+### Installation
 
 Download the ptouch-print git repository and compile it.
 ```
@@ -92,19 +102,10 @@ cd ptouch-print
 ./configure 
 make
 ```
-ptouch-print --image <filename.png>
+Ensure that ptouch-print is on the path.
 
-
-
-##### Ptouch Print
-- Build dependencies
--- git
--- autogen
--- autoreconf
--- gettext
--- autopoint
-- https://github.com/clarkewd/ptouch-print
-
+Execute `ptouch-print --image <filename.png>` and ensure that it works.
+ 
 ## Tools and Equipment
 ### PTouch Printer Tape: 
 ```
@@ -142,7 +143,6 @@ cd ptouch-print
 ./configure 
 make
 ```
-ptouch-print --image <filename.png>
 
 
 

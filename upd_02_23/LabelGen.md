@@ -2,7 +2,7 @@
 title: Garden Label Generation
 description: Information on the configuration, tools, and generation of garden plant labels.
 published: true
-date: 2023-03-02T02:17:44.392Z
+date: 2023-03-02T03:21:26.564Z
 tags: garden, service
 editor: markdown
 dateCreated: 2023-02-25T23:59:47.252Z
@@ -13,7 +13,7 @@ dateCreated: 2023-02-25T23:59:47.252Z
 Label printing is initiated from a host computer by running the labelgen program.  Labelgen queries the database and retrieves the necessary data to create the requested labels.  The data is passed to *glabels-batch-qt* and applied to a template label.  If no label template has been specified, a default template is used that is embedded in the labelgen script.  The *glabels-batch-qt* program outputs a PDF file containing all the labels.  *Imagemagick's convert* utility is used to split the labels into individual images.  The images are sent to the *ptouch-print* utility on the print server to print.<br><br>
 <figure>
   <center>
-    <img src="/label_printing_configuration.drawio.png" width="60%" height="60%" align="center"
+    <img src="/assets/labelgen/label_printing_configuration.drawio.png" width="60%" height="60%" align="center"
        alt="Label Printing Overview"></center><center>
     <fig caption>Label Printing Overview</figcaption>
   </center>
@@ -50,7 +50,27 @@ Running this command without any parameters will select the currently (2/4/2023)
 servers, and print labels for all living plants in the collection.
 ```
 
-The script can be executed 
+The [labelgen](/assets/labelgen/labelgen.py) python script can be downloaded from here and executed on any host meeting the requirements.  Install the requirements by downloading the [requirements.txt](/assets/labelgen/requirements.txt) file and executing:
+`pip install -r requirements.txt`
+
+You will also need to install *glabels-qt* and *ImageMagick*.  The following versions are required (or later):
+1. glabels-qt 3.99-master564 (2da9b2d 2021-02-06)
+1. imagemagick, at least version  8:6.9.11.60+dfsg-1.3build2
+
+*Glabels-qt* can be obtained from  https://github.com/jimevins/glabels-qt.git.
+*Imagemagick* as available on the standard Ubuntu distribution using apt-get.
+
+The default label is an XML file embeded inside the labelgen utility.  It was sourced from [plantlabels.glabels](/assets/labelgen/plantlabels.glabels).  The glabels file is created from *glabels-qt*. It is technically a glabels project file with form fields defined that get replaced with column values from the database. 
+
+<figure>
+  <center>
+    <img src="/assets/labelgen/plantlabels.png" width="60%" height="60%" align="center"
+       alt="Plant Label project in Glabels-Qt"></center><center>
+    <fig caption>Plant Label project in Glabels-Qt</figcaption>
+  </center>
+</figure>
+![plantlabels.png](/assets/labelgen/plantlabels.png)
+
 ## Tools and Equipment
 ### PTouch Printer Tape: 
 ```

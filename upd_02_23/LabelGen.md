@@ -2,7 +2,7 @@
 title: Garden Label Generation
 description: Information on the configuration, tools, and generation of garden plant labels.
 published: true
-date: 2023-03-02T03:26:53.577Z
+date: 2023-03-02T03:28:03.040Z
 tags: garden, service
 editor: markdown
 dateCreated: 2023-02-25T23:59:47.252Z
@@ -74,7 +74,7 @@ If new labels are created, they should use the Glabels-Qt properties as shown be
 
 <figure>
   <center>
-    <img src="/assets/labelgen/plantlabelprops.png" width="60%" height="60%" align="center"
+    <img src="/assets/labelgen/plantlabelprops.png" width="30%" height="30%" align="center"
        alt="Plant Label Properties fro PT-P700 TZES251 Tape"></center><center>
     <fig caption>Plant Label Properties fro PT-P700 TZES251 Tape</figcaption>
   </center>

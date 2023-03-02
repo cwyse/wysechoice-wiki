@@ -2,7 +2,7 @@
 title: Garden Label Generation
 description: Information on the configuration, tools, and generation of garden plant labels.
 published: true
-date: 2023-03-02T03:21:26.564Z
+date: 2023-03-02T03:25:55.589Z
 tags: garden, service
 editor: markdown
 dateCreated: 2023-02-25T23:59:47.252Z
@@ -69,7 +69,16 @@ The default label is an XML file embeded inside the labelgen utility.  It was so
     <fig caption>Plant Label project in Glabels-Qt</figcaption>
   </center>
 </figure>
-![plantlabels.png](/assets/labelgen/plantlabels.png)
+
+If new labels are created, they should use the Glabels-Qt properties as shown below, and be sure to specify 'Points' in *Edit->Preferences*.
+
+<figure>
+  <center>
+    <img src="/assets/labelgen/plantlabelprops.png" width="60%" height="60%" align="center"
+       alt="Plant Label Properties fro PT-P700 TZES251 Tape"></center><center>
+    <fig caption>Plant Label Properties fro PT-P700 TZES251 Tape</figcaption>
+  </center>
+</figure>
 
 ## Tools and Equipment
 ### PTouch Printer Tape: 

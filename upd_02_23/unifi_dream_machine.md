@@ -2,7 +2,7 @@
 title: Unifi Dream Machine Router
 description: All aspects of maintenance for the Unifi Dream Machine router configuration
 published: true
-date: 2023-03-05T20:16:35.630Z
+date: 2023-03-05T21:41:03.367Z
 tags: 
 editor: markdown
 dateCreated: 2023-03-05T19:10:34.928Z
@@ -21,6 +21,9 @@ Configure and create backups of the Unifi managed configuration data (custom con
 Restore the configuration if the hard disk has failed.
 
 ## UDM Services
+
+### [UDM Boot Script](/upd_02_23/udm/boot)
+This service allows all other services to function by running a oot script at router startup.
 
 ### [Domain Name Service](/upd_02_23/udm/dns)
 All information relating to the domain services used by the system.

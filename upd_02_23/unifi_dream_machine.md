@@ -2,7 +2,7 @@
 title: Unifi Dream Machine Router
 description: All aspects of maintenance for the Unifi Dream Machine router configuration
 published: true
-date: 2023-03-05T19:17:54.604Z
+date: 2023-03-05T19:18:48.231Z
 tags: 
 editor: markdown
 dateCreated: 2023-03-05T19:10:34.928Z
@@ -12,7 +12,7 @@ dateCreated: 2023-03-05T19:10:34.928Z
 
 ## UDM Base configuration
 ### General
-### Backup
+### [Backup](/upd_02_23/udm/udm_backup)
 
 The Dream Machine configuration is backed up to both the Unifi Cloud and to the QNAP NAS.  The cloud backup should always be enabled in the UDM console settings.  The [Cloud Config Backup](https://192.168.1.1/settings/system) page shows whether it is enabled or not, and is the support page used to restore and/or backup a configuration to/from the cloud.
 

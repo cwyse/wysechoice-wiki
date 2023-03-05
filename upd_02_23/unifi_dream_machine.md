@@ -2,7 +2,7 @@
 title: Unifi Dream Machine Router
 description: All aspects of maintenance for the Unifi Dream Machine router configuration
 published: true
-date: 2023-03-05T19:36:29.943Z
+date: 2023-03-05T19:44:19.071Z
 tags: 
 editor: markdown
 dateCreated: 2023-03-05T19:10:34.928Z
@@ -23,17 +23,31 @@ Restore the configuration if the hard disk has failed.
 ## UDM Services
 
 ### [Domain Name Service](/upd_02_23/udm/dns)
+All information relating to the domain services used by the system.
 
 ### [Multicast Relay](/upd_02_23/udm/multicast)
+Support mDNS local name resolution.
 
 ### [RSync](/upd_02_23/udm/rsync)
-### [Podman](/upd_02_23/udm/podman)
-### [Container Common](/upd_02_23/udm/common)
-### [Container Network Interface](/upd_02_23/udm/cni)
-### [SSH](/upd_02_23/udm/ssh)
-### [Firewall updates](/upd_02_23/udm/firewall)
-### [Boot Script](/upd_02_23/udm/bootscript)
+RSync client to backup UDM data.
 
+### [Podman](/upd_02_23/udm/podman)
+Install and update podman tool, which is no longer used in recent UDM firmware.
+
+### [Container Common](/upd_02_23/udm/common)
+Common configuration that applies to all UDM containers.
+
+### [Container Network Interface](/upd_02_23/udm/cni)
+Network configuration information for the Podman containers.
+
+### [SSH](/upd_02_23/udm/ssh)
+Add an SSH key to the UDM that persists across reboots.
+
+### [Firewall updates](/upd_02_23/udm/firewall)
+Backup the port forwarding used by the UDM.
+
+### [Boot Script](/upd_02_23/udm/bootscript)
+Initial boot script support.
 
 
 

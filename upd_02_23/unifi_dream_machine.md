@@ -2,7 +2,7 @@
 title: Unifi Dream Machine Router
 description: All aspects of maintenance for the Unifi Dream Machine router configuration
 published: true
-date: 2023-03-05T19:10:34.928Z
+date: 2023-03-05T19:12:55.656Z
 tags: 
 editor: markdown
 dateCreated: 2023-03-05T19:10:34.928Z
@@ -114,7 +114,7 @@ root@ubnt:/# ssh-proxy /mnt/data/on_boot.sh
 ```
 On subsequent boots, the server will be started automatically.
 
-### Restore
+### UDM Restore[udm_restore](/upd_02_23/udm/udm_restore)
 If the UDM has failed completely, loosing all configuration data, the first thing to do is to restore internet connectivity.  From a web browser, enter 192.168.1.1 in the URL, and the following screen will be displayed. Press the button to start the setup. 
 
 &nbsp;

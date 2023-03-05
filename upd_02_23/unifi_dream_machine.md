@@ -2,7 +2,7 @@
 title: Unifi Dream Machine Router
 description: All aspects of maintenance for the Unifi Dream Machine router configuration
 published: true
-date: 2023-03-05T19:44:19.071Z
+date: 2023-03-05T20:16:35.630Z
 tags: 
 editor: markdown
 dateCreated: 2023-03-05T19:10:34.928Z
@@ -48,6 +48,17 @@ Backup the port forwarding used by the UDM.
 
 ### [Boot Script](/upd_02_23/udm/bootscript)
 Initial boot script support.
+
+### [Reverse Proxy](/upd_02_23/udm/reverseproxy)
+Support simple reverse proxy to avoid entering website port numbers.
+
+### [File Server](/upd_02_23/udm/fileserver)
+Lightweight broser based file server.  Primarily used to ensure that referenced UDM configuration files are up to date.
+
+
+
+
+
 
 
 

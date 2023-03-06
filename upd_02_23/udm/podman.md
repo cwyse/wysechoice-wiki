@@ -2,7 +2,7 @@
 title: UDM Podman service
 description: Installation and configuration information to install Podman.
 published: true
-date: 2023-03-06T07:29:14.556Z
+date: 2023-03-06T07:33:00.847Z
 tags: 
 editor: markdown
 dateCreated: 2023-03-06T07:12:03.414Z
@@ -19,7 +19,7 @@ dateCreated: 2023-03-06T07:12:03.414Z
 
 1. You have successfully set up the on boot script described
    [here](https://github.com/unifi-utilities/unifios-utilities/tree/main/on-boot-script)
-2. [Optional] [`25-add-cron-jobs.sh`](https://github.com/unifi-utilities/unifios-utilities/blob/main/on-boot-script/examples/udm-files/on_boot.d/25-add-cron-jobs.sh)
+2. [Optional] [`25-add-cron-jobs.sh`](https://raw.githubusercontent.com/unifi-utilities/unifios-utilities/main/on-boot-script/examples/udm-files/on_boot.d/25-add-cron-jobs.sh)
 
 ## Installation
 

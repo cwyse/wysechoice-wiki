@@ -2,7 +2,7 @@
 title: UDM Podman service
 description: Installation and configuration information to install Podman.
 published: true
-date: 2023-03-06T07:33:00.847Z
+date: 2023-03-06T07:39:46.866Z
 tags: 
 editor: markdown
 dateCreated: 2023-03-06T07:12:03.414Z
@@ -30,7 +30,7 @@ dateCreated: 2023-03-06T07:12:03.414Z
 
 Optional: automatic updates
 
-* Copy `cronjobs/update-podman` to `/data/cronjobs`
+* Copy [cronjobs/update-podman](https://raw.githubusercontent.com/unifi-utilities/unifios-utilities/main/podman-install/cronjobs/update-podman) to `/data/cronjobs`
 * Re-run `/data/on_boot.d/25-add-cron-jobs.sh`
 
 The script can be run manually. Normally, it will refuse to overwrite an existing podman install. If you've installed podman manually, or if you are using UDM 1.x firmware (which includes podman), then the script will do nothing.

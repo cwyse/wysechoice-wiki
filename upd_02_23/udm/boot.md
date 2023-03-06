@@ -2,7 +2,7 @@
 title: UDM Boot Script Utility
 description: Configuration and setup for the unifi-utilities on-boot-script package
 published: true
-date: 2023-03-06T04:13:58.358Z
+date: 2023-03-06T07:05:55.403Z
 tags: 
 editor: markdown
 dateCreated: 2023-03-05T21:43:02.600Z
@@ -78,4 +78,4 @@ Now that the package has been successfully installed, it can be used to start ad
 
 # Update
 
-To facilitate updating to a new version of the software, create a /data/scripts/update directory.  
+To update, perform the same steps as the installation.

@@ -2,7 +2,7 @@
 title: UDM Boot Script Utility
 description: Configuration and setup for the unifi-utilities on-boot-script package
 published: true
-date: 2023-03-06T02:33:38.122Z
+date: 2023-03-06T02:34:03.820Z
 tags: 
 editor: markdown
 dateCreated: 2023-03-05T21:43:02.600Z
@@ -55,7 +55,7 @@ Mar 05 17:14:28 UDM systemd[1]: Started Run On Startup UDM.
 Mar 05 17:14:28 UDM systemd[1]: udm-boot.service: Consumed 2.075s CPU time.
 root@UDM:~# 
 ```
-Note the it didn't actually work correctly yet, since it couldn't resolve github.com.  Therefore, modify /data/on_boot.d/05-install-cni-plugins.sh to include a test to see if the DNS service is running.
+Note the it didn't actually work correctly yet, since it couldn't resolve github.com.  Therefore, modify /data/on_boot.d/05-install-cni-plugins.sh to include a test to see if the DNS service is running, then reboot.
 
 ```
 #!/bin/bash

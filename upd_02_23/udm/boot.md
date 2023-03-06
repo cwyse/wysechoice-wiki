@@ -2,7 +2,7 @@
 title: UDM Boot Script Utility
 description: Configuration and setup for the unifi-utilities on-boot-script package
 published: true
-date: 2023-03-06T02:55:56.248Z
+date: 2023-03-06T03:05:38.758Z
 tags: 
 editor: markdown
 dateCreated: 2023-03-05T21:43:02.600Z
@@ -16,7 +16,12 @@ https://github.com/unifi-utilities/unifios-utilities/tree/main/on-boot-script-2.
 
 Run the commands shown below to get version 1.0.7, or the latest at [https://udm-boot.boostchicken.dev](https://udm-boot.boostchicken.dev).  The first few commands will fail like below if the package wasn't already installed.  
 
+
+Run the commands shown below to get version 1.0.7, or the latest at [https://udm-boot.boostchicken.dev](https://udm-boot.boostchicken.dev).  The first few commands will fail like below if the package wasn't already installed.  
+
 ```
+apt remove udm-boot
+
 root@UDM:~# systemctl disable udm-boot
 Failed to disable unit: Unit file udmboot.service does not exist.
 root@UDM:~# rm /etc/systemd/system/udm-boot.service

@@ -2,7 +2,7 @@
 title: UDM Boot Script Utility
 description: Configuration and setup for the unifi-utilities on-boot-script package
 published: true
-date: 2023-03-06T02:34:03.820Z
+date: 2023-03-06T02:39:29.421Z
 tags: 
 editor: markdown
 dateCreated: 2023-03-05T21:43:02.600Z
@@ -67,4 +67,24 @@ while ! ping -c 1 example.com; do sleep 1; done
 DATA_DIR="/data"
 case "$(ubnt-device-info firmware || true)" in
 ```
- 
+ After reboot the service should have successfully started:
+ ```
+ root@UDM:~# systemctl status udm-boot
+● udm-boot.service - Run On Startup UDM
+   Loaded: loaded (/etc/systemd/system/udm-boot.service; enabled; vendor preset: enabled)
+   Active: inactive (dead) since Sun 2023-03-05 21:35:25 EST; 15s ago
+      CPU: 2.275s
+
+Mar 05 21:34:44 UDM bash[2669]: PING example.com (93.184.216.34) 56(84) bytes of data.
+Mar 05 21:34:44 UDM bash[2669]: 64 bytes from 93.184.216.34 (93.184.216.34): icmp_seq=1 ttl=60 time=13.4 ms
+Mar 05 21:34:44 UDM bash[2669]: --- example.com ping statistics ---
+Mar 05 21:34:44 UDM bash[2669]: 1 packets transmitted, 1 received, 0% packet loss, time 0ms
+Mar 05 21:34:44 UDM bash[2669]: rtt min/avg/max/mdev = 13.416/13.416/13.416/0.000 ms
+Mar 05 21:35:23 UDM bash[2669]: Pouring /data/.cache/cni-plugins/cni-plugins-linux-arm64-v1.2.0.tgz
+Mar 05 21:35:24 UDM bash[2669]: udm-boot.service: running /data/on_boot.d/06-cni-bridge.sh
+Mar 05 21:35:25 UDM systemd[1]: udm-boot.service: Succeeded.
+Mar 05 21:35:25 UDM systemd[1]: Started Run On Startup UDM.
+Mar 05 21:35:25 UDM systemd[1]: udm-boot.service: Consumed 2.275s CPU time.
+root@UDM:~#
+```
+Now that the package has been successfully installed, it can be used to start additional services by adding a startup script to the /data/on_boot.d directory.

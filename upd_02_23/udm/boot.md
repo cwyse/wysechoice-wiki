@@ -2,7 +2,7 @@
 title: UDM Boot Script Utility
 description: Configuration and setup for the unifi-utilities on-boot-script package
 published: true
-date: 2023-03-06T03:05:38.758Z
+date: 2023-03-06T03:38:18.372Z
 tags: 
 editor: markdown
 dateCreated: 2023-03-05T21:43:02.600Z
@@ -19,9 +19,34 @@ Run the commands shown below to get version 1.0.7, or the latest at [https://udm
 
 Run the commands shown below to get version 1.0.7, or the latest at [https://udm-boot.boostchicken.dev](https://udm-boot.boostchicken.dev).  The first few commands will fail like below if the package wasn't already installed.  
 
+## Clean (optional)
+
+Start the install with a clean slate by running the following commands, ignoring any errors:
 ```
 apt remove udm-boot
+dpkg --purge udm-boot
+systemctl stop udm-boot
+systemctl disable udm-boot
+rm /etc/systemd/system/udm-boot.service
+rm /etc/systemd/system/udm-boot.service
+rm /usr/lib/systemd/system/udm-boot.service
+rm /usr/lib/systemd/system/udm-boot.service
+systemctl daemon-reload
+systemctl reset-failed
+```
+After execution of these commands, all traces of udm-boot should be gone:
+```
+root@UDM:~# find / -name "udm-boot*"
+root@UDM:~# 
+```
 
+## Install
+Now install the [udm-boot-2x_1.0.1_all.deb](https://github.com/unifi-utilities/unifios-utilities/blob/main/on-boot-script-2.x/packages/udm-boot-2x_1.0.1_all.deb?raw=true) (or later) using the following commands:
+```
+cd
+curl -L https://github.com/unifi-utilities/unifios-utilities/blob/main/on-boot-script-2.x/packages/udm-boot-2x_1.0.1_all.deb?raw=true -o udm-boot-2x_1.0.1_all.deb
+dpkg -i udm-boot-2x_1.0.1_all.deb
+systemctl enable udm-boot
 root@UDM:~# systemctl disable udm-boot
 Failed to disable unit: Unit file udmboot.service does not exist.
 root@UDM:~# rm /etc/systemd/system/udm-boot.service

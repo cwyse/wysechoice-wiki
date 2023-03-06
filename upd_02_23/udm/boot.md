@@ -2,27 +2,24 @@
 title: UDM Boot Script Utility
 description: Configuration and setup for the unifi-utilities on-boot-script package
 published: true
-date: 2023-03-06T02:39:29.421Z
+date: 2023-03-06T02:55:56.248Z
 tags: 
 editor: markdown
 dateCreated: 2023-03-05T21:43:02.600Z
 ---
 
 # Reference
-The official documentation:  [UDM / UDMPro Boot Script](https://github.com/unifi-utilities/unifios-utilities/raw/main/on-boot-script/README.md)
+The official documentation:  [UDM / UDMPro Boot Script](https://github.com/unifi-utilities/unifios-utilities/raw/main/on-boot-script-2.x/README.md)
 &nbsp;
-https://github.com/unifi-utilities/unifios-utilities/tree/main/on-boot-script
-
+https://github.com/unifi-utilities/unifios-utilities/tree/main/on-boot-script-2.x
 # Installation
 
 Run the commands shown below to get version 1.0.7, or the latest at [https://udm-boot.boostchicken.dev](https://udm-boot.boostchicken.dev).  The first few commands will fail like below if the package wasn't already installed.  
 
 ```
-root@UDM:~# rm /etc/init.d/udm.sh
-rm: cannot remove '/etc/init.d/udm.sh': No such file or directory
-root@UDM:~# systemctl disable udmboot
+root@UDM:~# systemctl disable udm-boot
 Failed to disable unit: Unit file udmboot.service does not exist.
-root@UDM:~# rm /etc/systemd/system/udmboot.service
+root@UDM:~# rm /etc/systemd/system/udm-boot.service
 rm: cannot remove '/etc/systemd/system/udmboot.service': No such file or directory
 root@UDM:~# curl -L https://unifi.boostchicken.io/udm-boot_1.0.7_all.deb -o udm-boot_1.0.7_all.deb
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
@@ -88,3 +85,7 @@ Mar 05 21:35:25 UDM systemd[1]: udm-boot.service: Consumed 2.275s CPU time.
 root@UDM:~#
 ```
 Now that the package has been successfully installed, it can be used to start additional services by adding a startup script to the /data/on_boot.d directory.
+
+# Update
+
+To facilitate updating to a new version of the software, create a /data/scripts/update directory.  

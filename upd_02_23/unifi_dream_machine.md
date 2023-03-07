@@ -2,7 +2,7 @@
 title: Unifi Dream Machine Router
 description: All aspects of maintenance for the Unifi Dream Machine router configuration
 published: true
-date: 2023-03-06T07:07:40.338Z
+date: 2023-03-07T05:10:27.441Z
 tags: 
 editor: markdown
 dateCreated: 2023-03-05T19:10:34.928Z
@@ -23,7 +23,7 @@ Restore the configuration if the hard disk has failed.
 ## UDM Services
 
 ### [UDM Boot Script](/upd_02_23/udm/boot)
-This service allows all other services to function by running a oot script at router startup.
+This service allows all other services to function by running a boot script at router startup.
 
 ### [Podman](/upd_02_23/udm/podman)
 Install and update podman tool, which is no longer used in recent UDM firmware.

@@ -2,9 +2,9 @@
 title: Network Servers
 description: Physical network servers
 published: true
-date: 2021-01-31T23:29:50.605Z
+date: 2023-12-17T18:55:39.459Z
 tags: 
-editor: undefined
+editor: markdown
 dateCreated: 2020-12-11T12:40:15.387Z
 ---
 
@@ -69,5 +69,7 @@ https://community.ui.com/questions/UniFi-API-browser-tool-updates-and-discussion
 openssl enc -d -in "unifi-20190707-2225.supp" -out "unifi-20190707-2225.supp.tmp" -aes-128-cbc -K 626379616e676b6d6c756f686d617273 -iv 75626e74656e74657270726973656170 -nosalt -nopad
 zip -FF "unifi-20190707-2225.supp.tmp" --out supp
 Is this a single-disk archive? (y/n): y
+gunzip -c db.gz | bsondump >dump.txt
 
 Reference: https://community.ui.com/questions/Extracting-logs-from-the-support-file/9cae86af-b73a-4a1c-8d41-4ba4b0ab45ad
+https://www.incredigeek.com/home/extract-unifi-unf-backup-file/

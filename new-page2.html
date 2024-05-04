@@ -2,7 +2,7 @@
 title: Untitled Page2
 description: 
 published: true
-date: 2024-05-04T15:42:52.706Z
+date: 2024-05-04T15:50:00.676Z
 tags: 
 editor: code
 dateCreated: 2024-05-04T15:03:36.474Z
@@ -64,13 +64,13 @@ dateCreated: 2024-05-04T15:03:36.474Z
             <th>Description</th>
         </tr>
         <tr>
-            <td>Main Network</td>
+            <td>Network Devices</td>
             <td>10</td>
             <td>192.168.10.2 - 192.168.10.254</td>
             <td>255.255.255.0</td>
             <td>192.168.10.1 (UDM)</td>
-            <td>WYSECHOICE (2.4GHz and 5GHz)</td>
-            <td>Primary network for wired devices, personal wireless devices</td>
+            <td>-</td>
+            <td>Network for network devices, access to all networks</td>
         </tr>
         <tr>
             <td>IoT Network</td>
@@ -91,6 +91,15 @@ dateCreated: 2024-05-04T15:03:36.474Z
             <td>Dedicated network for streaming devices, internet access only</td>
         </tr>
         <tr>
+            <td>Main Network</td>
+            <td>40</td>
+            <td>192.168.40.2 - 192.168.40.254</td>
+            <td>255.255.255.0</td>
+            <td>192.168.40.1 (UDM)</td>
+            <td>WYSECHOICE (2.4GHz and 5GHz)</td>
+            <td>Primary network for wired devices, personal wireless devices</td>
+        </tr>
+        <tr>
             <td>Guest Network</td>
             <td>50</td>
             <td>192.168.50.2 - 192.168.50.254</td>
@@ -98,15 +107,6 @@ dateCreated: 2024-05-04T15:03:36.474Z
             <td>192.168.50.1 (UDM)</td>
             <td>WYSECHOICE_GUEST (2.4GHz and 5GHz)</td>
             <td>Network for guest devices, internet access only</td>
-        </tr>
-        <tr>
-            <td>Network Devices</td>
-            <td>40</td>
-            <td>192.168.40.2 - 192.168.40.254</td>
-            <td>255.255.255.0</td>
-            <td>192.168.40.1 (UDM)</td>
-            <td>-</td>
-            <td>Network for network devices, access to all networks</td>
         </tr>
     </table>
 
@@ -125,7 +125,7 @@ dateCreated: 2024-05-04T15:03:36.474Z
         <tr>
             <td>UDM</td>
             <td>Port 2</td>
-            <td>Access port (VLAN 10)</td>
+            <td>Access port (VLAN 40)</td>
         </tr>
         <tr>
             <td>UDM</td>
@@ -140,7 +140,7 @@ dateCreated: 2024-05-04T15:03:36.474Z
         <tr>
             <td>UDM</td>
             <td>Port 5</td>
-            <td>Access port (VLAN 40)</td>
+            <td>Access port (VLAN 10)</td>
         </tr>
         <tr>
             <td>D-Link Switch</td>
@@ -150,7 +150,7 @@ dateCreated: 2024-05-04T15:03:36.474Z
         <tr>
             <td>USW-Flex-Mini-Office</td>
             <td>-</td>
-            <td>Access port (VLAN 10)</td>
+            <td>Access port (VLAN 40)</td>
         </tr>
         <tr>
             <td>USW-Flex-Mini-LivingRoom</td>
@@ -164,7 +164,7 @@ dateCreated: 2024-05-04T15:03:36.474Z
         </tr>
     </table>
 
-    <p>This configuration will separate your networks based on device types, providing appropriate access and security. The Main Network will be for your personal devices, the IoT Network for IoT devices, the Streaming Network for streaming devices, the Guest Network for guests, and the Network Devices network for management purposes.</p>
+    <p>This configuration will separate your networks based on device types, providing appropriate access and security. The Main Network (VLAN 40) will be for your personal devices, the IoT Network (VLAN 20) for IoT devices, the Streaming Network (VLAN 30) for streaming devices, the Guest Network (VLAN 50) for guests, and the Network Devices network (VLAN 10) for management purposes.</p>
 
     <p>Note: You will need to configure VLANs on your UDM and switches, as well as set up appropriate firewall rules to control inter-VLAN communication as per your requirements.</p>
 
@@ -178,11 +178,11 @@ dateCreated: 2024-05-04T15:03:36.474Z
             <th>Static IP Assignments</th>
         </tr>
         <tr>
-            <td>Main Network (VLAN 10)</td>
+            <td>Network Devices (VLAN 10)</td>
             <td>Enabled</td>
             <td>192.168.10.100 - 192.168.10.200</td>
             <td>24 hours</td>
-            <td>Assign static IP addresses to devices that require a fixed IP, such as network printers, servers, or any critical devices.</td>
+            <td>Assign static IP addresses to all network devices for easier management and identification.</td>
         </tr>
         <tr>
             <td>IoT Network (VLAN 20)</td>
@@ -195,22 +195,22 @@ dateCreated: 2024-05-04T15:03:36.474Z
             <td>Streaming Network (VLAN 30)</td>
             <td>Enabled</td>
             <td>192.168.30.100 - 192.168.30.200</td>
-            <td>24 hours</td>
+            <td>24<td>24 hours</td>
             <td>-</td>
-        </</tr>
+        </tr>
+        <tr>
+            <td>Main Network (VLAN 40)</td>
+            <td>Enabled</td>
+            <td>192.168.40.100 - 192.168.40.200</td>
+            <td>24 hours</td>
+            <td>Assign static IP addresses to devices that require a fixed IP, such as network printers, servers, or any critical devices.</td>
+        </tr>
         <tr>
             <td>Guest Network (VLAN 50)</td>
             <td>Enabled</td>
             <td>192.168.50.100 - 192.168.50.200</td>
             <td>12 hours</td>
             <td>-</td>
-        </tr>
-        <tr>
-            <td>Network Devices (VLAN 40)</td>
-            <td>Enabled</td>
-            <td>192.168.40.100 - 192.168.40.200</td>
-            <td>24 hours</td>
-            <td>Assign static IP addresses to all network devices for easier management and identification.</td>
         </tr>
     </table>
 
@@ -232,7 +232,7 @@ dateCreated: 2024-05-04T15:03:36.474Z
     <h4>D-Link Switch (DGS-1100-8)</h4>
     <ul>
         <li>Configure the switch as a trunk port to allow all VLANs to pass through.</li>
-        <li>Ensure the switch is configured to use the UDM (192.168.1.1) as the gateway.</li>
+        <li>Ensure the switch is configured to use the UDM (192.168.10.1) as the gateway.</li>
     </ul>
 
     <h4>Ubiquiti Access Points (UAP AC Lite)</h4>
@@ -241,14 +241,14 @@ dateCreated: 2024-05-04T15:03:36.474Z
             Living Room AP (192.168.10.13):
             <ul>
                 <li>Configure the AP to broadcast the SSID "WYSECHOICE" for both 2.4GHz and 5GHz bands.</li>
-                <li>Assign the AP to VLAN 1 (Main Network).</li>
+                <li>Assign the AP to VLAN 40 (Main Network).</li>
             </ul>
         </li>
         <li>
             Family Room AP (192.168.10.4):
             <ul>
                 <li>Configure the AP to broadcast the SSID "WYSECHOICE" for both 2.4GHz and 5GHz bands.</li>
-                <li>Assign the AP to VLAN 1 (Main Network).</li>
+                <li>Assign the AP to VLAN 40 (Main Network).</li>
             </ul>
         </li>
     </ul>
@@ -258,7 +258,7 @@ dateCreated: 2024-05-04T15:03:36.474Z
         <li>
             USW-Flex-Mini-Office (192.168.10.9):
             <ul>
-                <li>Configure the switch as an access port for VLAN 1 (Main Network).</li>
+                <li>Configure the switch as an access port for VLAN 40 (Main Network).</li>
             </ul>
         </li>
         <li>
@@ -266,14 +266,14 @@ dateCreated: 2024-05-04T15:03:36.474Z
             <ul>
                 <li>Configure the switch as an access port for VLAN 30 (Streaming Network).</li>
                 <li>Assign the FireTV connected to port 2 to VLAN 30.</li>
-                <li>Assign the Living Room AP connected to port 3 to VLAN 1 (Main Network).</li>
+                <li>Assign the Living Room AP connected to port 3 to VLAN 40 (Main Network).</li>
             </ul>
         </li>
         <li>
             USW-Flex-Mini-FamilyRoom (192.168.10.6):
             <ul>
                 <li>Configure the switch as an access port for VLAN 20 (IoT Network).</li>
-                <li>Assign the Family Room AP connected to port 4 to VLAN 1 (Main Network).</li>
+                <li>Assign the Family Room AP connected to port 4 to VLAN 40 (Main Network).</li>
             </ul>
         </li>
     </ul>

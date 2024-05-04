@@ -2,7 +2,7 @@
 title: Untitled Page2
 description: 
 published: true
-date: 2024-05-04T15:39:42.775Z
+date: 2024-05-04T15:42:52.706Z
 tags: 
 editor: code
 dateCreated: 2024-05-04T15:03:36.474Z
@@ -65,10 +65,10 @@ dateCreated: 2024-05-04T15:03:36.474Z
         </tr>
         <tr>
             <td>Main Network</td>
-            <td>1 (Default)</td>
-            <td>192.168.1.2 - 192.168.1.254</td>
+            <td>10</td>
+            <td>192.168.10.2 - 192.168.10.254</td>
             <td>255.255.255.0</td>
-            <td>192.168.1.1 (UDM)</td>
+            <td>192.168.10.1 (UDM)</td>
             <td>WYSECHOICE (2.4GHz and 5GHz)</td>
             <td>Primary network for wired devices, personal wireless devices</td>
         </tr>
@@ -125,7 +125,7 @@ dateCreated: 2024-05-04T15:03:36.474Z
         <tr>
             <td>UDM</td>
             <td>Port 2</td>
-            <td>Access port (VLAN 1)</td>
+            <td>Access port (VLAN 10)</td>
         </tr>
         <tr>
             <td>UDM</td>
@@ -150,7 +150,7 @@ dateCreated: 2024-05-04T15:03:36.474Z
         <tr>
             <td>USW-Flex-Mini-Office</td>
             <td>-</td>
-            <td>Access port (VLAN 1)</td>
+            <td>Access port (VLAN 10)</td>
         </tr>
         <tr>
             <td>USW-Flex-Mini-LivingRoom</td>
@@ -178,9 +178,9 @@ dateCreated: 2024-05-04T15:03:36.474Z
             <th>Static IP Assignments</th>
         </tr>
         <tr>
-            <td>Main Network (VLAN 1)</td>
+            <td>Main Network (VLAN 10)</td>
             <td>Enabled</td>
-            <td>192.168.1.100 - 192.168.1.200</td>
+            <td>192.168.10.100 - 192.168.10.200</td>
             <td>24 hours</td>
             <td>Assign static IP addresses to devices that require a fixed IP, such as network printers, servers, or any critical devices.</td>
         </tr>
@@ -238,14 +238,14 @@ dateCreated: 2024-05-04T15:03:36.474Z
     <h4>Ubiquiti Access Points (UAP AC Lite)</h4>
     <ul>
         <li>
-            Living Room AP (192.168.1.13):
+            Living Room AP (192.168.10.13):
             <ul>
                 <li>Configure the AP to broadcast the SSID "WYSECHOICE" for both 2.4GHz and 5GHz bands.</li>
                 <li>Assign the AP to VLAN 1 (Main Network).</li>
             </ul>
         </li>
         <li>
-            Family Room AP (192.168.1.4):
+            Family Room AP (192.168.10.4):
             <ul>
                 <li>Configure the AP to broadcast the SSID "WYSECHOICE" for both 2.4GHz and 5GHz bands.</li>
                 <li>Assign the AP to VLAN 1 (Main Network).</li>
@@ -256,13 +256,13 @@ dateCreated: 2024-05-04T15:03:36.474Z
     <h4>Ubiquiti Switches (USW-Flex-Mini)</h4>
     <ul>
         <li>
-            USW-Flex-Mini-Office (192.168.1.9):
+            USW-Flex-Mini-Office (192.168.10.9):
             <ul>
                 <li>Configure the switch as an access port for VLAN 1 (Main Network).</li>
             </ul>
         </li>
         <li>
-            USW-Flex-Mini-LivingRoom (192.168.1.7):
+            USW-Flex-Mini-LivingRoom (192.168.10.7):
             <ul>
                 <li>Configure the switch as an access port for VLAN 30 (Streaming Network).</li>
                 <li>Assign the FireTV connected to port 2 to VLAN 30.</li>
@@ -270,7 +270,7 @@ dateCreated: 2024-05-04T15:03:36.474Z
             </ul>
         </li>
         <li>
-            USW-Flex-Mini-FamilyRoom (192.168.1.6):
+            USW-Flex-Mini-FamilyRoom (192.168.10.6):
             <ul>
                 <li>Configure the switch as an access port for VLAN 20 (IoT Network).</li>
                 <li>Assign the Family Room AP connected to port 4 to VLAN 1 (Main Network).</li>

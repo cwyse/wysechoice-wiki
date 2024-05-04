@@ -2,10 +2,127 @@
 title: test
 description: 
 published: true
-date: 2024-05-04T15:00:12.448Z
+date: 2024-05-04T15:01:49.005Z
 tags: 
 editor: ckeditor
 dateCreated: 2024-05-04T15:00:12.448Z
 -->
 
-<p>test</p>
+<p>&lt;!DOCTYPE html&gt;</p>
+<p>&lt;html lang="en"&gt;</p>
+<p>&lt;head&gt;</p>
+<p>&nbsp; &nbsp;&lt;meta charset="UTF-8"&gt;</p>
+<p>&nbsp; &nbsp;&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p>&nbsp; &nbsp;&lt;title&gt;Configure UDM for Multiple VLANs and Wi-Fi Networks&lt;/title&gt;</p>
+<p>&nbsp; &nbsp;&lt;style&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;body {font-family: Arial, sans-serif; line-height: 1.6; color: #333333; margin: 20px;}</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;h1, h2 {color: #0056b3;}</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;h3 {color: #0066CC;}</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;pre {background-color: #f4f4f4; padding: 15px;}</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;code {color: #D63384;}</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;ul, ol {padding-left: 20px;}</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;table {width: 100%; border-collapse: collapse;}</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;th, td {border: 1px solid #dddddd; padding: 8px; text-align: left;}</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;th {background-color: #f2f2f2;}</p>
+<p>&nbsp; &nbsp;&lt;/style&gt;</p>
+<p>&lt;/head&gt;</p>
+<p>&lt;body&gt;</p>
+<p>&nbsp; &nbsp;&lt;h1&gt;Configure Ubiquiti Dream Machine for Multiple VLANs and Wi-Fi Networks&lt;/h1&gt;</p>
+<p>&nbsp; &nbsp;</p>
+<p>&nbsp; &nbsp;&lt;p&gt;This guide provides detailed instructions on how to configure the Ubiquiti Dream Machine (UDM) to support multiple VLANs and associated Wi-Fi SSIDs to segment network traffic for management, user devices, IoT devices, guest access, and streaming services.&lt;/p&gt;</p>
+<p>&nbsp;</p>
+<p>&nbsp; &nbsp;&lt;h2&gt;Prerequisites&lt;/h2&gt;</p>
+<p>&nbsp; &nbsp;&lt;ul&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;&lt;li&gt;Ubiquiti Dream Machine (UDM)&lt;/li&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;&lt;li&gt;Ubiquiti Access Points (APs) compatible with UDM&lt;/li&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;&lt;li&gt;Network cables&lt;/li&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;&lt;li&gt;Access to UniFi Network application (latest version)&lt;/li&gt;</p>
+<p>&nbsp; &nbsp;&lt;/ul&gt;</p>
+<p>&nbsp;</p>
+<p>&nbsp; &nbsp;&lt;h2&gt;1. VLAN Configuration&lt;/h2&gt;</p>
+<p>&nbsp; &nbsp;&lt;p&gt;Begin by configuring the VLANs on your UDM. VLANs help in segmenting the network which enhances security and improves network management.&lt;/p&gt;</p>
+<p>&nbsp;</p>
+<p>&nbsp; &nbsp;&lt;h3&gt;Step 1: Access the UniFi Network Application&lt;/h3&gt;</p>
+<p>&nbsp; &nbsp;&lt;ol&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;&lt;li&gt;Connect your device to the network managed by the UDM.&lt;/li&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;&lt;li&gt;Open a web browser and navigate to &lt;code&gt;https://unifi.ui.com&lt;/code&gt; or the IP address assigned to your UDM.&lt;/li&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;&lt;li&gt;Log in using your Ubiquiti account credentials.&lt;/li&gt;</p>
+<p>&nbsp; &nbsp;&lt;/ol&gt;</p>
+<p>&nbsp;</p>
+<p>&nbsp; &nbsp;&lt;h3&gt;Step 2: Create VLANs&lt;/h3&gt;</p>
+<p>&nbsp; &nbsp;&lt;p&gt;Navigate to the settings area and select 'Networks'. Click on 'Create New Network' and configure each VLAN as follows:&lt;/p&gt;</p>
+<p>&nbsp; &nbsp;</p>
+<p>&nbsp; &nbsp;&lt;table&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;&lt;tr&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;th&gt;VLAN Name&lt;/th&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;th&gt;VLAN ID&lt;/th&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;th&gt;Purpose&lt;/th&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;&lt;/tr&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;&lt;tr&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;td&gt;WYSECHOICE_MGMT&lt;/td&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;td&gt;10&lt;/td&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;td&gt;Management&lt;/td&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;&lt;/tr&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;&lt;tr&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;td&gt;WYSECHOICE&lt;/td&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;td&gt;40&lt;/td&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;td&gt;User devices&lt;/td&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;&lt;/tr&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;&lt;tr&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;td&gt;WYSECHOICE_IOT&lt;/td&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;td&gt;20&lt;/td&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;td&gt;IoT Devices&lt;/td&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;&lt;/tr&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;&lt;tr&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;td&gt;WYSECHOICE_GUEST&lt;/td&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;td&gt;50&lt;/td&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;td&gt;Guest Access&lt;/td&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;&lt;/tr&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;&lt;tr&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;td&gt;WYSECHOICE_STREAMING&lt;/td&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;td&gt;30&lt;/td&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;td&gt;Streaming Devices&lt;/td&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;&lt;/tr&gt;</p>
+<p>&nbsp; &nbsp;&lt;/table&gt;</p>
+<p>&nbsp;</p>
+<p>&nbsp; &nbsp;&lt;p&gt;For each network:&lt;/p&gt;</p>
+<p>&nbsp; &nbsp;&lt;ul&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;&lt;li&gt;Enter the Name and VLAN ID.&lt;/li&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;&lt;li&gt;Configure DHCP settings as required. It’s recommended to enable DHCP and set an appropriate range that does not overlap with other VLANs.&lt;/li&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;&lt;li&gt;Save and apply changes.&lt;/li&gt;</p>
+<p>&nbsp; &nbsp;&lt;/ul&gt;</p>
+<p>&nbsp;</p>
+<p>&nbsp; &nbsp;&lt;h2&gt;2. Wi-Fi Network Setup&lt;/h2&gt;</p>
+<p>&nbsp; &nbsp;&lt;p&gt;After setting up VLANs, configure the corresponding SSIDs for wireless access.&lt;/p&gt;</p>
+<p>&nbsp;</p>
+<p>&nbsp; &nbsp;&lt;h3&gt;Step 1: Configure SSIDs&lt;/h3&gt;</p>
+<p>&nbsp; &nbsp;&lt;p&gt;Navigate to 'Wi-Fi Networks' and click on 'Create New Wi-Fi Network'.Set up each SSID as follows:</p>
+<p>&nbsp;</p>
+<p>```html</p>
+<p>&lt;table&gt;</p>
+<p>&nbsp; &nbsp;&lt;tr&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;&lt;th&gt;SSID Name&lt;/th&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;&lt;th&gt;VLAN&lt;/th&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;&lt;th&gt;Security&lt;/th&gt;</p>
+<p>&nbsp; &nbsp;&lt;/tr&gt;</p>
+<p>&nbsp; &nbsp;&lt;tr&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;&lt;td&gt;WYSECHOICE_GUEST&lt;/td&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;&lt;td&gt;50&lt;/td&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;&lt;td&gt;WPA2 Personal&lt;/td&gt;</p>
+<p>&nbsp; &nbsp;&lt;/tr&gt;</p>
+<p>&nbsp; &nbsp;&lt;tr&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;&lt;td&gt;WYSECHOICE&lt;/td&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;&lt;td&gt;40&lt;/td&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;&lt;td&gt;WPA2 Personal&lt;/td&gt;</p>
+<p>&nbsp; &nbsp;&lt;/tr&gt;</p>
+<p>&nbsp; &nbsp;&lt;tr&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;&lt;td&gt;WYSECHOICE_IOT&lt;/td&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;&lt;td&gt;20&lt;/td&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;&lt;td&gt;WPA2 Personal&lt;/td&gt;</p>
+<p>&nbsp; &nbsp;&lt;/tr&gt;</p>
+<p>&nbsp; &nbsp;&lt;tr&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;&lt;td&gt;WYSECHOICE_STREAMING&lt;/td&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;&lt;td&gt;30&lt;/td&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp;&lt;td&gt;WPA2 Personal&lt;/td&gt;</p>
+<p>&nbsp; &nbsp;&lt;/tr&gt;</p>
+<p>&lt;/table&gt;</p>

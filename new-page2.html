@@ -2,382 +2,288 @@
 title: Untitled Page2
 description: 
 published: true
-date: 2024-05-04T15:33:01.584Z
+date: 2024-05-04T15:39:42.775Z
 tags: 
 editor: code
 dateCreated: 2024-05-04T15:03:36.474Z
 -->
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Network Configuration Plan</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
         }
-        h1, h2, h3 {
+
+        h1, h2, h3, h4 {
             color: #333;
         }
-        code {
-            background-color: #f0f0f0;
-            padding: 2px 4px;
-            font-family: Consolas, monospace;
-        }
-        pre {
-            background-color: #f0f0f0;
-            padding: 10px;
-            font-family: Consolas, monospace;
-            overflow-x: auto;
-        }
-        .network-diagram {
-            text-align: center;
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
             margin-bottom: 20px;
         }
-        .network-diagram img {
-            max-width: 100%;
-            height: auto;
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .network-diagram {
+            text-align: center;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
     <h1>Network Configuration Plan</h1>
 
-    <h2>Hardware</h2>
-    <ul>
-        <li>ISP: Cox Internet. Modem connected to Ubiquiti Dream Machine (UDM)</li>
-        <li>
-            UDM:
-            <ul>
-                <li>Running UnifiOS 4.0.3</li>
-                <li>IP Address: 192.168.1.1</li>
-                <li>MAC Address: 74:83:c2:d6:c9:1b</li>
-                <li>Device Version: 4.0.3</li>
-                <li>Network: WYSECHOICE_DEFAULT</li>
-                <li>
-                    WAN 1:
-                    <ul>
-                        <li>IP Address: 70.188.160.115</li>
-                        <li>MAC Address: 74:83:c2:d6:c9:1f</li>
-                        <li>Experience: GbE</li>
-                        <li>ISP: Cox Communications</li>
-                    </ul>
-                </li>
-                <li>
-                    Ports:
-                    <ul>
-                        <li>1 - Connected to D-Link UGS-1100-8 smart switch at 192.168.1.5</li>
-                        <li>2 - Connected to USW-Flex-Mini-Office at 192.168.1.9</li>
-                        <li>3 - Connected to USW-Flex-Mini-LivingRoom at 192.168.1.7</li>
-                        <li>4 - Connected to USW-Flex-Mini-FamilyRoom at 192.168.1.6</li>
-                        <li>5 - Connected to Cox internet via Motorola Surfboard modem</li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-        <li>
-            D-Link Switch:
-            <ul>
-                <li>Device Type: DGS-1100-08 Gigabit Ethernet Switch</li>
-                <li>MAC Address: 10-62-EB-01-C9-72</li>
-                <li>System Name: D-Link DGS-1100-8</li>
-                <li>IP Address: 192.168.1.5</li>
-                <li>System Location: </li>
-                <li>Mask: 255.255.255.0</li>
-                <li>System Contact: </li>
-                <li>Gateway: 192.168.1.1</li>
-                <li>Boot PROM Version: Ver 1.0.8</li>
-                <li>System Up Time: 0 days 0 hours 5 mins 56 secs</li>
-                <li>Firmware Version: Ver 1.00.B031</li>
-                <li>Serial Number: QBLX3GA000780</li>
-                <li>Hardware Version: B1</li>
-                <li>Web Session Timeout: 3600 secs</li>
-            </ul>
-        </li>
-        <li>
-            USW-Flex-Mini-Office:
-            <ul>
-                <li>IP Address: 192.168.1.9</li>
-                <li>MAC Address: 74:ac:b9:aa:7f:4d</li>
-                <li>Device Version: 2.0.0.704</li>
-            </ul>
-        </li>
-        <li>
-            USW-Flex-Mini-LivingRoom:
-            <ul>
-                <li>IP Address: 192.168.1.7</li>
-                <li>MAC Address: 74:ac:b9:ab:a0:b9</li>
-                <li>Device Version: 2.0.0.704</li>
-            </ul>
-        </li>
-        <li>
-            USW-Flex-Mini-FamilyRoom:
-            <ul>
-                <li>IP Address: 192.168.1.6</li>
-                <li>MAC Address: 74:ac:b9:ab:a1:2f</li>
-                <li>Device Version: 2.0.0.704</li>
-            </ul>
-        </li>
-    </ul>
-
-    <h2>Device Types</h2>
-    <ul>
-        <li>
-            Wired devices: Various computers. These devices should have access to all other devices on the network by default, including any ports. Exceptions would be two Ubiquiti Access Points connected to the USW-Flex-Minis (UDM ports 3 & 4).
-            <ul>
-                <li>
-                    USW-Flex-Mini-LivingRoom:
-                    <ul>
-                        <li>Port 2: FireTV (hard-wired, considered a streaming device)</li>
-                        <li>
-                            Port 3: Living Room AP (Model: UAP AC Lite)
-                            <ul>
-                                <li>IP Address: 192.168.1.13</li>
-                                <li>MAC Address: 80:2a:a8:86:fb:37</li>
-                                <li>Device Version: 6.6.70</li>
-                            </ul>
-                        </li>
-                        <li>Port 1: UDM</li>
-                    </ul>
-                </li>
-                <li>
-                    USW-Flex-Mini-FamilyRoom:
-                    <ul>
-                        <li>Port 1: UDM</li>
-                        <li>
-                            Port 4: UAP (Model: UAP AC Lite)
-                            <ul>
-                                <li>IP Address: 192.168.1.4</li>
-                                <li>MAC Address: 80:2a:a8:86:fc:98</li>
-                                <li>Device Version: 6.6.70</li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-        <li>Network devices: All Ubiquiti devices and the D-Link switch.</li>
-        <li>Streaming devices: Two Fire TVs, one hard-wired and one will connect via WiFi.</li>
-        <li>IoT devices: Many smart switches and other devices, primarily connected via WiFi.</li>
-        <li>iPhones, tablets, and WiFi user devices: Various WiFi devices owned by me.</li>
-        <li>Guest devices: iPhones of visitors.</li>
-    </ul>
-
-    <p>Additionally, some wired devices may also have WiFi, and should be able to connect with the same connectivity as its wired connection.</p>
-
-    <p>The IoT devices and streaming devices should not be able to access the wired or network devices, but need internet access. If they are hard-wired, they need to be distinct from my standard 'wired' devices.</p>
-
-    <p>The network devices should be able to access any device on the network.</p>
-
-    <p>The iPhones, tablets, and WiFi user devices should be able to access any device on the network.</p>
-
-    <p>Guest devices should be able to access the internet</p>
-
     <h2>Network Configuration</h2>
     <p>Based on the requirements, the following network configuration plan is recommended:</p>
 
     <h3>VLANs</h3>
-    <ol>
-        <li>
-            <strong>Main Network (VLAN 1):</strong>
-            <ul>
-                <li>VLAN ID: 1 (Default)</li>
-                <li>IP Address Range: 192.168.1.2 - 192.168.1.254</li>
-                <li>Subnet Mask: 255.255.255.0</li>
-                <li>Gateway: 192.168.1.1 (UDM)</li>
-                <li>SSID: WYSECHOICE (2.4GHz and 5GHz)</li>
-                <li>This will be the primary network for your wired devices, such as computers, and your personal wireless devices (phones, tablets).</li>
-            </ul>
-        </li>
-        <li>
-            <strong>IoT Network (VLAN 20):</strong>
-            <ul>
-                <li>VLAN ID: 20</li>
-                <li>IP Address Range: 192.168.20.2 - 192.168.20.254</li>
-                <li>Subnet Mask: 255.255.255.0</li>
-                <li>Gateway: 192.168.20.1 (UDM)</li>
-                <li>SSID: WYSECHOICE_IOT (2.4GHz only)</li>
-                <li>This network will be dedicated to your IoT devices (smart switches, etc.).</li>
-                <li>This network will have internet access but no access to other networks.</li>
-            </ul>
-        </li>
-        <li>
-            <strong>Streaming Network (VLAN 30):</strong>
-            <ul>
-                <li>VLAN ID: 30</li>
-                <li>IP Address Range: 192.168.30.2 - 192.168.30.254</li>
-                <li>Subnet Mask: 255.255.255.0</li>
-                <li>Gateway: 192.168.30.1 (UDM)</li>
-                <li>SSID: WYSECHOICE_STREAMING (5GHz only)</li>
-                <li>This network will be dedicated to your streaming devices (Fire TVs).</li>
-                <li>This network will have internet access but no access to other networks.</li>
-            </ul>
-        </li>
-        <li>
-            <strong>Guest Network (VLAN 50):</strong>
-            <ul>
-                <li>VLAN ID: 50</li>
-                <li>IP Address Range: 192.168.50.2 - 192.168.50.254</li>
-                <li>Subnet Mask: 255.255.255.0</li>
-                <li>Gateway: 192.168.50.1 (UDM)</li>
-                <li>SSID: WYSECHOICE_GUEST (2.4GHz and 5GHz)</li>
-                <li>This network will be for your guests' devices, providing internet access only.</li>
-                <li>This network will have internet access but no access to other networks.</li>
-            </ul>
-        </li>
-        <li>
-            <strong>Network Devices (VLAN 40):</strong>
-            <ul>
-                <li>VLAN ID: 40</li>
-                <li>IP Address Range: 192.168.40.2 - 192.168.40.254</li>
-                <li>Subnet Mask: 255.255.255.0</li>
-                <li>Gateway: 192.168.40.1 (UDM)</li>
-                <li>This network will be for your network devices (Ubiquiti devices, D-Link switch).</li>
-                <li>This network will have access to all other networks for management purposes.</li>
-            </ul>
-        </li>
-    </ol>
+    <table>
+        <tr>
+            <th>VLAN Name</th>
+            <th>VLAN ID</th>
+            <th>IP Address Range</th>
+            <th>Subnet Mask</th>
+            <th>Gateway</th>
+            <th>SSID</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>Main Network</td>
+            <td>1 (Default)</td>
+            <td>192.168.1.2 - 192.168.1.254</td>
+            <td>255.255.255.0</td>
+            <td>192.168.1.1 (UDM)</td>
+            <td>WYSECHOICE (2.4GHz and 5GHz)</td>
+            <td>Primary network for wired devices, personal wireless devices</td>
+        </tr>
+        <tr>
+            <td>IoT Network</td>
+            <td>20</td>
+            <td>192.168.20.2 - 192.168.20.254</td>
+            <td>255.255.255.0</td>
+            <td>192.168.20.1 (UDM)</td>
+            <td>WYSECHOICE_IOT (2.4GHz only)</td>
+            <td>Dedicated network for IoT devices, internet access only</td>
+        </tr>
+        <tr>
+            <td>Streaming Network</td>
+            <td>30</td>
+            <td>192.168.30.2 - 192.168.30.254</td>
+            <td>255.255.255.0</td>
+            <td>192.168.30.1 (UDM)</td>
+            <td>WYSECHOICE_STREAMING (5GHz only)</td>
+            <td>Dedicated network for streaming devices, internet access only</td>
+        </tr>
+        <tr>
+            <td>Guest Network</td>
+            <td>50</td>
+            <td>192.168.50.2 - 192.168.50.254</td>
+            <td>255.255.255.0</td>
+            <td>192.168.50.1 (UDM)</td>
+            <td>WYSECHOICE_GUEST (2.4GHz and 5GHz)</td>
+            <td>Network for guest devices, internet access only</td>
+        </tr>
+        <tr>
+            <td>Network Devices</td>
+            <td>40</td>
+            <td>192.168.40.2 - 192.168.40.254</td>
+            <td>255.255.255.0</td>
+            <td>192.168.40.1 (UDM)</td>
+            <td>-</td>
+            <td>Network for network devices, access to all networks</td>
+        </tr>
+    </table>
 
     <h3>Port Configuration</h3>
-    <ul>
-        <li>UDM Port 1: Trunk port (All VLANs)</li>
-        <li>UDM Port 2: Access port (VLAN 1)</li>
-        <li>UDM Port 3: Access port (VLAN 30)</li>
-        <li>UDM Port 4: Access port (VLAN 20)</li>
-        <li>UDM Port 5: Access port (VLAN 40)</li>
-        <li>D-Link Switch: Trunk port (All VLANs)</li>
-        <li>USW-Flex-Mini-Office: Access port (VLAN 1)</li>
-        <li>USW-Flex-Mini-LivingRoom: Access port (VLAN 30)</li>
-        <li>USW-Flex-Mini-FamilyRoom: Access port (VLAN 20)</li>
-    </ul>
+    <table>
+        <tr>
+            <th>Device</th>
+            <th>Port</th>
+            <th>Configuration</th>
+        </tr>
+        <tr>
+            <td>UDM</td>
+            <td>Port 1</td>
+            <td>Trunk port (All VLANs)</td>
+        </tr>
+        <tr>
+            <td>UDM</td>
+            <td>Port 2</td>
+            <td>Access port (VLAN 1)</td>
+        </tr>
+        <tr>
+            <td>UDM</td>
+            <td>Port 3</td>
+            <td>Access port (VLAN 30)</td>
+        </tr>
+        <tr>
+            <td>UDM</td>
+            <td>Port 4</td>
+            <td>Access port (VLAN 20)</td>
+        </tr>
+        <tr>
+            <td>UDM</td>
+            <td>Port 5</td>
+            <td>Access port (VLAN 40)</td>
+        </tr>
+        <tr>
+            <td>D-Link Switch</td>
+            <td>-</td>
+            <td>Trunk port (All VLANs)</td>
+        </tr>
+        <tr>
+            <td>USW-Flex-Mini-Office</td>
+            <td>-</td>
+            <td>Access port (VLAN 1)</td>
+        </tr>
+        <tr>
+            <td>USW-Flex-Mini-LivingRoom</td>
+            <td>-</td>
+            <td>Access port (VLAN 30)</td>
+        </tr>
+        <tr>
+            <td>USW-Flex-Mini-FamilyRoom</td>
+            <td>-</td>
+            <td>Access port (VLAN 20)</td>
+        </tr>
+    </table>
 
     <p>This configuration will separate your networks based on device types, providing appropriate access and security. The Main Network will be for your personal devices, the IoT Network for IoT devices, the Streaming Network for streaming devices, the Guest Network for guests, and the Network Devices network for management purposes.</p>
 
     <p>Note: You will need to configure VLANs on your UDM and switches, as well as set up appropriate firewall rules to control inter-VLAN communication as per your requirements.</p>
 
     <h3>DHCP Configuration</h3>
-    <p>For DHCP configuration, it is recommended to use the following settings:</p>
+    <table>
+        <tr>
+            <th>Network</th>
+            <th>DHCP Server</th>
+            <th>DHCP Range</th>
+            <th>Lease Time</th>
+            <th>Static IP Assignments</th>
+        </tr>
+        <tr>
+            <td>Main Network (VLAN 1)</td>
+            <td>Enabled</td>
+            <td>192.168.1.100 - 192.168.1.200</td>
+            <td>24 hours</td>
+            <td>Assign static IP addresses to devices that require a fixed IP, such as network printers, servers, or any critical devices.</td>
+        </tr>
+        <tr>
+            <td>IoT Network (VLAN 20)</td>
+            <td>Enabled</td>
+            <td>192.168.20.100 - 192.168.20.200</td>
+            <td>24 hours</td>
+            <td>-</td>
+        </tr>
+        <tr>
+            <td>Streaming Network (VLAN 30)</td>
+            <td>Enabled</td>
+            <td>192.168.30.100 - 192.168.30.200</td>
+            <td>24 hours</td>
+            <td>-</td>
+        </</tr>
+        <tr>
+            <td>Guest Network (VLAN 50)</td>
+            <td>Enabled</td>
+            <td>192.168.50.100 - 192.168.50.200</td>
+            <td>12 hours</td>
+            <td>-</td>
+        </tr>
+        <tr>
+            <td>Network Devices (VLAN 40)</td>
+            <td>Enabled</td>
+            <td>192.168.40.100 - 192.168.40.200</td>
+            <td>24 hours</td>
+            <td>Assign static IP addresses to all network devices for easier management and identification.</td>
+        </tr>
+    </table>
+
+    <p>By using static IP assignments for critical devices and network devices, you can ensure consistent and reliable access to these devices, while still allowing dynamic IP assignment for other devices on the network. The shorter lease time for the Guest Network will help free up IP addresses more frequently for new guest devices.</p>
+
+    <h3>Network Device Configuration</h3>
+    <p>To ensure proper functionality and security, the following configurations are recommended for your network devices:</p>
+
+    <h4>Ubiquiti Dream Machine (UDM)</h4>
+    <ul>
+        <li>Configure VLANs as per the VLAN configuration mentioned above.</li>
+        <li>Set up DHCP servers for each VLAN with the specified IP address ranges and lease times.</li>
+        <li>Configure port assignments as per the Port Configuration section.</li>
+        <li>Set up appropriate firewall rules to control inter-VLAN communication and internet access.</li>
+        <li>Enable DNS server and configure the domain name "wysechoice.net".</li>
+        <li>Add DNS entries for all network devices using their static IP addresses and hostnames.</li>
+    </ul>
+
+    <h4>D-Link Switch (DGS-1100-8)</h4>
+    <ul>
+        <li>Configure the switch as a trunk port to allow all VLANs to pass through.</li>
+        <li>Ensure the switch is configured to use the UDM (192.168.1.1) as the gateway.</li>
+    </ul>
+
+    <h4>Ubiquiti Access Points (UAP AC Lite)</h4>
     <ul>
         <li>
-            <strong>Main Network (VLAN 1):</strong>
+            Living Room AP (192.168.1.13):
             <ul>
-                <li>DHCP Server: Enabled</li>
-                <li>DHCP Range: 192.168.1.100 - 192.168.1.200</li>
-                <li>Lease Time: 24 hours</li>
-                <li>Static IP Assignments:
-                    <ul>
-                        <li>Assign static IP addresses to devices that require a fixed IP, such as network printers, servers, or any critical devices.</li>
-                    </ul>
-                </li>
+                <li>Configure the AP to broadcast the SSID "WYSECHOICE" for both 2.4GHz and 5GHz bands.</li>
+                <li>Assign the AP to VLAN 1 (Main Network).</li>
             </ul>
         </li>
         <li>
-            <strong>IoT Network (VLAN 20):</strong>
+            Family Room AP (192.168.1.4):
             <ul>
-                <li>DHCP Server: Enabled</li>
-                <li>DHCP Range: 192.168.20.100 - 192.168.20.200</li>
-                <li>Lease Time: 24 hours</li>
-            </ul>
-        </li>
-        <li>
-            <strong>Streaming Network (VLAN 30):</strong>
-            <ul>
-                <li>DHCP Server: Enabled</li>
-                <li>DHCP Range: 192.168.30.100 - 192.168.30.200</li>
-                <li>Lease Time: 24 hours</li>
-            </ul>
-        </li>
-        <li>
-            <strong>Guest Network (VLAN 50):</strong>
-            <ul>
-                <li>DHCP Server: Enabled</li>
-                <li>DHCP Range: 192.168.50.100 - 192.168.50.200</li>
-                <li>Lease Time: 12 hours</li>
-            </ul>
-        </li>
-        <li>
-            <strong>Network Devices (VLAN 40):</strong>
-            <ul>
-                <li>DHCP Server: Enabled</li>
-                <li>DHCP Range: 192.168.40.100 - 192.168.40.200</li>
-                <li>Lease Time: 24 hours</li>
-                <li>Static IP Assignments:
-                    <ul>
-                        <li>Assign static IP addresses to all network devices for easier management and identification.</li>
-                    </ul>
-                </li>
+                <li>Configure the AP to broadcast the SSID "WYSECHOICE" for both 2.4GHz and 5GHz bands.</li>
+                <li>Assign the AP to VLAN 1 (Main Network).</li>
             </ul>
         </li>
     </ul>
 
-    <p>By using static IPassignments for critical devices and network devices, you can ensure consistent and reliable access to these devices, while still allowing dynamic IP assignment for other devices on the network. The shorter lease time for the Guest Network will help free up IP addresses more frequently for new guest devices.
+    <h4>Ubiquiti Switches (USW-Flex-Mini)</h4>
+    <ul>
+        <li>
+            USW-Flex-Mini-Office (192.168.1.9):
+            <ul>
+                <li>Configure the switch as an access port for VLAN 1 (Main Network).</li>
+            </ul>
+        </li>
+        <li>
+            USW-Flex-Mini-LivingRoom (192.168.1.7):
+            <ul>
+                <li>Configure the switch as an access port for VLAN 30 (Streaming Network).</li>
+                <li>Assign the FireTV connected to port 2 to VLAN 30.</li>
+                <li>Assign the Living Room AP connected to port 3 to VLAN 1 (Main Network).</li>
+            </ul>
+        </li>
+        <li>
+            USW-Flex-Mini-FamilyRoom (192.168.1.6):
+            <ul>
+                <li>Configure the switch as an access port for VLAN 20 (IoT Network).</li>
+                <li>Assign the Family Room AP connected to port 4 to VLAN 1 (Main Network).</li>
+            </ul>
+        </li>
+    </ul>
 
-<h3>Network Device Configuration</h3>
-<p>To ensure proper functionality and security, the following configurations are recommended for your network devices:</p>
+    <p>By following these configurations, your network devices will be properly set up to support the desired network segmentation, security, and management requirements.</p>
 
-<h4>Ubiquiti Dream Machine (UDM)</h4>
-<ul>
-    <li>Configure VLANs as per the VLAN configuration mentioned above.</li>
-    <li>Set up DHCP servers for each VLAN with the specified IP address ranges and lease times.</li>
-    <li>Configure port assignments as per the Port Configuration section.</li>
-    <li>Set up appropriate firewall rules to control inter-VLAN communication and internet access.</li>
-    <li>Enable DNS server and configure the domain name "wysechoice.net".</li>
-    <li>Add DNS entries for all network devices using their static IP addresses and hostnames.</li>
-</ul>
+    <div class="network-diagram">
+        <img src="network-diagram.png" alt="Network Diagram">
+        <p>Network Diagram (editable format)</p>
+    </div>
 
-<h4>D-Link Switch (DGS-1100-8)</h4>
-<ul>
-    <li>Configure the switch as a trunk port to allow all VLANs to pass through.</li>
-    <li>Ensure the switch is configured to use the UDM (192.168.1.1) as the gateway.</li>
-</ul>
-
-<h4>Ubiquiti Access Points (UAP AC Lite)</h4>
-<ul>
-    <li>
-        Living Room AP (192.168.1.13):
-        <ul>
-            <li>Configure the AP to broadcast the SSID "WYSECHOICE" for both 2.4GHz and 5GHz bands.</li>
-            <li>Assign the AP to VLAN 1 (Main Network).</li>
-        </ul>
-    </li>
-    <li>
-        Family Room AP (192.168.1.4):
-        <ul>
-            <li>Configure the AP to broadcast the SSID "WYSECHOICE" for both 2.4GHz and 5GHz bands.</li>
-            <li>Assign the AP to VLAN 1 (Main Network).</li>
-        </ul>
-    </li>
-</ul>
-
-<h4>Ubiquiti Switches (USW-Flex-Mini)</h4>
-<ul>
-    <li>
-        USW-Flex-Mini-Office (192.168.1.9):
-        <ul>
-            <li>Configure the switch as an access port for VLAN 1 (Main Network).</li>
-        </ul>
-    </li>
-    <li>
-        USW-Flex-Mini-LivingRoom (192.168.1.7):
-        <ul>
-            <li>Configure the switch as an access port for VLAN 30 (Streaming Network).</li>
-            <li>Assign the FireTV connected to port 2 to VLAN 30.</li>
-            <li>Assign the Living Room AP connected to port 3 to VLAN 1 (Main Network).</li>
-        </ul>
-    </li>
-    <li>
-        USW-Flex-Mini-FamilyRoom (192.168.1.6):
-        <ul>
-            <li>Configure the switch as an access port for VLAN 20 (IoT Network).</li>
-            <li>Assign the Family Room AP connected to port 4 to VLAN 1 (Main Network).</li>
-        </ul>
-    </li>
-</ul>
-
-<p>By following these configurations, your network devices will be properly set up to support the desired network segmentation, security, and management requirements.</p>
-
-<div class="network-diagram">
-    <img src="network-diagram.png" alt="Network Diagram">
-    <p>Network Diagram (editable format)</p>
-</div>
+</body>
+</html>

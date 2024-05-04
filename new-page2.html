@@ -2,7 +2,7 @@
 title: Untitled Page2
 description: 
 published: true
-date: 2024-05-04T15:06:27.488Z
+date: 2024-05-04T15:08:36.640Z
 tags: 
 editor: code
 dateCreated: 2024-05-04T15:03:36.474Z
@@ -126,6 +126,61 @@ dateCreated: 2024-05-04T15:03:36.474Z
         <td>WPA2 Personal</td>
     </tr>
 </table>
+<h2>3. Setting Up VLANs</h2>
+<p>Virtual Local Area Networks (VLANs) are essential for network segmentation and enhancing security. Here's how to configure VLANs on your UDM:</p>
+
+<h3>Step 1: Access the UDM Network Settings</h3>
+<p>Login to the UniFi Controller to access your UDM settings. Navigate to the settings area and select 'Networks'.</p>
+
+<h3>Step 2: Create VLAN</h3>
+<p>Click on 'Create New Network'. Here you can define each VLAN:</p>
+<ol>
+    <li>Name your VLAN (e.g., WYSECHOICE_MGMT for management, WYSECHOICE_GUEST for guest access).</li>
+    <li>Assign a VLAN ID (e.g., 10 for management, 20 for guests).</li>
+    <li>Configure the subnet and gateway. For example, 192.168.10.1/24 for management and 192.168.20.1/24 for guests.</li>
+    <li>Enable DHCP server, providing a range of IP addresses that can be assigned to devices connected to each VLAN.</li>
+</ol>
+
+<h3>Step 3: Configure Inter-VLAN Routing</h3>
+<p>If certain VLANs need to communicate with each other, set up routing rules that define how traffic should be handled between them:</p>
+<ol>
+    <li>Go to 'Routing & Firewall' > 'Firewall'.</li>
+    <li>Create groups for each VLAN under 'Groups' tab.</li>
+    <li>Under 'Rules', add new rules specifying which VLANs can interact and the nature of their interaction (e.g., allow, deny).</li>
+</ol>
+
+<h3>Step 4: Apply Changes</h3>
+<p>After setting up your VLANs, make sure to apply and save the changes. Restart your UDM if necessary to ensure all configurations are correctly implemented.</p>
+  
+  
+  <h2>4. Configuring Wi-Fi Networks</h2>
+<p>Once you've set up your VLANs, you can create separate Wi-Fi networks for different user groups to enhance security and manage network traffic effectively:</p>
+
+<h3>Step 1: Access the Wi-Fi Settings</h3>
+<p>Log into the UniFi Controller. Navigate to 'Wi-Fi Networks' to start setting up your networks.</p>
+
+<h3>Step 2: Create Wi-Fi Network</h3>
+<p>Click 'Create New Wi-Fi Network'. Here you will configure each network:</p>
+<ol>
+    <li>Enter the name (SSID) for the network, such as WYSECHOICE_CORP for corporate use.</li>
+    <li>Set the security level, ideally WPA2 or WPA3 for enhanced security.</li>
+    <li>Assign the network to a VLAN (e.g., WYSECHOICE_CORP to VLAN 10).</li>
+    <li>Configure advanced settings like band steering and minimum RSSI if needed.</li>
+</ol>
+
+<h3>Step 3: Guest Network Configuration</h3>
+<p>For guest networks, additional settings such as client isolation and captive portal can be configured:</p>
+<ol>
+    <li>Enable client isolation to prevent guests from accessing other devices on the network.</li>
+    <li>Set up a captive portal with terms of service and authentication methods to manage and monitor guest access.</li>
+</ol>
+
+<h3>Step 4: Apply and Test</h3>
+<p>After configuring your Wi-Fi networks, apply the settings. Test each network with different devices to ensure they are correctly set up and functioning as expected.</p>
+  
+  
+  
+  
   <h2>5. Advanced Network Settings</h2>
 <p>Advanced settings allow you to further tailor network performance and security according to specific needs. Here are some of the critical advanced configurations:</p>
 

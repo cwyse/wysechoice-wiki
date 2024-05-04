@@ -1,0 +1,128 @@
+<!--
+title: Untitled Page2
+description: 
+published: true
+date: 2024-05-04T15:03:36.474Z
+tags: 
+editor: code
+dateCreated: 2024-05-04T15:03:36.474Z
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configure UDM for Multiple VLANs and Wi-Fi Networks</title>
+    <style>
+        body {font-family: Arial, sans-serif; line-height: 1.6; color: #333333; margin: 20px;}
+        h1, h2 {color: #0056b3;}
+        h3 {color: #0066CC;}
+        pre {background-color: #f4f4f4; padding: 15px;}
+        code {color: #D63384;}
+        ul, ol {padding-left: 20px;}
+        table {width: 100%; border-collapse: collapse;}
+        th, td {border: 1px solid #dddddd; padding: 8px; text-align: left;}
+        th {background-color: #f2f2f2;}
+    </style>
+</head>
+<body>
+    <h1>Configure Ubiquiti Dream Machine for Multiple VLANs and Wi-Fi Networks</h1>
+    
+    <p>This guide provides detailed instructions on how to configure the Ubiquiti Dream Machine (UDM) to support multiple VLANs and associated Wi-Fi SSIDs to segment network traffic for management, user devices, IoT devices, guest access, and streaming services.</p>
+
+    <h2>Prerequisites</h2>
+    <ul>
+        <li>Ubiquiti Dream Machine (UDM)</li>
+        <li>Ubiquiti Access Points (APs) compatible with UDM</li>
+        <li>Network cables</li>
+        <li>Access to UniFi Network application (latest version)</li>
+    </ul>
+
+    <h2>1. VLAN Configuration</h2>
+    <p>Begin by configuring the VLANs on your UDM. VLANs help in segmenting the network which enhances security and improves network management.</p>
+
+    <h3>Step 1: Access the UniFi Network Application</h3>
+    <ol>
+        <li>Connect your device to the network managed by the UDM.</li>
+        <li>Open a web browser and navigate to <code>https://unifi.ui.com</code> or the IP address assigned to your UDM.</li>
+        <li>Log in using your Ubiquiti account credentials.</li>
+    </ol>
+
+    <h3>Step 2: Create VLANs</h3>
+    <p>Navigate to the settings area and select 'Networks'. Click on 'Create New Network' and configure each VLAN as follows:</p>
+    
+    <table>
+        <tr>
+            <th>VLAN Name</th>
+            <th>VLAN ID</th>
+            <th>Purpose</th>
+        </tr>
+        <tr>
+            <td>WYSECHOICE_MGMT</td>
+            <td>10</td>
+            <td>Management</td>
+        </tr>
+        <tr>
+            <td>WYSECHOICE</td>
+            <td>40</td>
+            <td>User devices</td>
+        </tr>
+        <tr>
+            <td>WYSECHOICE_IOT</td>
+            <td>20</td>
+            <td>IoT Devices</td>
+        </tr>
+        <tr>
+            <td>WYSECHOICE_GUEST</td>
+            <td>50</td>
+            <td>Guest Access</td>
+        </tr>
+        <tr>
+            <td>WYSECHOICE_STREAMING</td>
+            <td>30</td>
+            <td>Streaming Devices</td>
+        </tr>
+    </table>
+
+    <p>For each network:</p>
+    <ul>
+        <li>Enter the Name and VLAN ID.</li>
+        <li>Configure DHCP settings as required. It’s recommended to enable DHCP and set an appropriate range that does not overlap with other VLANs.</li>
+        <li>Save and apply changes.</li>
+    </ul>
+
+    <h2>2. Wi-Fi Network Setup</h2>
+    <p>After setting up VLANs, configure the corresponding SSIDs for wireless access.</p>
+
+    <h3>Step 1: Configure SSIDs</h3>
+    <p>Navigate to 'Wi-Fi Networks' and click on 'Create New Wi-Fi Network'.Set up each SSID as follows:
+
+```html
+<table>
+    <tr>
+        <th>SSID Name</th>
+        <th>VLAN</th>
+        <th>Security</th>
+    </tr>
+    <tr>
+        <td>WYSECHOICE_GUEST</td>
+        <td>50</td>
+        <td>WPA2 Personal</td>
+    </tr>
+    <tr>
+        <td>WYSECHOICE</td>
+        <td>40</td>
+        <td>WPA2 Personal</td>
+    </tr>
+    <tr>
+        <td>WYSECHOICE_IOT</td>
+        <td>20</td>
+        <td>WPA2 Personal</td>
+    </tr>
+    <tr>
+        <td>WYSECHOICE_STREAMING</td>
+        <td>30</td>
+        <td>WPA2 Personal</td>
+    </tr>
+</table>

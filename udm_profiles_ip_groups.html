@@ -1,0 +1,398 @@
+<!--
+title: UDM: Profiles->IP Groups
+description: 
+published: true
+date: 2024-05-05T03:38:11.888Z
+tags: 
+editor: code
+dateCreated: 2024-05-05T03:38:11.888Z
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP Groups Detailed Configuration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        details {
+            margin-top: 10px;
+            border: 1px solid #cccccc;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+        summary {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>IP Groups Detailed Configuration</h1>
+
+    <details>
+        <summary>@DHCP (67) - Port Group</summary>
+        <table>
+            <tr>
+                <th>Type</th>
+                <td>Port Group</td>
+            </tr>
+            <tr>
+                <th>Ports</th>
+                <td>67</td>
+            </tr>
+        </table>
+    </details>
+
+    <details>
+        <summary>@DNS (53, 54, 443, 9443, 9080, 5335) - Port Group</summary>
+        <table>
+            <tr>
+                <th>Type</th>
+                <td>Port Group</td>
+            </tr>
+            <tr>
+                <th>Ports</th>
+                <td>53, 54, 443, 9443, 9080, 5335</td>
+            </tr>
+        </table>
+    </details>
+
+    <details>
+        <summary>@Docker Swarm (2376, 2377, 2375, 7946, 4789) - Port Group</summary>
+        <table>
+            <tr>
+                <th>Type</th>
+                <td>Port Group</td>
+            </tr>
+            <tr>
+                <th>Ports</th>
+                <td>2376, 2377, 2375, 7946, 4789</td>
+            </tr>
+        </table>
+    </details>
+
+    <details>
+        <summary>Cloudflare IPv4 (All Cloudflare Subnets) - IPv4 Address/Subnet</summary>
+        <table>
+            <tr>
+                <th>Type</th>
+                <td>IPv4 Address/Subnet</td>
+            </tr>
+            <tr>
+                <th>Addresses</th>
+                <td>173.245.48.0/20, 103.21.244.0/22, 103.22.200.0/22, 103.31.4.0/22, 141.101.64.0/18, 108.162.192.0/18, 190.93.240.0/20, 188.114.96.0/20</td>
+            </tr>
+        </table>
+    </details>
+
+    <details>
+        <summary>@HTTP (80, 443) - Port Group</summary>
+        <table>
+            <tr>
+                <th>Type</th>
+                <td>Port Group</td>
+            </tr>
+            <tr>
+                <th>Ports</th>
+                <td>80, 443</td>
+            </tr>
+        </table>
+    </details>
+<details>
+        <summary>@HTTPS (443) - Port Group</summary>
+        <table>
+            <tr>
+                <th>Type</th>
+                <td>Port Group</td>
+            </tr>
+            <tr>
+                <th>Ports</th>
+                <td>443</td>
+            </tr>
+        </table>
+    </details>
+
+    <details>
+        <summary>@MariaDB (3306) - Port Group</summary>
+        <table>
+            <tr>
+                <th>Type</th>
+                <td>Port Group</td>
+            </tr>
+            <tr>
+                <th>Ports</th>
+                <td>3306</td>
+            </tr>
+        </table>
+    </details>
+
+    <details>
+        <summary>@mDNS (5353) - Port Group</summary>
+        <table>
+            <tr>
+                <th>Type</th>
+                <td>Port Group</td>
+            </tr>
+            <tr>
+                <th>Ports</th>
+                <td>5353</td>
+            </tr>
+        </table>
+    </details>
+
+    <details>
+        <summary>@NTP (123) - Port Group</summary>
+        <table>
+            <tr>
+                <th>Type</th>
+                <td>Port Group</td>
+            </tr>
+            <tr>
+                <th>Ports</th>
+                <td>123</td>
+            </tr>
+        </table>
+    </details>
+
+    <details>
+        <summary>@PostgreSQL (5432) - Port Group</summary>
+        <table>
+            <tr>
+                <th>Type</th>
+                <td>Port Group</td>
+            </tr>
+            <tr>
+                <th>Ports</th>
+                <td>5432</td>
+            </tr>
+        </table>
+    </details>
+<details>
+        <summary>@RDP (3389) - Port Group</summary>
+        <table>
+            <tr>
+                <th>Type</th>
+                <td>Port Group</td>
+            </tr>
+            <tr>
+                <th>Ports</th>
+                <td>3389</td>
+            </tr>
+        </table>
+    </details>
+
+    <details>
+        <summary>@Redis (6379, 6380) - Port Group</summary>
+        <table>
+            <tr>
+                <th>Type</th>
+                <td>Port Group</td>
+            </tr>
+            <tr>
+                <th>Ports</th>
+                <td>6379, 6380</td>
+            </tr>
+        </table>
+    </details>
+
+    <details>
+        <summary>@SMB (445) - Port Group</summary>
+        <table>
+            <tr>
+                <th>Type</th>
+                <td>Port Group</td>
+            </tr>
+            <tr>
+                <th>Ports</th>
+                <td>445</td>
+            </tr>
+        </table>
+    </details>
+
+    <details>
+        <summary>@SMTP (25, 587, 465) - Port Group</summary>
+        <table>
+            <tr>
+                <th>Type</th>
+                <td>Port Group</td>
+            </tr>
+            <tr>
+                <th>Ports</th>
+                <td>25, 587, 465</td>
+            </tr>
+        </table>
+    </details>
+
+    <details>
+        <summary>@SNMP (161, 162) - Port Group</summary>
+        <table>
+            <tr>
+                <th>Type</th>
+                <td>Port Group</td>
+            </tr>
+            <tr>
+                <th>Ports</th>
+                <td>161, 162</td>
+            </tr>
+        </table>
+    </details>
+  <details>
+        <summary>@SSH (22) - Port Group</summary>
+        <table>
+            <tr>
+                <th>Type</th>
+                <td>Port Group</td>
+            </tr>
+            <tr>
+                <th>Ports</th>
+                <td>22</td>
+            </tr>
+        </table>
+    </details>
+
+    <details>
+        <summary>@Telnet (23) - Port Group</summary>
+        <table>
+            <tr>
+                <th>Type</th>
+                <td>Port Group</td>
+            </tr>
+            <tr>
+                <th>Ports</th>
+                <td>23</td>
+            </tr>
+        </table>
+    </details>
+
+    <details>
+        <summary>@TFTP (69) - Port Group</summary>
+        <table>
+            <tr>
+                <th>Type</th>
+                <td>Port Group</td>
+            </tr>
+            <tr>
+                <th>Ports</th>
+                <td>69</td>
+            </tr>
+        </table>
+    </details>
+
+    <details>
+        <summary>@VNC (5900, 5901, 5902, 5903) - Port Group</summary>
+        <table>
+            <tr>
+                <th>Type</th>
+                <td>Port Group</td>
+            </tr>
+            <tr>
+                <th>Ports</th>
+                <td>5900, 5901, 5902, 5903</td>
+            </tr>
+        </table>
+    </details>
+
+    <details>
+        <summary>@Web Services (80, 443) - Port Group</summary>
+        <table>
+            <tr>
+                <th>Type</th>
+                <td>Port Group</td>
+            </tr>
+            <tr>
+                <th>Ports</th>
+                <td>80, 443</td>
+            </tr>
+        </table>
+    </details>
+  <details>
+        <summary>@DNS (53) - Port Group</summary>
+        <table>
+            <tr>
+                <th>Type</th>
+                <td>Port Group</td>
+            </tr>
+            <tr>
+                <th>Ports</th>
+                <td>53</td>
+            </tr>
+        </table>
+    </details>
+
+    <details>
+        <summary>@FTP (21) - Port Group</summary>
+        <table>
+            <tr>
+                <th>Type</th>
+                <td>Port Group</td>
+            </tr>
+            <tr>
+                <th>Ports</th>
+                <td>21</td>
+            </tr>
+        </table>
+    </details>
+
+    <details>
+        <summary>@IMAP (143, 993) - Port Group</summary>
+        <table>
+            <tr>
+                <th>Type</th>
+                <td>Port Group</td>
+            </tr>
+            <tr>
+                <th>Ports</th>
+                <td>143, 993</td>
+            </tr>
+        </table>
+    </details>
+
+    <details>
+        <summary>@POP3 (110, 995) - Port Group</summary>
+        <table>
+            <tr>
+                <th>Type</th>
+                <td>Port Group</td>
+            </tr>
+            <tr>
+                <th>Ports</th>
+                <td>110, 995</td>
+            </tr>
+        </table>
+    </details>
+
+    <details>
+        <summary>@SIP (5060, 5061) - Port Group</summary>
+        <table>
+            <tr>
+                <th>Type</th>
+                <td>Port Group</td>
+            </tr>
+            <tr>
+                <th>Ports</th>
+                <td>5060, 5061</td>
+            </tr>
+        </table>
+    </details>
+  </body>
+</html>

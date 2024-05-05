@@ -1,0 +1,216 @@
+<!--
+title: UDM: Security->Firewall Rules
+description: 
+published: true
+date: 2024-05-05T04:20:36.437Z
+tags: 
+editor: code
+dateCreated: 2024-05-05T04:20:36.437Z
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firewall Rules Configuration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <h1>Firewall Rules Configuration</h1>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Action</th>
+            <th>Type</th>
+            <th>Protocol</th>
+            <th>Source</th>
+            <th>Source Port</th>
+            <th>Destination</th>
+            <th>Destination Port</th>
+            <th>ID</th>
+        </tr>
+        <tr>
+            <td>Allow Established/Related Traffic</td>
+            <td>Accept</td>
+            <td>Internet In</td>
+            <td>All</td>
+            <td>Any</td>
+            <td>Any</td>
+            <td>Any</td>
+            <td>Any</td>
+            <td>30001</td>
+        </tr>
+        <tr>
+            <td>Block Invalid Traffic</td>
+            <td>Drop</td>
+            <td>Internet In</td>
+            <td>All</td>
+            <td>Any</td>
+            <td>Any</td>
+            <td>Any</td>
+            <td>Any</td>
+            <td>30002</td>
+        </tr>
+        <tr>
+            <td>Allow Port Forward {postgres}</td>
+            <td>Accept</td>
+            <td>Internet In</td>
+            <td>TCP/UDP</td>
+            <td>192.168.0.0/16</td>
+            <td>Any</td>
+            <td>192.168.40.32</td>
+            <td>5432</td>
+            <td>30005</td>
+        </tr>
+        <tr>
+            <td>Allow Port Forward {influxdb}</td>
+            <td>Accept</td>
+            <td>Internet In</td>
+            <td>TCP/UDP</td>
+            <td>192.168.0.0/16</td>
+            <td>Any</td>
+            <td>192.168.50.4</td>
+            <td>8086</td>
+            <td>30006</td>
+        </tr>
+        <tr>
+            <td>Allow Port Forward {unbound}</td>
+            <td>Accept</td>
+            <td>Internet In</td>
+            <td>TCP/UDP</td>
+            <td>192.168.0.0/16</td>
+            <td>Any</td>
+            <td>192.168.5.4</td>
+            <td>5335</td>
+            <td>30007</td>
+        </tr>
+        <tr>
+            <td>Allow Port Forward {Caddy_80}</td>
+            <td>Accept</td>
+            <td>Internet In</td>
+            <td>TCP/UDP</td>
+            <td>192.168.0.0/16</td>
+            <td>Any</td>
+            <td>192.168.61.11</td>
+            <td>443</td>
+            <td>30008</td>
+        </tr>
+        <tr>
+            <td>Allow Port Forward {Wiki}</td>
+            <td>Accept</td>
+            <td>Internet In</td>
+            <td>TCP/UDP</td>
+            <td>192.168.40.33/32</td>
+            <td>Any</td>
+            <td>192.168.60.133</td>
+            <td>443</td>
+            <td>30009</td>
+        </tr>
+        <tr>
+            <td>Allow Port Forward {Hawkbit 8080}</td>
+            <td>Accept</td>
+            <td>Internet In</td>
+            <td>TCP/UDP</td>
+            <td>192.168.0.0/16</td>
+            <td>Any</td>
+            <td>192.168.1.118</td>
+            <td>8080</td>
+            <td>30010</td>
+        </tr>
+        <tr>
+            <td>Allow Port Forward {postgres 5434}</td>
+            <td>Accept</td>
+            <td>Internet In</td>
+            <td>TCP/UDP</td>
+            <td>192.168.0.0/16</td>
+            <td>Any</td>
+            <td>192.168.15.5</td>
+            <td>5434</td>
+            <td>30011</td>
+        </tr>
+        <tr>
+            <td>Block All Other Traffic</td>
+            <td>Drop</td>
+            <td>Internet In</td>
+            <td>All</td>
+            <td>Any</td>
+            <td>Any</td>
+            <td>Any</td>
+            <td>Any</td>
+            <td>Final rule for this type</td>
+        </tr>
+        <tr>
+            <td>Allow Established/Related Traffic</td>
+            <td>Accept</td>
+            <td>Internet Local</td>
+            <td>All</td>
+            <td>Any</td>
+            <td>Any</td>
+            <td>Any</td>
+            <td>Any</td>
+            <td>30001</td>
+        </tr>
+        <tr>
+            <td>Block Invalid Traffic</td>
+            <td>Drop</td>
+            <td>Internet Local</td>
+            <td>All</td>
+            <td>Any</td>
+            <td>Any</td>
+            <td>Any</td>
+            <td>Any</td>
+            <td>30002</td>
+        </tr>
+        <tr>
+            <td>Block All Other Traffic</td>
+            <td>Drop</td>
+            <td>Internet Local</td>
+            <td>All</td>
+            <td>Any</td>
+            <td>Any</td>
+            <td>Any</td>
+            <td>Any</td>
+            <td>Final rule for this type</td>
+        </tr>
+    </table>
+    <h2>Traffic Settings Documentation</h2>
+
+    <h3>1. Conntrack Modules</h3>
+    <p>Connection tracking (Conntrack) modules are used to help the firewall track the state of network connections. The following modules are enabled to support various protocols:</p>
+    <ul>
+        <li><strong>FTP</strong> - File Transfer Protocol</li>
+        <li><strong>H.323</strong> - Used for multimedia communications over IP networks such as video conferencing.</li>
+        <li><strong>GRE</strong> - Generic Routing Encapsulation, commonly used for VPNs.</li>
+        <li><strong>PPTP</strong> - Point-to-Point Tunneling Protocol, another VPN protocol.</li>
+        <li><strong>TFTP</strong> - Trivial File Transfer Protocol, simpler than FTP and used primarily for booting devices over a network.</li>
+    </ul>
+
+    <h3>2. Default Action Logging</h3>
+    <p>The default setting for action logging within the firewall:</p>
+    <ul>
+        <li><strong>None</strong>: No logging is performed by default for actions taken by the firewall. This setting can be modified if logging of specific events is required for security or diagnostic purposes.</li>
+    </ul>
+
+    <h3>3. State Timeouts</h3>
+    <p>The settings for state timeouts determine how long the firewall maintains the state information about a particular connection before it is discarded:</p>
+    <ul>
+        <li><strong>Auto</strong>: The firewall automatically manages state timeouts based on the network conditions and the type of traffic. This dynamic management helps optimize performance without sacrificing security.</li>
+    </ul></body>
+</html>

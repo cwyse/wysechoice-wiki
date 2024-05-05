@@ -1,0 +1,110 @@
+<!--
+title: UDM: Security->Port Forwarding
+description: 
+published: true
+date: 2024-05-05T04:13:06.504Z
+tags: 
+editor: code
+dateCreated: 2024-05-05T04:13:06.504Z
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Port Forwarding Configuration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <h1>Port Forwarding Configuration</h1>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>From</th>
+            <th>Port</th>
+            <th>Forward IP / Port</th>
+            <th>Enabled</th>
+        </tr>
+        <tr>
+            <td>Caddy</td>
+            <td>192.168.0.0/16</td>
+            <td>443</td>
+            <td>192.168.60.133:443</td>
+            <td>Disabled</td>
+        </tr>
+        <tr>
+            <td>Caddy_80</td>
+            <td>192.168.0.0/16</td>
+            <td>80</td>
+            <td>192.168.61.11:443</td>
+            <td>Enabled</td>
+        </tr>
+        <tr>
+            <td>Hawkbit</td>
+            <td>192.168.0.0/16</td>
+            <td>8080</td>
+            <td>192.168.1.118:8080</td>
+            <td>Enabled</td>
+        </tr>
+        <tr>
+            <td>influxdb</td>
+            <td>192.168.0.0/16</td>
+            <td>8086</td>
+            <td>192.168.50.4:8086</td>
+            <td>Enabled</td>
+        </tr>
+        <tr>
+            <td>postgres</td>
+            <td>192.168.0.0/16</td>
+            <td>5432</td>
+            <td>192.168.40.32:5432</td>
+            <td>Enabled</td>
+        </tr>
+        <tr>
+            <td>postgres</td>
+            <td>192.168.0.0/16</td>
+            <td>5434</td>
+            <td>192.168.15.5:5434</td>
+            <td>Enabled</td>
+        </tr>
+        <tr>
+            <td>unbound</td>
+            <td>192.168.0.0/16</td>
+            <td>5335</td>
+            <td>192.168.5.4:5335</td>
+            <td>Enabled</td>
+        </tr>
+        <tr>
+            <td>Wiki</td>
+            <td>192.168.40.33/32</td>
+            <td>80</td>
+            <td>192.168.60.133:443</td>
+            <td>Enabled</td>
+        </tr>
+        <tr>
+            <td>wiki_443</td>
+            <td>192.168.0.0/16</td>
+            <td>443</td>
+            <td>192.168.40.33:443</td>
+            <td>Disabled</td>
+        </tr>
+    </table>
+</body>
+</html>

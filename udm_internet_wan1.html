@@ -1,0 +1,68 @@
+<!--
+title: UDM: Internet->WAN1
+description: 
+published: true
+date: 2024-05-05T04:31:36.654Z
+tags: 
+editor: code
+dateCreated: 2024-05-05T04:31:36.654Z
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internet Configuration Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        p, ul, li {
+            font-size: 16px;
+            color: #666;
+        }
+        ul {
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Internet Configuration Details</h1>
+
+    <h2>General Information</h2>
+    <p><strong>Name:</strong> Primary (WAN1)</p>
+    <p><strong>Host Device:</strong> UDM</p>
+    <p><strong>Interface:</strong> Port 5 - WAN</p>
+    <p><strong>Expected ISP Speeds:</strong> Download 250 Mbps, Upload 10 Mbps</p>
+
+    <h2>Advanced Settings</h2>
+    <ul>
+        <li><strong>Manual Configuration:</strong> Yes</li>
+        <li><strong>VLAN ID:</strong> Not set</li>
+        <li><strong>MAC Address Clone:</strong> Not set</li>
+        <li><strong>Smart Queues:</strong>
+            <ul>
+                <li>Downrate: Not set</li>
+                <li>Uprate: Not set</li>
+            </ul>
+        </li>
+        <li><strong>UPnP:</strong> No</li>
+        <li><strong>Dynamic DNS:</strong>
+            <ul>
+                <li>Service: Namecheap</li>
+                <li>Hostname: pi-hole.wysechoice.net</li>
+                <li>Username: wysechoice.net</li>
+                <li>Server: dynamicdns.park-your-domain.com</li>
+            </ul>
+        </li>
+        <li><strong>DHCP CoS:</strong> Not set</li>
+    </ul>
+
+    <h2>IPv4 Configuration</h2>
+    <p><strong>IPv4 Connection:</strong> DHCPv4</p>
+    <p><strong>Other Options:</strong>

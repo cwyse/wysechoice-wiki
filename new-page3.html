@@ -2,138 +2,31 @@
 title: Untitled Page3
 description: 
 published: true
-date: 2024-05-05T02:32:34.129Z
+date: 2024-05-05T02:38:29.240Z
 tags: 
 editor: code
 dateCreated: 2024-05-05T02:32:34.129Z
 -->
 
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Network Configuration</title>
-</head>
-<body>
-  <h1>Network Configuration</h1>
-  
-  <h2>System Properties</h2>
-  <p>The system.properties file contains the following commented out settings:</p>
-  <ul>
-    <li>unifi.http.port=8080</li>
-    <li>unifi.https.port</li>
-  </ul>
-  
-  <h2>Network Settings</h2>
-  <table>
-    <tr>
-      <th>Network Name</th>
-      <th>Purpose</th>
-      <th>IP Subnet</th>
-      <th>VLAN</th>
-      <th>DHCP Range</th>
-      <th>DHCP Lease Time</th>
-      <th>DHCP Gateway</th>
-      <th>DNS Servers</th>
-    </tr>
-    <tr>
-      <td>WYSECHOICE_DEFAULT</td>
-      <td>Corporate</td>
-      <td>192.168.1.1/24</td>
-      <td>None</td>
-      <td>192.168.1.100 - 192.168.1.254</td>
-      <td>86400 sec</td>
-      <td>Disabled</td>
-      <td>1.1.1.1, 1.0.0.1, 192.168.5.3, 208.67.222.222</td>
-    </tr>
-    <tr>
-      <td>Primary (WAN1)</td>
-      <td>WAN</td>
-      <td>DHCP</td>
-      <td>None</td>
-      <td>N/A</td>
-      <td>N/A</td>
-      <td>N/A</td>
-      <td>Auto</td>
-    </tr>
-    <tr>
-      <td>WYSECHOICE_IOT</td>
-      <td>Corporate</td>
-      <td>192.168.20.1/24</td>
-      <td>20</td>
-      <td>192.168.20.6 - 192.168.20.254</td>
-      <td>86400 sec</td>
-      <td>192.168.20.1</td>
-      <td>Disabled</td>
-    </tr>
-    <tr>
-      <td>WYSECHOICE_STREAMING</td>
-      <td>Corporate</td>
-      <td>192.168.30.1/24</td>
-      <td>30</td>
-      <td>192.168.30.6 - 192.168.30.254</td> 
-      <td>86400 sec</td>
-      <td>Disabled</td>
-      <td>1.1.1.1, 1.0.0.1, 192.168.5.3, 208.67.222.222</td>
-    </tr>
-    <tr>
-      <td>WYSECHOICE</td> 
-      <td>Corporate</td>
-      <td>192.168.10.1/24</td>
-      <td>10</td>
-      <td>192.168.10.6 - 192.168.10.254</td>
-      <td>86400 sec</td> 
-      <td>Disabled</td>
-      <td>1.1.1.1, 1.0.0.1, 192.168.5.3, 208.67.222.222</td>
-    </tr>
-    <tr>
-      <td>DockerNet.40</td>
-      <td>Corporate</td> 
-      <td>192.168.40.1/24</td>
-      <td>40</td>
-      <td>192.168.40.6 - 192.168.40.254</td>
-      <td>86400 sec</td>
-      <td>Disabled</td>
-      <td>Disabled</td>
-    </tr>
-    <tr>
-      <td>PiHole</td>
-      <td>Corporate</td>
-      <td>192.168.5.1/24</td> 
-      <td>5</td>
-      <td>192.168.5.6 - 192.168.5.254</td>
-      <td>86400 sec</td>
-      <td>Disabled</td>
-      <td>Disabled</td>
-    </tr>
-    <tr>
-      <td>DocketNet.51</td>
-      <td>Corporate</td>
-      <td>192.168.51.1/24</td>
-      <td>51</td>
-      <td>192.168.51.6 - 192.168.51.254</td>
-      <td>86400 sec</td>
-      <td>Disabled</td>
-      <td>Disabled</td>  
-    </tr>
-    <tr>
-      <td>WYSECHOICE_WIRED</td>
-      <td>Corporate</td>
-      <td>192.168.50.1/24</td>
-      <td>50</td> 
-      <td>192.168.50.6 - 192.168.50.254</td>
-      <td>86400 sec</td>
-      <td>Disabled</td>
-      <td>1.1.1.1, 1.0.0.1, 192.168.5.3, 208.67.222.222</td>
-    </tr>
-  </table>
-
-  <h2>Other Settings</h2>
-  <ul>
-    <li>IPv6 is disabled on all networks</li>
-    <li>IGMP snooping is disabled on all networks</li> 
-    <li>DHCP guard is enabled only on the WYSECHOICE network</li>
-    <li>UPnP is enabled on most networks</li>
-    <li>mDNS is disabled on all networks</li>
-  </ul>
-</body>
-</html>
+<!DOCTYPE html> <html> <head> <title>Network Configuration</title> <style> table, th, td { border: 1px solid black; border-collapse: collapse; padding: 5px; } </style> </head> <body> <h1>Network Configuration</h1> <h2>System Properties</h2> <p>The system.properties file contains the following commented out settings:</p> <ul> <li>unifi.http.port=8080</li> <li>unifi.https.port</li> </ul> <h2>Network Settings</h2> <table> <tr> <th>Network Name</th> <th>Purpose</th> <th>IP Subnet</th> <th>VLAN</th> <th>DHCP Range</th> <th>DHCP Lease Time</th> <th>DHCP Gateway</th> <th>DNS Servers</th> <th>NAT</th> <th>DHCP</th> <th>UPnP</th> <th>mDNS</th> <th>DHCP Guard</th> <th>DHCP Relay</th> <th>IGMP Snooping</th> </tr> <tr> <td>WYSECHOICE_DEFAULT</td> <td>Corporate</td> <td>192.168.1.1/24</td> <td>None</td> <td>192.168.1.100 - 192.168.1.254</td> <td>86400 sec</td> <td>Disabled</td> <td>1.1.1.1, 1.0.0.1, 192.168.5.3, 208.67.222.222</td> <td>Enabled</td> <td>Enabled</td> <td>Enabled</td> <td>Disabled</td> <td>Disabled</td> <td>Disabled</td> <td>Disabled</td> </tr> <tr> <td>Primary (WAN1)</td> <td>WAN</td> <td>DHCP</td> <td>None</td> <td>N/A</td> <td>N/A</td> <td>N/A</td> <td>Auto</td> <td>N/A</td> <td>N/A</td> <td>N/A</td> <td>N/A</td> <td>N/A</td> <td>N/A</td> <td>N/A</td> </tr> <tr> <td>WYSECHOICE_IOT</td> <td>Corporate</td> <td>192.168.20.1/24</td> <td>20</td> <td>192.168.20.6 - 192.168.20.254</td> <td>86400 sec</td> <td>192.168.20.1</td> <td>Disabled</td> <td>Enabled</td> <td>Enabled</td> <td>Disabled</td> <td>Disabled</td> <td>Disabled</td> <td>Disabled</td> <td>Disabled</td> </tr> <tr> <td>WYSECHOICE_STREAMING</td> <td>Corporate</td> <td>192.168.30.1/24</td> <td>30</td> <td>192.168.30.6 - 192.168.30.254</td> <td>86400 sec</td> <td>Disabled</td> <td>1.1.1.1, 1.0.0.1, 192.168.5.3, 208.67.222.222</td> <td>Enabled</td> <td>Enabled</td> <td>Enabled</td> <td>Disabled</td> <td>Disabled</td> <td>Disabled</td> <td>Disabled</td> </tr> <tr> <td>WYSECHOICE</td> <td>Corporate</td> <td>192.168.10.1/24</td> <td>10</td> <td>192.168.10.6 - 192.168.10.254</td> <td>86400 sec</td> <td>Disabled</td> <td>1.1.1.1, 1.0.0.1, 192.168.5.3, 208.67.222.222</td> <td>Enabled</td> <td>Enabled</td> <td>Enabled</td> <td>Disabled</td> <td>Enabled</td> <td>Disabled</td> <td>Disabled</td> </tr> <tr> <td>DockerNet.40</td> <td>Corporate</td> <td>192.168.40.1/24</td> <td>40</td> <td>192.168.40.6 - 192.168.40.254</td> <td>86400 sec</td> <td>Disabled</td> <td>Disabled</td> <td>Enabled</td> <td>Disabled</td> <td>Enabled</td> <td>Disabled</td> <td>Disabled</td> <td>Disabled</td> <td>Disabled</td> </tr> <tr> <td>PiHole</td> <td>Corporate</td> <td>192.168.5.1/24</td> <td>5</td> <td>192.168.5.6 - 192.168.5.254</td> <td>86400 sec</td> <td>Disabled</td> <td>Disabled</td> <td>Enabled</td> <td>Disabled</td> <td>Enabled</td> <td>Disabled</td> <td>Disabled</td> <td>Disabled</td> <td>Disabled</td> </tr> </table> <h2>Other Notable Settings</h2> <ul> <li>Domain name for DHCP is set to wysechoice.net on all networks</li> <li>Internet access is enabled on the WYSECHOICE_DEFAULT, WYSECHOICE_IOT and WYSECHOICE_STREAMING networks</li> <li>DHCP conflict checking is enabled on all networks except Primary (WAN1)</li> <li>Auto scaling is disabled on all networks</li> <li>IPv6 settings: <ul> <li>IPv6 setting preference is set to "auto" on all networks</li> <li>IPv6 interface type is set to "none" on all networks</li> <li>IPv6 PD start/stop is set to ::2 and ::7d1 on all networks</li> <li>IPv6 client address assignment is set to SLAAC on all networks</li> <li>IPv6 RA is enabled with a preferred lifetime of 14400 seconds on all networks
+<li>IPv6 RA priority is set to "high" on all networks</li>
+<li>DHCP for IPv6 allows SLAAC on all networks</li>
+<li>DHCP for IPv6 lease time is set to 86400 seconds on all networks</li>
+<li>DHCP for IPv6 start/stop is set to ::2 and ::7d1 on all networks</li>
+<li>DHCP for IPv6 DNS is set to automatic on all networks</li>
+</ul>
+</li>
+<li>IGMP proxy downstream is disabled on the WYSECHOICE_DEFAULT and Primary (WAN1) networks</li>
+<li>IGMP proxy upstream is disabled on the Primary (WAN1) network</li>
+<li>WAN settings on the Primary (WAN1) network:
+<ul>
+<li>WAN type is set to DHCP</li>
+<li>IPv6 WAN type is disabled</li>
+<li>WAN DNS preference is set to automatic</li>
+<li>WAN load balancing type is set to "failover-only"</li>
+<li>WAN SmartQueue is disabled with 10000 kbps up and 200000 kbps down</li>
+<li>WAN provider capabilities are set to 250000 kbps down and 10000 kbps up</li>
+<li>WAN events are set to be reported</li>
+</ul>
+</li>
+</ul> </body> </html>

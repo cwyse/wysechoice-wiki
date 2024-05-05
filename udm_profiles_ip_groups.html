@@ -2,7 +2,7 @@
 title: UDM: Profiles->IP Groups
 description: 
 published: true
-date: 2024-05-05T03:38:11.888Z
+date: 2024-05-05T03:57:27.251Z
 tags: 
 editor: code
 dateCreated: 2024-05-05T03:38:11.888Z
@@ -49,350 +49,430 @@ dateCreated: 2024-05-05T03:38:11.888Z
 <body>
     <h1>IP Groups Detailed Configuration</h1>
 
-    <details>
-        <summary>@DHCP (67) - Port Group</summary>
-        <table>
-            <tr>
-                <th>Type</th>
-                <td>Port Group</td>
-            </tr>
-            <tr>
-                <th>Ports</th>
-                <td>67</td>
-            </tr>
-        </table>
-    </details>
-
-    <details>
-        <summary>@DNS (53, 54, 443, 9443, 9080, 5335) - Port Group</summary>
-        <table>
-            <tr>
-                <th>Type</th>
-                <td>Port Group</td>
-            </tr>
-            <tr>
-                <th>Ports</th>
-                <td>53, 54, 443, 9443, 9080, 5335</td>
-            </tr>
-        </table>
-    </details>
-
-    <details>
-        <summary>@Docker Swarm (2376, 2377, 2375, 7946, 4789) - Port Group</summary>
-        <table>
-            <tr>
-                <th>Type</th>
-                <td>Port Group</td>
-            </tr>
-            <tr>
-                <th>Ports</th>
-                <td>2376, 2377, 2375, 7946, 4789</td>
-            </tr>
-        </table>
-    </details>
-
-    <details>
-        <summary>Cloudflare IPv4 (All Cloudflare Subnets) - IPv4 Address/Subnet</summary>
-        <table>
-            <tr>
-                <th>Type</th>
-                <td>IPv4 Address/Subnet</td>
-            </tr>
-            <tr>
-                <th>Addresses</th>
-                <td>173.245.48.0/20, 103.21.244.0/22, 103.22.200.0/22, 103.31.4.0/22, 141.101.64.0/18, 108.162.192.0/18, 190.93.240.0/20, 188.114.96.0/20</td>
-            </tr>
-        </table>
-    </details>
-
-    <details>
-        <summary>@HTTP (80, 443) - Port Group</summary>
-        <table>
-            <tr>
-                <th>Type</th>
-                <td>Port Group</td>
-            </tr>
-            <tr>
-                <th>Ports</th>
-                <td>80, 443</td>
-            </tr>
-        </table>
-    </details>
 <details>
-        <summary>@HTTPS (443) - Port Group</summary>
-        <table>
-            <tr>
-                <th>Type</th>
-                <td>Port Group</td>
-            </tr>
-            <tr>
-                <th>Ports</th>
-                <td>443</td>
-            </tr>
-        </table>
-    </details>
-
-    <details>
-        <summary>@MariaDB (3306) - Port Group</summary>
-        <table>
-            <tr>
-                <th>Type</th>
-                <td>Port Group</td>
-            </tr>
-            <tr>
-                <th>Ports</th>
-                <td>3306</td>
-            </tr>
-        </table>
-    </details>
-
-    <details>
-        <summary>@mDNS (5353) - Port Group</summary>
-        <table>
-            <tr>
-                <th>Type</th>
-                <td>Port Group</td>
-            </tr>
-            <tr>
-                <th>Ports</th>
-                <td>5353</td>
-            </tr>
-        </table>
-    </details>
-
-    <details>
-        <summary>@NTP (123) - Port Group</summary>
-        <table>
-            <tr>
-                <th>Type</th>
-                <td>Port Group</td>
-            </tr>
-            <tr>
-                <th>Ports</th>
-                <td>123</td>
-            </tr>
-        </table>
-    </details>
-
-    <details>
-        <summary>@PostgreSQL (5432) - Port Group</summary>
-        <table>
-            <tr>
-                <th>Type</th>
-                <td>Port Group</td>
-            </tr>
-            <tr>
-                <th>Ports</th>
-                <td>5432</td>
-            </tr>
-        </table>
-    </details>
+    <summary>@DHCP (67) - Port Group</summary>
+    <table>
+        <tr>
+            <th>Type</th>
+            <td>Port Group</td>
+        </tr>
+        <tr>
+            <th>IPv4 Address/Subnet</th>
+            <td>Not specified</td>
+        </tr>
+        <tr>
+            <th>IPv6 Address/Subnet</th>
+            <td>Not specified</td>
+        </tr>
+        <tr>
+            <th>Port</th>
+            <td>67</td>
+        </tr>
+    </table>
+</details>
 <details>
-        <summary>@RDP (3389) - Port Group</summary>
-        <table>
-            <tr>
-                <th>Type</th>
-                <td>Port Group</td>
-            </tr>
-            <tr>
-                <th>Ports</th>
-                <td>3389</td>
-            </tr>
-        </table>
-    </details>
+    <summary>@DNS (53, 54, 443, 9443, 9080, 5335) - Port Group</summary>
+    <table>
+        <tr>
+            <th>Type</th>
+            <td>Port Group</td>
+        </tr>
+        <tr>
+            <th>IPv4 Address/Subnet</th>
+            <td>Not specified</td>
+        </tr>
+        <tr>
+            <th>IPv6 Address/Subnet</th>
+            <td>Not specified</td>
+        </tr>
+        <tr>
+            <th>Ports</th>
+            <td>53, 54, 443, 9443, 9080, 5335</td>
+        </tr>
+    </table>
+</details>
 
-    <details>
-        <summary>@Redis (6379, 6380) - Port Group</summary>
-        <table>
-            <tr>
-                <th>Type</th>
-                <td>Port Group</td>
-            </tr>
-            <tr>
-                <th>Ports</th>
-                <td>6379, 6380</td>
-            </tr>
-        </table>
-    </details>
+<details>
+    <summary>@Docker Swarm - Port Group</summary>
+    <table>
+        <tr>
+            <th>Type</th>
+            <td>Port Group</td>
+        </tr>
+        <tr>
+            <th>IPv4 Address/Subnet</th>
+            <td>Not specified</td>
+        </tr>
+        <tr>
+            <th>IPv6 Address/Subnet</th>
+            <td>Not specified</td>
+        </tr>
+        <tr>
+            <th>Ports</th>
+            <td>2376, 2377, 2375, 7946, 4789</td>
+        </tr>
+    </table>
+</details>
+ <details>
+    <summary>@HTTPS (443) - Port Group</summary>
+    <table>
+        <tr>
+            <th>Type</th>
+            <td>Port Group</td>
+        </tr>
+        <tr>
+            <th>IPv4 Address/Subnet</th>
+            <td>Not specified</td>
+        </tr>
+        <tr>
+            <th>IPv6 Address/Subnet</th>
+            <td>Not specified</td>
+        </tr>
+        <tr>
+            <th>Port</th>
+            <td>443</td>
+        </tr>
+    </table>
+</details>
+ <details>
+    <summary>@Mariadb (3306) - Port Group</summary>
+    <table>
+        <tr>
+            <th>Type</th>
+            <td>Port Group</td>
+        </tr>
+        <tr>
+            <th>IPv4 Address/Subnet</th>
+            <td>Not specified</td>
+        </tr>
+        <tr>
+            <th>IPv6 Address/Subnet</th>
+            <td>Not specified</td>
+        </tr>
+        <tr>
+            <th>Port</th>
+            <td>3306</td>
+        </tr>
+    </table>
+</details><details>
+    <summary>@MDNS (1900, 5353, 6969) - Port Group</summary>
+    <table>
+        <tr>
+            <th>Type</th>
+            <td>Port Group</td>
+        </tr>
+        <tr>
+            <th>IPv4 Address/Subnet</th>
+            <td>Not specified</td>
+        </tr>
+        <tr>
+            <th>IPv6 Address/Subnet</th>
+            <td>Not specified</td>
+        </tr>
+        <tr>
+            <th>Ports</th>
+            <td>1900, 5353, 6969</td>
+        </tr>
+    </table>
+</details>
 
-    <details>
-        <summary>@SMB (445) - Port Group</summary>
-        <table>
-            <tr>
-                <th>Type</th>
-                <td>Port Group</td>
-            </tr>
-            <tr>
-                <th>Ports</th>
-                <td>445</td>
-            </tr>
-        </table>
-    </details>
+ <details>
+    <summary>@NTP (123) - Port Group</summary>
+    <table>
+        <tr>
+            <th>Type</th>
+            <td>Port Group</td>
+        </tr>
+        <tr>
+            <th>IPv4 Address/Subnet</th>
+            <td>Not specified</td>
+        </tr>
+        <tr>
+            <th>IPv6 Address/Subnet</th>
+            <td>Not specified</td>
+        </tr>
+        <tr>
+            <th>Port</th>
+            <td>123</td>
+        </tr>
+    </table>
+</details>
 
-    <details>
-        <summary>@SMTP (25, 587, 465) - Port Group</summary>
-        <table>
-            <tr>
-                <th>Type</th>
-                <td>Port Group</td>
-            </tr>
-            <tr>
-                <th>Ports</th>
-                <td>25, 587, 465</td>
-            </tr>
-        </table>
-    </details>
+<details>
+    <summary>@Postgres (5432, 5434) - Port Group</summary>
+    <table>
+        <tr>
+            <th>Type</th>
+            <td>Port Group</td>
+        </tr>
+        <tr>
+            <th>IPv4 Address/Subnet</th>
+            <td>Not specified</td>
+        </tr>
+        <tr>
+            <th>IPv6 Address/Subnet</th>
+            <td>Not specified</td>
+        </tr>
+        <tr>
+            <th>Ports</th>
+            <td>5432, 5434</td>
+        </tr>
+    </table>
+</details>
+<details>
+    <summary>@TFTP (69) - Port Group</summary>
+    <table>
+        <tr>
+            <th>Type</th>
+            <td>Port Group</td>
+        </tr>
+        <tr>
+            <th>IPv4 Address/Subnet</th>
+            <td>Not specified</td>
+        </tr>
+        <tr>
+            <th>IPv6 Address/Subnet</th>
+            <td>Not specified</td>
+        </tr>
+        <tr>
+            <th>Port</th>
+            <td>69</td>
+        </tr>
+    </table>
+</details>
+<details>
+    <summary>Cloudflare IPv4 (All Cloudflare subnets)</summary>
+    <table>
+        <tr>
+            <th>Type</th>
+            <td>IPv4 Address/Subnet</td>
+        </tr>
+        <tr>
+            <th>Addresses</th>
+            <td>
+                173.245.48.0/20<br>
+                103.21.244.0/22<br>
+                103.22.200.0/22<br>
+                103.31.4.0/22<br>
+                141.101.64.0/18<br>
+                108.162.192.0/18<br>
+                190.93.240.0/20<br>
+                188.114.96.0/20
+            </td>
+        </tr>
+    </table>
+</details>
+<details>
+    <summary>Docker (192.168.40.x, 192.168.50.x, 192.168.60.x)</summary>
+    <table>
+        <tr>
+            <th>Type</th>
+            <td>IPv4 Address/Subnet</td>
+        </tr>
+        <tr>
+            <th>IPv4 Address/Subnet</th>
+            <td>
+                192.168.40.0/24<br>
+                192.168.50.0/24<br>
+                192.168.60.0/24
+            </td>
+        </tr>
+        <tr>
+            <th>IPv6 Address/Subnet</th>
+            <td>Not specified</td>
+        </tr>
+    </table>
+</details>
 
-    <details>
-        <summary>@SNMP (161, 162) - Port Group</summary>
-        <table>
-            <tr>
-                <th>Type</th>
-                <td>Port Group</td>
-            </tr>
-            <tr>
-                <th>Ports</th>
-                <td>161, 162</td>
-            </tr>
-        </table>
-    </details>
-  <details>
-        <summary>@SSH (22) - Port Group</summary>
-        <table>
-            <tr>
-                <th>Type</th>
-                <td>Port Group</td>
-            </tr>
-            <tr>
-                <th>Ports</th>
-                <td>22</td>
-            </tr>
-        </table>
-    </details>
+<details>
+    <summary>IOT_GROUP (192.168.20.x, 192.168.30.x)</summary>
+    <table>
+        <tr>
+            <th>Type</th>
+            <td>IPv4 Address/Subnet</td>
+        </tr>
+        <tr>
+            <th>IPv4 Address/Subnet</th>
+            <td>
+                192.168.20.0/24<br>
+                192.168.30.0/24
+            </td>
+        </tr>
+        <tr>
+            <th>IPv6 Address/Subnet</th>
+            <td>Not specified</td>
+        </tr>
+    </table>
+</details>
+<details>
+    <summary>LAN_NETWORKS (192.168.0.0/16, 172.16.0.0/12, 10.0.0.0/8)</summary>
+    <table>
+        <tr>
+            <th>Type</th>
+            <td>IPv4 Address/Subnet</td>
+        </tr>
+        <tr>
+            <th>IPv4 Address/Subnet</th>
+            <td>
+                192.168.0.0/16<br>
+                172.16.0.0/12<br>
+                10.0.0.0/8
+            </td>
+        </tr>
+        <tr>
+            <th>IPv6 Address/Subnet</th>
+            <td>Not specified</td>
+        </tr>
+    </table>
+</details>
 
-    <details>
-        <summary>@Telnet (23) - Port Group</summary>
-        <table>
-            <tr>
-                <th>Type</th>
-                <td>Port Group</td>
-            </tr>
-            <tr>
-                <th>Ports</th>
-                <td>23</td>
-            </tr>
-        </table>
-    </details>
+<details>
+    <summary>LAN_NETWORKS_EXCEPT_192.168.10.0/24</summary>
+    <table>
+        <tr>
+            <th>Type</th>
+            <td>IPv4 Address/Subnet</td>
+        </tr>
+        <tr>
+            <th>IPv4 Address/Subnet</th>
+            <td>
+                192.168.0.0/24<br>
+                192.168.1.0/24<br>
+                192.168.2.0/23<br>
+                192.168.4.0/22<br>
+                192.168.8.0/23<br>
+                192.168.11.0/24<br>
+                192.168.12.0/22<br>
+                192.168.16.0/20
+            </td>
+        </tr>
+        <tr>
+            <th>IPv6 Address/Subnet</th>
+            <td>Not specified</td>
+        </tr>
+    </table>
+</details>
 
-    <details>
-        <summary>@TFTP (69) - Port Group</summary>
-        <table>
-            <tr>
-                <th>Type</th>
-                <td>Port Group</td>
-            </tr>
-            <tr>
-                <th>Ports</th>
-                <td>69</td>
-            </tr>
-        </table>
-    </details>
-
-    <details>
-        <summary>@VNC (5900, 5901, 5902, 5903) - Port Group</summary>
-        <table>
-            <tr>
-                <th>Type</th>
-                <td>Port Group</td>
-            </tr>
-            <tr>
-                <th>Ports</th>
-                <td>5900, 5901, 5902, 5903</td>
-            </tr>
-        </table>
-    </details>
-
-    <details>
-        <summary>@Web Services (80, 443) - Port Group</summary>
-        <table>
-            <tr>
-                <th>Type</th>
-                <td>Port Group</td>
-            </tr>
-            <tr>
-                <th>Ports</th>
-                <td>80, 443</td>
-            </tr>
-        </table>
-    </details>
-  <details>
-        <summary>@DNS (53) - Port Group</summary>
-        <table>
-            <tr>
-                <th>Type</th>
-                <td>Port Group</td>
-            </tr>
-            <tr>
-                <th>Ports</th>
-                <td>53</td>
-            </tr>
-        </table>
-    </details>
-
-    <details>
-        <summary>@FTP (21) - Port Group</summary>
-        <table>
-            <tr>
-                <th>Type</th>
-                <td>Port Group</td>
-            </tr>
-            <tr>
-                <th>Ports</th>
-                <td>21</td>
-            </tr>
-        </table>
-    </details>
-
-    <details>
-        <summary>@IMAP (143, 993) - Port Group</summary>
-        <table>
-            <tr>
-                <th>Type</th>
-                <td>Port Group</td>
-            </tr>
-            <tr>
-                <th>Ports</th>
-                <td>143, 993</td>
-            </tr>
-        </table>
-    </details>
-
-    <details>
-        <summary>@POP3 (110, 995) - Port Group</summary>
-        <table>
-            <tr>
-                <th>Type</th>
-                <td>Port Group</td>
-            </tr>
-            <tr>
-                <th>Ports</th>
-                <td>110, 995</td>
-            </tr>
-        </table>
-    </details>
-
-    <details>
-        <summary>@SIP (5060, 5061) - Port Group</summary>
-        <table>
-            <tr>
-                <th>Type</th>
-                <td>Port Group</td>
-            </tr>
-            <tr>
-                <th>Ports</th>
-                <td>5060, 5061</td>
-            </tr>
-        </table>
-    </details>
+ <details>
+    <summary>LOCAL_CLIENTS (192.168.1.x/24, 192.168.2.x/24, 192.168.10.x/24)</summary>
+    <table>
+        <tr>
+            <th>Type</th>
+            <td>IPv4 Address/Subnet</td>
+        </tr>
+        <tr>
+            <th>IPv4 Address/Subnet</th>
+            <td>
+                192.168.1.0/24<br>
+                192.168.2.0/24<br>
+                192.168.10.0/24
+            </td>
+        </tr>
+        <tr>
+            <th>IPv6 Address/Subnet</th>
+            <td>Not specified</td>
+        </tr>
+    </table>
+</details>
+ <details>
+    <summary>MDNS (224.0.0.251)</summary>
+    <table>
+        <tr>
+            <th>Type</th>
+            <td>IPv4 Address/Subnet</td>
+        </tr>
+        <tr>
+            <th>IPv4 Address/Subnet</th>
+            <td>224.0.0.251</td>
+        </tr>
+        <tr>
+            <th>IPv6 Address/Subnet</th>
+            <td>Not specified</td>
+        </tr>
+    </table>
+</details>
+ <details>
+    <summary>No IOT or STREAMING</summary>
+    <table>
+        <tr>
+            <th>Type</th>
+            <td>IPv4 Address/Subnet</td>
+        </tr>
+        <tr>
+            <th>IPv4 Address/Subnet</th>
+            <td>
+                192.168.0.0/20<br>
+                192.168.16.0/22<br>
+                192.168.21.0/24<br>
+                192.168.22.0/23<br>
+                192.168.24.0/22<br>
+                192.168.28.0/23<br>
+                192.168.31.0/24<br>
+                192.168.32.0/19
+            </td>
+        </tr>
+        <tr>
+            <th>IPv6 Address/Subnet</th>
+            <td>Not specified</td>
+        </tr>
+    </table>
+</details>
+<details>
+    <summary>PhotoDB_Subnet</summary>
+    <table>
+        <tr>
+            <th>Type</th>
+            <td>IPv4 Address/Subnet</td>
+        </tr>
+        <tr>
+            <th>IPv4 Address/Subnet</th>
+            <td>192.168.15.0/24</td>
+        </tr>
+    </table>
+</details><details>
+    <summary>Unbound (192.168.5.3)</summary>
+    <table>
+        <tr>
+            <th>Type</th>
+            <td>IPv4 Address/Subnet</td>
+        </tr>
+        <tr>
+            <th>IPv4 Address/Subnet</th>
+            <td>192.168.5.3</td>
+        </tr>
+    </table>
+</details><details>
+    <summary>Web (80,443)</summary>
+    <table>
+        <tr>
+            <th>Type</th>
+            <td>Port Group</td>
+        </tr>
+        <tr>
+            <th>Port</th>
+            <td>80</td>
+        </tr>
+        <tr>
+            <th>Port</th>
+            <td>443</td>
+        </tr>
+    </table>
+</details> <details>
+    <summary>WIRED_ONLY (192.168.1.x, 192.168.2.x)</summary>
+    <table>
+        <tr>
+            <th>Type</th>
+            <td>IPv4 Address/Subnet</td>
+        </tr>
+        <tr>
+            <th>IPv4 Address/Subnet</th>
+            <td>192.168.1.0/24</td>
+        </tr>
+        <tr>
+            <th>IPv4 Address/Subnet</th>
+            <td>192.168.2.0/24</td>
+        </tr>
+    </table>
+</details>
   </body>
 </html>

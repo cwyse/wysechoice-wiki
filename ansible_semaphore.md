@@ -2,7 +2,7 @@
 title: Ansible Semaphore
 description: Installation and configuration of Ansible Semaphore
 published: true
-date: 2024-05-08T14:52:09.026Z
+date: 2024-05-08T15:28:44.758Z
 tags: 
 editor: markdown
 dateCreated: 2024-05-08T14:52:09.026Z
@@ -46,7 +46,7 @@ Switch to unix_socket authentication [Y/n] n
 
 You already have your root account protected, so you can safely answer 'n'.
 
-Change the root password? [Y/n] n
+Change the root password? [Y/n] Y   (xxxxx)
  ... skipping.
 
 By default, a MariaDB installation has an anonymous user, allowing anyone
@@ -88,66 +88,228 @@ installation should now be secure.
 Thanks for using MariaDB!
 chris@Winterfell:~/Downloads$ 
 ```
-Make sure python3 and python3-pip are installed:
+### Creating Database, User for Semaphore
 ```
-chris@Winterfell:~/Downloads$ python3 --version
-Python 3.10.12
+mysql -u root -p
 ```
-```
-chris@Winterfell:~/Downloads$ pip3 --version
-Command 'pip3' not found, but can be installed with:
-sudo apt install python3-pip
-chris@Winterfell:~/Downloads$
-```
-If necessary, install python3 and/or python3-pip:
-```
-sudo apt update
-sudo apt install python3
-sudo apt install python3-pip
-```
-Installation of python3-pip required fixing a  broken install:
-```
-sudo apt --fix-broken install
+To create database for Semaphore.
 
 ```
+CREATE DATABASE `semaphore`;
 ```
-chris@Winterfell:~/Downloads$ pip3 --version
-pip 22.0.2 from /usr/lib/python3/dist-packages/pip (python 3.10)
+To create and password.
+```
+CREATE USER 'semaphore' IDENTIFIED BY 'CHANGE-PASSWORD';
+```
+To Grant usages.
+```
+GRANT USAGE ON *.* TO 'semaphore'@localhost IDENTIFIED BY 'CHANGE-PASSWORD';
+```
+To grant all privileges.
+```
+GRANT ALL privileges ON `semaphore`.* TO 'semaphore'@localhost;
+```
+To flush privileges.
+```
+FLUSH PRIVILEGES;
+```
+    Note: We need to change username, password and database name in real environment.
+
+### Install Semaphore Web UI
+Install the debian binary package.
+```
+wget https://github.com/ansible-semaphore/semaphore/releases/\
+download/v2.8.75/semaphore_2.8.75_linux_amd64.deb
+sudo dpkg -i semaphore_2.8.75_linux_amd64.deb
+```
+Setup Semaphore by using the following command:
+```
+chris@Winterfell:~/Downloads$ semaphore setup
+
+Hello! You will now be guided through a setup to:
+
+1. Set up configuration for a MySQL/MariaDB database
+2. Set up a path for your playbooks (auto-created)
+3. Run database Migrations
+4. Set up initial semaphore user & password
+
+What database to use:
+   1 - MySQL
+   2 - BoltDB
+   3 - PostgreSQL
+ (default 1): 1
+
+db Hostname (default 127.0.0.1:3306): 
+
+db User (default root): 
+
+db Password: <store securely outside the repository>
+
+db Name (default semaphore): 
+
+Playbook path (default /tmp/semaphore): 
+
+Public URL (optional, example: https://example.com/semaphore): 
+
+Enable email alerts? (yes/no) (default no): 
+
+Enable telegram alerts? (yes/no) (default no): 
+
+Enable slack alerts? (yes/no) (default no): 
+
+Enable Rocket.Chat alerts? (yes/no) (default no): 
+
+Enable Microsoft Team Channel alerts? (yes/no) (default no): 
+
+Enable LDAP authentication? (yes/no) (default no): 
+
+Config output directory (default /home/chris/Downloads): 
+
+Running: mkdir -p /home/chris/Downloads..
+Configuration written to /home/chris/Downloads/config.json..
+ Pinging db..
+Running db Migrations..
+Executing migration v0.0.0 (at 2024-05-08 11:12:25.069642672 -0400 EDT m=+84.977603774)...
+Creating migrations table
+ [12/0]8]
+Executing migration v1.0.0 (at 2024-05-08 11:12:25.267527689 -0400 EDT m=+85.175488302)...
+ [4/87]
+Executing migration v1.2.0 (at 2024-05-08 11:12:25.363494078 -0400 EDT m=+85.271454691)...
+ [2/0]6]
+Executing migration v1.3.0 (at 2024-05-08 11:12:25.382867579 -0400 EDT m=+85.290828611)...
+ [4/0]]
+Executing migration v1.4.0 (at 2024-05-08 11:12:25.442458698 -0400 EDT m=+85.350419730)...
+ [5/0]]]
+Executing migration v1.5.0 (at 2024-05-08 11:12:25.514378732 -0400 EDT m=+85.422339764)...
+ [4/0]]]
+Executing migration v1.6.0 (at 2024-05-08 11:12:25.579022232 -0400 EDT m=+85.486983334)...
+ [5/0]]
+Executing migration v1.7.0 (at 2024-05-08 11:12:25.655417115 -0400 EDT m=+85.563377728)...
+ [2/0]]
+Executing migration v1.8.0 (at 2024-05-08 11:12:25.677418183 -0400 EDT m=+85.585379285)...
+ [2/0]]
+Executing migration v1.9.0 (at 2024-05-08 11:12:25.698656076 -0400 EDT m=+85.606617597)...
+ [2/0]]
+Executing migration v2.2.1 (at 2024-05-08 11:12:25.720144496 -0400 EDT m=+85.628106017)...
+ [5/0]]]
+Executing migration v2.3.0 (at 2024-05-08 11:12:25.759539293 -0400 EDT m=+85.667499906)...
+ [4/0]]
+Executing migration v2.3.1 (at 2024-05-08 11:12:25.816521283 -0400 EDT m=+85.724482385)...
+ [7/0]]]
+Executing migration v2.3.2 (at 2024-05-08 11:12:25.902982094 -0400 EDT m=+85.810943126)...
+ [6/0]]]
+Executing migration v2.4.0 (at 2024-05-08 11:12:25.948960442 -0400 EDT m=+85.856921055)...
+ [2/0]]
+Executing migration v2.5.0 (at 2024-05-08 11:12:25.969916867 -0400 EDT m=+85.877877410)...
+ [2/0]]
+Executing migration v2.5.2 (at 2024-05-08 11:12:25.991024014 -0400 EDT m=+85.898985605)...
+ [2/0]]
+Executing migration v2.7.1 (at 2024-05-08 11:12:26.012159866 -0400 EDT m=+85.920120898)...
+ [2/0]]
+Executing migration v2.7.4 (at 2024-05-08 11:12:26.050438779 -0400 EDT m=+85.958399322)...
+ [2/0]]
+Executing migration v2.7.6 (at 2024-05-08 11:12:26.084525989 -0400 EDT m=+85.992486601)...
+ [2/0]6]
+Executing migration v2.7.8 (at 2024-05-08 11:12:26.089309543 -0400 EDT m=+85.997270156)...
+ [4/57]
+Executing migration v2.7.9 (at 2024-05-08 11:12:26.173374876 -0400 EDT m=+86.081335907)...
+ [2/77]
+Executing migration v2.7.10 (at 2024-05-08 11:12:26.219827598 -0400 EDT m=+86.127788630)...
+ [1/43]
+Executing migration v2.7.12 (at 2024-05-08 11:12:26.243877514 -0400 EDT m=+86.151838057)...
+ [3/0]]
+Executing migration v2.7.13 (at 2024-05-08 11:12:26.330226507 -0400 EDT m=+86.238187539)...
+ [3/0]2]
+Executing migration v2.8.0 (at 2024-05-08 11:12:26.363353164 -0400 EDT m=+86.271314265)...
+ [8/0]]
+Executing migration v2.8.1 (at 2024-05-08 11:12:26.526648171 -0400 EDT m=+86.434609203)...
+ [1/63]
+Executing migration v2.8.7 (at 2024-05-08 11:12:26.570954684 -0400 EDT m=+86.478915716)...
+ [1/43]
+Executing migration v2.8.8 (at 2024-05-08 11:12:26.59807665 -0400 EDT m=+86.506037682)...
+ [2/98]]
+Executing migration v2.8.20 (at 2024-05-08 11:12:26.671032039 -0400 EDT m=+86.578993070)...
+ [3/0]9]
+Executing migration v2.8.25 (at 2024-05-08 11:12:26.704623571 -0400 EDT m=+86.612584603)...
+ [5/0]]]
+Executing migration v2.8.26 (at 2024-05-08 11:12:26.806610995 -0400 EDT m=+86.714572027)...
+ [2/0]]
+Executing migration v2.8.36 (at 2024-05-08 11:12:26.829638478 -0400 EDT m=+86.737599091)...
+ [4/0]]
+Executing migration v2.8.38 (at 2024-05-08 11:12:26.895472454 -0400 EDT m=+86.803433066)...
+ [9/0]]]
+Executing migration v2.8.39 (at 2024-05-08 11:12:26.944289365 -0400 EDT m=+86.852250397)...
+ [8/0]]]
+Executing migration v2.8.40 (at 2024-05-08 11:12:27.033322987 -0400 EDT m=+86.941284089)...
+ [7/0]]
+Executing migration v2.8.42 (at 2024-05-08 11:12:27.196253274 -0400 EDT m=+87.104214306)...
+ [1/26]
+Executing migration v2.8.51 (at 2024-05-08 11:12:27.217723395 -0400 EDT m=+87.125684497)...
+ [3/0]]
+Executing migration v2.8.57 (at 2024-05-08 11:12:27.258086986 -0400 EDT m=+87.166047529)...
+ [3/0]]
+Executing migration v2.8.58 (at 2024-05-08 11:12:27.300533438 -0400 EDT m=+87.208494539)...
+ [1/57]
+Executing migration v2.8.91 (at 2024-05-08 11:12:27.32074345 -0400 EDT m=+87.228704062)...
+ [3/46]
+Executing migration v2.9.6 (at 2024-05-08 11:12:27.363863119 -0400 EDT m=+87.271823732)...
+ [1/341]
+Executing migration v2.9.46 (at 2024-05-08 11:12:27.380179587 -0400 EDT m=+87.288140689)...
+ [2/0]]
+Executing migration v2.9.60 (at 2024-05-08 11:12:27.40138172 -0400 EDT m=+87.309342752)...
+ [5/0]6]
+Executing migration v2.9.61 (at 2024-05-08 11:12:27.474488878 -0400 EDT m=+87.382450469)...
+ [9/0]4]
+Executing migration v2.9.62 (at 2024-05-08 11:12:27.596723052 -0400 EDT m=+87.504683595)...
+ [5/0]4]
+Executing migration v2.9.70 (at 2024-05-08 11:12:27.71129774 -0400 EDT m=+87.619258772)...
+ [3/0]]
+Migrations Finished
+
+
+ > Username: semaphore
+ > Email: chris.wyse@wysechoice.net
+WARN[0141] no rows in result set                         fields.level=Warn
+ > Your name: Chris Wyse
+ > Password: <store securely outside the repository>
+
+ You are all setup Chris Wyse!
+ Re-launch this program pointing to the configuration file
+
+./semaphore server --config /home/chris/Downloads/config.json
+
+ To run as daemon:
+
+nohup ./semaphore server --config /home/chris/Downloads/config.json &
+
+ You can login with chris.wyse@wysechoice.net or semaphore.
 chris@Winterfell:~/Downloads$ 
-```
-Install Ansible:
-```
-sudo apt-get -y install software-properties-common
-sudo apt-add-repository -y ppa:ansible/ansible
-sudo apt-get -y update
-sudo apt-get -y install ansible
-```
 
-Install dependencies:
 ```
-sudo apt-get -y install python3-passlib
+### Configure Semaphore as a Service
+Create /etc/system/system/semaphore.service.
+```[Unit]
+Description=Ansible Semaphore
+Documentation=https://docs.ansible-semaphore.com/
+Wants=network-online.target
+After=network-online.target
+ConditionPathExists=/usr/bin/semaphore
+ConditionPathExists=/etc/semaphore/config.json
+
+[Service]
+ExecStart=/usr/bin/semaphore server --config /etc/semaphore/config.json
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=always
+RestartSec=10s
+User=semaphore
+Group=semaphore
+
+[Install]
+WantedBy=multi-user.target
 ```
-
-### Download the latest release:
+Start and enable the service:
 ```
-chris@Winterfell:~/Downloads$ wget https://github.com/semaphoreui/semaphore/releases/download/v2.9.75/semaphore_2.9.75_linux_amd64.deb
---2024-05-08 09:55:23--  https://github.com/semaphoreui/semaphore/releases/download/v2.9.75/semaphore_2.9.75_linux_amd64.deb
-Resolving github.com (github.com)... 140.82.112.4
-Connecting to github.com (github.com)|140.82.112.4|:443... connected.
-HTTP request sent, awaiting response... 302 Found
-Location: https://objects.githubusercontent.com/github-production-release-asset-2e65be/23267883/db9a42d2-d849-4d22-8599-618299a03e0a?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=<store securely outside the repository>%2F20240508%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240508T135523Z&X-Amz-Expires=300&X-Amz-Signature=f886fc5b5e9740ec66977821748d9e99474a239fa2171dbb558d150ebfddd232&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=23267883&response-content-disposition=attachment%3B%20filename%3Dsemaphore_2.9.75_linux_amd64.deb&response-content-type=application%2Foctet-stream [following]
---2024-05-08 09:55:23--  https://objects.githubusercontent.com/github-production-release-asset-2e65be/23267883/db9a42d2-d849-4d22-8599-618299a03e0a?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=<store securely outside the repository>%2F20240508%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240508T135523Z&X-Amz-Expires=300&X-Amz-Signature=f886fc5b5e9740ec66977821748d9e99474a239fa2171dbb558d150ebfddd232&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=23267883&response-content-disposition=attachment%3B%20filename%3Dsemaphore_2.9.75_linux_amd64.deb&response-content-type=application%2Foctet-stream
-Resolving objects.githubusercontent.com (objects.githubusercontent.com)... 185.199.108.133, 185.199.110.133, 185.199.109.133, ...
-Connecting to objects.githubusercontent.com (objects.githubusercontent.com)|185.199.108.133|:443... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 10109064 (9.6M) [application/octet-stream]
-Saving to: ‘semaphore_2.9.75_linux_amd64.deb’
-
-semaphore_2.9.75_linux_amd64.deb                  100%[============================================================================================================>]   9.64M  29.5MB/s    in 0.3s    
-
-2024-05-08 09:55:24 (29.5 MB/s) - ‘semaphore_2.9.75_linux_amd64.deb’ saved [10109064/10109064]
-
-chris@Winterfell:~/Downloads$
+sudo systemctl start semaphore
+sudo systemctl enable semaphore
+sudo system status semaphore
 ```
-
-Your content here

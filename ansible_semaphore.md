@@ -2,7 +2,7 @@
 title: Ansible Semaphore
 description: Installation and configuration of Ansible Semaphore
 published: true
-date: 2024-05-08T15:28:44.758Z
+date: 2024-05-08T15:46:13.652Z
 tags: 
 editor: markdown
 dateCreated: 2024-05-08T14:52:09.026Z
@@ -283,9 +283,34 @@ WARN[0141] no rows in result set                         fields.level=Warn
 nohup ./semaphore server --config /home/chris/Downloads/config.json &
 
  You can login with chris.wyse@wysechoice.net or semaphore.
-chris@Winterfell:~/Downloads$ 
+chris@Winterfell:~/Downloads$ sudo mkdir /etc/semaphore
+chris@Winterfell:~/Donwloads$ sudo mv /home/chris/Downloads/config.json /etc/semaphore/config.json
 
 ```
+### Create the semaphore user
+
+```
+chris@Winterfell:~$ sudo adduser semaphore
+[sudo] password for chris: 
+Adding user `semaphore' ...
+Adding new group `semaphore' (1001) ...
+Adding new user `semaphore' (1001) with group `semaphore' ...
+Creating home directory `/home/semaphore' ...
+Copying files from `/etc/skel' ...
+New password: 
+Retype new password: 
+passwd: password updated successfully
+Changing the user information for semaphore
+Enter the new value, or press ENTER for the default
+	Full Name []: Chris Wyse
+	Room Number []: 
+	Work Phone []: 
+	Home Phone []: 
+	Other []: 
+Is the information correct? [Y/n] Y
+chris@Winterfell:~$
+```
+
 ### Configure Semaphore as a Service
 Create /etc/system/system/semaphore.service.
 ```[Unit]

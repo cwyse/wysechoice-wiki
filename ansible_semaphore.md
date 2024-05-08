@@ -2,7 +2,7 @@
 title: Ansible Semaphore
 description: Installation and configuration of Ansible Semaphore
 published: true
-date: 2024-05-08T15:46:13.652Z
+date: 2024-05-08T15:48:05.431Z
 tags: 
 editor: markdown
 dateCreated: 2024-05-08T14:52:09.026Z
@@ -338,3 +338,8 @@ sudo systemctl start semaphore
 sudo systemctl enable semaphore
 sudo system status semaphore
 ```
+
+### Accessing Semaphore
+The service should now be running at:
+http://127.0.0.1:3000
+The MariaDB database will also be running, using port 3306.

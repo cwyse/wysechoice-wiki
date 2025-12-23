@@ -2,7 +2,7 @@
 title: UDM Domain Name Service
 description: Description of container providing domain name service.
 published: true
-date: 2023-03-07T05:34:41.206Z
+date: 2023-03-07T05:34:49.558Z
 tags: 
 editor: markdown
 dateCreated: 2023-03-07T05:34:41.205Z

@@ -4,7 +4,7 @@ description: Various bits of information without a home
 published: true
 date: 2021-03-25T04:08:30.784Z
 tags: 
-editor: undefined
+editor: markdown
 dateCreated: 2021-01-01T17:15:16.488Z
 ---
 

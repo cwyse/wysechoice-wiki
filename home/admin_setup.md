@@ -4,7 +4,7 @@ description: Initial configuration for various components
 published: true
 date: 2021-02-14T09:40:28.393Z
 tags: 
-editor: undefined
+editor: markdown
 dateCreated: 2021-02-01T03:28:39.504Z
 ---
 

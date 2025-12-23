@@ -4,7 +4,7 @@ description: Current Lastpass organization information
 published: true
 date: 2021-01-31T23:30:20.836Z
 tags: 
-editor: undefined
+editor: markdown
 dateCreated: 2021-01-23T14:38:36.664Z
 ---
 

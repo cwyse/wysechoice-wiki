@@ -4,7 +4,7 @@ description: Common location for finance documents
 published: true
 date: 2021-01-31T23:30:26.560Z
 tags: 
-editor: undefined
+editor: markdown
 dateCreated: 2021-01-29T11:46:08.871Z
 ---
 

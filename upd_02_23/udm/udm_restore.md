@@ -2,7 +2,7 @@
 title: Unifi Dream Machine Restore Configuration from Backup
 description: Procedure to restore configuration from a cloud backup
 published: true
-date: 2023-03-05T19:16:03.123Z
+date: 2023-03-05T19:16:10.469Z
 tags: 
 editor: markdown
 dateCreated: 2023-03-05T19:16:03.123Z

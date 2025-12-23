@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<Glabels-document version="4.0">
+  <Template brand="Brother" width="520pt" part="TZe" size="Other" description="128x520" height="128pt">
+    <Label-rectangle id="0" width="520pt" height="128pt" round="0pt" x_waste="0pt" y_waste="0pt">
+      <Markup-margin size="14pt"/>
+      <Layout nx="1" x0="0pt" dy="128pt" dx="520pt" ny="1" y0="0pt"/>
+    </Label-rectangle>
+  </Template>
+  <Objects id="0" rotate="false">
+    <Object-text align="left" auto_shrink="false" shadow_x="0pt" lock_aspect_ratio="false" a5="0" wrap="word" x="451.254pt" shadow="false" a1="0" font_family="Sans" y="99.0918pt" a3="1" font_size="9" w="57.7813pt" a0="1" a2="0" a4="0" h="21pt" shadow_color="0x0" font_underline="false" color="0xff" font_italic="false" line_spacing="1" font_weight="normal" shadow_y="0pt" shadow_opacity="1" valign="top">
+      <p>${code}</p>
+    </Object-text>
+    <Object-text align="left" auto_shrink="false" shadow_x="0pt" lock_aspect_ratio="false" a5="0" wrap="word" x="14.6932pt" shadow="false" a1="0" font_family="Sans" y="99.5541pt" a3="1" font_size="9" w="62.875pt" a0="1" a2="0" a4="0" h="21pt" shadow_color="0x0" font_underline="false" color="0xff" font_italic="false" line_spacing="1" font_weight="normal" shadow_y="0pt" shadow_opacity="1" valign="top">
+      <p>${name}</p>
+    </Object-text>
+    <Object-text align="left" auto_shrink="false" shadow_x="0pt" lock_aspect_ratio="false" a5="0" wrap="word" x="164.354pt" shadow="false" a1="0" font_family="Sans" y="26.3615pt" a3="1" font_size="9" w="87.5625pt" a0="1" a2="0" a4="0" h="35pt" shadow_color="0x0" font_underline="false" color="0xff" font_italic="false" line_spacing="1" font_weight="normal" shadow_y="0pt" shadow_opacity="1" valign="top">
+      <p>${title_line1}</p>
+      <p>${title_line2}</p>
+    </Object-text>
+    <Object-image y="0pt" shadow_x="0pt" w="520pt" shadow_opacity="1" a0="1" a4="0" a5="0" x="0pt" src="Box.png" shadow="false" h="128pt" lock_aspect_ratio="false" shadow_y="0pt" a2="0" a3="1" a1="0" shadow_color="0x0"/>
+    <Object-text align="right" auto_shrink="false" shadow_x="0pt" lock_aspect_ratio="false" a5="0" wrap="word" x="343.008pt" shadow="false" a1="0" font_family="Sans" y="85.968pt" a3="1" font_size="15" w="155pt" a0="1" a2="0" a4="0" h="31.752pt" shadow_color="0x0" font_underline="false" color="0xff" font_italic="false" line_spacing="1" font_weight="normal" shadow_y="0pt" shadow_opacity="1" valign="top">
+      <p>${code}</p>
+    </Object-text>
+    <Object-text align="left" auto_shrink="true" shadow_x="0pt" lock_aspect_ratio="false" a5="0" wrap="word" x="18.72pt" shadow="false" a1="0" font_family="Sans" y="85.968pt" a3="1" font_size="15" w="329.04pt" a0="1" a2="0" a4="0" h="31.7867pt" shadow_color="0x0" font_underline="false" color="0xff" font_italic="false" line_spacing="1" font_weight="normal" shadow_y="0pt" shadow_opacity="1" valign="top">
+      <p>${name}</p>
+    </Object-text>
+    <Object-text align="hcenter" auto_shrink="true" shadow_x="0pt" lock_aspect_ratio="false" a5="0" wrap="word" x="12.1404pt" shadow="false" a1="0" font_family="Sans" y="16.935pt" a3="1" font_size="18" w="494.86pt" a0="1" a2="0" a4="0" h="35pt" shadow_color="0x0" font_underline="false" color="0xff" font_italic="true" line_spacing="1" font_weight="normal" shadow_y="0pt" shadow_opacity="1" valign="top">
+      <p>${title_line1}</p>
+    </Object-text>
+    <Object-text align="hcenter" auto_shrink="true" shadow_x="0pt" lock_aspect_ratio="false" a5="0" wrap="word" x="11.7331pt" shadow="false" a1="0" font_family="Sans" y="51.9677pt" a3="1" font_size="18" w="495.267pt" a0="1" a2="0" a4="0" h="35pt" shadow_color="0x0" font_underline="false" color="0xff" font_italic="true" line_spacing="1" font_weight="normal" shadow_y="0pt" shadow_opacity="1" valign="top">
+      <p>${title_line2}</p>
+    </Object-text>
+  </Objects>
+  <Merge type="Text/Comma/Line1Keys" src="/home/chris/Downloads/plant_labels_living.csv"/>
+  <Data>
+    <File mimetype="image/png" encoding="base64" name="Box.png">iVBORw0KGgoAAAANSUhEUgAAAf8AAAB+CAYAAAAqahh3AAAACXBIWXMAAA7EAAAOxAGVKw4bAAACnElEQVR4nO3cMYrbQBiA0VHYwvgStluD738Qg1v7FMadU6XZFSKBSLvwvVeOpvi7TzMITWOM9wAAMn599wAAwLbEHwBixB8AYsQfAGI+5hZPp9PWcwAAK7jf71/WZuO/2+3G7XZbfSAAYD2Xy2V2fTb+f8y9LQAAP9/SLf5i/F+v1zifz/99IABgPdfrdfG5D/4AIEb8ASBm8dr/s/fbn4AB4Ceapumv9zr5A0CM+ANAjPgDQIz4A0CM+ANAjPgDQIz4A0CM+ANAjPgDQIz4A0CM+ANAjPgDQIz4A0CM+ANAjPgDQIz4A0CM+ANAjPgDQIz4A0CM+ANAjPgDQIz4A0CM+ANAjPgDQIz4A0CM+ANAjPgDQIz4A0CM+ANAjPgDQIz4A0CM+ANAjPgDQIz4A0CM+ANAjPgDQIz4A0CM+ANAjPgDQIz4A0CM+ANAjPgDQIz4A0CM+ANAjPgDQIz4A0CM+ANAjPgDQIz4A0CM+ANAjPgDQIz4A0CM+ANAjPgDQIz4A0CM+ANAjPgDQIz4A0CM+ANAjPgDQIz4A0CM+ANAjPgDQIz4A0CM+ANAjPgDQIz4A0CM+ANAjPgDQIz4A0CM+ANAjPgDQIz4A0CM+ANAjPgDQIz4A0CM+ANAjPgDQIz4A0CM+ANAjPgDQIz4A0CM+ANAjPgDQIz4A0CM+ANAjPgDQIz4A0CM+ANAjPgDQIz4A0CM+ANAjPgDQIz4A0CM+ANAjPgDQIz4A0CM+ANAjPgDQIz4A0CM+ANAjPgDQIz4A0DMx79snqZprTkAgI04+QNAjPgDQMzitf9+vx+Px2OjUQCALSzG/3A4bDUHALCR2fg/n89xPB43HgUA2MI0xnh/9xAAwHZ88AcAMeIPADHiDwAx4g8AMb8B+cIba3wu8b4AAAAASUVORK5CYII=</File>
+  </Data>
+</Glabels-document>

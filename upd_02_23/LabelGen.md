@@ -2,7 +2,7 @@
 title: Garden Label Generation
 description: Information on the configuration, tools, and generation of garden plant labels.
 published: true
-date: 2023-03-02T04:22:07.374Z
+date: 2023-03-02T04:22:15.000Z
 tags: garden, service
 editor: markdown
 dateCreated: 2023-02-25T23:59:47.252Z

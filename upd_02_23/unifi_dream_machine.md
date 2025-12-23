@@ -2,7 +2,7 @@
 title: Unifi Dream Machine Router
 description: All aspects of maintenance for the Unifi Dream Machine router configuration
 published: true
-date: 2023-03-07T05:10:27.441Z
+date: 2023-03-07T05:34:53.238Z
 tags: 
 editor: markdown
 dateCreated: 2023-03-05T19:10:34.928Z

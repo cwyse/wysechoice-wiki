@@ -4,7 +4,7 @@ description: Table of what I've borrowed and loaned out
 published: true
 date: 2021-03-25T01:12:20.765Z
 tags: 
-editor: undefined
+editor: markdown
 dateCreated: 2021-01-16T22:44:24.961Z
 ---
 

@@ -2,7 +2,7 @@
 title: UDM Configuration Backup
 description: Backup all Unifi managed configuration data
 published: true
-date: 2023-03-05T21:19:27.174Z
+date: 2023-03-05T21:19:34.658Z
 tags: 
 editor: markdown
 dateCreated: 2023-03-05T21:19:27.174Z

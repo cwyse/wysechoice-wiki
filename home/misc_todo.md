@@ -2,9 +2,9 @@
 title: Miscellaneous To Do Items
 description: Categorized To Do list
 published: true
-date: 2021-01-31T23:29:56.641Z
+date: 2021-06-05T16:04:39.227Z
 tags: 
-editor: undefined
+editor: markdown
 dateCreated: 2020-12-13T01:03:08.246Z
 ---
 
@@ -12,12 +12,12 @@ dateCreated: 2020-12-13T01:03:08.246Z
 
 1. Reverse proxy support
 1. Print server
-1. Label printer support on Linux
-1. Print plant labels
+1. ~~Label printer support on Linux~~
+1. ~~Print plant labels~~
 1. Get 3D printer working again
-1. Finish door for shed
-1. Network config backup
-1. Rsync server support for backup
+1. ~~Finish door for shed~~
+1. ~~Network config backup~~
+1. ~~Rsync server support for backup~~
 1. Cleanup RasperryPI
 1. Kiosk for Wiki
 1. Calendar on Wiki

@@ -2,7 +2,7 @@
 title: Network Services
 description: Reviews the existing services, their use, setup, and configuration
 published: true
-date: 2022-01-12T17:41:17.875Z
+date: 2022-08-24T02:12:50.139Z
 tags: level1
 editor: markdown
 dateCreated: 2020-11-09T02:33:13.649Z
@@ -218,7 +218,7 @@ The connection to the Ghini database pre-configuration is shown below:
 Connection Name:  WyseChoice
         Type: PostgreSQL
     Database: ghini
-        Host: 192.168.40.30
+        Host: 192.168.40.32
         Port: 5432
         User: chris
     Password: <store securely outside the repository> (must be entered by user)
@@ -231,9 +231,9 @@ Connection Name:  WyseChoice
 1. `./runme.sh`
 
 
-After executing these commands, the container should be running, and the Ghini application will be available at http://192.168.50.5:8080/vnc.html.  Note that it is NOT an https connection.
+After executing these commands, the container should be running, and the Ghini application will be available at http://192.168.50.5:8080/vnc.html.  Note that it is NOT an https connection.  Also may need to use vnc_lite.html.
 
-
+![screenshot_from_2022-08-21_14-42-31.png](/screenshot_from_2022-08-21_14-42-31.png)
 
 ## PGAdmin4 &  Psql
 

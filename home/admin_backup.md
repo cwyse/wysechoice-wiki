@@ -237,8 +237,8 @@ Archive deletion script: [delAWSVault](/delawsvault)
 > The credentials for the deletion script should be in JSON format:
 > ```
 > {
-> 	"AWSAccessKeyId": "<store securely outside the repository>",
-> 	"AWSSecretKey":   "<store securely outside the repository>"
+> 	"AWSAccessKeyId": "<set via environment/secret storage>",
+> 	"AWSSecretKey":   "<set via environment/secret storage>"
 > }
 > ```
 > The credentials for the CLI:
@@ -246,8 +246,8 @@ Archive deletion script: [delAWSVault](/delawsvault)
 
 ```
 [default]
-aws_access_key_id=<store securely outside the repository>
-aws_secret_access_key=<store securely outside the repository>
+aws_access_key_id=<set via environment/secret storage>
+aws_secret_access_key=<set via environment/secret storage>
 ```
 The config for the CLI:
 ```

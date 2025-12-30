@@ -21,20 +21,20 @@ syslog - TBD -  Service needed to manage server logs
 1. Start ContainerStation on the QNAP NAS
 1. Enter portainer in the search bar
 1. Click Install
-![portainer1.png](/portainer1.png)
+![portainer1.png](/media/network/portainer1.png)
 4. Click Advanced Settings->Network
 1. Update the Hostname and the port forwarding
-![portainer2.png](/portainer2.png)
+![portainer2.png](/media/network/portainer2.png)
 6. Click on Shared Folders, type in a volume name, click Add, then Create
-![portainer3.png](/portainer3.png)
+![portainer3.png](/media/network/portainer3.png)
 7. Go to http://192.168.1.8:9123
 1. Select 'Restore Portainer from backup' and load the tgz file.
 [portainer-backup_2021-12-22_02-10-33.tar.gz](/portainer-backup_2021-12-22_02-10-33.tar.gz)
-![portainer4.png](/portainer4.png)
+![portainer4.png](/media/network/portainer4.png)
 9. Login with admin/9y
 10. The QNAP endpoint may require a certificate to be loaded.  From the ContainerStation, select Preferences->Docker Certificate.  Download and extract the keys.
 11. Back in Portainer select Environments->Docker, and set the URL to 192.168.1.8:2376, the Public IP to 192.168.1.8:9123, enable TLS, select the three pem files just downloaded, and add the QNAP environment.
-![portainer5.png](/portainer5.png)
+![portainer5.png](/media/network/portainer5.png)
 **portainer** - 
 Runs on QNAP (192.168.1.8:9123).  Endpoints used are:
 - QNAP (local)  --  RUnning portainer

@@ -15,7 +15,7 @@ These subpages document the WyseChoice network.  It is a complicated network inf
 ## Network Diagrams
 ### Tabs {.tabset}
 #### VLANs
-![wysechoicevlans.png](/wysechoicevlans.png)
+![wysechoicevlans.png](/media/network/wysechoicevlans.png)
 
 #### D-Link DGS-1100-08
 D-Link managed switch assigned to 192.168.1.15.
@@ -38,7 +38,7 @@ Downlinks to Living Room AP & Fire TV
 Located in Living Room
 
 #### Email
-![wysechoiceemail.png](/wysechoiceemail.png)
+![wysechoiceemail.png](/media/network/wysechoiceemail.png)
 #### Server Addresses
 ##### UniFi Dream Machine
 
@@ -122,7 +122,7 @@ Wireless Channels: 6 Low (2G), 40 Medium VHT40 (5G)
 ```
 
 #### PiHole (Old)
-![piholediagram.png](/piholediagram.png)
+![piholediagram.png](/media/network/piholediagram.png)
 {.links-list}
 
 ## WiFi Access

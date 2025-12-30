@@ -72,7 +72,7 @@ This website is intended as a tool to document the information relevant to the W
 ## :thought_balloon:&nbsp;&nbsp;Miscellaneous
 
 - [:memo: &nbsp;&nbsp;Notes *Locations and information on pictures.*](/home/misc_notes)
-- [:soon: &nbsp;&nbsp;To Do *Plans for the future.*](/home/misc_todo)
+- [:soon: &nbsp;&nbsp;Network Roadmap *Planned infrastructure work.*](/network/roadmap)
 - [:memo: &nbsp;&nbsp;Borrowed Items *Items loaned out.*](/home/loaned_items)
 {.links-list}
 

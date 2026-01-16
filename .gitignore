@@ -1,0 +1,5 @@
+*.exe
+*.msi
+*.dmg
+*.pkg
+wiki/data/

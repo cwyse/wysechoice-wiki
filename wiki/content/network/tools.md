@@ -1,0 +1,234 @@
+---
+title: Network Tools
+description: Network administration tools and utilities
+published: true
+date: 2021-12-22T02:25:05.802Z
+tags: 
+editor: markdown
+dateCreated: 2020-11-13T04:39:58.551Z
+---
+
+# Network Tools
+
+Network administration is supported through various web interfaces.  All passwords and user information is available through LastPass.
+
+Unifi - Router management interface.  Provides DHCP server, firewall, and VLAN management.  Router works in conjunction with two Ubiquiti access points.
+pihole - Provides local DNS service with ad blocking support
+pgAdmin4 - Started on local host to manage postgres databases.
+grafana - Interactive dashboard with ability to collect data from multiple sources.
+syslog - TBD -  Service needed to manage server logs
+**NEW METHOD - Portainer via ContainerStation**
+1. Start ContainerStation on the QNAP NAS
+1. Enter portainer in the search bar
+1. Click Install
+![portainer1.png](/media/network/portainer1.png)
+4. Click Advanced Settings->Network
+1. Update the Hostname and the port forwarding
+![portainer2.png](/media/network/portainer2.png)
+6. Click on Shared Folders, type in a volume name, click Add, then Create
+![portainer3.png](/media/network/portainer3.png)
+7. Go to http://192.168.1.8:9123
+1. Select 'Restore Portainer from backup' and load the tgz file.
+[portainer-backup_2021-12-22_02-10-33.tar.gz](/portainer-backup_2021-12-22_02-10-33.tar.gz)
+![portainer4.png](/media/network/portainer4.png)
+9. Login with admin/9y
+10. The QNAP endpoint may require a certificate to be loaded.  From the ContainerStation, select Preferences->Docker Certificate.  Download and extract the keys.
+11. Back in Portainer select Environments->Docker, and set the URL to 192.168.1.8:2376, the Public IP to 192.168.1.8:9123, enable TLS, select the three pem files just downloaded, and add the QNAP environment.
+![portainer5.png](/media/network/portainer5.png)
+**portainer** - 
+Runs on QNAP (192.168.1.8:9123).  Endpoints used are:
+- QNAP (local)  --  RUnning portainer
+- rpi4 (192.168.1.2:1111)
+- rpi4-print (192.168.1.119:2376)
+- udm (podman - 192.168.1.1.2375)
+- laptop (192.168.1.118:2375)
+
+Portainer can be updated with the following commands from the QNAP shell:
+```
+docker pull portainer/portainer-ce:latest
+docker stop portainer
+docker rm portainer
+docker run -d --restart=unless-stopped -p 8000:8000 -p 9123:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer:/data --name portainer portainer/portainer-ce:latest
+```
+It requires the portainer volume to be created initially (not for an update) using the following command:
+```
+docker volume create portainer
+```
+https://medium.com/digitalfrontiers/easily-set-up-portainer-ce-on-a-qnap-nas-5d82b2390854
+
+**podman**  Runs on UDM 
+Podman version has been updated to support the docker API used by portainer using the following information:
+https://github.com/boostchicken/udm-utilities/tree/master/podman-update
+
+It can be updated by executing these two scripts:
+```
+/mnt/data/on_boot.d/01-podman-update.sh
+/mnt/data/on_boot.d/05-install-cni-plugins.sh
+```
+
+
+Update is 
+wiki - Documentation web server running Wiki.js.
+The table below provides additional information on these servers.
+
+
+## Tools
+### Tabs {.tabset}
+
+#### Administrative Tools
+<figure class="table">
+  <table>
+    <thead>
+      <tr>
+        <th>Service</th>
+        <th>Server</th>
+        <th>Server IP</th>
+        <th>Port</th>
+        <th>VM</th>
+        <th>VM Type</th>
+        <th>VM Host</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>pihole</td>
+        <td>pihole</td>
+        <td>192.168.5.3</td>
+        <td>80</td>
+        <td><span class="text-huge">✓</span></td>
+        <td>Podman</td>
+        <td>udm</td>
+        <td>Ad-aware DNS service</td>
+      </tr>
+      <tr>
+        <td>pgAdmin4</td>
+        <td>&nbsp;localhost</td>
+        <td>&nbsp;localhost</td>
+        <td>32887</td>
+        <td><span class="text-huge">✗</span></td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;Database administration</td>
+      </tr>
+      <tr>
+        <td>Unifi</td>
+        <td>postgres&nbsp;</td>
+        <td>192.168.1.1</td>
+        <td>&nbsp;80</td>
+        <td><span class="text-huge">✗</span></td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;Router management</td>
+      </tr>
+      <tr>
+        <td>Grafana</td>
+        <td>grafana</td>
+        <td>192.168.40.40</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>Docker</td>
+        <td>rpi4</td>
+        <td>Multi-service dashboard</td>
+      </tr>
+      <tr>
+        <td>Syslog</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>Service logging</td>
+      </tr>
+      <tr>
+        <td>portainer</td>
+        <td>&nbsp;</td>
+        <td>localhost</td>
+        <td>9000</td>
+        <td><span class="text-huge">✓</span></td>
+        <td>Docker</td>
+        <td>localhost</td>
+        <td>Container management</td>
+      </tr>
+      <tr>
+        <td>Wiki</td>
+        <td>wiki</td>
+        <td>192.168.40.128</td>
+        <td>80</td>
+        <td><span class="text-huge">✓</span></td>
+        <td>Docker</td>
+        <td>rpi4</td>
+        <td>WyseChoice documentation</td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+#### Network Servers
+<figure class="table">
+  <table>
+    <thead>
+      <tr>
+        <th>Service</th>
+        <th>Web Interfaces</th>
+        <th>Server</th>
+        <th>Server IP</th>
+        <th>Port</th>
+        <th>VM</th>
+        <th>VM Type</th>
+        <th>VM Host</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Wiki</td>
+        <td>Wiki.js</td>
+        <td>wiki</td>
+        <td>192.168.40.128</td>
+        <td>80</td>
+        <td><span class="text-huge">✓</span></td>
+        <td>Docker</td>
+        <td>rpi4</td>
+        <td>WyseChoice documentation</td>
+      </tr>
+      <tr>
+        <td>Postgres</td>
+        <td>&nbsp;</td>
+        <td>postgres&nbsp;</td>
+        <td>192.168.40.30</td>
+        <td>&nbsp;</td>
+        <td><span class="text-huge">✓</span></td>
+        <td>Docker</td>
+        <td>rpi4</td>
+        <td>&nbsp;Wiki and ghini clients</td>
+      </tr>
+      <tr>
+        <td>influxdb</td>
+        <td>&nbsp;</td>
+        <td>localhost</td>
+        <td>localhost</td>
+        <td>9000</td>
+        <td>&nbsp;<span class="text-huge">✓</span></td>
+        <td>&nbsp;Docker</td>
+        <td>&nbsp;rpi4</td>
+        <td>&nbsp;Used by grafana</td>
+      </tr>
+      <tr>
+        <td>&nbsp;qnap</td>
+        <td>&nbsp;</td>
+        <td>qnap</td>
+        <td>192.168.1.8/9</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;<span class="text-huge">✗</span></td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>File server&nbsp;</td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+
+{.links-list}
